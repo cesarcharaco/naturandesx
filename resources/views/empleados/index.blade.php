@@ -65,13 +65,13 @@
                               <td>
                                 
                                 <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verEmpleado('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->email}}','{{$key->rut}}')">
-                                    <div class="ti-eye"> Ver</div>
+                                    <div class="ti-eye"></div>
                                   </a>
                                   <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->telefono}}','{{$key->status}}','{{$key->direccion}}')">
-                                    <div class="ti-pencil-alt text-white"> Editar</div>
+                                    <div class="ti-pencil-alt text-white"></div>
                                   </a>
                                   <a href="#" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
-                                      <div class="ti-trash"> Eliminar</div>
+                                      <div class="ti-trash"></div>
                                   </a>
                               </td>
                           </tr>

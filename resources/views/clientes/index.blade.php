@@ -25,6 +25,7 @@
   <div class="sales-report-area mt-5 mb-5">             
     <div class="card bg-white shadow" style="border-radius: 30px !important;">
       <div class="card-body">
+        <h4 class="header-title mb-0">Clientes</h4>
         <div class="row mb-3">
           <div class="col-md-12">
             <a href="#RegistrarEmpleados" onclick="RegistrarCliente()" class="btn btn-outline-primary btn-sm text-uppercase float-right">
@@ -40,6 +41,7 @@
                   <tr>
                     <th>Nombres</th>
                     <th>RUT</th>
+                    <th>Usuario</th>
                     <th>Email</th>
                     <th>status</th>
                     <th></th>
@@ -50,14 +52,15 @@
                     <tr>
                       <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                       <td>{!! $key->rut !!}</td>
-                      <td>{!! $key->email !!}</td>
+                      <td>{!! $key->usuario->username !!}</td>
+                      <td>{!! $key->usuario->email !!}</td>
                       <td>{!! $key->status !!}</td>
                       <td>
-                         <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->email}}','{{$key->rut}}')">
+                         <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->username}}','{{$key->usuario->email}}','{{$key->rut}}')">
                                       <div class="ti-eye"></div>
-                                    </a>
+                          </a>
 
-                          <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarCliente('{{$key->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->email}}','{{$key->rut}}','{{$key->status}}')">
+                          <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarCliente('{{$key->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->username}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->status}}')">
                             <div class="ti-pencil-alt text-white"></div>
                           </a>
                           <a href="#" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarCliente('{{$key->id}}','{{$key->qr->id}}')">
@@ -74,52 +77,54 @@
             <div class="VistaLateralClientes RegistrarClientes shadow" id="RegistrarClientes">
               <div class="card card-default border border-success shadow">
                 <div class="card-body">
+                  <h4 class="header-title mb-2">Registro de cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                   <form action="{{ route('clientes.store') }}" name="registro_clientes" method="POST">
                     @csrf
                         <div class="form-group">
-                          <label for="nombres">Nombres</label>
+                          <label for="nombres">Nombres <b style="color: red;">*</b></label>
                           <input type="text" class="form-control" placeholder="Ingrese nombres" id="nombres" required="required" name="nombres" value="{{ old('nombres') }}">
-                          @error('nombres')
-                            <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                            </span>
-                          @enderror
+                          @if ($errors->has('nombres'))
+                              <small class="form-text text-danger">
+                                  {{ $errors->first('usuario') }}
+                               </small>
+                          @endif
                         </div>
                         <div class="form-group">
-                          <label for="apellidos">Apellidos</label>
+                          <label for="apellidos">Apellidos <b style="color: red;">*</b></label>
                           <input type="text" class="form-control" placeholder="Ingrese apellidos" id="apellidos" required="required" name="apellidos" value="{{ old('apellidos') }}">
+                        </div>
+                        <div class="form-group">
+                          <label for="usuario">Usuario <b style="color: red;">*</b></label>
+                          <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}">
+                          @if ($errors->has('usuario'))
+                              <small class="form-text text-danger">
+                                  {{ $errors->first('usuario') }}
+                               </small>
+                          @endif
                         </div>
                         <div class="form-group">
                           <label for="email">Email</label>
                           <input type="email" class="form-control" placeholder="Ingrese email" name="email" required id="email" value="{{ old('email') }}">
-                          @error('email')
-                            <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                            </span>
-                          @enderror
                           @if ($errors->has('email'))
                               <small class="form-text text-danger">
                                   {{ $errors->first('email') }}
                                </small>
                           @endif
                         </div>
-                        <div class="row">
+                        <div class="form-group">                          
+                          <label for="rut">RUT <b style="color: red;">*</b></label>
+                          <div class="row">
                             <div class="col-md-8">
-                                <div class="form-group">
-                                    <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut_e" class="form-control" required>
-                            @error('rut')
-                                <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                                </div>
+                              <div class="form-group">
+                                <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control" required>
+                              </div>
                             </div>
-                            
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="number" name="verificador" min="1" id="verificador_e" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
-                                </div>
+                              <div class="form-group">
+                                <input type="number" name="verificador" min="1" id="verificador_e" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+                              </div>
                             </div>
+                          </div>
                         </div>
                         <div class="form-group">
                           <label for="status">Status</label>
@@ -258,11 +263,12 @@
       });
     }
 
-    function verCliente(id,codigo_qr,nombres,apellidos,email,rut) {
+    function verCliente(id,codigo_qr,nombres,apellidos,usuario,email,rut) {
       $('#id').val(id);
       $('#codigo_qr').val(codigo_qr);
       $('#nombres_carnet').text(nombres);
       $('#apellidos_carnet').text(apellidos);
+      $('#usuario').text(usuario);
       $('#email_carnet').text(email);
       $('#rut_carnet').text(rut);
       $("#img_qr").empty();
@@ -275,10 +281,11 @@
       $('#VerClientes').fadeIn(300);
     }
 
-    function editarCliente(id, nombres, apellidos, email, rut,status) {
+    function editarCliente(id, nombres, apellidos,usuario ,email, rut,status) {
       $('#id_edit').val(id);
       $('#nombres_edit').val(nombres);
       $('#apellidos_edit').val(apellidos);
+      $('#usuario_edit').val(usuario);
       $('#email_edit').val(email);
       $('#rut_edit').val(rut);
       if(status=="Activo") {

@@ -13,14 +13,17 @@
                         <a href="{{ route('home') }}"><i class="ti-dashboard"></i> <span>Home</span></a></li>
                     <li>
                         <a href="{{ route('ventas.index') }}"><i class="ti-money"></i> <span>Ventas</span></a></li>
-                    <li>
-                        <a href="#"><i class="ti-user"></i> <span>Usuarios</span></a></li>
-                    <li>
-                        <a href="{{ route('empleados.index') }}"><i class="ti-truck"></i> <span>Repartidores</span></a>
-                    </li>
-                    <li>
-                        <a href="{{ route('clientes.index') }}"><i class="ti-receipt"></i> <span>Clientes</span></a>
-                    </li>
+                    @if(Auth::user()->tipo_usuario == 'Admin' )
+                        <li>
+                            <a href="#"><i class="ti-user"></i> <span>Usuarios</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('empleados.index') }}"><i class="ti-truck"></i> <span>Repartidores</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('clientes.index') }}"><i class="ti-receipt"></i> <span>Clientes</span></a>
+                        </li>
+                    @endif
                 </ul>
             </nav>
         </div>

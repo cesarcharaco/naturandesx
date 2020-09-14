@@ -11,13 +11,18 @@
               </div>
               <div class="login-form-body">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="email@email.cl">
-                      @error('email')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
+                    <label for="login">Email o usuario</label>
+                    <input id="login" type="text" class="form-control @if ($errors->has('usuario') || $errors->has('email')) is-invalid @endif" name="login" value="{{ old('usuario') ?: old('email') }}" required placeholder="Ingrese email o usuario..." autocomplete="login" autofocus="">
+                    @if ($errors->has('usuario') || $errors->has('email'))
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('usuario') ?: $errors->first('email') }}</strong>
+                      </span>
+                    @endif
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     <small id="emailHelp" class="form-text text-muted">Ingrese un correo valido.</small>
                 </div>
                 <div class="form-group">
