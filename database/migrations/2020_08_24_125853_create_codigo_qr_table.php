@@ -14,7 +14,7 @@ class CreateCodigoQrTable extends Migration
     public function up()
     {
         Schema::create('codigo_qr', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('codigo');
             $table->string('codigo_recupera');
             $table->enum('status',['Activo','Inactivo'])->default('Activo');
