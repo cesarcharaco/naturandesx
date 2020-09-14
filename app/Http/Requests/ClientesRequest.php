@@ -26,8 +26,8 @@ class ClientesRequest extends FormRequest
         return [
             'nombres' => 'required|max:255',
             'apellidos' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:clientes',
-            'rut' => 'required|numeric|digits_between:7,8|unique:clientes'
+            'usuario' => 'required|max:15|unique:users',
+            'email' => 'email|max:255|unique:users'
         ];
     }
 
@@ -38,7 +38,9 @@ class ClientesRequest extends FormRequest
             'nombres.max' => 'El nombre no puede contener mas de 255 caracteres',
             'apellidos.required' => 'El apellido es obligatorio',
             'apellidos.max' => 'El apellido no puede contener mas de 255 caracteres',
-            'email.required' => 'El email es obligatorio',
+            'usuario.required' => 'El usuario es obligatorio',
+            'usuario.max' => 'El usuario no debe contener mas de 15 caracteres',
+            'usuario.unique' => 'Nombre de usuario ya registrado',
             'email.email' => 'El email debe ser válido',
             'email.max' => 'El email no debe contener mas de 255 caracteres',
             'email.unique' => 'Email ya registrado',
