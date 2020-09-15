@@ -22,6 +22,8 @@
                         <li>
                             <a href="{{ route('empleados.index') }}"><i class="ti-truck"></i> <span>Repartidores</span></a>
                         </li>
+                    @endif
+                    @if(Auth::user()->tipo_usuario != 'Cliente' )
                         <li>
                             <a href="{{ route('clientes.index') }}"><i class="ti-receipt"></i> <span>Clientes</span></a>
                         </li>
