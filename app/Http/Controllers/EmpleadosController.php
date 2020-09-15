@@ -73,7 +73,11 @@ class EmpleadosController extends Controller
 
                 $usuario = new User();
                 $usuario->usuario=$request->usuario;
-                $usuario->email=$request->email;
+                if ($request->email=="") {
+                    $usuario->email=NULL;
+                } else {
+                    $usuario->email=$request->email;
+                }
                 $nueva_clave=\Hash::make($clave);
                 $usuario->password=$nueva_clave;
                 $usuario->tipo_usuario="Empleado";
@@ -139,7 +143,11 @@ class EmpleadosController extends Controller
             //dd($request->all());
             $usuario = User::find($request->id_usuario);
             $usuario->usuario=$request->usuario;
-            $usuario->email=$request->email;
+            if ($request->email=="") {
+                $usuario->email=NULL;
+            } else {
+                $usuario->email=$request->email;
+            }
             $usuario->save();
 
             $empleados =Empleados::find($request->id);

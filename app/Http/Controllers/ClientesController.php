@@ -63,7 +63,11 @@ class ClientesController extends Controller
 
             $usuario = new User();
             $usuario->usuario=$request->usuario;
-            $usuario->email=$request->email;
+            if ($request->email=="") {
+                $usuario->email=NULL;
+            } else {
+                $usuario->email=$request->email;
+            }            
             $nueva_clave=\Hash::make($clave);
             $usuario->password=$nueva_clave;
             $usuario->tipo_usuario="Cliente";
@@ -140,8 +144,9 @@ class ClientesController extends Controller
             $usuario->usuario=$request->usuario;
             if ($request->email=="") {
                 $usuario->email=NULL;
+            } else {
+                $usuario->email=$request->email;
             }
-            $usuario->email=$request->email;
             $usuario->save();
 
             toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
