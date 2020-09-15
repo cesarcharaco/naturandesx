@@ -18,6 +18,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::post('registerCliente', 'Auth\RegisterController@store')->name('registerCliente');
+
 Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::resource('clientes','ClientesController');

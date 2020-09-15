@@ -2,6 +2,7 @@
 <html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('layouts.css')
+    @toastr_css
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -15,4 +16,7 @@
     @yield('content')
     @include('layouts.scripts')
 </body>
+@jquery
+@toastr_js
+@toastr_render
 </html>

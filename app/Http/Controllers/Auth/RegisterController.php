@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Clientes;
+use App\CodigoQr;
+use QR_Code\Types\QR_Url;
+use QRCode;
+use App\Http\Requests\ClienteRegisterRequest;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -50,8 +57,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'nombres' => ['required', 'string', 'max:255'],
+            'apellidos' => ['required', 'string', 'max:255'],
+            'usuario' => ['required', 'string', 'max:15', 'unique:users'],
+            'email' => ['max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,10 +73,55 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        //
+    }
+
+    public function store(ClienteRegisterRequest $request)
+    {
+        //dd($request->all());
+        $nombre_qr = $request->rut.'-'.$request->verificador;
+        $buscar_rut = Clientes::where('rut',$nombre_qr)->get();
+        if (count($buscar_rut)>0) {
+            toastr()->error('Error!!', ' RUT ya se encuentra registrado');
+            return redirect()->to('register');
+        } else {
+            $qr_code = QRCode::text($nombre_qr)
+            ->setOutfile('./img/qr-code/'.$nombre_qr.'.png')
+            ->setSize(8)
+            ->setMargin(2)
+            ->png();
+
+            $url_img = "img/qr-code/".$nombre_qr.".png";
+            $qr = new CodigoQr();
+            $qr->codigo=$url_img;
+            $qr->codigo_recupera=1234;
+            $qr->status="Activo";
+            $qr->save();
+
+            $clave = $request->password;
+            $usuario = new User();
+            $usuario->usuario=$request->usuario;
+            if ($request->email=="") {
+                $usuario->email=NULL;
+            } else {
+                $usuario->email=$request->email;
+            }            
+            $nueva_clave=\Hash::make($clave);
+            $usuario->password=$nueva_clave;
+            $usuario->tipo_usuario="Cliente";
+            $usuario->save();
+            
+            $clientes = new Clientes();
+            $clientes->id_qr=$qr->id;
+            $clientes->id_usuario=$usuario->id;
+            $clientes->nombres=$request->nombres;
+            $clientes->apellidos=$request->apellidos;
+            $clientes->rut = $request->rut.'-'.$request->verificador;
+            $clientes->status="Activo";
+            $clientes->save();
+
+            toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
+            return redirect()->to('register');
+        }
     }
 }
