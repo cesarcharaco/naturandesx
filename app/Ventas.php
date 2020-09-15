@@ -19,4 +19,9 @@ class Ventas extends Model
     {
     	return $this->belongsTo('App\Promociones','id_promociones');
     }
+
+    public function empleados_has_ventas()
+    {
+        return $this->hasMany('App\EmpleadosVentas','id_venta','id');
+    }
 }

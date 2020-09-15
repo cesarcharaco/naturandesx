@@ -19,4 +19,14 @@ class Empleados extends Model
     {
     	return $this->belongsTo('App\CodigoQr','id_qr');
     }
+
+    public function empleados_has_ventas()
+    {
+        return $this->hasMany('App\EmpleadosVentas','id_empleado','id');
+    }
+
+    public function pagos()
+    {
+        return $this->hasMany('App\Pagos','id_empleado','id');
+    }
 }

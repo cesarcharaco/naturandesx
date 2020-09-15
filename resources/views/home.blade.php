@@ -35,15 +35,15 @@
             <thead>
               <tr align="center">
                 <th colspan="2">Proveedores</th>
-                <th>Promoción</th>
+                <th>Promociones vendida</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr align="center">
                 <th colspan="2">Carlos Inc.</th>
                 <th>1</th>
               </tr>
-              <tr>
+              <tr align="center">
                 <th colspan="2">Montalban</th>
                 <th>2</th>
               </tr>
@@ -58,7 +58,7 @@
           <table class="table table-curved">
             <thead>
               <tr align="center">
-                <th>Últimas Promociones</th>
+                <th>Promociones activas</th>
               </tr>
             </thead>
             <tbody>
@@ -86,14 +86,12 @@
               </tr>
             </thead>
             <tbody>
+              @foreach($ventas as $key)
               <tr align="center">
-                <th colspan="2">Carlos Inc.</th>
-                <th>1</th>
+                <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
+                <th>{{$key->cantidad}}</th>
               </tr>
-              <tr align="center">
-                <th colspan="2">Montalban</th>
-                <th>2</th>
-              </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
