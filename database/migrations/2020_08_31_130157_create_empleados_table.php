@@ -20,8 +20,8 @@ class CreateEmpleadosTable extends Migration
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('rut');
-            $table->string('telefono');
-            $table->text('direccion');
+            $table->string('telefono')->nullable();
+            $table->text('direccion')->nullable();
             $table->enum('status',['Activo','Inactivo'])->default('Activo');
 
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
