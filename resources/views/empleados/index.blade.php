@@ -175,7 +175,7 @@
                     </div>
                     <div class="form-group">
                       <label for="direccion">Dirección</label>
-	                	  <textarea name="direccion" class="form-control" required value="{{ old('direccion') }}" placeholder="Dirección del repartidor"></textarea>
+	                	  <textarea name="direccion" class="form-control" value="{{ old('direccion') }}" placeholder="Dirección del repartidor"></textarea>
                       @if($errors->has('direccion'))
                         <small class="form-text text-danger">
                           {{ $errors->first('direccion') }}
@@ -312,7 +312,7 @@
                     </div>
                     <div class="form-group">
                       <label for="direccion">Dirección</label>
-	                	  <textarea name="direccion" class="form-control" required value="{{ old('direccion') }}" id="direccion_edit"></textarea>
+	                	  <textarea name="direccion" class="form-control" value="{{ old('direccion') }}" id="direccion_edit"></textarea>
                       @error('direccion')
                         <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
