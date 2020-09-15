@@ -25,16 +25,30 @@
                     @enderror
                     <small id="emailHelp" class="form-text text-muted">Ingrese un correo valido.</small>
                 </div>
-                <div class="form-group">
+                    
                     <label for="password">Contraseña</label>
                       <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="*******************">
+                      <div class="input-group border border-success mt-1 bg-success" style="border-radius: 30px;">
+                          <div class="input-group-prepend">
+                            <div class="input-group-prepend" style="border-radius: 30px !important;">
+                              <div class="input-group-text"  style="border-radius: 30px !important;">
+                                <div class="ti-lock"></div>&nbsp;
+                              </div>
+                            </div>
+                          </div>
+                          <div  align="center" style="color: white;">
+                              <div class="mt-2 mb-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Rut+<strong>Verificador</strong>) <span class="">Ejm:1234567<strong>1</strong></span></div>
+                          </div>
+                      </div>
                       @error('password')
+                      </div>
+                      <div class="container  mt-1" style="border-radius: 30px; color: green; font-family: serif; font-size: 12px;">
+                      
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                           </span>
                       @enderror
-                    <small id="emailHelp" class="form-text text-muted">En caso de no poder recuperar su contraseña contacte con el admin.</small>
-                </div>
+                  <small id="emailHelp" class="form-text text-muted">En caso de no poder recuperar su contraseña contacte con el admin.</small>
                 <div class="row mb-4 rmber-area">
                     <div class="col-6">
                         <div class="custom-control custom-checkbox mr-sm-2">
