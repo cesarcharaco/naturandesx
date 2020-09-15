@@ -110,7 +110,7 @@
     <h1>Carnet único de cliente de Naturandes</h1>
     <hr>
     <div class="contenido">
-        <p id="primero">Hola, Bienvenido Sr(a). Antoni León. Gracias por formar parte de nuestra familia de Naturandes, para hacer sus compras mucho
+        <p id="primero">Hola, Bienvenido Sr(a). {{$nombres}}. Gracias por formar parte de nuestra familia de Naturandes, para hacer sus compras mucho
          mejo y en el menor tiempo posibles hemos mejorado nuestra atención, por eso le traemos nuestro nuevo carnet con código QR de Naturandes.</p>
         <div class="carnet">          
           <div class="card border shadow" style="
@@ -128,9 +128,9 @@
                 </div>
                 <div class="card rounded" style="margin: 15px;">
                   <p>
-                    <span>{{ $nombres }}</span><br>
-                    <span>a.leon@eiche.cl</span><br>
-                    <span>12345678-9</span>
+                    <span>{{$nombres}}</span><br>
+                    <span>{{$email}}</span><br>
+                    <span>{{$rut}}</span>
                   </p>
                 </div>
               </center>
