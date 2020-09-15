@@ -96,10 +96,12 @@
       <?php $image_path = '/img/naturandes.jpg'; ?>
       <img src="{{ public_path() . $image_path }}" class="logo">
       <b style="font-size: 20px; margin-top: 20px;">
-        República Bolivariana de Venezuela<br>
+        Naturandes - Es Tritan<br>
        </b>
-      Asociación Civil Real Victoria<br>
-      Rif: J-40153589-5
+      Horario del Call Center<br>
+      Lu-VI: 8:30-18:00
+      Sa: 8:30-14:00
+      Do: cerrado
       <p align="right">Fecha: <?php echo date('d/m/Y h:m A'); ?></p>
     </p>
   </header>
@@ -126,7 +128,7 @@
                 </div>
                 <div class="card rounded" style="margin: 15px;">
                   <p>
-                    <span>Antoni León</span><br>
+                    <span>{{ $nombres }}</span><br>
                     <span>a.leon@eiche.cl</span><br>
                     <span>12345678-9</span>
                   </p>
@@ -147,7 +149,7 @@
           </p>
           Dirección: Ignacio Carrera Pinto 651, Copiapó, III Región.
           info@naturandes.cl telef. +52 222 1297. <br>
-            <h5 style="text-align: right;">Impreso por: {{ \Auth::User()->email }}</h5>
+            <h5 style="text-align: right;">Impreso por: </h5>
         </td>
         <td>
           <p class="page">

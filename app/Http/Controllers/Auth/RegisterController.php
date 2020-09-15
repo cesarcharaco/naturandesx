@@ -15,6 +15,8 @@ use QR_Code\Types\QR_Url;
 use QRCode;
 use App\Http\Requests\ClienteRegisterRequest;
 use DB;
+use Mail;
+use PDF;
 
 class RegisterController extends Controller
 {
@@ -119,6 +121,24 @@ class RegisterController extends Controller
             $clientes->rut = $request->rut.'-'.$request->verificador;
             $clientes->status="Activo";
             $clientes->save();
+
+            if ($request->email!="") {
+                //dd('email y pdf');
+                $nombres= $request->nombres.' '.$request->apellidos;
+                $asunto="Naturandes! | Bienvenido";
+                $destinatario=$request->email;
+                $mensaje="Bienvenido a Naturandes";
+                
+                //PDF::loadHTML($html)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf')
+                return PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,))->save('pdfs/'.$nombre_qr.'.pdf')->stream(''.$nombre_qr.'.pdf');
+
+                //enviando correo si no tiene avisos registrados
+                $r=Mail::send('email.carnet_qr',
+                    ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$asunto,$destinatario,$mensaje) {
+                    $m->from('a.leon@eiche.cl', 'Naturandes!');
+                    $m->to($destinatario)->subject($asunto);
+                });
+            }
 
             toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
             return redirect()->to('register');

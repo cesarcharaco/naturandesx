@@ -1,4 +1,4 @@
-<?php
+.<?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -40,4 +40,6 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('clientes/{QR}/buscar','ClientesController@buscarQR');
 	Route::get('promociones/{id}/buscar_promocion','PromocionesController@buscar_promocion');
 	Route::post('qrLogin', ['uses' => 'QrLoginController@checkUser']);
+
+	Route::name('carnet_qr')->get('carnet_qr', 'ClientesController@carnet_qr');
 });
