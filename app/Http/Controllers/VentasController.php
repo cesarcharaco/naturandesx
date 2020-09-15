@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Clientes;
 use App\Promociones;
 use App\Ventas;
+use App\EmpleadosVentas;
 
 class VentasController extends Controller
 {

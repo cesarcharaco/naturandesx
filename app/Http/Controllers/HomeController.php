@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ventas;
 use App\Promociones;
+use App\EmpleadosVentas;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,7 @@ class HomeController extends Controller
     {
         $ventas = Ventas::all();
         $promociones = Promociones::all();
-        return view('home', compact('ventas','promociones'));
+        $empleados_ventas = EmpleadosVentas::all();
+        return view('home', compact('ventas','promociones','empleados_ventas'));
     }
 }

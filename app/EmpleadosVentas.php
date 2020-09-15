@@ -14,8 +14,8 @@ class EmpleadosVentas extends Model
 	{
 	  	return $this->belongsTo('App\Empleados','id_empleado','id');
 	}
-	public function ventas()
+	public function venta()
 	{
-	  	return $this->belongsTo('App\Ventas','id_ventas','id');
+	  	return $this->belongsTo('App\Ventas','id_venta','id');
 	}
 }

@@ -34,19 +34,17 @@
           <table class="table table-curved">
             <thead>
               <tr align="center">
-                <th colspan="2">Proveedores</th>
+                <th colspan="2">Repartidor</th>
                 <th>Promociones vendida</th>
               </tr>
             </thead>
             <tbody>
+              @foreach($empleados_ventas as $key)
               <tr align="center">
-                <th colspan="2">Carlos Inc.</th>
-                <th>1</th>
+                <th colspan="2">{{$key->empleado->nombres}}</th>
+                <th>{{$key->venta->cantidad}}</th>
               </tr>
-              <tr align="center">
-                <th colspan="2">Montalban</th>
-                <th>2</th>
-              </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
