@@ -188,7 +188,11 @@ class ClientesController extends Controller
 
     public function buscarQR($QR)
     {
-        return \DB::table('clientes')->where('rut',$QR)->get();
+        return \DB::table('users')
+        ->join('clientes','clientes.id_usuario','=','users.id')
+        ->where('clientes.rut',$QR)
+        ->select('clientes.*','users.email')
+        ->get();
         // return 1;
     }
     /**
