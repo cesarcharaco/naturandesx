@@ -28,17 +28,74 @@
       <div class="row mt-5 mb-5">
           <!-- Live Crypto Price area sta Qrt -->
           <div class="col-lg-4">
-              <div class="card">
+              <div class="card border" style="border-radius: 10px !important;">
                   <div class="card-body">
                       <h4 class="header-title">Ventas Realizadas</h4>
-                      <div class="cripto-live mt-5">
-                          <ul>
+                      <div class="" style="width: 100% !important;box-shadow: 0 0 3px black;">
+                        <table id="" class="text-center table-striped table-hover" width="100%">
+                          <thead class="text-capitalize">
+                            <tr class="bg-success text-white">
+                              <th><center>Cliente</center></th>
+                              <th><center>Cantidad</center></th>
+                              <th><center>Total($)</center></th>
+                              <th><center>Realizado el</center></th>
+                            </tr>
+                            
+                          </thead>
+                          <tbody>
                             @foreach($ventas as $key)
-                              <li>
-                                  <div class="icon d"><i class="ti-money"></i></div> {{ $key->cliente->nombres }}<span>${{$key->monto_total}} <i class="ti-check"></i></span>
-                              </li>
+                              <tr class="mb-5">
+                                <td>
+                                  <!-- <div class="icon d">
+                                    <i class="ti-money"></i>
+                                  </div> -->
+                                      <i class="ti-check" style="background-color: green; color: white; border-radius: 30px;"></i>
+                                  {{ $key->cliente->nombres }}
+                                </td>
+                                <td>
+                                  {{ $key->cantidad }}
+                                </td>
+                                <td>
+                                  <span>${{$key->monto_total}} 
+                                  </span>
+                                </td>
+                                <td>
+                                  @if($key->created_at->month == 1)
+                                    @php $mes= 'Enero' @endphp
+                                  @elseif($key->created_at->month == 2)
+                                    @php $mes= 'Febrero' @endphp
+                                  @elseif($key->created_at->month == 3)
+                                    @php $mes= 'Marzo' @endphp
+                                  @elseif($key->created_at->month == 4)
+                                    @php $mes= 'Abril' @endphp
+                                  @elseif($key->created_at->month == 5)
+                                    @php $mes= 'Mayo' @endphp
+                                  @elseif($key->created_at->month == 6)
+                                    @php $mes= 'Junio' @endphp
+                                  @elseif($key->created_at->month == 7)
+                                    @php $mes= 'Julio' @endphp
+                                  @elseif($key->created_at->month == 8)
+                                    @php $mes= 'Agosto' @endphp
+                                  @elseif($key->created_at->month == 9)
+                                    @php $mes= 'Septiembre' @endphp
+                                  @elseif($key->created_at->month == 10)
+                                    @php $mes= 'Octubre' @endphp
+                                  @elseif($key->created_at->month == 11)
+                                    @php $mes= 'Noviembre' @endphp
+                                  @else
+                                    @php $mes= 'Diciembre' @endphp
+                                  @endif
+                                  <strong>{{$key->created_at->day}}</strong> de
+                                  <strong>{{$mes}}</strong> del
+                                  <strong>{{$key->created_at->year}}</strong>
+                                  <br>
+                                  {{--A las <strong>{{$key->created_at->hour}}:{{$key->created_at->minute}}:00</strong>--}}
+
+                                </td>
+                              </tr>
                               @endforeach
-                          </ul>
+                          </tbody>
+                        </table>
                       </div>
                   </div>
               </div>
@@ -162,7 +219,7 @@
                               </div>
 
                               <div class="form-group">
-                                <input type="number" class="form-control border border-dark" onkeyup="selectPromocion(this.value)" name="cantidad" id="cantidadPromo" placeholder="Cantidad de Promociones" style="
+                                <input type="number" class="form-control border border-dark" onkeyup="selectPromocion(this.value)" min="0" maxlength="7" name="cantidad" id="cantidadPromo" placeholder="Cantidad de Promociones" style="
                                     width: 100% !important;
                                     border-color: #8914fc !important;
                                     border-radius: 5px;
