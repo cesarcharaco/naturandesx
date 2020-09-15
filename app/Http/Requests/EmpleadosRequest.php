@@ -27,8 +27,8 @@ class EmpleadosRequest extends FormRequest
             'nombres' => 'required|max:255',
             'apellidos' => 'required|max:255',
             'telefono' => 'required|max:12',
-            'rut' => 'required|numeric|digits_between:7,8|unique:empleados',
-            'email' => 'required|email|max:255|unique:users'
+            'usuario' => 'required|max:15|unique:users',
+            'email' => 'email|max:255|unique:users'
         ];
     }
 
@@ -44,7 +44,9 @@ class EmpleadosRequest extends FormRequest
             'rut.required' => 'El RUT es obligatorio',
             'rut.numeric' => 'El RUT solo debe contener números',
             'rut.max' => 'El RUT solo debe contener máximo 8 números',
-            'email.required' => 'El email es obligatorio',
+            'usuario.required' => 'El usuario es obligatorio',
+            'usuario.max' => 'El usuario no debe contener mas de 255 caracteres',
+            'usuario.unique' => 'Usuario ya registrado',
             'email.email' => 'El email debe ser válido',
             'email.max' => 'El email no debe contener mas de 255 caracteres',
             'email.unique' => 'Email ya registrado'

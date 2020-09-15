@@ -27,6 +27,7 @@
   <div class="sales-report-area mt-5 mb-5">
     <div class="card bg-white">
       <div class="card-body">
+        <h4 class="header-title mb-0">Repartidores</h4>
         <div class="row mb-3">
           <div class="col-md-12">
             <a href="#RegistrarEmpleados" onclick="RegistrarEmpleado()" class="btn btn-outline-primary btn-sm text-uppercase float-right">
@@ -44,7 +45,7 @@
                           <th>Rut</th>
                           <th>Teléfono</th>
                           <th>Email</th>
-                          <th>Dirección</th>
+                          <th>Usuario</th>
                           <th>Status</th>
                           <th></th>
                       </tr>
@@ -56,7 +57,7 @@
                               <td>{!! $key->rut !!}</td>
                               <td>{!! $key->telefono !!}</td>
                               <td>{!! $key->usuario->email !!}</td>
-                              <td>{!! $key->direccion !!}</td>
+                              <td>{!! $key->usuario->usuario !!}</td>
                               @if( $key->status == 'Activo')
                                 <td class="text-success">{!! $key->status !!}</td>
                               @else
@@ -64,10 +65,10 @@
                               @endif
                               <td>
                                 
-                                <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verEmpleado('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->email}}','{{$key->rut}}')">
+                                <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verEmpleado('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
                                     <div class="ti-eye"></div>
                                   </a>
-                                  <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->telefono}}','{{$key->status}}','{{$key->direccion}}')">
+                                  <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->telefono}}','{{$key->status}}','{{$key->direccion}}')">
                                     <div class="ti-pencil-alt text-white"></div>
                                   </a>
                                   <a href="#" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
@@ -84,46 +85,56 @@
             <div class="VistaLateralEmpleados RegistrarEmpleados shadow" id="RegistrarEmpleados">
               <div class="card card-default border border-success shadow">
                 <div class="card-body">
+                  <h4 class="header-title mb-2">Registro de cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                 	<form action="{{ route('empleados.store') }}" name="registro_empleados" method="POST">
                     @csrf
 	                	<div class="form-group">
 	                		<label>Nombres</label>
 	                		<input type="text" name="nombres" class="form-control" required value="{{ old('nombres') }}" placeholder="Nombres del repartidor">
-                      @error('nombres')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
+                      @if($errors->has('nombres'))
+                        <small class="form-text text-danger">
+                          {{ $errors->first('nombres') }}
+                        </small>
+                      @endif
 	                	</div>
 	                	<div class="form-group">
 	                		<label>Apellidos</label>
 	                		<input type="text" name="apellidos" class="form-control" required value="{{ old('apellidos') }}" placeholder="Apellidos del repartidor">
-                      @error('apellidos')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
+                      @if($errors->has('apellidos'))
+                        <small class="form-text text-danger">
+                          {{ $errors->first('apellidos') }}
+                        </small>
+                      @endif
 	                	</div>
-                    <label for="rut" style="color: black;">Rut</label>
-	                	<div class="row">
-                      <div class="col-md-8">
-                        <div class="form-group">
-                          <input type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_e" class="form-control" required placeholder="Rut del repartidor">
-			                		@if($errors->has('rut'))
-                            <small class="form-text text-danger">
-                              {{ $errors->first('rut') }}
-                            </small>
-                          @endif
+                    <div class="form-group">
+                      <label for="rut" style="color: black;">Rut</label>
+  	                	<div class="row">
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <input type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_e" class="form-control" required placeholder="Rut del repartidor">
+  			                		@if($errors->has('rut'))
+                              <small class="form-text text-danger">
+                                {{ $errors->first('rut') }}
+                              </small>
+                            @endif
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <input type="number" name="verificador" min="1" id="verificador_e" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <input type="number" name="verificador" min="1" id="verificador_e" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="input-group mb-2 mr-sm-2">
 						        </div>
+                    <div class="form-group">
+                      <label for="usuario">Usuario <b style="color: red;">*</b></label>
+                      <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}">
+                      @if ($errors->has('usuario'))
+                          <small class="form-text text-danger">
+                              {{ $errors->first('usuario') }}
+                           </small>
+                      @endif
+                    </div>
                     <div class="form-group">
                       <label for="email">Email</label>
           						<div class="input-group mb-2 mr-sm-2">
@@ -205,6 +216,7 @@
             <div class="VistaLateralEmpleados EditarEmpleados shadow" id="EditarEmpleados" style="display: none;">
               <div class="card card-warning border border-warning">
                 <div class="card-body">
+                  <h4 class="header-title mb-2">Editar datos del cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                 	<form action="{{ route('empleados.editar') }}" name="registro_empleados" method="POST">
 	                   @csrf
 	                	<div class="form-group">
@@ -236,6 +248,15 @@
 	                	</div>
 	                	<div class="input-group mb-2 mr-sm-2">
 						        </div>
+                    <div class="form-group">
+                      <label for="usuario">Usuario <b style="color: red;">*</b></label>
+                      <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit">
+                      @if ($errors->has('usuario'))
+                          <small class="form-text text-danger">
+                              {{ $errors->first('usuario') }}
+                           </small>
+                      @endif
+                    </div>
                     <div class="form-group">
                       <label for="email">Email</label>
           						<div class="input-group mb-2 mr-sm-2">
@@ -361,12 +382,13 @@
       });
     }
 
-    function editarEmpleado(id,id_usuario,nombres,apellidos,email,rut,telefono,status,direccion) {
+    function editarEmpleado(id,id_usuario,nombres,apellidos,usuario,email,rut,telefono,status,direccion) {
       $('#id_edit').val(id);
       $('#id_usuario').val(id_usuario);
       $('#nombres_edit').val(nombres);
       $('#apellidos_edit').val(apellidos);
       $('#rut_edit').val(rut);
+      $('#usuario_edit').val(usuario);
       $('#email_edit').val(email);
       $('#telefono_edit').val(telefono);
       if(status=="Activo") {

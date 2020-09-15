@@ -48,42 +48,51 @@ class EmpleadosController extends Controller
     public function store(EmpleadosRequest $request)
     {
         if(\Auth::user()->tipo_usuario == 'Admin'){
-            //dd($request->all());
-            $usuario = new User();
-            $usuario->name=$request->nombres;
-            $usuario->email=$request->email;
-            $nueva_clave=\Hash::make($request->rut);
-            $usuario->password=$nueva_clave;
-            $usuario->tipo_usuario="Empleado";
-            $usuario->save();
-
             $nombre_qr = $request->rut.'-'.$request->verificador;
-            $qr_code = QRCode::url('https://naturandes.cl')
-            ->setOutfile('./img/qr-code/'.$nombre_qr.'.svg')
-            ->setSize(8)
-            ->setMargin(2)
-            ->svg();
+            $clave = $request->rut.''.$request->verificador;
+            $buscar_rut = Empleados::where('rut',$nombre_qr)->get();
+            //dd($buscar_rut);
+            if (count($buscar_rut)>0) {
+                toastr()->error('Error!!', ' RUT ya se encuentra registrado');
+                return redirect()->to('empleados');
+            } else {
+                //dd($request->all());
 
-            $url_img = "img/qr-code/".$nombre_qr.".svg";
-            $qr = new CodigoQr();
-            $qr->codigo=$url_img;
-            $qr->codigo_recupera=1234;
-            $qr->status="Activo";
-            $qr->save();
+                $qr_code = QRCode::text($nombre_qr)
+                ->setOutfile('./img/qr-code/'.$nombre_qr.'.png')
+                ->setSize(8)
+                ->setMargin(2)
+                ->png();
 
-            $empleados = new Empleados();
-            $empleados->id_usuario=$usuario->id;
-            $empleados->id_qr=$qr->id;
-            $empleados->nombres=$request->nombres;
-            $empleados->apellidos=$request->apellidos;
-            $empleados->rut = $request->rut.'-'.$request->verificador;
-            $empleados->telefono=$request->telefono;
-            $empleados->direccion=$request->direccion;
-            $empleados->status="Activo";
-            $empleados->save();
+                $url_img = "img/qr-code/".$nombre_qr.".png";
+                $qr = new CodigoQr();
+                $qr->codigo=$url_img;
+                $qr->codigo_recupera=1234;
+                $qr->status="Activo";
+                $qr->save();
 
-            toastr()->success('Éxito!!', ' Empleado registrado satisfactoriamente');
-            return redirect()->to('empleados');
+                $usuario = new User();
+                $usuario->usuario=$request->usuario;
+                $usuario->email=$request->email;
+                $nueva_clave=\Hash::make($clave);
+                $usuario->password=$nueva_clave;
+                $usuario->tipo_usuario="Empleado";
+                $usuario->save();
+
+                $empleados = new Empleados();
+                $empleados->id_usuario=$usuario->id;
+                $empleados->id_qr=$qr->id;
+                $empleados->nombres=$request->nombres;
+                $empleados->apellidos=$request->apellidos;
+                $empleados->rut = $request->rut.'-'.$request->verificador;
+                $empleados->telefono=$request->telefono;
+                $empleados->direccion=$request->direccion;
+                $empleados->status="Activo";
+                $empleados->save();
+
+                toastr()->success('Éxito!!', ' Empleado registrado satisfactoriamente');
+                return redirect()->to('empleados');
+            }
         }else{
             toastr()->warning('no puede acceder!!', 'ACCESO DENEGADO');
             return redirect()->back();
@@ -129,7 +138,7 @@ class EmpleadosController extends Controller
         if(\Auth::user()->tipo_usuario == 'Admin'){
             //dd($request->all());
             $usuario = User::find($request->id_usuario);
-            $usuario->name=$request->nombres;
+            $usuario->usuario=$request->usuario;
             $usuario->email=$request->email;
             $usuario->save();
 

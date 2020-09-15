@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-2 col-sm-12 col-xs-2 clearfix">
             <div class="user-profile pull-right">
-                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}</h4>
+                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->usuario }}</h4>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="ti-power-off"></i>

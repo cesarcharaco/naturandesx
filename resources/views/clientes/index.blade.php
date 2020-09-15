@@ -52,18 +52,18 @@
                     <tr>
                       <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                       <td>{!! $key->rut !!}</td>
-                      <td>{!! $key->usuario->username !!}</td>
+                      <td>{!! $key->usuario->usuario !!}</td>
                       <td>{!! $key->usuario->email !!}</td>
                       <td>{!! $key->status !!}</td>
                       <td>
-                         <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->username}}','{{$key->usuario->email}}','{{$key->rut}}')">
+                         <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
                                       <div class="ti-eye"></div>
                           </a>
 
-                          <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarCliente('{{$key->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->username}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->status}}')">
+                          <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarCliente('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->status}}')">
                             <div class="ti-pencil-alt text-white"></div>
                           </a>
-                          <a href="#" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarCliente('{{$key->id}}','{{$key->qr->id}}')">
+                          <a href="#" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarCliente('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
                               <div class="ti-trash"></div>
                           </a>
                       </td>
@@ -77,7 +77,7 @@
             <div class="VistaLateralClientes RegistrarClientes shadow" id="RegistrarClientes">
               <div class="card card-default border border-success shadow">
                 <div class="card-body">
-                  <h4 class="header-title mb-2">Registro de cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
+                  <h4 class="header-title mb-2">Registro de repartidores <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                   <form action="{{ route('clientes.store') }}" name="registro_clientes" method="POST">
                     @csrf
                         <div class="form-group">
@@ -173,8 +173,8 @@
             <div class="VistaLateralClientes EditarClientes shadow" id="EditarClientes" style="display: none;">
               <div class="card card-warning border border-warning">
                 <div class="card-body">
+                  <h4 class="header-title mb-2">Editar datos de repartidor <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                   <center>
-                    <h3>Editar Cliente</h3>
                     <form action="{{ route('clientes.editar') }}" name="registro_clientes" method="POST">
                       @csrf
                       <div class="form-group">
@@ -184,6 +184,15 @@
                       <div class="form-group">
                         <label for="apellidos_edit">Apellidos</label>
                         <input type="text" class="form-control" placeholder="Ingrese apellidos" id="apellidos_edit" required="required" name="apellidos">
+                      </div>
+                      <div class="form-group">
+                        <label for="usuario">Usuario <b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit" >
+                        @if ($errors->has('usuario'))
+                            <small class="form-text text-danger">
+                                {{ $errors->first('usuario') }}
+                             </small>
+                        @endif
                       </div>
                       <div class="form-group">
                         <label for="email_edit">Email</label>
@@ -200,7 +209,8 @@
                       </div>
                       <div class="form-footer pt-5 border-top">
                         <input type="hidden" id="id_edit" name="id">
-                        <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
+                        <input type="hidden" id="id_usuario_edit" name="id_usuario">
+                        <button type="submit" style="float: right;" class="btn btn-success btn-default">Actualizar</button>
                       </div>
                     </form>
                   </center>
@@ -235,6 +245,7 @@
                       </div>
                       <div class="float-right">
                         <input type="hidden" name="id" id="id_delete">
+                        <input type="hidden" name="id_usuario" id="id_usuario_delete">
                         <input type="hidden" name="id_qr" id="id_qr_delete">
                         <button type="submit" class="btn btn-danger float-right">Eliminar</button>
                       </div>
@@ -281,8 +292,9 @@
       $('#VerClientes').fadeIn(300);
     }
 
-    function editarCliente(id, nombres, apellidos,usuario ,email, rut,status) {
+    function editarCliente(id, id_usuario,nombres, apellidos,usuario ,email, rut,status) {
       $('#id_edit').val(id);
+      $('#id_usuario_edit').val(id_usuario);
       $('#nombres_edit').val(nombres);
       $('#apellidos_edit').val(apellidos);
       $('#usuario_edit').val(usuario);
@@ -305,9 +317,10 @@
       $('#EditarClientes').fadeIn(300);
     }
 
-    function eliminarCliente(id,id_qr){
+    function eliminarCliente(id,id_usuario,id_qr){
       $('#id_clienteE').val(id);
       $('#id_delete').val(id);
+      $('#id_usuario_delete').val(id_usuario);
       $('#id_qr_delete').val(id_qr);
 
 

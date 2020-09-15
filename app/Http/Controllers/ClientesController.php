@@ -128,13 +128,17 @@ class ClientesController extends Controller
     public function editar(Request $request)
     {
         if(\Auth::user()->tipo_usuario == 'Admin'){
-            $clientes = Clientes::find($id);
+            $clientes = Clientes::find($request->id);
             $clientes->nombres=$request->nombres;
             $clientes->apellidos=$request->apellidos;
             $clientes->rut = $request->rut.'-'.$request->verificador;
-            $clientes->email=$request->email;
             $clientes->status=$request->status;
             $clientes->save();
+
+            $usuario = User::find($request->id_usuario);
+            $usuario->usuario=$request->usuario;
+            $usuario->email=$request->email;
+            $usuario->save();
 
             toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
             return redirect()->to('clientes');
