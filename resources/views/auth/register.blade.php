@@ -1,3 +1,9 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+?>
+
 @extends('layouts.app_login')
 
 @section('content')
@@ -69,6 +75,32 @@
                     <label for="password-confirm" class="col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="*******************" autocomplete="new-password">
                 </div>
+                <div class="form-group">
+                    <label for="pregunta">Pregunta de seguridad<b style="color: red;">*</b></label>
+                    <div class="input-group mb-2 mr-sm-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <div class="ti-lock"></div>
+                        </div>
+                      </div>
+                      <select class="form-control" name="pregunta" required>
+                        @foreach($preguntas as $key)
+                          <option value="{{$key->id}}">{{$key->pregunta}}</option>
+                        @endforeach()
+                      </select>
+                    </div>
+                  </div>
+              <div class="form-group">
+                <label for="respuesta">Respuesta<b style="color: red;">*</b></label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta">
+                  <div class="input-group-prepend" onclick="VerR(1)">
+                    <div class="input-group-text" style="color: green;">
+                      <div class="ti-eye"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
                 <div class="submit-btn-area">
                     <button id="form_submit" type="submit">Registrarse <i class="ti-arrow-right"></i></button>
                 </div>
