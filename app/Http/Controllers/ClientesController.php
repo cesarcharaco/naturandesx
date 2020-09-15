@@ -22,7 +22,8 @@ class ClientesController extends Controller
     {
         $num = 1;
         $clientes = Clientes::all();
-        return view('clientes.index', compact('clientes','num'));
+        $preguntas =  \DB::table('preguntas_seguridad')->get();
+        return view('clientes.index', compact('clientes','num','preguntas'));
     }
 
     /**

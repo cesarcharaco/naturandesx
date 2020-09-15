@@ -143,6 +143,32 @@
                             <option value="Inactivo">Inactivo</option>
                           </select>
                         </div>
+                          <div class="form-group">
+                            <label for="pregunta">Pregunta de seguridad</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                  <div class="ti-lock"></div>
+                                </div>
+                              </div>
+                              <select class="form-control" name="pregunta" required>
+                                @foreach($preguntas as $key)
+                                  <option value="{{$key->id}}">{{$key->pregunta}}</option>
+                                @endforeach()
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="respuesta">Respuesta</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                              <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta">
+                              <div class="input-group-prepend" onclick="VerR(1)">
+                                <div class="input-group-text" style="color: green;">
+                                  <div class="ti-eye"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                     <div class="form-footer pt-5 border-top">
                       <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
                     </div>
@@ -209,20 +235,46 @@
                         <input type="email" class="form-control" placeholder="Ingrese email" name="email" id="email_edit">
                       </div>
                       <div class="form-group">                          
-                          <label for="rut_edit">RUT <b style="color: red;">*</b></label>
-                          <div class="row">
-                            <div class="col-md-8">
-                              <div class="form-group">
-                                <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut_edit" class="form-control" required>
-                              </div>
+                        <label for="rut_edit">RUT <b style="color: red;">*</b></label>
+                        <div class="row">
+                          <div class="col-md-8">
+                            <div class="form-group">
+                              <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut_edit" class="form-control" required>
                             </div>
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <input type="number" name="verificador" min="1" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
-                              </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <input type="number" name="verificador" min="1" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div class="form-group">
+                            <label for="pregunta">Pregunta de seguridad</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                  <div class="ti-lock"></div>
+                                </div>
+                              </div>
+                              <select class="form-control" name="pregunta" required>
+                                @foreach($preguntas as $key)
+                                  <option value="{{$key->id}}">{{$key->pregunta}}</option>
+                                @endforeach()
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="respuesta">Respuesta</label>
+                            <div class="input-group mb-2 mr-sm-2">
+                              <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta">
+                              <div class="input-group-prepend" onclick="VerR(1)">
+                                <div class="input-group-text" style="color: green;">
+                                  <div class="ti-eye"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                       <div class="form-group">
                         <label for="status">Status</label>
                         <select class="form-control" id="status_editar" name="status">
@@ -283,6 +335,10 @@
 
   <script type="text/javascript">
 
+    function VerR(opcion) {
+      $('#Inputrespuesta').removeAttr('type',false);
+      $('#Inputrespuesta').attr('type','text');
+    }
     function Refrescar() {
        location.reload();
     }
