@@ -56,7 +56,13 @@
                               <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                               <td>{!! $key->rut !!}</td>
                               <td>{!! $key->telefono !!}</td>
-                              <td>{!! $key->usuario->email !!}</td>
+                              <td>
+                                @if($key->usuario->email=="")
+                                  No posee
+                                @else  
+                                  {!! $key->usuario->email !!}
+                                @endif
+                              </td>
                               <td>{!! $key->usuario->usuario !!}</td>
                               @if( $key->status == 'Activo')
                                 <td class="text-success">{!! $key->status !!}</td>
@@ -121,7 +127,7 @@
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                            <input type="number" name="verificador" min="1" id="verificador_e" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+                            <input type="number" name="verificador" min="1" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
                           </div>
                         </div>
                       </div>
@@ -141,7 +147,7 @@
           							<div class="input-group-prepend">
           								<div class="input-group-text">@</div>
           							</div>
-          							<input type="email" placeholder="Correo" name="email" class="form-control" required id="email" value="{{ old('email') }}">
+          							<input type="email" placeholder="Correo" name="email" class="form-control" id="email" value="{{ old('email') }}">
           						</div>
                       @if($errors->has('email'))
                         <small class="form-text text-danger">
@@ -238,16 +244,25 @@
                       @enderror
 	                	</div>
 	                	<div class="form-group">
-	                		<label>RUT</label>
-	                		<input type="text" name="rut" class="form-control" required id="rut_edit">
-                      @error('rut')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-	                	</div>
-	                	<div class="input-group mb-2 mr-sm-2">
-						        </div>
+                      <label for="rut_edit" style="color: black;">Rut</label>
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <input type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_edit" class="form-control" required placeholder="Rut del repartidor">
+                            @if($errors->has('rut'))
+                              <small class="form-text text-danger">
+                                {{ $errors->first('rut') }}
+                              </small>
+                            @endif
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <input type="number" name="verificador" min="1" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="form-group">
                       <label for="usuario">Usuario <b style="color: red;">*</b></label>
                       <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit">
@@ -263,7 +278,7 @@
           							<div class="input-group-prepend">
           								<div class="input-group-text">@</div>
           							</div>
-          							<input type="email" placeholder="Correo" name="email" class="form-control" required id="email_edit" value="{{ old('email') }}">
+          							<input type="email" placeholder="Correo" name="email" class="form-control" id="email_edit" value="{{ old('email') }}">
           						</div>
                       @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -387,9 +402,10 @@
       $('#id_usuario').val(id_usuario);
       $('#nombres_edit').val(nombres);
       $('#apellidos_edit').val(apellidos);
-      $('#rut_edit').val(rut);
       $('#usuario_edit').val(usuario);
       $('#email_edit').val(email);
+      $('#rut_edit').val(rut.substr(0,(rut.length-2)));
+      $('#verificador_edit').val(rut.substr(-1,(rut.length)));
       $('#telefono_edit').val(telefono);
       if(status=="Activo") {
         $("#status_editar").empty();

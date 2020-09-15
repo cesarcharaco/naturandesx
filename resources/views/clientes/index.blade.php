@@ -53,7 +53,13 @@
                       <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                       <td>{!! $key->rut !!}</td>
                       <td>{!! $key->usuario->usuario !!}</td>
-                      <td>{!! $key->usuario->email !!}</td>
+                      <td>
+                        @if($key->usuario->email=="")
+                          No posee
+                        @else  
+                          {!! $key->usuario->email !!}
+                        @endif
+                      </td>
                       <td>{!! $key->status !!}</td>
                       <td>
                          <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
@@ -104,7 +110,7 @@
                         </div>
                         <div class="form-group">
                           <label for="email">Email</label>
-                          <input type="email" class="form-control" placeholder="Ingrese email" name="email" required id="email" value="{{ old('email') }}">
+                          <input type="email" class="form-control" placeholder="Ingrese email" name="email" id="email" value="{{ old('email') }}">
                           @if ($errors->has('email'))
                               <small class="form-text text-danger">
                                   {{ $errors->first('email') }}
@@ -121,7 +127,7 @@
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <input type="number" name="verificador" min="1" id="verificador_e" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+                                <input type="number" name="verificador" min="1" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
                               </div>
                             </div>
                           </div>
@@ -196,12 +202,23 @@
                       </div>
                       <div class="form-group">
                         <label for="email_edit">Email</label>
-                        <input type="email" class="form-control" placeholder="Ingrese email" name="email" required id="email_edit">
+                        <input type="email" class="form-control" placeholder="Ingrese email" name="email" id="email_edit">
                       </div>
-                      <div class="form-group">
-                        <label for="rut_edit">RUT</label>
-                        <input type="text" class="form-control" placeholder="Ingrese RUT" name="rut" id="rut_edit" required>
-                      </div>
+                      <div class="form-group">                          
+                          <label for="rut_edit">RUT <b style="color: red;">*</b></label>
+                          <div class="row">
+                            <div class="col-md-8">
+                              <div class="form-group">
+                                <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut_edit" class="form-control" required>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <input type="number" name="verificador" min="1" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       <div class="form-group">
                         <label for="status">Status</label>
                         <select class="form-control" id="status_editar" name="status">
@@ -299,7 +316,8 @@
       $('#apellidos_edit').val(apellidos);
       $('#usuario_edit').val(usuario);
       $('#email_edit').val(email);
-      $('#rut_edit').val(rut);
+      $('#rut_edit').val(rut.substr(0,(rut.length-2)));
+      $('#verificador_edit').val(rut.substr(-1,(rut.length)));
       if(status=="Activo") {
         $("#status_editar").empty();
         $("#status_editar").append('<option selected value="Activo">Activo</option>');

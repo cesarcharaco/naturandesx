@@ -27,7 +27,7 @@ class ClientesRequest extends FormRequest
             'nombres' => 'required|max:255',
             'apellidos' => 'required|max:255',
             'usuario' => 'required|max:15|unique:users',
-            'email' => 'email|max:255|unique:users'
+            'email' => 'max:255|unique:users'
         ];
     }
 

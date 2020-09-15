@@ -128,6 +128,7 @@ class ClientesController extends Controller
     public function editar(Request $request)
     {
         if(\Auth::user()->tipo_usuario == 'Admin'){
+
             $clientes = Clientes::find($request->id);
             $clientes->nombres=$request->nombres;
             $clientes->apellidos=$request->apellidos;
@@ -137,6 +138,9 @@ class ClientesController extends Controller
 
             $usuario = User::find($request->id_usuario);
             $usuario->usuario=$request->usuario;
+            if ($request->email=="") {
+                $usuario->email=NULL;
+            }
             $usuario->email=$request->email;
             $usuario->save();
 
