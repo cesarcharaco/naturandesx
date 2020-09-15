@@ -61,6 +61,12 @@ class VentasController extends Controller
         $ventas->monto_total=$request->monto_total;
         $ventas->save();
 
+        $ventas = new EmpleadosVentas();
+        $ventas->id_empleado=\Auth::User()->id;
+        $ventas->id_venta=$ventas->id;
+        $ventas->status="No Pagada";
+        $ventas->save();
+
         toastr()->success('Éxito!!', ' Venta registrada satisfactoriamente');
         return redirect()->to('ventas');
     }
