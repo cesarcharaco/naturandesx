@@ -62,7 +62,7 @@ class VentasController extends Controller
         $ventas->save();
 
         toastr()->success('Éxito!!', ' Venta registrada satisfactoriamente');
-        return redirect()->to('mitestqr');
+        return redirect()->to('ventas');
     }
 
     /**
