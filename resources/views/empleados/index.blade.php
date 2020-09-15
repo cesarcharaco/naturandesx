@@ -91,7 +91,7 @@
             <div class="VistaLateralEmpleados RegistrarEmpleados shadow" id="RegistrarEmpleados">
               <div class="card card-default border border-success shadow">
                 <div class="card-body">
-                  <h4 class="header-title mb-2">Registro de cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
+                  <h4 class="header-title mb-2">Registro de repartidores <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                 	<form action="{{ route('empleados.store') }}" name="registro_empleados" method="POST">
                     @csrf
 	                	<div class="form-group">
@@ -165,7 +165,7 @@
                             </div>
                           </div>
           							</div>
-                        <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" autocomplete="off" maxlength="14" value="{{ old('telefono') }}">
+                        <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" autocomplete="off" maxlength="11" value="{{ old('telefono') }}">
                         @if($errors->has('telefono'))
                           <small class="form-text text-danger">
                             {{ $errors->first('email') }}
@@ -222,7 +222,7 @@
             <div class="VistaLateralEmpleados EditarEmpleados shadow" id="EditarEmpleados" style="display: none;">
               <div class="card card-warning border border-warning">
                 <div class="card-body">
-                  <h4 class="header-title mb-2">Editar datos del cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
+                  <h4 class="header-title mb-2">Editar datos de repartidor <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                 	<form action="{{ route('empleados.editar') }}" name="registro_empleados" method="POST">
 	                   @csrf
 	                	<div class="form-group">
@@ -296,12 +296,12 @@
                             </div>
                           </div>
                         </div>
-  							         <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="" aria-label="" autocomplete="off" maxlength="14" value="{{ old('telefono') }}" id="telefono_edit">
-                        @error('telefono')
-                          <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                          </span>
-                        @enderror
+  							         <input type="text" name="telefono" class="form-control" autocomplete="off" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" maxlength="11" value="{{ old('telefono') }}" id="telefono_edit" >
+                        @if ($errors->has('telefono'))
+                          <small class="form-text text-danger">
+                              {{ $errors->first('telefono') }}
+                           </small>
+                        @endif
   						        </div>
                     </div>
                     <div class="form-group">

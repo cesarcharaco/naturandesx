@@ -83,7 +83,7 @@
             <div class="VistaLateralClientes RegistrarClientes shadow" id="RegistrarClientes">
               <div class="card card-default border border-success shadow">
                 <div class="card-body">
-                  <h4 class="header-title mb-2">Registro de repartidores <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
+                  <h4 class="header-title mb-2">Registro de cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                   <form action="{{ route('clientes.store') }}" name="registro_clientes" method="POST">
                     @csrf
                         <div class="form-group">
@@ -179,7 +179,7 @@
             <div class="VistaLateralClientes EditarClientes shadow" id="EditarClientes" style="display: none;">
               <div class="card card-warning border border-warning">
                 <div class="card-body">
-                  <h4 class="header-title mb-2">Editar datos de repartidor <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
+                  <h4 class="header-title mb-2">Editar datos de cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
                   <center>
                     <form action="{{ route('clientes.editar') }}" name="registro_clientes" method="POST">
                       @csrf

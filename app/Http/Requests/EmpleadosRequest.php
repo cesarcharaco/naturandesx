@@ -28,7 +28,7 @@ class EmpleadosRequest extends FormRequest
             'apellidos' => 'required|max:255',
             'telefono' => 'required|max:12',
             'usuario' => 'required|max:15|unique:users',
-            'email' => 'email|max:255|unique:users'
+            'email' => 'max:255'
         ];
     }
 
@@ -39,8 +39,8 @@ class EmpleadosRequest extends FormRequest
             'nombres.max' => 'El nombre no puede contener mas de 255 caracteres',
             'apellidos.required' => 'El apellido es obligatorio',
             'apellidos.max' => 'El apellido no puede contener mas de 255 caracteres',
-            'telefono.required' => 'El email es obligatorio',
-            'telefono.max' => 'El email no debe contener mas de 12 caracteres',
+            'telefono.required' => 'El telefono es obligatorio',
+            'telefono.max' => 'El telefono no debe contener mas de 12 caracteres',
             'rut.required' => 'El RUT es obligatorio',
             'rut.numeric' => 'El RUT solo debe contener números',
             'rut.max' => 'El RUT solo debe contener máximo 8 números',
@@ -48,8 +48,7 @@ class EmpleadosRequest extends FormRequest
             'usuario.max' => 'El usuario no debe contener mas de 255 caracteres',
             'usuario.unique' => 'Usuario ya registrado',
             'email.email' => 'El email debe ser válido',
-            'email.max' => 'El email no debe contener mas de 255 caracteres',
-            'email.unique' => 'Email ya registrado'
+            'email.max' => 'El email no debe contener mas de 255 caracteres'
 
         ];
     }

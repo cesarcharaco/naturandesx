@@ -27,7 +27,7 @@ class ClientesRequest extends FormRequest
             'nombres' => 'required|max:255',
             'apellidos' => 'required|max:255',
             'usuario' => 'required|max:15|unique:users',
-            'email' => 'max:255|unique:users'
+            'email' => 'max:255'
         ];
     }
 
@@ -43,7 +43,6 @@ class ClientesRequest extends FormRequest
             'usuario.unique' => 'Nombre de usuario ya registrado',
             'email.email' => 'El email debe ser válido',
             'email.max' => 'El email no debe contener mas de 255 caracteres',
-            'email.unique' => 'Email ya registrado',
             'rut.required' => 'El RUT es obligatorio',
             'rut.numeric' => 'El RUT solo debe contener números',
             'rut.max' => 'El RUT solo debe contener máximo 8 números'
