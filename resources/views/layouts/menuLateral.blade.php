@@ -1,4 +1,5 @@
-<div class="offset-area">
+@if(Auth::user()->tipo_usuario == 'Admin' )
+    <div class="offset-area">
         <div class="offset-close"><i class="ti-close"></i></div>
         <ul class="nav offset-menu-tab">
             <li><a class="active show" data-toggle="tab" href="#activity">Reportes</a></li>
@@ -37,3 +38,24 @@
             </div>
         </div>
     </div>
+@elseif(Auth::user()->tipo_usuario == 'Empleado' )
+    <div class="offset-area">
+        <div class="offset-close"><i class="ti-close"></i></div>
+        <ul class="nav offset-menu-tab">
+            <li><a class="active show" data-toggle="tab" href="#activity">Reportes</a></li>
+        </ul>
+        <div class="offset-content tab-content">
+            <div id="settings" class="tab-pane fade in active show">
+                <center>
+                    <div class="form-group">
+                        <select name="semana[]" multiple class="form-control select2" required="">
+                            <option selected disabled>Semanas</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Generar</button>
+                </center>
+            </div>
+        </div>
+    </div>
+@else
+@endif

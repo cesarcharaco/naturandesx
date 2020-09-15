@@ -36,9 +36,9 @@
                           <thead class="text-capitalize">
                             <tr class="bg-success text-white">
                               <th><center>Cliente</center></th>
-                              <th><center>Cantidad</center></th>
-                              <th><center>Total($)</center></th>
-                              <th><center>Realizado el</center></th>
+                              <th><center>Cant.</center></th>
+                              <th>Total($)</th>
+                              <th><center>Fecha</center></th>
                             </tr>
                             
                           </thead>
