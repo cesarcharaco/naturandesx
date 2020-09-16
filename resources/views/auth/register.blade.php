@@ -1,5 +1,7 @@
 @extends('layouts.app_login')
-
+@section('css')
+  <title>Clientes</title>
+@endsection
 @section('content')
 <div class="login-area login-bg">
   <div class="container">

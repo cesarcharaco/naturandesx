@@ -82,13 +82,13 @@ class RegisterController extends Controller
         //dd($request->all());
         if($request->pregunta1==0 || $request->respuesta1=="" || $request->pregunta2==0 || $request->respuesta2==""){
             toastr()->error('Error!!', 'Debe Seleccionar las preguntas y colocar sus respectivas respuestas');
-            return redirect()->to('registerc');
+            return redirect()->to('registerClienteExterno');
         }else{
             $nombre_qr = $request->rut.'-'.$request->verificador;
             $buscar_rut = Clientes::where('rut',$nombre_qr)->get();
             if (count($buscar_rut)>0) {
                 toastr()->error('Error!!', ' RUT ya se encuentra registrado');
-                return redirect()->to('registerc');
+                return redirect()->to('registerClienteExterno');
             } else {
                 $qr_code = QRCode::text($nombre_qr)
                 ->setOutfile('./img/qr-code/'.$nombre_qr.'.png')
@@ -158,7 +158,7 @@ class RegisterController extends Controller
                 }
 
                 toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
-                return redirect()->to('registerc');
+                return redirect()->to('registerClienteExterno');
             }
         }
     }
