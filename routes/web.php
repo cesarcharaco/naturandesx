@@ -46,5 +46,5 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 
 
 	Route::get('reportes','VentasController@buscar_reporte')->name('reportes');
-	Route::post('reportes/mostrar','VentasController@mostrar_reporte');
+	Route::post('reportes/mostrar','VentasController@mostrar_reporte')->name('mostrar_reporte');
 });
