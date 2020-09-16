@@ -147,7 +147,7 @@
           							<div class="input-group-prepend">
           								<div class="input-group-text">@</div>
           							</div>
-          							<input type="email" placeholder="Correo" name="email" class="form-control" id="email" value="{{ old('email') }}">
+          							<input type="email" placeholder="Correo" name="email" class="form-control" id="email" value="{{ old('email') }}" required="required">
           						</div>
                       @if($errors->has('email'))
                         <small class="form-text text-danger">
@@ -157,16 +157,21 @@
                     </div>
                     <div class="form-group">                      
                       <label for="telefono">Teléfono <b style="color: red;">*</b></label>
-  	                	<div class="input-group">
-          							<div class="input-group-prepend">
-          								<div class="input-group-prepend">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <div class="input-group-prepend">
                             <div class="input-group-text">
                               <div class="ti-mobile"></div>
                             </div>
                           </div>
-          							</div>
-
-  						        </div>
+                        </div>
+                        <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" autocomplete="off" maxlength="11" value="{{ old('telefono') }}" required="required">
+                        @if($errors->has('telefono'))
+                          <small class="form-text text-danger">
+                            {{ $errors->first('email') }}
+                          </small>
+                        @endif
+                      </div>
                       @if($errors->has('telefono'))
                         <small class="form-text text-danger">
                           {{ $errors->first('telefono') }}
