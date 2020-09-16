@@ -50,6 +50,11 @@ class UserController extends Controller
         return view('user.show', compact('users'));
     }
 
+    public function editar_perfil(Request $request)
+    {
+        dd($request->all());
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
