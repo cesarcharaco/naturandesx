@@ -46,9 +46,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $preguntas =  \DB::table('preguntas_seguridad')->get();
         $users=User::find($id);
         
-        return view('user.show', compact('users'));
+        return view('user.show', compact('users','preguntas'));
     }
 
     public function editar_perfil(Request $request)

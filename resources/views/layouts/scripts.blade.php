@@ -24,7 +24,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-
     //DATOS DE LAS PREGUNTAS
     var opcion=1;
     $.get("buscar_preguntas/1/seguridad",function (data) {
@@ -67,6 +66,10 @@
   }
 
 
+  function VerR(opcion) {
+    $('#Inputrespuesta').removeAttr('type',false);
+    $('#Inputrespuesta').attr('type','text');
+  }
 
 
   function opcionesTabla(tipo,id) {
