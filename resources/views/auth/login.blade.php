@@ -55,7 +55,7 @@
                     <button id="form_submit" type="submit">Iniciar sesión <i class="ti-arrow-right"></i></button>
                 </div>
                 <div class="form-footer text-center mt-5">
-                    <p class="text-muted">¿No tienes cuenta? <a href="{{ route('register') }}">Registrarse</a></p>
+                    <p class="text-muted">¿No tienes cuenta? <a href="{{ route('registerc') }}">Registrarse</a></p>
                 </div>
               </div>
           </form>
