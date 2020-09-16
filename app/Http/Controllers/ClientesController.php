@@ -195,6 +195,7 @@ class ClientesController extends Controller
             $hashedPassword = $consulta->password;
 
             if (\Hash::check($password, $hashedPassword)) {
+                DB::table('users')->delete($request->id_usuario);
                 DB::table('clientes')->delete($request->id);
                 $data=CodigoQr::where('id',$request->id_qr)->first();
                 $image_path = $data->codigo;  // the value is : localhost/project/image/filename.format
