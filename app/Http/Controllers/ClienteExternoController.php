@@ -9,7 +9,7 @@ class ClienteExternoController extends Controller
 {
     public function register()
     {
-    	$pregutas=Preguntas::all();
+    	$preguntas=Preguntas::all();
     	return view('auth.register',compact('preguntas'));
     }
 
