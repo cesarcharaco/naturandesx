@@ -124,12 +124,14 @@ class RegisterController extends Controller
             if ($request->email!="") {
                 //dd('email y pdf');
                 $nombres= $request->nombres.' '.$request->apellidos;
+                $email= $request->email;
+                $rut = $request->rut.'-'.$request->verificador;
                 $asunto="Naturandes! | Bienvenido";
                 $destinatario=$request->email;
                 $mensaje="Bienvenido a Naturandes";
                 
-                $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,))->save('pdfs/'.$nombre_qr.'.pdf');
-                $output = $pdf->output();
+                $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut))->save('pdfs/'.$nombre_qr.'.pdf');
+                $output = "./pdf/".$nombre_qr.".pdf";
                 //$pdfPath = $pdf->download(BUDGETS_DIR.'/pdf.pdf');
                 //enviando correo si no tiene avisos registrados
                 $r=Mail::send('email.carnet_qr',
