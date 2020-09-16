@@ -34,16 +34,7 @@
                     </ul>
                 @endif
             @else
-                <ul class="notification-area pull-right">
-                    <a href="{{ route('mitestqr') }}">
-                        <li class="btn">
-                            <i class="fa fa-qrcode"></i>
-                        </li>
-                    </a>
-                    <li class="settings-btn" onclick="vistaMenuLateral(1)">
-                        <i class="ti-settings"></i>
-                    </li>
-                </ul>
+               
             @endif
             </div>
         <div class="col-md-2 col-sm-12 col-xs-2 clearfix">

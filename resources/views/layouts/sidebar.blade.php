@@ -16,12 +16,11 @@
                             <a href="{{ route('ventas.index') }}"><i class="ti-money"></i> <span>Ventas</span></a></li>
                     @endif
                     @if(Auth::user()->tipo_usuario == 'Admin' )
-                        <!-- <li>
-                            <a href="#"><i class="ti-user"></i> <span>Usuarios</span></a>
-                        </li> -->
                         <li>
                             <a href="{{ route('empleados.index') }}"><i class="ti-truck"></i> <span>Repartidores</span></a>
                         </li>
+                        <li>
+                            <a href="{{ route('reportes') }}"><i class="ti-book"></i> <span>Reportes</span></a></li>
                     @endif
                     @if(Auth::user()->tipo_usuario != 'Cliente' )
                         <li>
