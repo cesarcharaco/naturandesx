@@ -1,9 +1,3 @@
-<?php
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-?>
-
 @extends('layouts.app_login')
 
 @section('content')
