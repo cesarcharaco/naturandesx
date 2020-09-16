@@ -165,7 +165,7 @@
                             </div>
                           </div>
           							</div>
-                        <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" autocomplete="off" maxlength="11" value="{{ old('telefono') }}">
+                        <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" maxlength="12" autocomplete="off" maxlength="11" value="{{ old('telefono') }}">
                         @if($errors->has('telefono'))
                           <small class="form-text text-danger">
                             {{ $errors->first('email') }}

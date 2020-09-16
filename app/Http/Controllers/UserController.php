@@ -83,4 +83,9 @@ class UserController extends Controller
     {
         //
     }
+
+    public function buscarPreguntas($opcion)
+    {
+        return $preguntas = \DB::table('preguntas_seguridad')->get();
+    }
 }

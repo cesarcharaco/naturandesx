@@ -23,9 +23,51 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#dataTable3').DataTable();
-    // $('#dataTable2_wrapper').DataTable();
-  });
+
+    //DATOS DE LAS PREGUNTAS
+    var opcion=1;
+    $.get("buscar_preguntas/1/seguridad",function (data) {
+      })
+      .done(function(data) {
+        if (data.length>0) {
+          for (var i = 0; i < data.length; i++) {
+            $('#selectPreguntas').append('<option value="'+data[i].id+'">'+data[i].pregunta+'</option>');
+          }
+        }else{
+          alert('Sin resultados');
+        }
+      });
+    });
+
+  function vistaMenuLateral(opcion) {
+    if (opcion == 1) {
+      $('#vistaReportes').show();
+      $('#vistaPerfil').hide();
+    }else{
+      $('#vistaReportes').hide();
+      $('#vistaPerfil').show();
+    }
+  }
+
+  function editarPerfil(opcion) {
+    if (opcion == 1) {
+      $('.editPerfil').fadeOut('slow',
+              function() { 
+                  $(this).hide();
+                  $('.verDatosPerfil').fadeIn(300);
+          });
+    }else{
+      $('.verDatosPerfil').fadeOut('slow',
+              function() { 
+                  $(this).hide();
+                  $('.editPerfil').fadeIn(300);
+          });
+    }
+  }
+
+
+
+
   function opcionesTabla(tipo,id) {
       if (tipo == 1) {
           $('#vista1-'+id).fadeOut('slow',
