@@ -187,6 +187,15 @@
                         </small>
                       @endif
 	                	</div>
+                    <div class="card border border-success">
+                      <div class="card-header bg-success" align="center"><h4 align="center" style="color:white;">AVISO</h4></div>
+                        <div class="card-body">
+                          <div>
+                            <strong>-</strong> La contraseña será el Rut+<strong>Verificador</strong>.<br>
+                            Ejm: 1234567<strong>8</strong>.
+                          </div>
+                        </div>
+                      </div>
                     <div class="form-footer pt-5 border-top">
                       <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
                     </div>

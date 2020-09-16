@@ -11,18 +11,41 @@
                 <h4 class="page-title pull-left"> Dashboard</h4>
             </div>
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-2 clearfix">
-            <ul class="notification-area pull-right">
-                <a href="{{ route('mitestqr') }}">
-                    <li class="btn">
-                        <i class="fa fa-qrcode"></i>
+            <div class="col-md-6 col-sm-6 col-xs-2 clearfix">
+            @if(Auth::user()->tipo_usuario != 'Cliente' )
+                @if(Auth::user()->tipo_usuario == 'Admin' )
+                    <ul class="notification-area pull-right">
+                        <a href="{{ route('mitestqr') }}">
+                            <li class="btn">
+                                <i class="fa fa-qrcode"></i>
+                            </li>
+                        </a>
+                        <li class="settings-btn" onclick="vistaMenuLateral(1)">
+                            <i class="ti-settings"></i>
+                        </li>
+                    </ul>
+                @else
+                    <ul class="notification-area pull-right">
+                        <a href="{{ route('mitestqr') }}">
+                            <li class="btn">
+                                <i class="fa fa-qrcode"></i>
+                            </li>
+                        </a>
+                    </ul>
+                @endif
+            @else
+                <ul class="notification-area pull-right">
+                    <a href="{{ route('mitestqr') }}">
+                        <li class="btn">
+                            <i class="fa fa-qrcode"></i>
+                        </li>
+                    </a>
+                    <li class="settings-btn" onclick="vistaMenuLateral(1)">
+                        <i class="ti-settings"></i>
                     </li>
-                </a>
-                <li class="settings-btn" onclick="vistaMenuLateral(1)">
-                    <i class="ti-settings"></i>
-                </li>
-            </ul>
-        </div>
+                </ul>
+            @endif
+            </div>
         <div class="col-md-2 col-sm-12 col-xs-2 clearfix">
             <div class="user-profile pull-right">
                 <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->usuario }}</h4>

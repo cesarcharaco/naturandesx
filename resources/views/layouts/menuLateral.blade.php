@@ -1,4 +1,4 @@
-<div id="vistaReportes">
+<div id="vistaReportes" style="display: none;">
     @if(Auth::user()->tipo_usuario == 'Admin' )
         <div class="offset-area">
             <div class="offset-close"><i class="ti-close"></i></div>
@@ -62,7 +62,7 @@
     @endif
 </div>
 
-<div id="vistaPerfil" style="display: none;">
+<div id="vistaPerfil">
     <div class="offset-area">
         <div class="offset-close"><i class="ti-close"></i></div>
         <ul class="nav offset-menu-tab">
@@ -143,7 +143,7 @@
                             </div>
                         </center>
                     </form>
-                @elseif(Auth::user()->tipo_usuario == 'Empleado' )
+                @elseif(Auth::user()->tipo_usuario == 'Repartidor' )
                     <form action="{{ route('empleados.store') }}" name="registro_empleados" method="POST">
                     @csrf
                         <div class="form-group">
