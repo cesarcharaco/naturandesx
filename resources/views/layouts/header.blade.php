@@ -41,7 +41,7 @@
             <div class="user-profile pull-right">
                 <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->usuario }}</h4>
                 <div class="dropdown-menu">
-                    <a href="{{ url('user/0/perfil') }}" class="dropdown-item settings-btn" onclick="vistaMenuLateral(2)">
+                    <a href="{{ route('perfil',\Auth::User()->id) }}) }}" class="dropdown-item">
                         <i class="ti-pencil"></i>
                         Perfil
                     </a>

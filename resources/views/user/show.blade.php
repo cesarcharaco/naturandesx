@@ -14,7 +14,7 @@
               <img src="{{ asset('img/user/user.png') }}" alt="user image">
             </div>
             <div class="card-body">
-              <h4 class="py-2 text-dark">{{ Auth::user()->name }}</h4>
+              <h4 class="py-2 text-dark">{{ Auth::user()->usuario }}</h4>
               <p>{{ Auth::user()->email }}</p>
               <!-- <a class="btn btn-primary btn-pill btn-lg my-4" href="#">Follow</a> -->
             </div>
@@ -73,7 +73,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label for="firstName">Nombre</label>
-                        <input type="text" class="form-control" id="firstName" value="{{$users->name}}">
+                        <input type="text" class="form-control" id="firstName" value="{{$users->usuario}}">
                       </div>
                     </div>
                     <div class="col-lg-6">
