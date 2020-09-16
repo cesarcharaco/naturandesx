@@ -10,6 +10,8 @@ use QRCode;
 use App\Http\Requests\ClientesRequest;
 use App\User;
 use DB;
+use Mail;
+use PDF;
 
 class ClientesController extends Controller
 {
@@ -82,6 +84,32 @@ class ClientesController extends Controller
             $clientes->rut = $request->rut.'-'.$request->verificador;
             $clientes->status=$request->status;
             $clientes->save();
+
+            \DB::table('usuarios_has_preguntas')->insert([
+                'id_usuario' => $usuario->id,
+                'id_pregunta' => $request->pregunta,
+                'respuesta' => $request->respuesta
+            ]);
+
+            if ($request->email!="") {
+                //dd('email y pdf');
+                $nombres= $request->nombres.' '.$request->apellidos;
+                $email= $request->email;
+                $rut = $request->rut.'-'.$request->verificador;
+                $asunto="Naturandes! | Bienvenido";
+                $destinatario=$request->email;
+                $mensaje="Bienvenido a Naturandes";
+                
+                //enviando correo si tiene email
+                $r=Mail::send('email.carnet_qr',
+                    ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
+
+                    $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
+                    $m->from('a.leon@eiche.cl', 'Naturandes!');
+                    $m->to($destinatario)->subject($asunto);
+                    $m->attachData($pdf->output(), "carnet_qr.pdf");
+                });
+            }
 
             toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
             return redirect()->to('clientes');

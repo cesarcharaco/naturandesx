@@ -114,17 +114,19 @@
          mejo y en el menor tiempo posibles hemos mejorado nuestra atención, por eso le traemos nuestro nuevo carnet con código QR de Naturandes.</p>
         <div class="carnet">          
           <div class="card border shadow" style="
-          background-image: url('{{ asset('img/blue-white.jpg') }}');
+          <?php $favicon1 = '/img/blue-white.jpg'; ?>
+          background-image: url('{{ public_path() . $favicon1 }}');
           background-position: center;
           background-repeat: no-repeat;
           background-size: cover;">
             <div class="card-body">
               <center>
                 <div class="" style="border-radius: 30px; background: #007bff; margin: 15px;">
-                  <img src="{{ asset('img/favicon.png') }}" style="width: 250px;">
+                  <?php $favicon = '/img/favicon.png'; ?>
+                  <img src="{{ public_path() . $favicon }}" style="width: 250px;">
                 </div>
                 <div class="form-group" style="">
-                  <img src="{{ asset('img/qr.png') }}" style="width: 200px;">
+                  <img src="{{ $url_img }}" style="width: 200px;">
                 </div>
                 <div class="card rounded" style="margin: 15px;">
                   <p>
