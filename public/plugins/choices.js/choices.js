@@ -1897,10 +1897,10 @@ var DEFAULT_CONFIG = {
   prependValue: null,
   appendValue: null,
   renderSelectedChoices: 'auto',
-  loadingText: 'Loading...',
+  loadingText: 'Cargando...',
   noResultsText: 'No results found',
   noChoicesText: 'No choices to choose from',
-  itemSelectText: 'Press to select',
+  itemSelectText: 'Seleccione una opción',
   uniqueItemText: 'Only unique values can be added',
   customAddItemText: 'Only values matching specific conditions can be added',
   addItemText: function addItemText(value) {

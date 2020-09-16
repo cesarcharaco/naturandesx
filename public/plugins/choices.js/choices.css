@@ -227,7 +227,8 @@
   z-index: 1;
   position: absolute;
   width: 100%;
-  background-color: #ffffff;
+  background: #f2f2f2;
+  color: #000;
   border: 1px solid #dddddd;
   top: 100%;
   margin-top: -1px;
@@ -297,7 +298,8 @@
 }
 
 .choices__list--dropdown .choices__item--selectable.is-highlighted {
-  background-color: #f2f2f2;
+  background: #f2f2f2;
+  color: #000;
 }
 
 .choices__list--dropdown .choices__item--selectable.is-highlighted:after {
