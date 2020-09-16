@@ -124,7 +124,7 @@
                   <img src="{{ asset('img/favicon.png') }}" style="width: 250px;">
                 </div>
                 <div class="form-group" style="">
-                  <img src="{{ asset('img/qr-code/11122233-1.png') }}" style="width: 200px;">
+                  <img src="{{ asset('img/qr.png') }}" style="width: 200px;">
                 </div>
                 <div class="card rounded" style="margin: 15px;">
                   <p>
