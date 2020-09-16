@@ -79,7 +79,7 @@ class RegisterController extends Controller
 
     public function store(ClienteRegisterRequest $request)
     {
-        dd($request->all());
+        //dd($request->all());
         if($request->pregunta1==0 || $request->respuesta1=="" || $request->pregunta2==0 || $request->respuesta2==""){
             toastr()->error('Error!!', 'Debe Seleccionar las preguntas y colocar sus respectivas respuestas');
             return redirect()->to('registerc');
