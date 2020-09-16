@@ -143,7 +143,7 @@
                             <option value="Inactivo">Inactivo</option>
                           </select>
                         </div>
-                          <div class="form-group">
+                          {{--<div class="form-group">
                             <label for="pregunta">Pregunta de seguridad</label>
                             <div class="input-group mb-2 mr-sm-2">
                               <div class="input-group-prepend">
@@ -168,7 +168,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div>--}}
                           <div class="card border border-success">
                             <div class="card-header bg-success" align="center"><h4 align="center" style="color:white;">AVISO</h4></div>
                             <div class="card-body">
@@ -259,32 +259,32 @@
                           </div>
                         </div>
                       </div>
+                      {{--<div class="form-group">
+                        <label for="pregunta">Pregunta de seguridad</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <div class="ti-lock"></div>
+                            </div>
+                          </div>
+                          <select class="form-control" name="pregunta" required>
+                            @foreach($preguntas as $key)
+                              <option value="{{$key->id}}">{{$key->pregunta}}</option>
+                            @endforeach()
+                          </select>
+                        </div>
+                      </div>
                       <div class="form-group">
-                            <label for="pregunta">Pregunta de seguridad</label>
-                            <div class="input-group mb-2 mr-sm-2">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                  <div class="ti-lock"></div>
-                                </div>
-                              </div>
-                              <select class="form-control" name="pregunta" required>
-                                @foreach($preguntas as $key)
-                                  <option value="{{$key->id}}">{{$key->pregunta}}</option>
-                                @endforeach()
-                              </select>
+                        <label for="respuesta">Respuesta</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                          <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta">
+                          <div class="input-group-prepend" onclick="VerR(1)">
+                            <div class="input-group-text" style="color: green;">
+                              <div class="ti-eye"></div>
                             </div>
                           </div>
-                          <div class="form-group">
-                            <label for="respuesta">Respuesta</label>
-                            <div class="input-group mb-2 mr-sm-2">
-                              <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta">
-                              <div class="input-group-prepend" onclick="VerR(1)">
-                                <div class="input-group-text" style="color: green;">
-                                  <div class="ti-eye"></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                        </div>
+                      </div>--}}
                       <div class="form-group">
                         <label for="status">Status</label>
                         <select class="form-control" id="status_editar" name="status">
