@@ -14,4 +14,10 @@ class ClienteExternoController extends Controller
     }
 
 
+    public function buscar_preguntas($id_pregunta)
+    {
+    	return $preguntas=Preguntas::where('id','<>',$id_pregunta)->get();
+    }
+
+
 }

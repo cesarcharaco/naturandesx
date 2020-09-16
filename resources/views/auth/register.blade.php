@@ -70,14 +70,16 @@
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="*******************" autocomplete="new-password">
                 </div>
                 <div class="form-group">
-                    <label for="pregunta">Pregunta de seguridad<b style="color: red;">*</b></label>
+                    <label for="pregunta">1era Pregunta de seguridad<b style="color: red;">*</b></label>
                     <div class="input-group mb-2 mr-sm-2">
                       <div class="input-group-prepend">
                         <div class="input-group-text">
                           <div class="ti-lock"></div>
                         </div>
                       </div>
-                      <select class="form-control" name="pregunta" required>
+                      <select class="form-control" name="pregunta1" required id="pregunta1">
+                        <option value="0">Seleccione una pregunta</option>
+                        
                         @foreach($preguntas as $key)
                           <option value="{{$key->id}}">{{$key->pregunta}}</option>
                         @endforeach()
@@ -87,7 +89,7 @@
               <div class="form-group">
                 <label for="respuesta">Respuesta<b style="color: red;">*</b></label>
                 <div class="input-group mb-2 mr-sm-2">
-                  <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta">
+                  <input type="password" name="respuesta1" class="form-control" required id="Inputrespuesta">
                   <div class="input-group-prepend" onclick="VerR(1)">
                     <div class="input-group-text" style="color: green;">
                       <div class="ti-eye"></div>
@@ -95,18 +97,34 @@
                   </div>
                 </div>
               </div>
-              <div class="card border border-success">
-                <div class="card-header bg-success text-white" align="center"><h3>AVISO</h3></div>
-                <div class="card-body">
-                  <ul>
-                    <li>
-                      <strong>-</strong>
-                      La contraseña será el Rut+<strong>Verificador</strong>.<br>Ejm: 1234567<strong>8</strong>
-                    </li>
-                  </ul>
-                  <div style="font-family: sans-serif;"></div>
+              <div id="segunda_pregunta" style="display: none;" >
+                <div class="form-group">
+                    <label for="pregunta">2da Pregunta de seguridad<b style="color: red;">*</b></label>
+                    <div class="input-group mb-2 mr-sm-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <div class="ti-lock"></div>
+                        </div>
+                      </div>
+                      <select class="form-control" name="pregunta2" id="pregunta2" required>
+                        
+                      </select>
+                    </div>
+                  </div>
+              <div class="form-group">
+                <label for="respuesta">Respuesta<b style="color: red;">*</b></label>
+                <div class="input-group mb-2 mr-sm-2">
+                  <input type="password" name="respuesta2" class="form-control" required id="Inputrespuesta">
+                  <div class="input-group-prepend" onclick="VerR(1)">
+                    <div class="input-group-text" style="color: green;">
+                      <div class="ti-eye"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
+              
+              </div>
+              
                 <div class="submit-btn-area">
                     <button id="form_submit" type="submit">Registrarse <i class="ti-arrow-right"></i></button>
                 </div>
@@ -120,9 +138,21 @@
 </div>
 @endsection
 <script type="text/javascript">
+  $('#pregunta1').on('change',function(event){
+    var id_pregunta=event.target.value;
+    $.get('buscar_preguntas/'+id_pregunta+'/seguridad',function(data){
+      if (data.length>0) {
+        $('#pregunta2').empty();
 
-    function VerR(opcion) {
-      $('#Inputrespuesta').removeAttr('type',false);
-      $('#Inputrespuesta').attr('type','text');
-    }
+        for (var i = 0; i < data.length; i++) {
+        $('#pregunta2').append('<option value='+data[i].id+'>'+data[i].pregunta+'</option>');  
+        }
+      }
+    });
+
+  });
+
+
+
+
 </script>
