@@ -137,10 +137,13 @@
   </div>
 </div>
 @endsection
+@section('scripts')
 <script type="text/javascript">
   $('#pregunta1').on('change',function(event){
     var id_pregunta=event.target.value;
+    $('#segunda_pregunta').css('display','block');
     $.get('buscar_preguntas/'+id_pregunta+'/seguridad',function(data){
+
       if (data.length>0) {
         $('#pregunta2').empty();
 
@@ -151,8 +154,5 @@
     });
 
   });
-
-
-
-
 </script>
+@endsection
