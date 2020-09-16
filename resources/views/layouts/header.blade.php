@@ -18,7 +18,7 @@
                         <i class="fa fa-qrcode"></i>
                     </li>
                 </a>
-                <li class="settings-btn">
+                <li class="settings-btn" onclick="vistaMenuLateral(1)">
                     <i class="ti-settings"></i>
                 </li>
             </ul>
@@ -27,6 +27,10 @@
             <div class="user-profile pull-right">
                 <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->usuario }}</h4>
                 <div class="dropdown-menu">
+                    <a class="dropdown-item settings-btn" onclick="vistaMenuLateral(2)">
+                        <i class="ti-pencil"></i>
+                        Perfil
+                    </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="ti-power-off"></i>
                         {{ __('Cerrar sesión') }}
