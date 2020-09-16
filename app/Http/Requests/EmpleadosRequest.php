@@ -28,7 +28,7 @@ class EmpleadosRequest extends FormRequest
             'apellidos' => 'required|max:255',
             'telefono' => 'required|max:12',
             'usuario' => 'required|max:15|unique:users',
-            'email' => 'max:255'
+            'email' => 'required|email|max:255|unique:users'
         ];
     }
 
@@ -48,7 +48,9 @@ class EmpleadosRequest extends FormRequest
             'usuario.max' => 'El usuario no debe contener mas de 255 caracteres',
             'usuario.unique' => 'Usuario ya registrado',
             'email.email' => 'El email debe ser válido',
-            'email.max' => 'El email no debe contener mas de 255 caracteres'
+            'email.max' => 'El email no debe contener mas de 255 caracteres',
+            'email.unique' => 'Email ya registrado',
+            'email.required' => 'El email es obligatorio',
 
         ];
     }

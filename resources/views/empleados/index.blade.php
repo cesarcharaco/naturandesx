@@ -142,7 +142,7 @@
                       @endif
                     </div>
                     <div class="form-group">
-                      <label for="email">Email</label>
+                      <label for="email">Email <b style="color: red;">*</b></label>
           						<div class="input-group mb-2 mr-sm-2">
           							<div class="input-group-prepend">
           								<div class="input-group-text">@</div>
@@ -156,7 +156,7 @@
                       @endif
                     </div>
                     <div class="form-group">                      
-                      <label for="telefono">Teléfono</label>
+                      <label for="telefono">Teléfono <b style="color: red;">*</b></label>
   	                	<div class="input-group">
           							<div class="input-group-prepend">
           								<div class="input-group-prepend">
@@ -166,12 +166,12 @@
                           </div>
           							</div>
                         <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" autocomplete="off" maxlength="11" value="{{ old('telefono') }}">
-                        @if($errors->has('telefono'))
-                          <small class="form-text text-danger">
-                            {{ $errors->first('email') }}
-                          </small>
-                        @endif
   						        </div>
+                      @if($errors->has('telefono'))
+                        <small class="form-text text-danger">
+                          {{ $errors->first('telefono') }}
+                        </small>
+                      @endif
                     </div>
                     <div class="form-group">
                       <label for="direccion">Dirección</label>
