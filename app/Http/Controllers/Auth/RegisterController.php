@@ -146,15 +146,14 @@ class RegisterController extends Controller
                     $destinatario=$request->email;
                     $mensaje="Bienvenido a Naturandes";
                     
-                    $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut))->save('pdfs/'.$nombre_qr.'.pdf');
-                    $output = "./pdf/".$nombre_qr.".pdf";
-                    //$pdfPath = $pdf->download(BUDGETS_DIR.'/pdf.pdf');
-                    //enviando correo si no tiene avisos registrados
+                    //enviando correo si tiene email
                     $r=Mail::send('email.carnet_qr',
-                        ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$asunto,$destinatario,$mensaje,$output) {
+                        ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
+
+                        $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
                         $m->from('a.leon@eiche.cl', 'Naturandes!');
                         $m->to($destinatario)->subject($asunto);
-                        $m->attach($output);
+                        $m->attachData($pdf->output(), "carnet_qr.pdf");
                     });
                 }
 
