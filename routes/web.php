@@ -43,4 +43,8 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::post('qrLogin', ['uses' => 'QrLoginController@checkUser']);
 
 	Route::name('carnet_qr')->get('carnet_qr', 'ClientesController@carnet_qr');
+
+
+	Route::get('reportes','VentasController@buscar_reporte')->name('reportes');
+	Route::post('reportes/mostrar','VentasController@mostrar_reporte');
 });

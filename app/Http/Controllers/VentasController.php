@@ -7,7 +7,7 @@ use App\Clientes;
 use App\Promociones;
 use App\Ventas;
 use App\EmpleadosVentas;
-
+use App\Empleados;
 class VentasController extends Controller
 {
     /**
@@ -115,5 +115,17 @@ class VentasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function buscar_reporte()
+    {
+        $repartidores=Empleados::where('status','Activo')->get();
+
+        return view('reportes.index',compact('repartidores'));
+    }
+
+    public function mostrar_reporte(Request $request)
+    {
+        dd($request->all());
     }
 }
