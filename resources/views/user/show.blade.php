@@ -4,7 +4,28 @@
 @endsection
 
 @section('content')
-<div class="content  mt-5 mb-5">
+<div class="main-conten-inner">
+  	<div class="row">
+  		<div class="col-xl-3 col-ml-6 col-mdl-4 col-sm-6 mt-5">
+            <div class="card">
+                <div class="pricing-list">
+                    <div class="prc-head">
+                        <h4>Mi Perfil</h4>
+                    </div>
+                    <div class="prc-list">
+                        <ul>
+                            <li><a href="#">Term financing</a></li>
+                            <li><a href="#">Access up to $10,000</a></li>
+                            <li><a href="#">Get: USD</a></li>
+                            <li><a href="#">3-24 Month Terms</a></li>
+                            <li class="bold"><a href="#">1 SALT/year</a></li>
+                        </ul>
+                        <a href="#">Buy Package</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+  	</div>
   <div class="bg-white border rounded">
     <div class="row no-gutters">
       <div class="col-lg-4 col-xl-3">

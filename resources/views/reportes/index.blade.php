@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('css')
-  <title>Reportes</title>
+	<title>Reportes</title>
+	<!-- Include base CSS (optional) -->
+	<link rel="stylesheet" href="{{ asset('plugins/choices.js/base.css') }}" />
+	<!-- Include Choices CSS -->
+	<link rel="stylesheet" href="{{ asset('plugins/choices.js/choices.css') }}" />
 @endsection
 
 @section('page-title-area')
@@ -29,6 +33,16 @@
         <div class="mb-3">
         	<form action="{{ route('mostrar_reporte') }}" name="mostrar_reportes" method="POST">
 	            @csrf
+	            <div class="form-group">
+	            	<label>Repartidores</label>
+	            	<select class="choices form-select multiple-remove" multiple="multiple" name="id_repartidores[]">
+                        <optgroup label="Repartidores">
+                            @foreach($repartidores as $key)
+			          			<option value="{{$key->id}}" style="color: black !important;">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
+			          		@endforeach()
+                        </optgroup>
+                    </select>
+	            </div>
 	          	<div class="form-group">
 		          	<label>Repartidores</label>
 		          	<select class="form-control select2" multiple="multiple" name="id_repartidores[]" required="required">
@@ -76,4 +90,6 @@
     
   </script>
 @section('scripts')
+<!-- Include Choices JavaScript -->
+<script src="{{ asset('plugins/choices.js/choices.min.js') }}"></script>
 @endsection
