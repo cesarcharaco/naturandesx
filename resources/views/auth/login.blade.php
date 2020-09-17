@@ -25,9 +25,7 @@
 </style>
 @section('content')
 
-  <div class="row justify-content-center" style="width: 70% !important;">
-    <div class="col-md-6">
-      <div class="card card-black">
+      <div class="login-box card-black">
         <div class="card-body">
         <h2 align="center" class="mb-4">INICIAR SESIÓN</h2>
         <form action="{{ route('login') }}" method="post">
@@ -52,7 +50,7 @@
               </div>
               <!-- /.col -->
               <div class="col-6">
-                <button type="submit" class="btn btn-warning btn-block text-white" style="background-color: orange; border-color: orange;"><strong>Iniciar sesión</strong></button>
+                <button type="submit" class="btn btn-block text-white" style="background-color: orange; border-color: orange; border-radius: 10px;"><strong>Iniciar sesión</strong></button>
               </div>
               <!-- /.col -->
             </div>
@@ -61,8 +59,6 @@
           
         </div>
       </div>
-    </div>
     <!-- <div class="col-md-6"></div> -->
-  </div>
 <!-- /.login-box -->
 @endsection
