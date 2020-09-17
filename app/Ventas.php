@@ -8,7 +8,7 @@ class Ventas extends Model
 {
     protected $table='ventas';
 
-    protected $fillable=['id_cliente','id_promociones','cantidad'];
+    protected $fillable=['id_cliente','id_promocion','cantidad','monto_total'];
 
     public function cliente()
     {

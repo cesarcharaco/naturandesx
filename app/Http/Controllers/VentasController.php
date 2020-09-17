@@ -55,18 +55,24 @@ class VentasController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        $ventas = new Ventas();
-        $ventas->id_cliente=$request->id_cliente;
-        $ventas->id_promocion=1;
-        $ventas->cantidad=$request->cantidad1;
-        $ventas->monto_total=$request->monto_total;
-        $ventas->save();
+        //dd(count($request->id_promocion));
+        for ($i=0; $i < count($request->id_promocion); $i++) { 
+            
+            $ventas = new Ventas();
+            $ventas->id_cliente=$request->id_cliente;
+            $ventas->id_promocion=$request->id_promocion[$i];
+            $ventas->cantidad=$request->cantidad[$i];
+            $ventas->monto_total=$request->monto_total;
+            $ventas->save();
+            // dd($ventas->id);
+            $empleado=Empleados::where('id_usuario',\Auth::User()->id)->first();
+            
+            $registro = new EmpleadosVentas();
+            $registro->id_empleado=$empleado->id;
+            $registro->id_venta=$ventas->id;
+            $registro->save();
+        }
 
-        $ventas = new EmpleadosVentas();
-        $ventas->id_empleado=\Auth::User()->id;
-        $ventas->id_venta=$ventas->id;
-        $ventas->status="No Pagada";
-        $ventas->save();
 
         toastr()->success('Éxito!!', ' Venta registrada satisfactoriamente');
         return redirect()->to('ventas');

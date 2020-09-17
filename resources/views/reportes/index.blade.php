@@ -35,7 +35,7 @@
 	            @csrf
 	            <div class="form-group">
 	            	<label>Repartidores</label>
-	            	<select class="choices form-select multiple-remove" multiple="multiple" name="id_repartidores[]">
+	            	<select class="choices form-select multiple-remove" multiple="multiple" name="id_repartidor[]">
                         <optgroup label="Repartidores">
                             @foreach($repartidores as $key)
 			          			<option value="{{$key->id}}" style="color: black !important;">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
@@ -43,14 +43,7 @@
                         </optgroup>
                     </select>
 	            </div>
-	          	<div class="form-group">
-		          	<label>Repartidores</label>
-		          	<select class="form-control select2" multiple="multiple" name="id_repartidores[]" required="required">
-		          		@foreach($repartidores as $key)
-		          			<option value="{{$key->id}}">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
-		          		@endforeach()
-		          	</select>
-	          	</div>
+	          	
 	        	<center>
 		          	<div class="row">
 			          	<div class="col-lg-6">

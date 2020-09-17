@@ -85,12 +85,6 @@ class ClientesController extends Controller
             $clientes->status=$request->status;
             $clientes->save();
 
-            \DB::table('usuarios_has_preguntas')->insert([
-                'id_usuario' => $usuario->id,
-                'id_pregunta' => $request->pregunta,
-                'respuesta' => $request->respuesta
-            ]);
-
             if ($request->email!="") {
                 //dd('email y pdf');
                 $nombres= $request->nombres.' '.$request->apellidos;
