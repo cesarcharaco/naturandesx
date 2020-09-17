@@ -28,6 +28,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::post('clientes/eliminar','ClientesController@eliminar')->name('clientes.eliminar');
 	Route::resource('user','UserController',['except' => ['show']]);
 	Route::get('user/{id}/perfil', 'UserController@show')->name('perfil');
+	Route::get('buscar_preguntas_p/{id_pregunta}/seguridad_p','UserController@buscar_preguntas');
 	Route::post('user/editar_perfil', 'UserController@editar_perfil')->name('editar_perfil');
 	Route::resource('empleados','EmpleadosController');
 	Route::post('empleados/editar','EmpleadosController@editar')->name('empleados.editar');
