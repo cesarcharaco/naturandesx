@@ -132,6 +132,21 @@ class VentasController extends Controller
 
     public function mostrar_reporte(Request $request)
     {
-        dd($request->all());
+        //dd(is_null($request->cancelado));
+        $repartidores=$request->id_repartidor;
+        //dd($repartidores);
+
+            if(is_null($request->cancelado) and $request->no_cancelado==1){
+                $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->where('status','No Pagada')->get();
+
+            }elseif(is_null($request->no_cancelado) and $request->cancelado==1){
+                $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->where('status','Pagada')->get();
+            }else{
+                $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->get();
+                
+            }
+            //dd($ventas);    
+        return view('reportes.show',compact('ventas','repartidores'));
+        
     }
 }
