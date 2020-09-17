@@ -4,26 +4,25 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">
 @endsection
 
-@section('page-title-area')
-<!-- page title area start -->
-<div class="page-title-area">
-    <div class="row align-items-center">
-        <div class="col-sm-6 barraTitulo">
-            <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Realizar Venta</h4>
-                <ul class="breadcrumbs pull-left">
-                    <li><a href="{{ route('empleados.index') }}">Ventas</a></li>
-                    <li><span>Inicio</span></li>
-                </ul>
-            </div>
-        </div>
-        @include('layouts.perfil')
+@section('content-header')
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Home</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Tablero</li>
+        </ol>
+      </div>
     </div>
-</div>
-<!-- page title area end -->
+  </div><!-- /.container-fluid -->
+</section>
 @endsection
 @section('content')
-  <div class="main-content-inner">
+  <div class="container-fluid">
 
       <div class="row mt-5 mb-5">
           <!-- Live Crypto Price area sta Qrt -->

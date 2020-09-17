@@ -1,32 +1,27 @@
 @extends('layouts.app')
 @section('css')
 	<title>Reportes</title>
-	<!-- Include base CSS (optional) -->
-	<link rel="stylesheet" href="{{ asset('plugins/choices.js/base.css') }}" />
-	<!-- Include Choices CSS -->
-	<link rel="stylesheet" href="{{ asset('plugins/choices.js/choices.css') }}" />
 @endsection
 
-@section('page-title-area')
-<!-- page title area start -->
-<div class="page-title-area">
-    <div class="row align-items-center">
-        <div class="col-sm-6">
-            <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Reportes</h4>
-                <ul class="breadcrumbs pull-left">
-                    <li><a href="{{ route('empleados.index') }}">Reportes</a></li>
-                    <li><span>Inicio</span></li>
-                </ul>
-            </div>
-        </div>
-        @include('layouts.perfil')
+@section('content-header')
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Reportes</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Reportes</a></li>
+          <li class="breadcrumb-item active">Filtro</li>
+        </ol>
+      </div>
     </div>
-</div>
-<!-- page title area end -->
+  </div><!-- /.container-fluid -->
+</section>
 @endsection
 @section('content')
-  <div class="sales-report-area mt-5 mb-5">             
+  <div class="container-fluid">
     <div class="card bg-white shadow" style="border-radius: 30px !important;">
       <div class="card-body">
         <h4 class="header-title mb-3">Reportes</h4>
@@ -83,6 +78,15 @@
     
   </script>
 @section('scripts')
-<!-- Include Choices JavaScript -->
-<script src="{{ asset('plugins/choices.js/choices.min.js') }}"></script>
+<!-- Page script -->
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+</script>
 @endsection
