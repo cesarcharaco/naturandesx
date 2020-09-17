@@ -50,7 +50,7 @@
               </div>
               <!-- /.col -->
               <div class="col-6">
-                <button type="submit" class="btn btn-block text-white" style="background-color: orange; border-color: orange; border-radius: 10px;"><strong>Iniciar sesión</strong></button>
+                <button type="submit" class="btn btn-block text-white" style="background-color: #ffa600;border-radius: 10px;"><strong>Iniciar sesión</strong></button>
               </div>
               <!-- /.col -->
             </div>
