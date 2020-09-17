@@ -4,27 +4,26 @@
   <title>Dashboard</title>
 @endsection
 
-@section('page-title-area')
-<!-- page title area start -->
-<div class="page-title-area">
-    <div class="row align-items-center">
-        <div class="col-sm-6">
-            <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Dashboard</h4>
-                <ul class="breadcrumbs pull-left">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><span>Dashboard</span></li>
-                </ul>
-            </div>
-        </div>
-        @include('layouts.perfil')
+@section('content-header')
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Home</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Tablero</li>
+        </ol>
+      </div>
     </div>
-</div>
-<!-- page title area end -->
+  </div><!-- /.container-fluid -->
+</section>
 @endsection
 
 @section('content')
-<div class="sales-report-area mt-5 mb-5">
+<div class="container-fluid">
   <!-- Top Statistics -->
   @if(Auth::user()->tipo_usuario == 'Admin' )
     <div class="row">

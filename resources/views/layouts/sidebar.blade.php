@@ -1,35 +1,70 @@
-<!-- sidebar menu area start -->
-<div class="sidebar-menu">
-    <div class="sidebar-header">
-        <div class="logo">
-            <a href="index.html"><img src="{{ asset('img/favicon.png') }}" alt="logo" width="150px"></a>
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{{ route('home') }}" class="brand-link">
+      <img src="{{ asset('img/favicon.png') }}" alt="Naturandes"
+           class="brand-image elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">NA</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ asset('img/default.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
-    </div>
-    <div class="main-menu">
-        <div class="menu-inner">
-            <nav>
-                <ul class="metismenu" id="menu">
-                    <li>
-                        <a href="{{ route('home') }}"><i class="ti-dashboard"></i> <span>Home</span></a></li>
-                    @if(Auth::user()->tipo_usuario == 'Empleado' )
-                        <li>
-                            <a href="{{ route('ventas.index') }}"><i class="ti-money"></i> <span>Ventas</span></a></li>
-                    @endif
-                    @if(Auth::user()->tipo_usuario == 'Admin' )
-                        <li>
-                            <a href="{{ route('empleados.index') }}"><i class="ti-truck"></i> <span>Repartidores</span></a>
-                        </li>
-                        <li>
-                            <a href="{{ route('reportes') }}"><i class="ti-book"></i> <span>Reportes</span></a></li>
-                    @endif
-                    @if(Auth::user()->tipo_usuario != 'Cliente' )
-                        <li>
-                            <a href="{{ route('clientes.index') }}"><i class="ti-receipt"></i> <span>Clientes</span></a>
-                        </li>
-                    @endif
-                </ul>
-            </nav>
+        <div class="info">
+          <a href="#" class="d-block">{{\Auth::User()->usuario}}</a>
         </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-header">Menú</li>
+          <li class="nav-item">
+            <a href="{{ route('home') }}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt text-info"></i>
+              <p class="text">Home</p>
+            </a>
+          </li>
+          @if(Auth::user()->tipo_usuario == 'Empleado' )
+          <li class="nav-item">
+            <a href="{{ route('ventas.index') }}" class="nav-link">
+              <i class="nav-icon far fa-circle text-warning"></i>
+              <p>Ventas</p>
+            </a>
+          </li>
+          @endif
+          @if(Auth::user()->tipo_usuario == 'Admin' )
+          <li class="nav-item">
+            <a href="{{ route('empleados.index') }}" class="nav-link">
+              <i class="nav-icon far fa-circle text-info"></i>
+              <p>Repartidores</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('reportes') }}" class="nav-link">
+              <i class="nav-icon far fa-circle text-info"></i>
+              <p>Reportes</p>
+            </a>
+          </li>
+          @endif
+          @if(Auth::user()->tipo_usuario != 'Cliente' )
+          <li class="nav-item">
+            <a href="{{ route('clientes.index') }}" class="nav-link">
+              <i class="nav-icon far fa-circle text-info"></i>
+              <p>Clientes</p>
+            </a>
+          </li>
+          @endif
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-</div>
-<!-- sidebar menu area end -->
+    <!-- /.sidebar -->
+</aside>

@@ -1,7 +1,6 @@
-<!-- footer area start-->
-<footer>
-    <div class="footer-area">
-        <p>© 2020 Copyright {{ config('app.name', 'Laravel') }}. Todos los derechos reservados. Aplicación web desarrollada por: <a href="https://eiche.cl">EICHE</a>.</p>
+ <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.5
     </div>
-</footer>
-<!-- footer area end-->
+    <strong>© 2020 Copyright Naturandes. Todos los derechos reservados. Desarrollado por: <a href="http://eiche.cl" target="_blank">EICHE</a>.</strong>
+ </footer>
