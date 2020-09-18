@@ -1,10 +1,13 @@
 @extends('layouts.app_login')
 <style type="text/css">
   body{
+    
     background-image: url("{{ asset('img/banner-covid-19.jpg') }}") !important;
-    background-position: center !important;
+    background-position: center center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
+    background-attachment: fixed !important;
+
   }
   h2{
     color: white !important;
