@@ -84,7 +84,7 @@
 			            <div class="input-group-prepend">
 			              <div class="input-group-prepend">
 			                <div class="input-group-text">
-			                  <div class="ti-mobile"></div>
+			                  <i class="fa fa-fw fa-phone"></i>
 			                </div>
 			              </div>
 			            </div>

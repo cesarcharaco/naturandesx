@@ -23,13 +23,14 @@
 @endsection
 
 @section('content')
+  <input type="hidden" id="nameRegistrar" value="1">
   <div class="container-fluid">
     <div class="card bg-white">
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-md-12">
-            <a class="btn btn-outline-primary btn-sm text-uppercase float-right" data-toggle="collapse" href="#RegistrarEmpleado" role="button" aria-expanded="false" aria-controls="RegistrarEmpleado">
-              Registrar
+            <a class="btn btn-outline-primary btn-sm text-uppercase float-right" data-toggle="collapse" href="#RegistrarEmpleado" role="button" aria-expanded="false" aria-controls="RegistrarEmpleado" onclick="RegistrarEmpleado()">
+              <span id="Registrar">Registrar</span>
             </a>
           </div>
         </div>
@@ -99,6 +100,17 @@
 @endsection
 
   <script type="text/javascript">
+    function RegistrarEmpleado() {
+      var opcion = $('#nameRegistrar').val();
+      if (opcion == 1) {
+        $('#Registrar').html('Cerrar');
+        $('#nameRegistrar').val(2);
+      }else{
+        $('#Registrar').html('Registrar');
+        $('#nameRegistrar').val(1);
+      }
+      
+    }
 
     function verEmpleado(id,codigo_qr,nombres,apellidos,email,rut) {
       $('#columna').removeAttr('class',false);
