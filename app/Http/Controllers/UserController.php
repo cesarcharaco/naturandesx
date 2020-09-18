@@ -121,6 +121,28 @@ class UserController extends Controller
                     
                     toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
                     return redirect()->back();
+                } else if ($request->cambiar_password==1 && $request->cambiar_preguntas==1){
+                    //dd($id_preguntas);
+                    $clave = $request->password;
+                    $usuario = new User();
+                    $nueva_clave=\Hash::make($clave);
+                    $usuario->password=$nueva_clave;
+                    $usuario->save();
+                    
+                    DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta1,
+                        'respuesta' => $request->respuesta1
+                    ]);
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta2,
+                        'respuesta' => $request->respuesta2
+                    ]);
+                    
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
                 }
             }
             
@@ -178,6 +200,28 @@ class UserController extends Controller
                     
                     toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
                     return redirect()->back();
+                } else if ($request->cambiar_password==1 && $request->cambiar_preguntas==1){
+                    //dd($id_preguntas);
+                    $clave = $request->password;
+                    $usuario = new User();
+                    $nueva_clave=\Hash::make($clave);
+                    $usuario->password=$nueva_clave;
+                    $usuario->save();
+                    
+                    DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta1,
+                        'respuesta' => $request->respuesta1
+                    ]);
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta2,
+                        'respuesta' => $request->respuesta2
+                    ]);
+                    
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
                 }
                 
             }
@@ -221,6 +265,28 @@ class UserController extends Controller
                     $usuario->save();
                 } else if ($request->cambiar_preguntas==1){
                     //dd($id_preguntas);
+                    DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta1,
+                        'respuesta' => $request->respuesta1
+                    ]);
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta2,
+                        'respuesta' => $request->respuesta2
+                    ]);
+                    
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
+                } else if ($request->cambiar_password==1 && $request->cambiar_preguntas==1){
+                    //dd($id_preguntas);
+                    $clave = $request->password;
+                    $usuario = new User();
+                    $nueva_clave=\Hash::make($clave);
+                    $usuario->password=$nueva_clave;
+                    $usuario->save();
+
                     DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
                     \DB::table('usuarios_has_preguntas')->insert([
                         'id_usuario' => $request->id_usuario,
