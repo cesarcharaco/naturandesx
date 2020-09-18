@@ -28,6 +28,10 @@
 	    border-radius: 10px !important;
 	    text-align: center;
 	  }
+	  label{
+	  	color: #ffa600;
+	  	text-align: center !important;
+	  }
 	</style>
 </head>
 <body class="hold-transition login-page">
