@@ -76,20 +76,21 @@ class UserController extends Controller
             $empleados->direccion=$request->direccion;
             $empleados->save();
         } else if (\Auth::User()->tipo_usuario=="Cliente") {
-            if ($request->datos_personales=="1") {
-                $clientes = Clientes::find($request->id);
+            dd($request->all());
+            if ($request->datos_per==1) {
+                $clientes = Clientes::find($request->id_cliente);
                 $clientes->nombres=$request->nombres;
                 $clientes->apellidos=$request->apellidos;
                 $clientes->save();
 
-                $usuario = User::find($id);
+                $usuario = User::find($request->id_usuario);
                 if ($request->email=="") {
                     $usuario->email=NULL;
                 } else {
                     $usuario->email=$request->email;
                 }
                 $usuario->save();
-            } else if ($request->datos_seguridad==1){
+            } else if ($request->datos_seg==1){
                 if ($request->cambiar_password==1) {
                     $clave = $request->password;
                     $usuario = new User();
@@ -110,17 +111,6 @@ class UserController extends Controller
                 }
                 
             }
-            
-            
-
-            $usuario = User::find($id);
-            $usuario->usuario=$request->usuario;
-            if ($request->email=="") {
-                $usuario->email=NULL;
-            } else {
-                $usuario->email=$request->email;
-            }
-            $usuario->save();
         } else if (\Auth::User()->tipo_usuario=="Admin") {
             $usuario = User::find($id);
             $usuario->usuario=$request->usuario;
