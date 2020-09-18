@@ -2,10 +2,10 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link">
-      <img src="{{ asset('img/favicon.png') }}" alt="Naturandes"
+      <img src="{{ asset('img/naturandes.jpg') }}" alt="Naturandes"
            class="brand-image elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">NA</span>
+      <span class="brand-text font-weight-light">Naturandes</span>
     </a>
 
     <!-- Sidebar -->
@@ -16,7 +16,7 @@
           <img src="{{ asset('dist/img/default-150x150.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{\Auth::User()->usuario}}</a>
+          <a href="#" class="d-block" style="text-transform: uppercase;">{{\Auth::User()->usuario}}</a>
         </div>
       </div>
 
