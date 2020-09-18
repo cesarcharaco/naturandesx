@@ -3,8 +3,25 @@
 <title>Mi perfil</title>
 @endsection
 
+@section('content-header')
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Mi Cuenta</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Mi cuenta</a></li>
+          <li class="breadcrumb-item active">Perfil</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+@endsection
 @section('content')
-<div class="main-conten-inner">
+<div class="container-fluid">
   @if(\Auth::User()->tipo_usuario=="Cliente")
     <div class="row">
       <div class="col-lg-4 col-md-6 mt-5">

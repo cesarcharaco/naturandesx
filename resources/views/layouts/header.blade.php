@@ -31,7 +31,7 @@
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="{{ route('perfil', \Auth::User()->id) }}" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
               <div class="media-body">
