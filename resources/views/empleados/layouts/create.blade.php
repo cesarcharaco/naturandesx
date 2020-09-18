@@ -1,4 +1,4 @@
-<div class="collapse multi-collapse" id="RegistrarEmpleado">
+<div class="collapse multi-collapse" id="RegistrarEmpleado" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
   	<div class="card card-body">
     	<h4 class="header-title mb-2">Registro de repartidores <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
     	<form action="{{ route('empleados.store') }}" name="registro_empleados" method="POST">

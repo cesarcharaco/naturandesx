@@ -34,11 +34,15 @@
             </a>
           </div>
         </div>
-        @include('empleados.layouts.create')
-        @include('empleados.layouts.show')
-        @include('empleados.layouts.edit')
-        @include('empleados.layouts.delete')
         <div class="row">
+          <div class="col-md-12">
+            @include('empleados.layouts.create')
+            @include('empleados.layouts.show')
+            @include('empleados.layouts.edit')
+            @include('empleados.layouts.delete')
+          </div>
+        </div>
+        <div class="row" style="position: relative !important;">
           <div class="col-md-12" id="columna" style="position: relative !important;">
             <div class="data-tables datatable-primary" style="width: 100% !important;">
               <table id="dataTable3" class="text-center" style="width: 100% !important; font:">
@@ -103,11 +107,13 @@
     function RegistrarEmpleado() {
       var opcion = $('#nameRegistrar').val();
       if (opcion == 1) {
-        $('#Registrar').html('Cerrar');
+        $('#Registrar').html('Cerrar').removeAttr('btn-outline-primary').attr('class','btn-outline-success');
         $('#nameRegistrar').val(2);
+        $('#dataTable3').fadeOut('fast');
       }else{
-        $('#Registrar').html('Registrar');
+        $('#Registrar').html('Registrar').removeAttr('btn-outline-primary').attr('class','btn-outline-success');
         $('#nameRegistrar').val(1);
+        $('#dataTable3').fadeIn('fast');
       }
       
     }
