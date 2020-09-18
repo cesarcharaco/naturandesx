@@ -8,13 +8,13 @@
         @csrf
         <div class="mt-4">
           
-          <input id="login" type="text" class="border border-warning form-control mb-4 input @if ($errors->has('usuario') || $errors->has('email')) is-invalid @endif" name="login" value="Usuario" required placeholder="Ingrese email o usuario..." autocomplete="login" autofocus="">
+          <input id="login" type="text" class="border border-warning form-control mb-4 input @if ($errors->has('usuario') || $errors->has('email')) is-invalid @endif" name="login" value="{{ old('usuario') ?: old('email') }}" required placeholder="Email o Usuario" autocomplete="login" autofocus="">
           @if ($errors->has('usuario') || $errors->has('email'))
             <span class="invalid-feedback" role="alert">
               <strong>{{ $errors->first('usuario') ?: $errors->first('email') }}</strong>
             </span>
           @endif
-          <input id="password" value="Contraseña" type="password" class="border border-warning form-control mb-4 input @error('password') is-invalid @enderror" name="password" required placeholder="*******************">
+          <input id="password" value="Contraseña" type="password" class="border border-warning form-control mb-4 input @error('password') is-invalid @enderror" name="password" required placeholder="Contraseña">
           <div class="row">
             <div class="col-6">
               <div class="icheck-primary">

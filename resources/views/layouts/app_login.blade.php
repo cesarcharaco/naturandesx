@@ -32,6 +32,12 @@
 	  	color: #ffa600;
 	  	text-align: center !important;
 	  }
+
+	  @media only screen and (max-width: 2000px)  {
+	  	#login2{
+	  		width: 90%;
+	  	}
+	  }
 	</style>
 </head>
 <body class="hold-transition login-page">

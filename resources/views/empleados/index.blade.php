@@ -28,11 +28,15 @@
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-md-12">
-            <a href="#RegistrarEmpleados" onclick="RegistrarEmpleado()" class="btn btn-outline-primary btn-sm text-uppercase float-right">
-              <i class="mdi mdi-link mr-1"></i>  Registrar 
+            <a class="btn btn-outline-primary btn-sm text-uppercase float-right" data-toggle="collapse" href="#RegistrarEmpleado" role="button" aria-expanded="false" aria-controls="RegistrarEmpleado">
+              Registrar
             </a>
           </div>
         </div>
+        @include('empleados.layouts.create')
+        @include('empleados.layouts.show')
+        @include('empleados.layouts.edit')
+        @include('empleados.layouts.delete')
         <div class="row">
           <div class="col-md-12" id="columna" style="position: relative !important;">
             <div class="data-tables datatable-primary" style="width: 100% !important;">
@@ -86,10 +90,7 @@
             </div>
           </div>
           <div id="columna2" style="position: relative !important;">
-            @include('empleados.layouts.create')
-            @include('empleados.layouts.show')
-            @include('empleados.layouts.edit')
-            @include('empleados.layouts.delete')
+           
           </div>
         </div>
       </div>
@@ -98,15 +99,6 @@
 @endsection
 
   <script type="text/javascript">
-    function RegistrarEmpleado() {
-      $('#columna').removeAttr('class',false);
-      $('#columna').attr('class','col-md-8');
-      $('#columna2').attr('class','col-md-4');
-      $('.VistaLateralEmpleados').fadeOut('slow');
-      $('#RegistrarEmpleados2').fadeIn('slow');
-      $('#RegistrarEmpleados').animate({width:'toggle'},350);
-      $('#RegistrarEmpleados').fadeIn('slow');
-    }
 
     function verEmpleado(id,codigo_qr,nombres,apellidos,email,rut) {
       $('#columna').removeAttr('class',false);
