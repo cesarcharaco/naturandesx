@@ -9,7 +9,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Empleados</h1>
+        <h1>Repartidores</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -26,7 +26,6 @@
   <div class="container-fluid">
     <div class="card bg-white">
       <div class="card-body">
-        <h4 class="header-title mb-0">Repartidores</h4>
         <div class="row mb-3">
           <div class="col-md-12">
             <a href="#RegistrarEmpleados" onclick="RegistrarEmpleado()" class="btn btn-outline-primary btn-sm text-uppercase float-right">
@@ -35,7 +34,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-8" style="position: relative !important;">
+          <div class="col-md-12" id="columna" style="position: relative !important;">
             <div class="data-tables datatable-primary" style="width: 100% !important;">
               <table id="dataTable3" class="text-center" style="width: 100% !important; font:">
                   <thead class="text-capitalize">
@@ -86,297 +85,11 @@
               </table>
             </div>
           </div>
-          <div class="col-md-4" style="position: relative !important;">
-            <div class="VistaLateralEmpleados RegistrarEmpleados shadow" id="RegistrarEmpleados">
-              <div class="card card-default border border-success shadow">
-                <div class="card-body">
-                  <h4 class="header-title mb-2">Registro de repartidores <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
-                	<form action="{{ route('empleados.store') }}" name="registro_empleados" method="POST">
-                    @csrf
-	                	<div class="form-group">
-	                		<label>Nombres</label>
-	                		<input type="text" name="nombres" class="form-control" required value="{{ old('nombres') }}" placeholder="Nombres del repartidor">
-                      @if($errors->has('nombres'))
-                        <small class="form-text text-danger">
-                          {{ $errors->first('nombres') }}
-                        </small>
-                      @endif
-	                	</div>
-	                	<div class="form-group">
-	                		<label>Apellidos</label>
-	                		<input type="text" name="apellidos" class="form-control" required value="{{ old('apellidos') }}" placeholder="Apellidos del repartidor">
-                      @if($errors->has('apellidos'))
-                        <small class="form-text text-danger">
-                          {{ $errors->first('apellidos') }}
-                        </small>
-                      @endif
-	                	</div>
-                    <div class="form-group">
-                      <label for="rut" style="color: black;">Rut</label>
-  	                	<div class="row">
-                        <div class="col-md-8">
-                          <div class="form-group">
-                            <input type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_e" class="form-control" required placeholder="Rut del repartidor">
-  			                		@if($errors->has('rut'))
-                              <small class="form-text text-danger">
-                                {{ $errors->first('rut') }}
-                              </small>
-                            @endif
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <input type="number" name="verificador" min="1" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
-                          </div>
-                        </div>
-                      </div>
-						        </div>
-                    <div class="form-group">
-                      <label for="usuario">Usuario <b style="color: red;">*</b></label>
-                      <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}">
-                      @if ($errors->has('usuario'))
-                          <small class="form-text text-danger">
-                              {{ $errors->first('usuario') }}
-                           </small>
-                      @endif
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email <b style="color: red;">*</b></label>
-          						<div class="input-group mb-2 mr-sm-2">
-          							<div class="input-group-prepend">
-          								<div class="input-group-text">@</div>
-          							</div>
-          							<input type="email" placeholder="Correo" name="email" class="form-control" id="email" value="{{ old('email') }}" required="required">
-          						</div>
-                      @if($errors->has('email'))
-                        <small class="form-text text-danger">
-                          {{ $errors->first('email') }}
-                        </small>
-                      @endif
-                    </div>
-                    <div class="form-group">                      
-                      <label for="telefono">Teléfono <b style="color: red;">*</b></label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-prepend">
-                            <div class="input-group-text">
-                              <div class="ti-mobile"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" autocomplete="off" maxlength="11" value="{{ old('telefono') }}" required="required">
-                        @if($errors->has('telefono'))
-                          <small class="form-text text-danger">
-                            {{ $errors->first('email') }}
-                          </small>
-                        @endif
-                      </div>
-                      @if($errors->has('telefono'))
-                        <small class="form-text text-danger">
-                          {{ $errors->first('telefono') }}
-                        </small>
-                      @endif
-                    </div>
-                    <div class="form-group">
-                      <label for="direccion">Dirección</label>
-	                	  <textarea name="direccion" class="form-control" value="{{ old('direccion') }}" placeholder="Dirección del repartidor"></textarea>
-                      @if($errors->has('direccion'))
-                        <small class="form-text text-danger">
-                          {{ $errors->first('direccion') }}
-                        </small>
-                      @endif
-	                	</div>
-                    <div class="card border border-success">
-                      <div class="card-header bg-success" align="center"><h4 align="center" style="color:white;">AVISO</h4></div>
-                        <div class="card-body">
-                          <div>
-                            <strong>-</strong> La contraseña será el Rut+<strong>Verificador</strong>.<br>
-                            Ejm: 1234567<strong>8</strong>.
-                          </div>
-                        </div>
-                      </div>
-                    <div class="form-footer pt-5 border-top">
-                      <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
-                    </div>
-	                </form>
-                </div>
-              </div>
-            </div>
-            <div class="VistaLateralEmpleados VerEmpleados" id="VerEmpleados" style="display: none;">
-              <div class="card border shadow" style="
-              background-image: url('{{ asset('img/blue-white.jpg') }}');
-              background-position: center;
-              background-repeat: no-repeat;
-              background-size: cover;
-              border-radius: 30px !important;">
-                <div class="card-body">
-                  <center>
-                  	<div class="bg-primary" style="border-radius: 30px;">
-                    	<img src="{{ asset('img/favicon.png') }}" style="width: 250px;">
-                  	</div>
-                    <div class="form-group" style="">
-                      <div id="img_qr"></div>
-                    </div>
-                    <div class="card rounded">
-                      <div class="form-group">
-                        <h3 style="color: black !important;"><span id="nombres_carnet"></span> <span id="apellidos_carnet"></span></h3>
-                      </div>
-                      <div class="form-group">
-                        <h5 style="color: black !important;"><span id="email_carnet"></span></h5>
-                      </div>
-                      <div class="form-group">
-                        <h5 style="color: black !important;"><span id="rut_carnet"></span></h5>
-                      </div>
-                    </div>
-                  </center>
-                </div>
-              </div>
-            </div>
-            <div class="VistaLateralEmpleados EditarEmpleados shadow" id="EditarEmpleados" style="display: none;">
-              <div class="card card-warning border border-warning">
-                <div class="card-body">
-                  <h4 class="header-title mb-2">Editar datos de repartidor <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
-                	<form action="{{ route('empleados.editar') }}" name="registro_empleados" method="POST">
-	                   @csrf
-	                	<div class="form-group">
-	                		<label>Nombres</label>
-	                		<input type="text" name="nombres" class="form-control" required value="{{ old('nombres') }}" id="nombres_edit">
-                      @error('nombres')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-	                	</div>
-	                	<div class="form-group">
-	                		<label>Apellidos</label>
-	                		<input type="text" name="apellidos" class="form-control" required value="{{ old('apellidos') }}" id="apellidos_edit">
-                      @error('apellidos')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-	                	</div>
-	                	<div class="form-group">
-                      <label for="rut_edit" style="color: black;">Rut</label>
-                      <div class="row">
-                        <div class="col-md-8">
-                          <div class="form-group">
-                            <input type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_edit" class="form-control" required placeholder="Rut del repartidor">
-                            @if($errors->has('rut'))
-                              <small class="form-text text-danger">
-                                {{ $errors->first('rut') }}
-                              </small>
-                            @endif
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <input type="number" name="verificador" min="1" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="usuario">Usuario <b style="color: red;">*</b></label>
-                      <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit">
-                      @if ($errors->has('usuario'))
-                          <small class="form-text text-danger">
-                              {{ $errors->first('usuario') }}
-                           </small>
-                      @endif
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email</label>
-          						<div class="input-group mb-2 mr-sm-2">
-          							<div class="input-group-prepend">
-          								<div class="input-group-text">@</div>
-          							</div>
-          							<input type="email" placeholder="Correo" name="email" class="form-control" id="email_edit" value="{{ old('email') }}">
-          						</div>
-                      @error('email')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-                    </div>
-                    <div class="form-group">                      
-                      <label for="telefono">Teléfono</label>
-  	                	<div class="input-group">
-          							<div class="input-group-prepend">
-                          <div class="input-group-prepend">
-                            <div class="input-group-text">
-                              <div class="ti-mobile"></div>
-                            </div>
-                          </div>
-                        </div>
-  							         <input type="text" name="telefono" class="form-control" autocomplete="off" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" maxlength="11" value="{{ old('telefono') }}" id="telefono_edit" >
-                        @if ($errors->has('telefono'))
-                          <small class="form-text text-danger">
-                              {{ $errors->first('telefono') }}
-                           </small>
-                        @endif
-  						        </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="status">Status</label>
-                      <select name="status" id="status_editar" class="form-control">
-                        
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="direccion">Dirección</label>
-	                	  <textarea name="direccion" class="form-control" value="{{ old('direccion') }}" id="direccion_edit"></textarea>
-                      @error('direccion')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-                    </div>
-                    <div class="form-footer pt-5 border-top">
-                    	<input type="hidden" name="id" id="id_edit">
-                      <input type="hidden" name="id_usuario" id="id_usuario">
-                      <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
-                    </div>
-	                </form>
-                </div>
-              </div>
-            </div>
-            <div class="VistaLateralEmpleados EliminarEmpleados shadow" id="EliminarEmpleados" style="display: none;">
-              <div class="card card-danger border border-danger">
-                <div class="card-body">
-                    <form action="{{ route('empleados.eliminar') }}" name="eliminar_empleados" method="POST">
-                      @csrf
-                      <h3>¿Está realmente seguro de querer eliminar a este Repartidor?</h3> 
-                      <p>Se eliminarán todos sus datos y su código QR<p>
-                      <br><br>
-                      <div class="form-group">                      
-                        <label for="contraseña">Ingrese contraseña de Administrador</label>
-    	                	<div class="input-group">
-            							<div class="input-group-prepend">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <div class="ti-lock"></div>
-                              </div>
-                            </div>
-                          </div>
-                          <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña actual" aria-label="" autocomplete="off" required="required">
-                          @error('password')
-    	                      <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                            </span>
-                          @enderror
-    						        </div>
-                      </div>
-                      <div class="float-right">
-                        <input type="hidden" name="id" id="id_delete">
-                        <input type="hidden" name="id_usuario" id="id_usuarioDelete">
-                        <input type="hidden" name="id_qr" id="id_qr_delete">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                      </div>
-                    </form>
-                </div>
-              </div>
-            </div>
+          <div id="columna2" style="position: relative !important;">
+            @include('empleados.layouts.create')
+            @include('empleados.layouts.show')
+            @include('empleados.layouts.edit')
+            @include('empleados.layouts.delete')
           </div>
         </div>
       </div>
@@ -386,14 +99,20 @@
 
   <script type="text/javascript">
     function RegistrarEmpleado() {
+      $('#columna').removeAttr('class',false);
+      $('#columna').attr('class','col-md-8');
+      $('#columna2').attr('class','col-md-4');
       $('.VistaLateralEmpleados').fadeOut('slow',
         function() { 
           $(this).hide();
-          $('#RegistrarEmpleados').fadeIn(300);
       });
+      $('#RegistrarEmpleados').animate({width:'toggle'},350);
     }
 
     function verEmpleado(id,codigo_qr,nombres,apellidos,email,rut) {
+      $('#columna').removeAttr('class',false);
+      $('#columna').attr('class','col-md-8');
+      $('#columna2').attr('class','col-md-4');
       $('#id').val(id);
       $('#codigo_qr').val(codigo_qr);
       $('#nombres_carnet').text(nombres);
@@ -411,6 +130,9 @@
     }
 
     function editarEmpleado(id,id_usuario,nombres,apellidos,usuario,email,rut,telefono,status,direccion) {
+      $('#columna').removeAttr('class',false);
+      $('#columna').attr('class','col-md-8');
+      $('#columna2').attr('class','col-md-4');
       $('#id_edit').val(id);
       $('#id_usuario').val(id_usuario);
       $('#nombres_edit').val(nombres);
@@ -439,6 +161,9 @@
     }
 
     function eliminarEmpleado(id,id_usuario,id_qr){
+      $('#columna').removeAttr('class',false);
+      $('#columna').attr('class','col-md-8');
+      $('#columna2').attr('class','col-md-4');
       $('#id_EmpleadoE').val(id);
       $('#id_delete').val(id);
       $('#id_qr_delete').val(id_qr);
