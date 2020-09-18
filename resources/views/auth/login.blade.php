@@ -1,7 +1,7 @@
 @extends('layouts.app_login')
 <style type="text/css">
   body{
-    background-image: url("{{ asset('img/fondoN.jpg') }}") !important;
+    background-image: url("{{ asset('img/banner-covid-19.jpg') }}") !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
