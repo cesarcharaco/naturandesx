@@ -48,28 +48,6 @@
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
-        <!-- About Me Box -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Información de Naturandes</h3>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <strong><i class="fas fa-book mr-1"></i> Contacto</strong>
-            <p class="text-muted">promociones@naturandeschile.com</p>
-            <hr>
-            <strong><i class="fas fa-map-marker-alt mr-1"></i> Dirección</strong>
-            <p class="text-muted">Ignacio Carrera Pinto 651, Copiapó, III Región. info@naturandes.cl telef.</p>
-            <hr>
-            <strong><i class="fas fa-phone-alt mr-1"></i> Número telefónico</strong>
-            <p class="text-muted">+52 222 1297.</p>
-            <hr>
-            <strong><i class="far fa-clock mr-1"></i> Horario</strong>
-            <p class="text-muted">Lu-VI: 8:30-18:00 | Sa: 8:30-14:00 | Do: cerrado.</p>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
       </div>
       <!-- /.col -->
       <div class="col-md-9">
@@ -186,6 +164,47 @@
       </div>
       <!-- /.col -->
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- About Me Box -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Información de Naturandes</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-book mr-1"></i> Contacto</h5>
+                  <p>promociones@naturandeschile.com</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-map-marker-alt mr-1"></i> Dirección</h5>
+                  <p>Ignacio Carrera Pinto 651, Copiapó, III Región. </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-phone-alt mr-1"></i> Número telefónico</h5>
+                  <p>+52 222 1297. </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="far fa-clock mr-1"></i> Horario</h5>
+                  <p>Lu-VI: 8:30-18:00 | Sa: 8:30-14:00 | Do: cerrado. </p>
+                </div>
+              </div>              
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
   @endif
   @if(\Auth::User()->tipo_usuario=="Empleado")
     <div class="row">
@@ -208,28 +227,6 @@
               <a href="#" class="btn btn-primary"><b>Descargar QR en PDF</b></a>
               <a href="#" class="btn btn-primary"><b>Enviar al email QR</b></a>              
             </div>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-        <!-- About Me Box -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Información de Naturandes</h3>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <strong><i class="fas fa-book mr-1"></i> Contacto</strong>
-            <p class="text-muted">promociones@naturandeschile.com</p>
-            <hr>
-            <strong><i class="fas fa-map-marker-alt mr-1"></i> Dirección</strong>
-            <p class="text-muted">Ignacio Carrera Pinto 651, Copiapó, III Región. info@naturandes.cl telef.</p>
-            <hr>
-            <strong><i class="fas fa-phone-alt mr-1"></i> Número telefónico</strong>
-            <p class="text-muted">+52 222 1297.</p>
-            <hr>
-            <strong><i class="far fa-clock mr-1"></i> Horario</strong>
-            <p class="text-muted">Lu-VI: 8:30-18:00 | Sa: 8:30-14:00 | Do: cerrado.</p>
           </div>
           <!-- /.card-body -->
         </div>
@@ -272,14 +269,14 @@
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="email">Email <b style="color: red;">*</b></label>
-                      <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Ingrese un email..." value="{{$users->email}}">
+                      <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Ingrese un email..." value="{{$users->email}}" required>
                       <small id="email" class="form-text text-muted">Ingrese un email valido.</small>                      
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
                       <label for="telefono">Teléfono <b style="color: red;">*</b></label>
-                      <input type="text" class="form-control" name="telefono" id="telefono" aria-describedby="telefono" placeholder="Ingrese telefono..." value="{{$users->empleado->telefono}}" data-parsley-type="number">
+                      <input type="text" class="form-control" name="telefono" id="telefono" aria-describedby="telefono" placeholder="Ingrese telefono..." value="{{$users->empleado->telefono}}" data-parsley-type="number" required>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="direccion">Dirección</label>
@@ -362,6 +359,47 @@
       </div>
       <!-- /.col -->
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- About Me Box -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Información de Naturandes</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-book mr-1"></i> Contacto</h5>
+                  <p>promociones@naturandeschile.com</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-map-marker-alt mr-1"></i> Dirección</h5>
+                  <p>Ignacio Carrera Pinto 651, Copiapó, III Región. </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-phone-alt mr-1"></i> Número telefónico</h5>
+                  <p>+52 222 1297. </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="far fa-clock mr-1"></i> Horario</h5>
+                  <p>Lu-VI: 8:30-18:00 | Sa: 8:30-14:00 | Do: cerrado. </p>
+                </div>
+              </div>              
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
   @endif
   @if(\Auth::User()->tipo_usuario=="Admin")
     <div class="row">
@@ -372,40 +410,26 @@
             <div class="text-center">
               <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/naturandes.jpg') }}" alt="User profile picture">
             </div>
-            <h3 class="profile-username text-center" style="text-transform: uppercase;">{{$users->clientes->nombres}} {{$users->clientes->apellidos}}</h3>
+            <h3 class="profile-username text-center" style="text-transform: uppercase;">{{$users->empleado->nombres}} {{$users->empleado->apellidos}}</h3>
             <p class="text-muted text-center">{{$users->tipo_usuario}}</p>
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
-                <?php $favicon = $users->clientes->qr->codigo; ?>
-                <img class="card-img-top img-fluid" src="{{ asset($favicon) }}" alt="image-QR">
+                <?php $favicon = $users->empleado->qr->codigo; ?>
+                @if($favicon!="")
+                  <img class="card-img-top img-fluid" src="{{ asset($favicon) }}" alt="image-QR">
+                @else
+                  <div class="text-center">
+                    <a href="{{ route('generar_qr', $users->empleado->id) }}" class="btn btn-primary"><b>Generar QR</b></a>
+                  </div>
+                @endif
               </li>
             </ul>
             <div class="text-center">
-              <a href="#" class="btn btn-primary"><b>Descargar QR en PDF</b></a>
-              <a href="#" class="btn btn-primary"><b>Enviar al email QR</b></a>              
+              @if($favicon!="")
+                <a href="{{ route('descargar_qr_pdf', $users->empleado->id) }}" class="btn btn-primary" target="_blank"><b>Descargar QR en PDF</b></a>
+                <a href="{{ route('enviar_qr', $users->empleado->id) }}" class="btn btn-primary"><b>Enviar al email QR</b></a>
+              @endif
             </div>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-        <!-- About Me Box -->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Información de Naturandes</h3>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <strong><i class="fas fa-book mr-1"></i> Contacto</strong>
-            <p class="text-muted">promociones@naturandeschile.com</p>
-            <hr>
-            <strong><i class="fas fa-map-marker-alt mr-1"></i> Dirección</strong>
-            <p class="text-muted">Ignacio Carrera Pinto 651, Copiapó, III Región. info@naturandes.cl telef.</p>
-            <hr>
-            <strong><i class="fas fa-phone-alt mr-1"></i> Número telefónico</strong>
-            <p class="text-muted">+52 222 1297.</p>
-            <hr>
-            <strong><i class="far fa-clock mr-1"></i> Horario</strong>
-            <p class="text-muted">Lu-VI: 8:30-18:00 | Sa: 8:30-14:00 | Do: cerrado.</p>
           </div>
           <!-- /.card-body -->
         </div>
@@ -422,38 +446,55 @@
           </div><!-- /.card-header -->
           <div class="card-body">
             <div class="tab-content">
+              <p class="text-center mb-3">Todos los campos (<b style="color: red;">*</b>) son requeridos.</p>
               <div class="active tab-pane" id="activity">
-                <form action="{{ route('editar_perfil') }}" name="editar_perfil" method="POST">
+                <form action="{{ route('editar_perfil') }}" name="editar_perfil" id="demo-form" method="POST" data-parsley-validate>
                   @csrf
                   <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="nombres">Nombres</label>
-                        <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Ingrese nombres..." value="{{$users->clientes->nombres}}" required="">
+                    <div class="col-md-4 mb-3">
+                        <label for="usuario">Usuario <b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Ingrese usuario..." value="{{$users->usuario}}" required="">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="apellidos">Apellidos</label>
-                        <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Apellidos..." value="{{$users->clientes->apellidos}}" required="">
+                    <div class="col-md-4 mb-3">
+                        <label for="nombres">Nombres <b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Ingrese nombres..." value="{{$users->empleado->nombres}}" required="">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="apellidos">Apellidos <b style="color: red;">*</b></label>
+                        <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Apellidos..." value="{{$users->empleado->apellidos}}" required="">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="rut">RUT</label>
-                    <input type="text" class="form-control" name="rut" id="rut" aria-describedby="rut" placeholder="Ingrese RUT..." disabled="" value="{{$users->clientes->rut}}">
-                    <small id="rut" class="form-text text-muted">Solo lo puede actualizar el administrador.</small>
-                  </div>
-                    <div class="form-group">
-                      <label for="email">Email address</label>
-                      <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Ingrese un email..." value="{{$users->email}}">
-                      <small id="email" class="form-text text-muted">Ingrese un email valido.</small>
+                  <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                      <label for="rut">RUT <b style="color: red;">*</b></label>
+                      <input type="text" class="form-control" name="rut" id="rut" aria-describedby="rut" placeholder="Ingrese RUT..." disabled="" value="{{$users->empleado->rut}}">
+                      <small id="rut" class="form-text text-muted">Solo lo puede actualizar el administrador.</small>                      
                     </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="email">Email <b style="color: red;">*</b></label>
+                      <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Ingrese un email..." value="{{$users->email}}" required>
+                      <small id="email" class="form-text text-muted">Ingrese un email valido.</small>                      
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                      <label for="telefono">Teléfono <b style="color: red;">*</b></label>
+                      <input type="text" class="form-control" name="telefono" id="telefono" aria-describedby="telefono" placeholder="Ingrese telefono..." required value="{{$users->empleado->telefono}}" data-parsley-type="number">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="direccion">Dirección</label>
+                      <textarea name="direccion" id="direccion" class="form-control" style="resize: none;" placeholder="Dirección">{{$users->empleado->direccion}}</textarea>
+                    </div>
+                  </div>
                     <input type="hidden" value="1" id="datos_per" name="datos_per">
-                    <input type="hidden" value="{{$users->clientes->id}}" id="id_cliente" name="id_cliente">
+                    <input type="hidden" value="{{$users->empleado->id}}" id="id_empleado" name="id_empleado">
                     <input type="hidden" value="{{$users->id}}" id="id_usuario" name="id_usuario">
                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Actualizar perfil</button>
                 </form>
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="timeline">
-                <form action="{{ route('editar_perfil') }}" name="editar_perfil" method="POST">
+                <form action="{{ route('editar_perfil') }}" name="editar_perfil" method="POST" data-parsley-validate>
                   @csrf
                   <div class="form-group">
                     <div class="form-check">
@@ -466,11 +507,11 @@
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." required="" disabled="disabled">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." required="" disabled="disabled" data-parsley-minlength="8">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="confirmar_password">Repita contraseña</label>
-                        <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." required="" disabled="disabled">
+                        <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." required="" disabled="disabled" data-parsley-equalto="#password" data-parsley-minlength="8">
                     </div>
                   </div>
                   <div class="form-group">
@@ -483,7 +524,7 @@
                   </div>
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
-                        <label for="pregunta1">1era Pregunta de seguridad</label>
+                        <label for="pregunta1">1era Pregunta de seguridad <b style="color: red;">*</b></label>
                         <select class="form-control" name="pregunta1" required id="pregunta1" disabled="">
                           <option value="0">Seleccione una pregunta</option>
                           @foreach($preguntas as $key)
@@ -492,19 +533,19 @@
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="respuesta1">Respuesta</label>
+                        <label for="respuesta1">Respuesta <b style="color: red;">*</b></label>
                         <input type="password" class="form-control" name="respuesta1" id="respuesta1" placeholder="Ingrese respuesta..." required="" disabled="disabled">
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
-                        <label for="pregunta2">2da Pregunta de seguridad</label>
+                        <label for="pregunta2">2da Pregunta de seguridad <b style="color: red;">*</b></label>
                         <select class="form-control" name="pregunta2" required id="pregunta2" disabled="">
                           
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="respuesta2">Respuesta</label>
+                        <label for="respuesta2">Respuesta <b style="color: red;">*</b></label>
                         <input type="password" class="form-control" name="respuesta2" id="respuesta2" placeholder="Ingrese respuesta..." required="" disabled="disabled">
                     </div>
                   </div>
@@ -520,6 +561,47 @@
         <!-- /.nav-tabs-custom -->
       </div>
       <!-- /.col -->
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- About Me Box -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Información de Naturandes</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-book mr-1"></i> Contacto</h5>
+                  <p>promociones@naturandeschile.com</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-map-marker-alt mr-1"></i> Dirección</h5>
+                  <p>Ignacio Carrera Pinto 651, Copiapó, III Región. </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="fas fa-phone-alt mr-1"></i> Número telefónico</h5>
+                  <p>+52 222 1297. </p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="callout callout-info">
+                  <h5><i class="far fa-clock mr-1"></i> Horario</h5>
+                  <p>Lu-VI: 8:30-18:00 | Sa: 8:30-14:00 | Do: cerrado. </p>
+                </div>
+              </div>              
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
     </div>
   @endif
 </div>

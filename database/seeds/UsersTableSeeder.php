@@ -12,10 +12,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $url_img = "img/qr-code/12345678-9.png";
-
+     
         \DB::table('codigo_qr')->insert([
-            'codigo' => $url_img,
+            'codigo' => '',
             'codigo_recupera' => 1234,
             'status' => 'Activo'
         ]);

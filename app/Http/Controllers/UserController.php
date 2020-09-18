@@ -7,6 +7,11 @@ use App\User;
 use App\Preguntas;
 use App\Clientes;
 use App\Empleados;
+use App\CodigoQr;
+use QR_Code\Types\QR_Url;
+use QRCode;
+use Mail;
+use PDF;
 
 class UserController extends Controller
 {
@@ -124,6 +129,7 @@ class UserController extends Controller
                         $clientes->save();
 
                         $usuario = User::find($request->id_usuario);
+                        $usuario->usuario=$request->usuario;
                         if ($request->email=="") {
                             $usuario->email=NULL;
                         } else {
@@ -149,14 +155,145 @@ class UserController extends Controller
                 
             }
         } else if (\Auth::User()->tipo_usuario=="Admin") {
-            $usuario = User::find($id);
-            $usuario->usuario=$request->usuario;
-            $usuario->email=$request->email;
-            $usuario->save();
+            $user=User::find($request->id_usuario);
+            $buscar_user = User::where('usuario',$request->usuario)->where('id','<>',$user->id)->get();
+            if ($request->datos_per==1) {
+                if (count($buscar_user)>0) {
+                    toastr()->error('Error!!', ' Usuario ya registrado en el sistema');
+                    return redirect()->back();
+                } else {
+                    $buscar_email = User::where('email',$request->email)->where('id','<>',$user->id)->get();
+                    if (count($buscar_email)>0) {
+                        toastr()->error('Error!!', ' Email ya registrado en el sistema');
+                        return redirect()->back();
+                    } else {
+                        $clientes = Clientes::find($request->id_cliente);
+                        $clientes->nombres=$request->nombres;
+                        $clientes->apellidos=$request->apellidos;
+                        $clientes->save();
+
+                        $usuario = User::find($request->id_usuario);
+                        $usuario->usuario=$request->usuario;
+                        $usuario->email=$request->email;
+                        $usuario->save();
+                    }
+                }
+
+                toastr()->success('Éxito!!', ' Perfil actualizado satisfactoriamente');
+                return redirect()->back();
+
+            } else if ($request->datos_seg==1){
+                if ($request->cambiar_password==1) {
+                    $clave = $request->password;
+                    $usuario = new User();
+                    $nueva_clave=\Hash::make($clave);
+                    $usuario->password=$nueva_clave;
+                    $usuario->save();
+                } else if ($request->cambiar_preguntas==1){
+                    //Editar preguntas
+                }
+                
+            }
         }
         
     }
 
+    public function generar_qr($id) 
+    {
+        $user = Empleados::where('id',$id)->first();
+        $rut = $user->rut;
+        $id_qr = $user->id_qr;
+        //dd($id_qr);
+
+        $qr_code = QRCode::text($rut)
+        ->setOutfile('./img/qr-code/'.$rut.'.png')
+        ->setSize(8)
+        ->setMargin(2)
+        ->png();
+
+        $url_img = "img/qr-code/".$rut.".png";
+        $qr = CodigoQr::find($id_qr);
+        $qr->codigo=$url_img;
+        $qr->save();
+
+        toastr()->success('Éxito!!', ' QR generado satisfactoriamente');
+        return redirect()->back();
+    }
+
+    public function descargar_qr_pdf($id)
+    {
+        if (\Auth::User()->tipo_usuario=="Admin" || \Auth::User()->tipo_usuario=="Empleado") {
+            $user = Empleados::where('id',$id)->first();
+            $nombres = $user->nombres.' '.$user->apellidos;
+            $email = $user->usuario->email;
+            $rut = $user->rut;
+            $url_img = $user->qr->codigo;
+            $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
+            return $pdf->stream('carnet_qr.pdf');
+        } else if (\Auth::User()->tipo_usuario=="Cliente") {
+            $user = Clientes::where('id',$id)->first();
+            $nombres = $user->nombres.' '.$user->apellidos;
+            $email = $user->usuario->email;
+            $rut = $user->rut;
+            $url_img = $user->qr->codigo;
+            $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
+            return $pdf->stream('carnet_qr.pdf');
+        }
+        
+    }
+
+    public function enviar_qr($id)
+    {
+        if (\Auth::User()->tipo_usuario=="Admin" || \Auth::User()->tipo_usuario=="Empleado") {
+            //dd('hola mundo');
+            $user = Empleados::where('id',$id)->first();
+            $nombres= $user->nombres.' '.$user->apellidos;
+            $email= $user->usuario->email;
+            $rut = $user->rut;
+            $url_img = $user->qr->codigo;
+            $asunto="Naturandes! | Bienvenido";
+            $destinatario=$user->usuario->email;
+            $mensaje="Bienvenido a Naturandes";
+            
+            //enviando correo si tiene email
+            $r=Mail::send('email.carnet_qr',
+            ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
+                $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
+                $m->from('a.leon@eiche.cl', 'Naturandes!');
+                $m->to($destinatario)->subject($asunto);
+                $m->attachData($pdf->output(), "carnet_qr.pdf");
+            });
+            toastr()->success('Éxito!!', ' QR enviado al email satisfactoriamente');
+            return redirect()->back();
+        } else if (\Auth::User()->tipo_usuario=="Cliente") {
+            $user = Clientes::where('id',$id)->first();
+            $email= $user->usuario->email;
+            if ($email=="") {
+                toastr()->error('Error!!', 'No posee email registrado en el sistema');
+                return redirect()->back();
+            } else {
+                $nombres= $user->nombres.' '.$user->apellidos;
+                $email= $user->usuario->email;
+                $rut = $user->rut;
+                $url_img = $user->qr->codigo;
+                $asunto="Naturandes! | Bienvenido";
+                $destinatario=$user->usuario->email;
+                $mensaje="Bienvenido a Naturandes";
+                
+                //enviando correo si tiene email
+                $r=Mail::send('email.carnet_qr',
+                ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
+                    $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
+                    $m->from('a.leon@eiche.cl', 'Naturandes!');
+                    $m->to($destinatario)->subject($asunto);
+                    $m->attachData($pdf->output(), "carnet_qr.pdf");
+                });
+                toastr()->success('Éxito!!', ' QR enviado al email satisfactoriamente');
+                return redirect()->back();
+            }
+            
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *
