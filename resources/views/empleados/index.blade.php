@@ -102,11 +102,10 @@
       $('#columna').removeAttr('class',false);
       $('#columna').attr('class','col-md-8');
       $('#columna2').attr('class','col-md-4');
-      $('.VistaLateralEmpleados').fadeOut('slow',
-        function() { 
-          $(this).hide();
-      });
+      $('.VistaLateralEmpleados').fadeOut('slow');
+      $('#RegistrarEmpleados2').fadeIn('slow');
       $('#RegistrarEmpleados').animate({width:'toggle'},350);
+      $('#RegistrarEmpleados').fadeIn('slow');
     }
 
     function verEmpleado(id,codigo_qr,nombres,apellidos,email,rut) {

@@ -1,5 +1,5 @@
 <div class="VistaLateralEmpleados RegistrarEmpleados shadow" id="RegistrarEmpleados" style="display: none;">
-  <div class="card card-default border border-success shadow">
+  <div class="card card-default border border-success shadow" id="RegistrarEmpleados2" style="display: none;">
     <div class="card-body">
       <h4 class="header-title mb-2">Registro de repartidores <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
     	<form action="{{ route('empleados.store') }}" name="registro_empleados" method="POST">
