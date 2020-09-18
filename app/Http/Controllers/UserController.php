@@ -12,6 +12,7 @@ use QR_Code\Types\QR_Url;
 use QRCode;
 use Mail;
 use PDF;
+use DB;
 
 class UserController extends Controller
 {
@@ -106,7 +107,20 @@ class UserController extends Controller
                     $usuario->password=$nueva_clave;
                     $usuario->save();
                 } else if ($request->cambiar_preguntas==1){
-                    //Editar preguntas
+                    DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta1,
+                        'respuesta' => $request->respuesta1
+                    ]);
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta2,
+                        'respuesta' => $request->respuesta2
+                    ]);
+                    
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
                 }
             }
             
@@ -150,7 +164,20 @@ class UserController extends Controller
                     $usuario->password=$nueva_clave;
                     $usuario->save();
                 } else if ($request->cambiar_preguntas==1){
-                    //Editar preguntas
+                    DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta1,
+                        'respuesta' => $request->respuesta1
+                    ]);
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta2,
+                        'respuesta' => $request->respuesta2
+                    ]);
+                    
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
                 }
                 
             }
@@ -167,9 +194,11 @@ class UserController extends Controller
                         toastr()->error('Error!!', ' Email ya registrado en el sistema');
                         return redirect()->back();
                     } else {
-                        $clientes = Clientes::find($request->id_cliente);
+                        $clientes = Empleados::find($request->id_empleado);
                         $clientes->nombres=$request->nombres;
                         $clientes->apellidos=$request->apellidos;
+                        $clientes->telefono=$request->telefono;
+                        $clientes->direccion=$request->direccion;
                         $clientes->save();
 
                         $usuario = User::find($request->id_usuario);
@@ -183,6 +212,7 @@ class UserController extends Controller
                 return redirect()->back();
 
             } else if ($request->datos_seg==1){
+                //dd($request->all());
                 if ($request->cambiar_password==1) {
                     $clave = $request->password;
                     $usuario = new User();
@@ -190,7 +220,21 @@ class UserController extends Controller
                     $usuario->password=$nueva_clave;
                     $usuario->save();
                 } else if ($request->cambiar_preguntas==1){
-                    //Editar preguntas
+                    //dd($id_preguntas);
+                    DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta1,
+                        'respuesta' => $request->respuesta1
+                    ]);
+                    \DB::table('usuarios_has_preguntas')->insert([
+                        'id_usuario' => $request->id_usuario,
+                        'id_pregunta' => $request->pregunta2,
+                        'respuesta' => $request->respuesta2
+                    ]);
+                    
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
                 }
                 
             }

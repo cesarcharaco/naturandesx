@@ -100,7 +100,7 @@
                   @csrf
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="cambiar_password" id="cambiar_password">
+                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
                         <label class="form-check-label" for="cambiar_password">
                             Seleccione si desea cambiar su contraseña
                         </label>
@@ -118,7 +118,7 @@
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="cambiar_preguntas" id="cambiar_preguntas">
+                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
                         <label class="form-check-label" for="cambiar_preguntas">
                             Seleccione si desea cambiar sus preguntas de seguridad
                         </label>
@@ -295,7 +295,7 @@
                   @csrf
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="cambiar_password" id="cambiar_password">
+                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
                         <label class="form-check-label" for="cambiar_password">
                             Seleccione si desea cambiar su contraseña
                         </label>
@@ -313,7 +313,7 @@
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="cambiar_preguntas" id="cambiar_preguntas">
+                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
                         <label class="form-check-label" for="cambiar_preguntas">
                             Seleccione si desea cambiar sus preguntas de seguridad
                         </label>
@@ -498,7 +498,7 @@
                   @csrf
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="cambiar_password" id="cambiar_password">
+                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
                         <label class="form-check-label" for="cambiar_password">
                             Seleccione si desea cambiar su contraseña
                         </label>
@@ -507,16 +507,16 @@
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." required="" disabled="disabled" data-parsley-minlength="8">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." disabled="disabled" data-parsley-minlength="8">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="confirmar_password">Repita contraseña</label>
-                        <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." required="" disabled="disabled" data-parsley-equalto="#password" data-parsley-minlength="8">
+                        <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." disabled="disabled" data-parsley-equalto="#password" data-parsley-minlength="8">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="cambiar_preguntas" id="cambiar_preguntas">
+                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
                         <label class="form-check-label" for="cambiar_preguntas">
                             Seleccione si desea cambiar sus preguntas de seguridad
                         </label>
@@ -541,7 +541,9 @@
                     <div class="col-md-6 mb-3">
                         <label for="pregunta2">2da Pregunta de seguridad <b style="color: red;">*</b></label>
                         <select class="form-control" name="pregunta2" required id="pregunta2" disabled="">
-                          
+                          @foreach($preguntas as $key)
+                            <option value="{{$key->id}}">{{$key->pregunta}}</option>
+                          @endforeach()
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -550,6 +552,7 @@
                     </div>
                   </div>
                   <input type="hidden" value="1" id="datos_seg" name="datos_seg">
+                  <input type="hidden" value="{{$users->id}}" id="id_usuario" name="id_usuario">
                   <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Actualizar perfil</button>
                 </form>
               </div>
