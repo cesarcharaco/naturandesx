@@ -1,33 +1,7 @@
 @extends('layouts.app_login')
-<style type="text/css">
-  body{
-    
-    background-image: url("{{ asset('img/banner-covid-19.jpg') }}") !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-attachment: fixed !important;
 
-  }
-  h2{
-    color: white !important;
-  }
-  .card-black{
-    /*background-color: black !important;*/
-    border-radius: 0px !important;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6) !important;
-    color: black;
-    font: 18px Arial, sans-serif;
-  }
-  .input{
-    color:orange !important;
-    border-radius: 10px !important;
-    text-align: center;
-  }
-</style>
 @section('content')
-
+    <div class="contenido">
       <div class="login-box card-black">
         <div class="card-body">
         <h2 align="center" class="mb-4">INICIAR SESIÓN</h2>
@@ -62,6 +36,7 @@
           
         </div>
       </div>
+    </div>
     <!-- <div class="col-md-6"></div> -->
 <!-- /.login-box -->
 @endsection
