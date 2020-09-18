@@ -33,6 +33,15 @@
             </div>
           </div>
         </form>
+
+        @if (Route::has('password.request'))
+          <p class="mt-3">
+            <a href="#" style="float: left !important;">¿Olvidó su contraseña?</a>
+          </p>
+        @endif
+        <p class="mt-2">
+          <a href="{{ route('registerc') }}" class="text-center" style="float: left !important;">Registro de nuevo clientes</a>
+        </p>
           
         </div>
       </div>

@@ -5,7 +5,6 @@
     @toastr_css
     <style type="text/css">
 	  body{
-	    
 	    background-image: url("{{ asset('img/banner-covid-19.jpg') }}") !important;
 	    background-position: center center !important;
 	    background-repeat: no-repeat !important;
@@ -24,7 +23,7 @@
 	    color: black;
 	    font: 18px Arial, sans-serif;
 	  }
-	  .input{
+	  .input,p, a{
 	    color:orange !important;
 	    border-radius: 10px !important;
 	    text-align: center;
