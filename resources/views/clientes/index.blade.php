@@ -33,6 +33,14 @@
           </div>
         </div>
         <div class="row">
+          <div class="col-md-12">
+            @include('clientes.layouts.create')
+            @include('clientes.layouts.show')
+            @include('clientes.layouts.edit')
+            @include('clientes.layouts.delete')
+          </div>
+        </div>
+        <div class="row">
            <div class="col-md-8" style="position: relative !important;">
             <div class="data-tables datatable-primary" style="width: 100% !important;">
               <table id="dataTable3" class="text-center" style="width: 100% !important; font:">

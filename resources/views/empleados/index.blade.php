@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="row" style="position: relative !important;">
-          <div class="col-md-12" id="columna" style="position: relative !important;">
+          <div class="col-md-12" style="position: relative !important;">
             <div class="data-tables datatable-primary" style="width: 100% !important;">
               <table id="dataTable3" class="table table-bordered table-hover dataTable dtr-inline collapsed" style="width: 100% !important; font:">
                   <thead class="text-capitalize">
@@ -59,13 +59,13 @@
                   </thead>
                   <tbody>
                       @foreach($empleados as $key)
-                        @if($key->usuario->tipo_usuario=="Empleado")
+                        @if(Auth::user()->tipo_usuario == 'Admin' )
                           <tr>
                               <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                               <td>{!! $key->rut !!}</td>
                               <td>{!! $key->telefono !!}</td>
                               <td>
-                                @if($key->usuario->email=="")
+                                @if($key->usuario->email == null)
                                   No posee
                                 @else  
                                   {!! $key->usuario->email !!}
