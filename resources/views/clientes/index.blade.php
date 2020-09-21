@@ -63,14 +63,14 @@
                       @if(Auth::user()->tipo_usuario == 'Admin' )
                         <td>
                            <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
-                                        <div class="ti-eye"></div>
+                                        <div class="far fa-eye"></div>
                             </a>
 
                             <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarCliente('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->status}}')">
-                              <div class="ti-pencil-alt text-white"></div>
+                              <div class="far fa-edit"></div>
                             </a>
                             <a href="#" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarCliente('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
-                                <div class="ti-trash"></div>
+                                <div class="far fa-trash-alt"></div>
                             </a>
                         </td>
                       @else

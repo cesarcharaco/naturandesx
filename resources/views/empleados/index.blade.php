@@ -59,6 +59,7 @@
                   </thead>
                   <tbody>
                       @foreach($empleados as $key)
+                        @if($key->usuario->tipo_usuario=="Empleado")
                           <tr>
                               <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                               <td>{!! $key->rut !!}</td>
@@ -76,8 +77,7 @@
                               @else
                                 <td class="text-danger">{!! $key->status !!}</td>
                               @endif
-                              <td>
-                                
+                              <td>                                
                                 <a data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verEmpleado('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
                                     <i class="fa fa-fw fa-eye text-white"></i>
                                 </a>
@@ -86,9 +86,9 @@
                                   </a>
                                   <a data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
                                       <i class="fa fa-fw fa-trash text-white"></i>
-                                  </a>
                               </td>
                           </tr>
+                        @endif
                       @endforeach
                   </tbody>
               </table>
