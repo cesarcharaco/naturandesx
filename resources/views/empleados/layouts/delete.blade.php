@@ -1,6 +1,10 @@
-<div class="VistaLateralEmpleados EliminarEmpleados shadow" id="EliminarEmpleados" style="display: none;">
-  <div class="card card-danger border border-danger">
-    <div class="card-body">
+<div class="collapse multi-collapse" id="collapseExample4" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
+    <div class="card-header">
+      <a href="#" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px; float: right;" onclick="cerrar(4)">
+        Cerrar
+      </a>
+    </div>
+    <div class="card border border-danger card-body">
         <form action="{{ route('empleados.eliminar') }}" name="eliminar_empleados" method="POST">
           @csrf
           <h3>¿Está realmente seguro de querer eliminar a este Repartidor?</h3> 
@@ -32,5 +36,4 @@
           </div>
         </form>
     </div>
-  </div>
 </div>

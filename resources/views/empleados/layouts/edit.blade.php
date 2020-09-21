@@ -1,8 +1,12 @@
-<div class="VistaLateralEmpleados EditarEmpleados shadow" id="EditarEmpleados" style="display: none;">
-  <div class="card card-warning border border-warning">
-    <div class="card-body">
+<div class="collapse multi-collapse" id="collapseExample3" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
+    <div class="card-header">
+      <a href="#" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px; float: right;" onclick="cerrar(3)">
+        Cerrar</i>
+      </a>
+    </div>
+    <div class="card card-body">
       <h4 class="header-title mb-2">Editar datos de repartidor <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
-    	<form action="{{ route('empleados.editar') }}" name="registro_empleados" method="POST">
+      <form action="{{ route('empleados.editar') }}" name="registro_empleados" method="POST">
            @csrf
         	<div class="form-group">
         		<label>Nombres</label>
@@ -103,7 +107,13 @@
           <input type="hidden" name="id_usuario" id="id_usuario">
           <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
         </div>
-        </form>
+      </form>
+    </div>
+</div>
+
+<div class="VistaLateralEmpleados EditarEmpleados shadow" id="EditarEmpleados" style="display: none;">
+  <div class="card card-warning border border-warning">
+    <div class="card-body">
     </div>
   </div>
 </div>

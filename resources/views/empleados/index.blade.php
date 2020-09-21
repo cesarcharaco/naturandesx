@@ -78,14 +78,14 @@
                               @endif
                               <td>
                                 
-                                <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verEmpleado('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
-                                    <div class="ti-eye"></div>
+                                <a data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verEmpleado('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
+                                    <i class="fa fa-fw fa-eye text-white"></i>
+                                </a>
+                                <a data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->telefono}}','{{$key->status}}','{{$key->direccion}}')">
+                                    <i class="fa fa-fw fa-edit text-white"></i>
                                   </a>
-                                  <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->telefono}}','{{$key->status}}','{{$key->direccion}}')">
-                                    <div class="ti-pencil-alt text-white"></div>
-                                  </a>
-                                  <a href="#" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
-                                      <div class="ti-trash"></div>
+                                  <a data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
+                                      <i class="fa fa-fw fa-trash text-white"></i>
                                   </a>
                               </td>
                           </tr>
@@ -93,9 +93,6 @@
                   </tbody>
               </table>
             </div>
-          </div>
-          <div id="columna2" style="position: relative !important;">
-           
           </div>
         </div>
       </div>
@@ -107,11 +104,9 @@
     function RegistrarEmpleado() {
       var opcion = $('#nameRegistrar').val();
       if (opcion == 1) {
-        $('#Registrar').html('Cerrar').removeAttr('btn-outline-primary').attr('class','btn-outline-success');
         $('#nameRegistrar').val(2);
         $('#dataTable3').fadeOut('fast');
       }else{
-        $('#Registrar').html('Registrar').removeAttr('btn-outline-primary').attr('class','btn-outline-success');
         $('#nameRegistrar').val(1);
         $('#dataTable3').fadeIn('fast');
       }
@@ -119,9 +114,7 @@
     }
 
     function verEmpleado(id,codigo_qr,nombres,apellidos,email,rut) {
-      $('#columna').removeAttr('class',false);
-      $('#columna').attr('class','col-md-8');
-      $('#columna2').attr('class','col-md-4');
+      $('#dataTable3').fadeOut('fast');
       $('#id').val(id);
       $('#codigo_qr').val(codigo_qr);
       $('#nombres_carnet').text(nombres);
@@ -139,9 +132,8 @@
     }
 
     function editarEmpleado(id,id_usuario,nombres,apellidos,usuario,email,rut,telefono,status,direccion) {
-      $('#columna').removeAttr('class',false);
-      $('#columna').attr('class','col-md-8');
-      $('#columna2').attr('class','col-md-4');
+      var opcion = $('#nameRegistrar').val();
+      $('#dataTable3').fadeOut('fast');
       $('#id_edit').val(id);
       $('#id_usuario').val(id_usuario);
       $('#nombres_edit').val(nombres);
@@ -162,27 +154,29 @@
       }
       $('#direccion_edit').val(direccion);
 
-      $('.VistaLateralEmpleados').fadeOut('slow',
-        function() { 
-          $(this).hide();
-      });
-      $('#EditarEmpleados').fadeIn(300);
+
+
     }
 
     function eliminarEmpleado(id,id_usuario,id_qr){
-      $('#columna').removeAttr('class',false);
-      $('#columna').attr('class','col-md-8');
-      $('#columna2').attr('class','col-md-4');
       $('#id_EmpleadoE').val(id);
       $('#id_delete').val(id);
       $('#id_qr_delete').val(id_qr);
       $('#id_usuarioDelete').val(id_usuario);
 
-      $('.VistaLateralEmpleados').fadeOut('slow',
-        function() { 
-          $(this).hide();
-      });
-      $('#EliminarEmpleados').fadeIn(300);
+      var opcion = $('#nameRegistrar').val();
+      if (opcion == 1) {
+        $('#nameRegistrar').val(2);
+        $('#dataTable3').fadeOut('fast');
+      }else{
+        $('#nameRegistrar').val(1);
+        $('#dataTable3').fadeIn('fast');
+      }
+    }
+
+    function cerrar(opcion) {
+      $('#nameRegistrar').val(1);
+      $('#dataTable3').fadeIn('fast');
     }
   </script>
 @section('scripts')
