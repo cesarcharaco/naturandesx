@@ -45,7 +45,7 @@
         <div class="row" style="position: relative !important;">
           <div class="col-md-12" id="columna" style="position: relative !important;">
             <div class="data-tables datatable-primary" style="width: 100% !important;">
-              <table id="dataTable3" class="text-center" style="width: 100% !important; font:">
+              <table id="dataTable3" class="table table-bordered table-hover dataTable dtr-inline collapsed" style="width: 100% !important; font:">
                   <thead class="text-capitalize">
                       <tr>
                           <th>Nombres</th>
