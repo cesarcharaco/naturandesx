@@ -23,7 +23,7 @@
 @endsection
 @section('content')
   <div class="container-fluid">
-    <div class="card bg-white shadow" style="border-radius: 30px !important;">
+    <div class="card bg-white">
       <div class="card-body">
         <h4 class="header-title mb-0">Clientes</h4>
         <div class="row mb-3">
