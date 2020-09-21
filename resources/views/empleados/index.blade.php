@@ -59,6 +59,7 @@
                   </thead>
                   <tbody>
                       @foreach($empleados as $key)
+                        @if($key->usuario->tipo_usuario=="Empleado")
                           <tr>
                               <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                               <td>{!! $key->rut !!}</td>
@@ -79,16 +80,17 @@
                               <td>
                                 
                                 <a href="#" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verEmpleado('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
-                                    <div class="ti-eye"></div>
+                                    <div class="far fa-eye"></div>
                                   </a>
                                   <a href="#" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->telefono}}','{{$key->status}}','{{$key->direccion}}')">
-                                    <div class="ti-pencil-alt text-white"></div>
+                                    <div class="far fa-edit"></div>
                                   </a>
                                   <a href="#" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
-                                      <div class="ti-trash"></div>
+                                      <div class="far fa-trash-alt"></div>
                                   </a>
                               </td>
                           </tr>
+                        @endif
                       @endforeach
                   </tbody>
               </table>
