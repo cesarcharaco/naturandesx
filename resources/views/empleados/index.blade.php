@@ -25,6 +25,7 @@
 @section('content')
   <input type="hidden" id="nameRegistrar" value="1">
   <div class="container-fluid">
+
     <div class="card bg-white">
       <div class="card-body">
         <div class="row mb-3">
@@ -44,7 +45,7 @@
         </div>
         <div class="row" style="position: relative !important;">
           <div class="col-md-12" style="position: relative !important;">
-            <div class="data-tables datatable-primary" style="width: 100% !important;">
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
               <table id="dataTable3" class="table table-bordered table-hover dataTable dtr-inline collapsed" style="width: 100% !important; font:">
                   <thead class="text-capitalize">
                       <tr>
@@ -59,7 +60,7 @@
                   </thead>
                   <tbody>
                       @foreach($empleados as $key)
-                        @if(Auth::user()->tipo_usuario == 'Admin' )
+                        {{--@if(Auth::user()->tipo_usuario == 'Admin' )
                           <tr>
                               <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                               <td>{!! $key->rut !!}</td>
@@ -88,7 +89,7 @@
                                       <i class="fa fa-fw fa-trash text-white"></i>
                               </td>
                           </tr>
-                        @endif
+                        @endif--}}
                       @endforeach
                   </tbody>
               </table>
@@ -105,16 +106,16 @@
       var opcion = $('#nameRegistrar').val();
       if (opcion == 1) {
         $('#nameRegistrar').val(2);
-        $('#dataTable3').fadeOut('fast');
+        $('#example1_wrapper').fadeOut('fast');
       }else{
         $('#nameRegistrar').val(1);
-        $('#dataTable3').fadeIn('fast');
+        $('#example1_wrapper').fadeIn('fast');
       }
       
     }
 
     function verEmpleado(id,codigo_qr,nombres,apellidos,email,rut) {
-      $('#dataTable3').fadeOut('fast');
+      $('#example1_wrapper').fadeOut('fast');
       $('#id').val(id);
       $('#codigo_qr').val(codigo_qr);
       $('#nombres_carnet').text(nombres);
@@ -123,17 +124,11 @@
       $('#rut_carnet').text(rut);
       $("#img_qr").empty();
       $("#img_qr").append('<img src="{!! asset("'+ codigo_qr +'") !!}" style="width: 200px; height: 200px; border-radius: 30px !important;">');
-
-      $('.VistaLateralEmpleados').fadeOut('slow',
-        function() { 
-          $(this).hide();
-          $('#VerEmpleados').fadeIn(300);
-      });
     }
 
     function editarEmpleado(id,id_usuario,nombres,apellidos,usuario,email,rut,telefono,status,direccion) {
       var opcion = $('#nameRegistrar').val();
-      $('#dataTable3').fadeOut('fast');
+      $('#example1_wrapper').fadeOut('fast');
       $('#id_edit').val(id);
       $('#id_usuario').val(id_usuario);
       $('#nombres_edit').val(nombres);
@@ -167,16 +162,16 @@
       var opcion = $('#nameRegistrar').val();
       if (opcion == 1) {
         $('#nameRegistrar').val(2);
-        $('#dataTable3').fadeOut('fast');
+        $('#example1_wrapper').fadeOut('fast');
       }else{
         $('#nameRegistrar').val(1);
-        $('#dataTable3').fadeIn('fast');
+        $('#example1_wrapper').fadeIn('fast');
       }
     }
 
     function cerrar(opcion) {
       $('#nameRegistrar').val(1);
-      $('#dataTable3').fadeIn('fast');
+      $('#example1_wrapper').fadeIn('fast');
     }
   </script>
 @section('scripts')

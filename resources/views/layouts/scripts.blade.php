@@ -15,8 +15,32 @@
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
+<!-- dataTables -->
+<script src="{{ asset('plugins/dataTables/jquery.dataTables.min.js') }}" defer></script>
+<script src="{{ asset('plugins/dataTables/dataTables.bootstrap4.min.js') }}" defer></script>
+<script src="{{ asset('plugins/dataTables/dataTables.responsive.min.js') }}" defer></script>
+<script src="{{ asset('plugins/dataTables/responsive.bootstrap4.min.js') }}" defer></script>
+
+
 
 <script type="text/javascript">
+
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#dataTable3').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+
   $(document).ready(function() {
     //DATOS DE LAS PREGUNTAS
     var opcion=1;
