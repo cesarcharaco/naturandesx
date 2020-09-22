@@ -125,16 +125,60 @@ class VentasController extends Controller
 
     public function buscar_reporte()
     {
-        $repartidores=Empleados::where('status','Activo')->get();
+        $repartidores=Empleados::join('users','users.id','=','empleados.id_usuario')->where([['empleados.status','Activo'],['users.tipo_usuario','Empleado']])->get();
+        $clientes=Clientes::where('status','Activo')->get();
+        $ventas = Ventas::all();
+        $e_ventas=EmpleadosVentas::all();
 
-        return view('reportes.index',compact('repartidores'));
+        $cancelado = EmpleadosVentas::where('status','Cancelado')->count();
+        $no_cancelado = EmpleadosVentas::where('status','No Cancelado')->count();
+
+        $chartjs = app()->chartjs
+         ->name('barChartTest')
+         ->type('bar')
+         ->size(['width' => 400, 'height' => 120])
+         ->labels(['Cancelado'])
+         ->datasets([
+             [
+                 "label" => "Cancelado",
+                 'backgroundColor' => ['rgba(255, 99, 132, 0.2)'],
+                 'data' => [69]
+             ],
+             [
+                 "label" => "No cancelado",
+                 'backgroundColor' => ['rgba(54, 162, 235, 0.3)'],
+                 'data' => [65]
+             ]
+         ])
+         ->options([]);
+
+         $chartjs1 = app()->chartjs
+            ->name('pieChartTest')
+            ->type('pie')
+            ->size(['width' => 400, 'height' => 120])
+            ->labels(['Label x', 'Label y'])
+            ->datasets([
+                [
+                    'backgroundColor' => ['#FF6384', '#36A2EB'],
+                    'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
+                    'data' => [69, 59]
+                ]
+            ])
+            ->options([]);
+
+
+        return view('reportes.index',compact('repartidores','clientes','ventas','chartjs','chartjs1','e_ventas'));
     }
 
     public function mostrar_reporte(Request $request)
     {
-        //dd(is_null($request->cancelado));
-        $repartidores=$request->id_repartidor;
-        //dd($repartidores);
+        if ($request->desde > $request->hasta) {
+            toastr()->error('Error!!', ' Fecha desde no puede ser mayor a fecha hasta');
+            return redirect()->back();
+        } else {
+            //dd(is_null($request->cancelado));
+            $repartidores=$request->id_repartidor;
+            //dd($repartidores);
 
             if(is_null($request->cancelado) and $request->no_cancelado==1){
                 $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->where('status','No Pagada')->get();
@@ -145,7 +189,8 @@ class VentasController extends Controller
                 $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->get();
                 
             }
-            //dd($ventas);    
+        }
+        
         return view('reportes.show',compact('ventas','repartidores'));
         
     }

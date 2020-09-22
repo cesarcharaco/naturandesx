@@ -17,7 +17,7 @@ class Ventas extends Model
 
     public function promociones()
     {
-    	return $this->belongsTo('App\Promociones','id_promociones');
+    	return $this->belongsTo('App\Promociones','id_promocion');
     }
 
     public function empleados_has_ventas()
