@@ -47,12 +47,6 @@
               <p>Repartidores</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('reportes') }}" class="nav-link">
-              <i class="nav-icon far fa-circle text-info"></i>
-              <p>Reportes</p>
-            </a>
-          </li>
           @endif
           @if(Auth::user()->tipo_usuario != 'Cliente' )
           <li class="nav-item">
@@ -61,6 +55,14 @@
               <p>Clientes</p>
             </a>
           </li>
+          @endif
+          @if(Auth::user()->tipo_usuario == 'Admin' )
+            <li class="nav-item">
+              <a href="{{ route('reportes') }}" class="nav-link">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p>Reportes</p>
+              </a>
+            </li>
           @endif
         </ul>
       </nav>

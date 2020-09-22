@@ -105,9 +105,11 @@
     function RegistrarEmpleado() {
       var opcion = $('#nameRegistrar').val();
       if (opcion == 1) {
+        $('#Registrar').html('Cerrar');
         $('#nameRegistrar').val(2);
         $('#example1_wrapper').fadeOut('fast');
       }else{
+        $('#Registrar').html('Registrar');
         $('#nameRegistrar').val(1);
         $('#example1_wrapper').fadeIn('fast');
       }
