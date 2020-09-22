@@ -17,7 +17,7 @@ class CreateEmpleadosHasVentasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_empleado');
             $table->unsignedBigInteger('id_venta');
-            $table->enum('status',['Pagada','No Pagada'])->default('No Pagada');
+            $table->enum('status',['Cancelado','No Cancelado'])->default('No Cancelado');
 
             $table->foreign('id_empleado')->references('id')->on('empleados')->onDelete('cascade');
             $table->foreign('id_venta')->references('id')->on('ventas')->onDelete('cascade');
