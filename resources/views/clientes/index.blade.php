@@ -43,8 +43,8 @@
         <div class="row">
            <div class="col-md-12" style="position: relative !important;">
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-              <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important; font:">
-                  <thead class="text-capitalize bg-primary">
+              <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
+                <thead class="text-capitalize bg-primary">
                   <tr class="border-orange">
                     <th>Nombres</th>
                     <th>RUT</th>
@@ -113,7 +113,6 @@
     }
 
     function RegistrarCliente() {
-      // alert('asdd');
       $('#btnRegistrar').fadeOut('fast');
       $('#example1_wrapper').fadeOut('fast');
     }

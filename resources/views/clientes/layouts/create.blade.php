@@ -98,7 +98,7 @@
 	              </div>
 	              
 	        <div class="form-footer pt-5 border-top">
-	          <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
+	          <button type="submit" style="float: right;" class="btn btn-success">Registrar</button>
 	        </div>
       	</form>
   	</div>

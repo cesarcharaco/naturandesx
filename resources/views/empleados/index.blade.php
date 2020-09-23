@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('css')
   <title>Repartidores</title>
 @endsection
@@ -14,7 +13,7 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Repartidores</a></li>
-          <li class="breadcrumb-item active">Consulta</li>
+          <li class="breadcrumb-item active" style="color:black;">Registros</li>
         </ol>
       </div>
     </div>
@@ -23,15 +22,13 @@
 @endsection
 
 @section('content')
-  <input type="hidden" id="nameRegistrar" value="1">
   <div class="container-fluid">
-
-    <div class="card bg-white">
+    <div class="card card-primary card-outline">
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-md-12">
-            <a class="btn btn-outline-primary btn-sm text-uppercase float-right" data-toggle="collapse" href="#RegistrarEmpleado" role="button" aria-expanded="false" aria-controls="RegistrarEmpleado" onclick="RegistrarEmpleado()">
-              <span id="Registrar">Registrar</span>
+            <a class="btn btn-primary btn-sm text-uppercase float-right" id="btnRegistrar" data-toggle="collapse" href="#RegistrarEmpleado" role="button" aria-expanded="false" aria-controls="RegistrarEmpleado" onclick="RegistrarEmpleado()">
+              <span>Registrar</span>
             </a>
           </div>
         </div>
@@ -46,21 +43,21 @@
         <div class="row" style="position: relative !important;">
           <div class="col-md-12" style="position: relative !important;">
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-              <table id="dataTable3" class="table table-bordered table-hover dataTable dtr-inline collapsed" style="width: 100% !important; font:">
-                  <thead class="text-capitalize">
-                      <tr>
-                          <th>Nombres</th>
-                          <th>Rut</th>
-                          <th>Teléfono</th>
-                          <th>Email</th>
-                          <th>Usuario</th>
-                          <th>Status</th>
-                          <th></th>
-                      </tr>
+              <table id="dataTable1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
+                  <thead class="text-capitalize bg-primary">
+                    <tr class="border-orange">
+                      <th>Nombres</th>
+                      <th>Rut</th>
+                      <th>Teléfono</th>
+                      <th>Email</th>
+                      <th>Usuario</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
                   </thead>
                   <tbody>
                       @foreach($empleados as $key)
-                        {{--@if(Auth::user()->tipo_usuario == 'Admin' )
+                        @if(Auth::user()->tipo_usuario == 'Admin' )
                           <tr>
                               <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                               <td>{!! $key->rut !!}</td>
@@ -89,7 +86,7 @@
                                       <i class="fa fa-fw fa-trash text-white"></i>
                               </td>
                           </tr>
-                        @endif--}}
+                        @endif
                       @endforeach
                   </tbody>
               </table>
@@ -103,21 +100,13 @@
 
   <script type="text/javascript">
     function RegistrarEmpleado() {
-      var opcion = $('#nameRegistrar').val();
-      if (opcion == 1) {
-        $('#Registrar').html('Cerrar');
-        $('#nameRegistrar').val(2);
-        $('#example1_wrapper').fadeOut('fast');
-      }else{
-        $('#Registrar').html('Registrar');
-        $('#nameRegistrar').val(1);
-        $('#example1_wrapper').fadeIn('fast');
-      }
-      
+      $('#btnRegistrar').fadeOut('fast');
+      $('#example1_wrapper').fadeOut('fast');
     }
 
     function verEmpleado(id,codigo_qr,nombres,apellidos,email,rut) {
       $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').fadeOut('fast');
       $('#id').val(id);
       $('#codigo_qr').val(codigo_qr);
       $('#nombres_carnet').text(nombres);
@@ -131,6 +120,7 @@
     function editarEmpleado(id,id_usuario,nombres,apellidos,usuario,email,rut,telefono,status,direccion) {
       var opcion = $('#nameRegistrar').val();
       $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').fadeOut('fast');
       $('#id_edit').val(id);
       $('#id_usuario').val(id_usuario);
       $('#nombres_edit').val(nombres);
@@ -156,24 +146,18 @@
     }
 
     function eliminarEmpleado(id,id_usuario,id_qr){
+      $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').fadeOut('fast');
       $('#id_EmpleadoE').val(id);
       $('#id_delete').val(id);
       $('#id_qr_delete').val(id_qr);
       $('#id_usuarioDelete').val(id_usuario);
-
-      var opcion = $('#nameRegistrar').val();
-      if (opcion == 1) {
-        $('#nameRegistrar').val(2);
-        $('#example1_wrapper').fadeOut('fast');
-      }else{
-        $('#nameRegistrar').val(1);
-        $('#example1_wrapper').fadeIn('fast');
-      }
     }
 
     function cerrar(opcion) {
-      $('#nameRegistrar').val(1);
       $('#example1_wrapper').fadeIn('fast');
+      $('#nameRegistrar').val(1);
+      $('#btnRegistrar').show();
     }
   </script>
 @section('scripts')

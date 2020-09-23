@@ -1,5 +1,10 @@
 <div class="collapse multi-collapse" id="RegistrarEmpleado" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
-  	<div class="card card-body">
+	<div class="card-header">
+      <a data-toggle="collapse" data-target="#RegistrarCliente" aria-expanded="false" aria-controls="RegistrarCliente" class="btn btn-primary btn-sm text-uppercase float-right" style="border-radius: 5px; float: right;" onclick="cerrar(4)">
+        <strong>Cerrar</strong>
+      </a>
+    </div>
+  	<div class="card border border-success card-body">
     	<h4 class="header-title mb-2">Registro de repartidores <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
     	<form action="{{ route('empleados.store') }}" name="registro_empleados" method="POST">
         	@csrf
@@ -122,16 +127,8 @@
 	            </div>
 	          </div>
 	        <div class="form-footer pt-5 border-top">
-	          <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
+	          <button type="submit" style="float: right;" class="btn btn-success">Registrar</button>
 	        </div>
         </form>
   	</div>
-</div>
-
-<div class="VistaLateralEmpleados RegistrarEmpleados shadow" id="RegistrarEmpleados" style="display: none;">
-  <div class="card card-default border border-success shadow" id="RegistrarEmpleados2" style="display: none;">
-    <div class="card-body">
-      
-    </div>
-  </div>
 </div>

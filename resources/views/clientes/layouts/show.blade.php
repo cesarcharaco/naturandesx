@@ -41,8 +41,3 @@
     </div>
   </div>
 </div>
-
-<div class="VistaLateralEmpleados VerEmpleados" id="VerEmpleados" style="display: none;">
-  <div class="card border shadow" >
-  </div>
-</div>

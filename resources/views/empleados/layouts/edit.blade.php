@@ -4,7 +4,7 @@
         Cerrar</i>
       </a>
     </div>
-    <div class="card card-body">
+    <div class="card card-body" style="border-top: 3px solid #ffc107;">
       <h4 class="header-title mb-2">Editar datos de repartidor <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
       <form action="{{ route('empleados.editar') }}" name="registro_empleados" method="POST">
            @csrf
@@ -102,18 +102,9 @@
             </span>
           @enderror
         </div>
-        <div class="form-footer pt-5 border-top">
         	<input type="hidden" name="id" id="id_edit">
           <input type="hidden" name="id_usuario" id="id_usuario">
-          <button type="submit" style="float: right;" class="btn btn-success btn-default">Registrar</button>
-        </div>
+          <button type="submit" style="float: right;" class="btn btn-warning">Actualizar</button>
       </form>
     </div>
-</div>
-
-<div class="VistaLateralEmpleados EditarEmpleados shadow" id="EditarEmpleados" style="display: none;">
-  <div class="card card-warning border border-warning">
-    <div class="card-body">
-    </div>
-  </div>
 </div>

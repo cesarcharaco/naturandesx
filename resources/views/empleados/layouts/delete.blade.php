@@ -4,7 +4,7 @@
         Cerrar
       </a>
     </div>
-    <div class="card border border-danger card-body">
+    <div class="card card-body" style="border-top: 3px solid red;">
         <form action="{{ route('empleados.eliminar') }}" name="eliminar_empleados" method="POST">
           @csrf
           <h3>¿Está realmente seguro de querer eliminar a este Repartidor?</h3> 
