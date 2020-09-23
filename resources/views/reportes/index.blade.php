@@ -3,9 +3,6 @@
 	<title>Reportes</title>
 	<!-- Include Choices CSS -->
 	<link rel="stylesheet" href="{{ asset('plugins/choices.js/choices.min.css') }}" />
-	<!-- DataTables -->
-	<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 @endsection
 
 @section('content-header')
@@ -29,41 +26,51 @@
   <div class="container-fluid">
     <div class="card bg-white shadow">
       <div class="card-body">
-        <h4 class="header-title mb-3">Reportes</h4>
         <div class="card card-primary card-outline">
           <div class="card-header p-2">
             <ul class="nav nav-pills">
-              <li class="nav-item"><a class="nav-link active" href="#reporte_repartidor" data-toggle="tab">Reportes de repartidores</a></li>
-              <li class="nav-item"><a class="nav-link" href="#reporte_cliente" data-toggle="tab">Reportes de clientes</a></li>
+            	@if($active==0)
+              		<li class="nav-item"><a class="nav-link active" href="#reporte_repartidor" data-toggle="tab">Reportes de repartidores</a></li>
+		            <li class="nav-item"><a class="nav-link" href="#reporte_cliente" data-toggle="tab">Reportes de clientes</a></li>
+		        @elseif($active==1)
+		        	<li class="nav-item"><a class="nav-link" href="#reporte_repartidor" data-toggle="tab">Reportes de repartidores</a></li>
+		            <li class="nav-item"><a class="nav-link active" href="#reporte_cliente" data-toggle="tab">Reportes de clientes</a></li>
+		        @endif
             </ul>
           </div><!-- /.card-header -->
           <div class="card-body">
             <div class="tab-content">
               <p class="text-center mb-3">Todos los campos (<b style="color: red;">*</b>) son requeridos.</p>
+              @if($active==0)
               <div class="active tab-pane" id="reporte_repartidor">
+              @elseif($active==1)
+              <div class="tab-pane" id="reporte_repartidor">
+              @endif
                 <form action="{{ route('mostrar_reporte') }}" name="mostrar_reportes" method="POST">
 		        	<div class="row">
 	            		@csrf
 			            <div class="col-lg-3">
 				            <div class="form-group">
-				            	<label>Repartidor</label>
-				            	<select class="form-control" name="id_repartidor[]" required="required">
+				            	<label>Repartidor <b style="color: red;">*</b></label>
+				            	<select class="choices form-select multiple-remove" multiple="multiple" name="id_repartidor[]" required="required">
 				            		<option value="">Seleccione un cliente...</option>
 		                            @foreach($repartidores as $key)
-					          			<option value="{{$key->id}}" style="color: black !important;">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
+		                            	@if($key->usuario->tipo_usuario=="Empleado")
+					          				<option value="{{$key->id}}" style="color: black !important;">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
+					          			@endif
 					          		@endforeach()
 			                    </select>
 				            </div>	            	
 			            </div>
 			            <div class="col-lg-3">
 			          		<div class="form-group">
-					          	<label>Desde</label>
+					          	<label>Desde <b style="color: red;">*</b></label>
 					          	<input type="date" max="<?php echo date('Y-m-d');?>" class="form-control" name="desde" required="required">
 					         </div>	            	
 			            </div>
 			            <div class="col-lg-3">
 			          		<div class="form-group">
-					          	<label>Hasta</label>
+					          	<label>Hasta <b style="color: red;">*</b></label>
 					          	<input type="date" max="<?php echo date('Y-m-d');?>" class="form-control" name="hasta" required="required">
 					        </div>	            	
 			            </div>
@@ -80,6 +87,7 @@
 			            </div>
 		        	</div>
 				    <center>
+				    	<input type="hidden" name="form_empleados" value="1">
 				    	<button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Generar</button>
 				    </center>
 				</form>
@@ -114,7 +122,7 @@
 										        	</div>
 											        <div class="card-body">
 								                     	<div style="width:100%;">
-													    	{!! $chartjs->render() !!}
+													    	{!! $graf_barra_rep->render() !!}
 														</div>
 											        </div>
 										        </div>
@@ -126,7 +134,7 @@
 										        	</div>
 											        <div class="card-body">
 								                     	<div style="width:100%;">
-													    	{!! $chartjs1->render() !!}
+													    	{!! $graf_torta_rep->render() !!}
 														</div>
 											        </div>
 										        </div>
@@ -134,7 +142,8 @@
 				                  		</div>
 				                   	</div>
 					                <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-					                	<table id="example1" class="table table-bordered table-striped">
+					                	<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+					                	<table id="repartidores_dt" class="table table-bordered table-striped dataTable dtr-inline">
 											<thead>
 												<tr>
 													<th>Repartidor</th>
@@ -147,7 +156,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($e_ventas as $key)
+												@foreach($rep_ventas as $key)
 												<tr>
 													<td>{{$key->empleado->nombres}} {{$key->empleado->apellidos}}</td>
 													<td>{{$key->venta->cliente->nombres}} {{$key->venta->cliente->apellidos}}</td>
@@ -159,7 +168,19 @@
 												</tr>
 												@endforeach
 											</tbody>
+											<tfoot>
+												<tr>
+													<th>Repartidor</th>
+													<th>Cliente</th>
+													<th>Promoción</th>
+													<th>Cantidad</th>
+													<th>Monto total</th>
+													<th>Status</th>
+													<th>Fecha</th>
+												</tr>
+											</tfoot>
 										</table>
+										</div>
 					                </div>  
 				                </div>
 				             </div><!-- /.card-body -->
@@ -168,14 +189,18 @@
 				</div>
               </div>
               <!-- /.tab-pane -->
+              @if($active==0)
               <div class="tab-pane" id="reporte_cliente">
+              @elseif($active==1)
+              <div class="active tab-pane" id="reporte_cliente">
+              @endif
                 <form action="{{ route('mostrar_reporte') }}" name="mostrar_reportes" method="POST">
 		        	<div class="row">
 	            		@csrf
-			            <div class="col-lg-3">
+			            <div class="col-lg-4">
 				            <div class="form-group">
-				            	<label>Clientes</label>
-				            	<select class="form-control" name="id_repartidor[]" required="required">
+				            	<label>Clientes <b style="color: red;">*</b></label>
+				            	<select class="choices form-select multiple-remove" multiple="multiple" required="required" name="id_clientes[]">
 				            		<option value="">Seleccione un cliente...</option>
 		                            @foreach($clientes as $key)
 					          			<option value="{{$key->id}}" style="color: black !important;">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
@@ -183,31 +208,21 @@
 			                    </select>
 				            </div>	            	
 			            </div>
-			            <div class="col-lg-3">
+			            <div class="col-lg-4">
 			          		<div class="form-group">
-					          	<label>Desde</label>
+					          	<label>Desde <b style="color: red;">*</b></label>
 					          	<input type="date" max="<?php echo date('Y-m-d');?>" class="form-control" name="desde" required="required">
 					         </div>	            	
 			            </div>
-			            <div class="col-lg-3">
+			            <div class="col-lg-4">
 			          		<div class="form-group">
-					          	<label>Hasta</label>
+					          	<label>Hasta <b style="color: red;">*</b></label>
 					          	<input type="date" max="<?php echo date('Y-m-d');?>" class="form-control" name="hasta" required="required">
 					        </div>	            	
 			            </div>
-			            <div class="col-lg-3">
-			            	<label for="">status</label>
-					        <div class="custom-control custom-checkbox">
-					            <input name="cancelado" type="checkbox" class="custom-control-input" id="customCheck1" value="1">
-					            <label class="custom-control-label" for="customCheck1">Cancelado</label>
-					        </div>
-					        <div class="custom-control custom-checkbox">
-					            <input name="no_cancelado" type="checkbox" class="custom-control-input" id="customCheck2" value="1">
-					            <label class="custom-control-label" for="customCheck2">No Cancelado</label>
-					        </div>		            	
-			            </div>
 		        	</div>
 				    <center>
+				    	<input type="hidden" name="form_clientes" value="1">
 				    	<button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Generar</button>
 				    </center>
 				</form>
@@ -222,18 +237,17 @@
 								<div class="card-tools">
 									<ul class="nav nav-pills ml-auto">
 									    <li class="nav-item">
-									      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Gráficas</a>
+									      <a class="nav-link active" href="#graficas-chart" data-toggle="tab">Gráficas</a>
 									    </li>
 									    <li class="nav-item">
-									      <a class="nav-link" href="#sales-chart" data-toggle="tab">Tabla</a>
+									      <a class="nav-link" href="#tabla-chart" data-toggle="tab">Tabla</a>
 									    </li>
 								  	</ul>
 								</div>
 							</div><!-- /.card-header -->
 				             <div class="card-body">
 				                <div class="tab-content p-0">
-				                  	<!-- Morris chart - Sales -->
-				                  	<div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
+				                  	<div class="chart tab-pane active" id="graficas-chart" style="position: relative; height: 300px;">
 				                  		<div class="row">
 				                  			<div class="col-lg-6">
 				                  				<div class="card card-default color-palette-box">
@@ -242,7 +256,7 @@
 										        	</div>
 											        <div class="card-body">
 								                     	<div style="width:100%;">
-													    	{!! $chartjs->render() !!}
+								                     		{!! $graf_barra_cli->render() !!}
 														</div>
 											        </div>
 										        </div>
@@ -254,15 +268,15 @@
 										        	</div>
 											        <div class="card-body">
 								                     	<div style="width:100%;">
-													    	
+													    	{!! $graf_torta_cli->render() !!}
 														</div>
 											        </div>
 										        </div>
 				                  			</div>
 				                  		</div>
 				                   	</div>
-					                <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-					                	<table id="example1" class="table table-bordered table-striped">
+					                <div class="chart tab-pane" id="tabla-chart" style="position: relative; height: 300px;">
+					                	<table id="clientes_dt" class="table table-bordered table-striped">
 											<thead>
 												<tr>
 													<th>Cliente</th>
@@ -303,12 +317,18 @@
 @section('scripts')
 <!-- Include Choices JavaScript -->
 <script src="{{ asset('plugins/choices.js/choices.min.js') }}"></script>
-<!-- DataTables -->
-<script src=" {{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src=" {{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src=" {{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src=" {{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-
 <script src="{{ asset('js/Chart.min.js') }}"></script>
 <script src="{{ asset('js/line-chart.js') }}"></script>
+<script>
+  $(function () {
+    $("#repartidores_dt").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $("#clientes_dt").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+  });
+</script>
 @endsection
