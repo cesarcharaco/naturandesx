@@ -59,20 +59,12 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="form-group">                          
+                <div class="">                          
                     <label for="rut">RUT <b style="color: red;">*</b></label>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control input" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="number" name="verificador" min="1" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control input" required>
-                            </div>
-                        </div>
-                    </div>
+                        <br>
+                    <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control input" required style="width: 80% !important; float: left;">
+                    <input type="number" name="verificador" min="1" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control input" required style="width: 20% !important; float: right;">
+
                 </div>
               </div>
               <div class="col-md-3">
