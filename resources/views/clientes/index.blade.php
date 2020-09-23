@@ -14,7 +14,7 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Clientes</a></li>
-          <li class="breadcrumb-item active">Registros</li>
+          <li class="breadcrumb-item active" style="color:black;">Registros</li>
         </ol>
       </div>
     </div>
@@ -28,7 +28,7 @@
         <div class="row mb-3">
           <div class="col-md-12">
             <a class="btn btn-primary btn-sm text-uppercase float-right" id="btnRegistrar" data-toggle="collapse" href="#RegistrarCliente" role="button" aria-expanded="false" aria-controls="RegistrarCliente" onclick="RegistrarCliente()">
-              <span id="Registrar"><strong>Registrar</strong></span>
+              <strong>Registrar</strong>
             </a>
           </div>
         </div>
@@ -113,14 +113,14 @@
     }
 
     function RegistrarCliente() {
+      // alert('asdd');
+      $('#btnRegistrar').fadeOut('fast');
       $('#example1_wrapper').fadeOut('fast');
-      $('#btnRegistrar').empty();
-      $('#btnRegistrar').append('<strong>Cerrar</strong>');
-      $('#btnRegistrar').attr('onclick','cerrar(4)');
     }
 
     function verCliente(id,codigo_qr,nombres,apellidos,usuario,email,rut) {
       $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').fadeOut('fast');
       $('#id').val(id);
       $('#codigo_qr').val(codigo_qr);
       $('#nombres_carnet').text(nombres);
@@ -134,6 +134,7 @@
 
     function editarCliente(id, id_usuario,nombres, apellidos,usuario ,email, rut,status) {
       $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').fadeOut('fast');
       $('#id_edit').val(id);
       $('#id_usuario_edit').val(id_usuario);
       $('#nombres_edit').val(nombres);
@@ -155,6 +156,7 @@
 
     function eliminarCliente(id,id_usuario,id_qr){
       $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').fadeOut('fast');
       $('#id_clienteE').val(id);
       $('#id_delete').val(id);
       $('#id_usuario_delete').val(id_usuario);
@@ -163,9 +165,7 @@
     function cerrar(opcion) {
       $('#example1_wrapper').fadeIn('fast');
       $('#nameRegistrar').val(1);
-      $('#btnRegistrar').empty();
-      $('#btnRegistrar').append('<strong>Registrar</strong>');
-      $('#btnRegistrar').attr('onclick','RegistrarCliente()');
+      $('#btnRegistrar').show();
     }
   </script>
 @section('scripts')
