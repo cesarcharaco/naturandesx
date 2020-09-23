@@ -57,7 +57,7 @@
                   </thead>
                   <tbody>
                       @foreach($empleados as $key)
-                        @if(Auth::user()->tipo_usuario == 'Admin' )
+                        @if(Auth::user()->tipo_usuario == 'Admin' && $key->usuario->tipo_usuario== 'Empleado')
                           <tr>
                               <td>{!! $key->nombres !!} {!! $key->apellidos !!}</td>
                               <td>{!! $key->rut !!}</td>

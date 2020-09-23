@@ -22,8 +22,8 @@ class EmpleadosController extends Controller
     {
         if(\Auth::user()->tipo_usuario == 'Admin'){
 
-            $empleados = Empleados::join('users', 'users.id', '=', 'empleados.id_usuario')->where('users.tipo_usuario','Empleado')->get();
-            // $empleados = Empleados::all();
+            //$empleados = Empleados::select('users.*','empleados.*')->join('users', 'users.id', '=', 'empleados.id_usuario')->where('users.tipo_usuario','Empleado')->get();
+            $empleados = Empleados::all();
             return view('empleados.index', compact('empleados'));
         }else{
             toastr()->warning('no puede acceder!!', 'ACCESO DENEGADO');
