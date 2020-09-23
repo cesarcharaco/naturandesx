@@ -1,5 +1,5 @@
 <div class="collapse multi-collapse" id="RegistrarCliente" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
-  	<div class="card card-body">
+  	<div class="card border border-success card-body">
     	<h4 class="header-title mb-2">Registro de cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
       	<form action="{{ route('clientes.store') }}" name="registro_clientes" method="POST">
 	        @csrf

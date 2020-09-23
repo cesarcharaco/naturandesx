@@ -3,6 +3,7 @@
 <head>
     
     @include('layouts.css')
+    @include('layouts.css2')
     @yield('css')
     @toastr_css
 </head>

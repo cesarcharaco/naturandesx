@@ -2,6 +2,7 @@
 <html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('layouts.css')
+    @include('layouts.css2')
     @toastr_css
     <style type="text/css">
 	  body{
@@ -15,19 +16,7 @@
 	  h2{
 	    color: white !important;
 	  }
-	  .card-black{
-	    /*background-color: black !important;*/
-	    border-radius: 0px !important;
-	    padding: 20px;
-	    background: rgba(0, 0, 0, 0.6) !important;
-	    color: black;
-	    font: 18px Arial, sans-serif;
-	  }
-	  .input,p, a{
-	    color:orange !important;
-	    border-radius: 10px !important;
-	    text-align: center;
-	  }
+	  
 	  label{
 	  	color: #ffa600;
 	  	text-align: center !important;

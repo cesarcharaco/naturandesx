@@ -1,10 +1,10 @@
 <div class="collapse multi-collapse" id="collapseExample3" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
     <div class="card-header">
-      <a href="#" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px; float: right;" onclick="cerrar(3)">
-        Cerrar</i>
+      <a href="#" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-warning btn-sm boton-tabla text-white" style="border-radius: 5px; float: right;" onclick="cerrar(3)">
+        Cerrar
       </a>
     </div>
-    <div class="card card-body">
+    <div class="card card-body" style="border-top: 3px solid #ffc107;">
       <h4 class="header-title mb-2">Editar datos de cliente <br> <small>Todos los campos (<b style="color: red;">*</b>) son requerido.</small></h4>
         <center>
           <form action="{{ route('clientes.editar') }}" name="registro_clientes" method="POST">
@@ -76,19 +76,10 @@
               <select class="form-control" id="status_editar" name="status">
               </select>
             </div>
-            <div class="form-footer pt-5 border-top">
               <input type="hidden" id="id_edit" name="id">
               <input type="hidden" id="id_usuario_edit" name="id_usuario">
-              <button type="submit" style="float: right;" class="btn btn-success btn-default">Actualizar</button>
-            </div>
+              <button type="submit" style="float: right;" class="btn btn-warning text-white">Actualizar</button>
           </form>
         </center>
     </div>
-</div>
-
-<div class="VistaLateralEmpleados EditarEmpleados shadow" id="EditarEmpleados" style="display: none;">
-  <div class="card card-warning border border-warning">
-    <div class="card-body">
-    </div>
-  </div>
 </div>

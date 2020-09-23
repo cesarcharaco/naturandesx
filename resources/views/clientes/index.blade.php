@@ -23,13 +23,12 @@
 @endsection
 @section('content')
   <div class="container-fluid">
-    <div class="card bg-white">
+    <div class="card card-primary card-outline">
       <div class="card-body">
-        <h4 class="header-title mb-0">Clientes</h4>
         <div class="row mb-3">
           <div class="col-md-12">
-            <a class="btn btn-outline-primary btn-sm text-uppercase float-right" data-toggle="collapse" href="#RegistrarCliente" role="button" aria-expanded="false" aria-controls="RegistrarCliente" onclick="RegistrarCliente()">
-              <span id="Registrar">Registrar</span>
+            <a class="btn btn-primary btn-sm text-uppercase float-right" id="btnRegistrar" data-toggle="collapse" href="#RegistrarCliente" role="button" aria-expanded="false" aria-controls="RegistrarCliente" onclick="RegistrarCliente()">
+              <span id="Registrar"><strong>Registrar</strong></span>
             </a>
           </div>
         </div>
@@ -44,9 +43,9 @@
         <div class="row">
            <div class="col-md-12" style="position: relative !important;">
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-              <table id="dataTable3" class="table table-bordered table-hover dataTable dtr-inline collapsed" style="width: 100% !important; font:">
-                  <thead class="text-capitalize">
-                  <tr>
+              <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important; font:">
+                  <thead class="text-capitalize bg-primary">
+                  <tr class="border-orange">
                     <th>Nombres</th>
                     <th>RUT</th>
                     <th>Usuario</th>
@@ -68,7 +67,13 @@
                           {!! $key->usuario->email !!}
                         @endif
                       </td>
-                      <td>{!! $key->status !!}</td>
+                      <td>
+                        @if($key->status == 'Activo')
+                          <span class="text-success"><strong>{!! $key->status !!}</strong></span>
+                        @else
+                          <span class="text-danger"><strong>{!! $key->status !!}</strong></span>
+                        @endif
+                      </td>
                       @if(Auth::user()->tipo_usuario == 'Admin' )
                         <td>
                            <a data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" class="btn btn-success btn-sm boton-tabla" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
@@ -108,16 +113,10 @@
     }
 
     function RegistrarCliente() {
-      var opcion = $('#nameRegistrar').val();
-      if (opcion == 1) {
-        $('#Registrar').html('Cerrar');
-        $('#nameRegistrar').val(2);
-        $('#example1_wrapper').fadeOut('fast');
-      }else{
-        $('#Registrar').html('Registrar');
-        $('#nameRegistrar').val(1);
-        $('#example1_wrapper').fadeIn('fast');
-      }
+      $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').empty();
+      $('#btnRegistrar').append('<strong>Cerrar</strong>');
+      $('#btnRegistrar').attr('onclick','cerrar(4)');
     }
 
     function verCliente(id,codigo_qr,nombres,apellidos,usuario,email,rut) {
@@ -162,8 +161,11 @@
       $('#id_qr_delete').val(id_qr);
     }
     function cerrar(opcion) {
-      $('#nameRegistrar').val(1);
       $('#example1_wrapper').fadeIn('fast');
+      $('#nameRegistrar').val(1);
+      $('#btnRegistrar').empty();
+      $('#btnRegistrar').append('<strong>Registrar</strong>');
+      $('#btnRegistrar').attr('onclick','RegistrarCliente()');
     }
   </script>
 @section('scripts')
