@@ -27,7 +27,7 @@
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-md-12">
-            <a class="btn btn-primary btn-sm text-uppercase float-right" id="btnRegistrar" data-toggle="collapse" href="#RegistrarCliente" role="button" aria-expanded="false" aria-controls="RegistrarCliente" onclick="RegistrarCliente()">
+            <a class="btn btn-primary btn-sm text-uppercase float-right text-white" id="btnRegistrar" data-toggle="collapse" href="#RegistrarCliente" role="button" aria-expanded="false" aria-controls="RegistrarCliente" onclick="RegistrarCliente()">
               <strong>Registrar</strong>
             </a>
           </div>

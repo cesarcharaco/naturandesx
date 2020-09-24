@@ -1,7 +1,7 @@
 <div class="collapse multi-collapse" id="collapseExample3" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
     <div class="card-header">
       <a href="#" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-warning btn-sm boton-tabla text-white" style="border-radius: 5px; float: right;" onclick="cerrar(3)">
-        Cerrar
+        <strong>Cerrar</strong>
       </a>
     </div>
     <div class="card card-body" style="border-top: 3px solid #ffc107;">

@@ -1,5 +1,14 @@
 @extends('layouts.app')
 @section('css')
+
+<style type="text/css">
+  .btn{
+    color:white !important;
+  }
+  .breadcrumb-item{
+    color: black;
+  }
+</style>
 <title>Mi perfil</title>
 <link rel="stylesheet" href="{{ asset('plugins/parsleyjs/parsley.css') }}">
 @endsection
@@ -13,7 +22,7 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Mi cuenta</a></li>
+          <li class="breadcrumb-item" style="color:black;"><a href="#" style="color:black;">Mi cuenta</a></li>
           <li class="breadcrumb-item active">Perfil</li>
         </ol>
       </div>
@@ -54,8 +63,8 @@
         <div class="card card-primary card-outline">
           <div class="card-header p-2">
             <ul class="nav nav-pills">
-              <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Datos personales</a></li>
-              <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Seguridad</a></li>
+              <li class="nav-item" style="color: black !important;"><a class="nav-link active" href="#activity" data-toggle="tab" style="color: black !important;">Datos personales</a></li>
+              <li class="nav-item" style="color: black !important;"><a class="nav-link" href="#timeline" data-toggle="tab" style="color: black !important;">Seguridad</a></li>
             </ul>
           </div><!-- /.card-header -->
           <div class="card-body">

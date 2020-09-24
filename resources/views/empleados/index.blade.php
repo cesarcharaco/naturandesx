@@ -27,8 +27,8 @@
       <div class="card-body">
         <div class="row mb-3">
           <div class="col-md-12">
-            <a class="btn btn-primary btn-sm text-uppercase float-right" id="btnRegistrar" data-toggle="collapse" href="#RegistrarEmpleado" role="button" aria-expanded="false" aria-controls="RegistrarEmpleado" onclick="RegistrarEmpleado()">
-              <span>Registrar</span>
+            <a class="btn btn-primary btn-sm text-uppercase float-right text-white" id="btnRegistrar" data-toggle="collapse" href="#RegistrarEmpleado" role="button" aria-expanded="false" aria-controls="RegistrarEmpleado" onclick="RegistrarEmpleado()">
+              <strong>Registrar</strong>
             </a>
           </div>
         </div>
@@ -71,9 +71,9 @@
                               </td>
                               <td>{!! $key->usuario->usuario !!}</td>
                               @if( $key->status == 'Activo')
-                                <td class="text-success">{!! $key->status !!}</td>
+                                <td class="text-success"><strong>{!! $key->status !!}</strong></td>
                               @else
-                                <td class="text-danger">{!! $key->status !!}</td>
+                                <td class="text-danger"><strong>{!! $key->status !!}</strong></td>
                               @endif
                               <td>                                
                                 <a data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="verEmpleado('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">

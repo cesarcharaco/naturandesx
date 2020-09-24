@@ -1,10 +1,10 @@
 <style type="text/css">
-	.content-wrapper{
+	/*.content-wrapper{
 	    background-image: url("{{ asset('img/blue-white.jpg') }}") !important;
 	    background-position: center;
         background-repeat: no-repeat;
         background-size: 100%;
-	  }
+	  }*/
 	.card-black{
 	    /*background-color: black !important;*/
 	    border-radius: 0px !important;

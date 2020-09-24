@@ -16,7 +16,7 @@
           <img src="{{ asset('dist/img/default-150x150.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block" style="text-transform: uppercase;">{{\Auth::User()->usuario}}</a>
+          <a href="{{ route('perfil', \Auth::User()->id) }}" class="d-block" style="text-transform: uppercase;">{{\Auth::User()->usuario}}</a>
         </div>
       </div>
 
