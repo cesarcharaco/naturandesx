@@ -72,7 +72,7 @@
     </div>
     <div class="row">
       <div class="col-xl-8 col-sm-6">
-        <div class="card mb-4 border" style="border-color: #8914fc !important;">
+        <div class="card card-outline card-primary">
           <div class="card-body">
             <table class="table table-curved">
               <thead>
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="col-xl-4 col-sm-6">
-        <div class="card mb-4 border" style="border-color: #8914fc !important;">
+        <div class="card card-outline card-primary">
           <div class="card-body">
             <table class="table table-curved">
               <thead>
@@ -116,7 +116,7 @@
     </div>
     <div class="row">
       <div class="col-xl-12 col-sm-12">
-        <div class="card mb-4 border" style="border-color: #8914fc !important;">
+        <div class="card card-outline card-primary">
           <div class="card-body">
             <h3>Ventas del día <?php echo date('d/m/Y'); ?></h3>
             <table class="table table-curved" >
@@ -142,7 +142,7 @@
   @elseif(Auth::user()->tipo_usuario == 'Repartidor')
     <div class="row">
       <div class="col-xl-12 col-sm-12">
-        <div class="card mb-4 border" style="border-color: #8914fc !important;">
+        <div class="card card-outline card-primary">
           <div class="card-body">
             <h3>Ventas del día <?php echo date('d/m/Y'); ?></h3>
             <table class="table table-curved" >
@@ -168,7 +168,7 @@
   @else
     <div class="row">
       <div class="col-xl-12 col-sm-12">
-        <div class="card mb-4 border" style="border-color: #8914fc !important;">
+        <div class="card card-outline card-primary">
           <div class="card-body">
             <h3>Compras del día <?php echo date('d/m/Y'); ?></h3>
             <table class="table table-curved" >
