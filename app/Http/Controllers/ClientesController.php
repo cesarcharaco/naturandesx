@@ -50,63 +50,68 @@ class ClientesController extends Controller
             $nombre_qr = $request->rut.'-'.$request->verificador;
             $clave = $request->rut.''.$request->verificador;
             //dd($clave);
-
-            $qr_code = QRCode::text($nombre_qr)
-            ->setOutfile('./img/qr-code/'.$nombre_qr.'.png')
-            ->setSize(8)
-            ->setMargin(2)
-            ->png();
-
-            $url_img = "img/qr-code/".$nombre_qr.".png";
-            $qr = new CodigoQr();
-            $qr->codigo=$url_img;
-            $qr->codigo_recupera=1234;
-            $qr->status="Activo";
-            $qr->save();
-
-            $usuario = new User();
-            $usuario->usuario=$request->usuario;
-            if ($request->email=="") {
-                $usuario->email=NULL;
+            $buscar_email = Clientes::join('users', 'users.id', '=', 'clientes.id_usuario')->where('users.email',$request->email)->get();
+            if (count($buscar_email)>0) {
+                toastr()->error('Error!!', ' Email ya se encuentra registrado');
+                return redirect()->to('clientes');
             } else {
-                $usuario->email=$request->email;
-            }            
-            $nueva_clave=\Hash::make($clave);
-            $usuario->password=$nueva_clave;
-            $usuario->tipo_usuario="Cliente";
-            $usuario->save();
-            
-            $clientes = new Clientes();
-            $clientes->id_qr=$qr->id;
-            $clientes->id_usuario=$usuario->id;
-            $clientes->nombres=$request->nombres;
-            $clientes->apellidos=$request->apellidos;
-            $clientes->rut = $request->rut.'-'.$request->verificador;
-            $clientes->status=$request->status;
-            $clientes->save();
+                $qr_code = QRCode::text($nombre_qr)
+                ->setOutfile('./img/qr-code/'.$nombre_qr.'.png')
+                ->setSize(8)
+                ->setMargin(2)
+                ->png();
 
-            if ($request->email!="") {
-                //dd('email y pdf');
-                $nombres= $request->nombres.' '.$request->apellidos;
-                $email= $request->email;
-                $rut = $request->rut.'-'.$request->verificador;
-                $asunto="Naturandes! | Bienvenido";
-                $destinatario=$request->email;
-                $mensaje="Bienvenido a Naturandes";
+                $url_img = "img/qr-code/".$nombre_qr.".png";
+                $qr = new CodigoQr();
+                $qr->codigo=$url_img;
+                $qr->codigo_recupera=1234;
+                $qr->status="Activo";
+                $qr->save();
+
+                $usuario = new User();
+                $usuario->usuario=$request->usuario;
+                if ($request->email=="") {
+                    $usuario->email=NULL;
+                } else {
+                    $usuario->email=$request->email;
+                }            
+                $nueva_clave=\Hash::make($clave);
+                $usuario->password=$nueva_clave;
+                $usuario->tipo_usuario="Cliente";
+                $usuario->save();
                 
-                //enviando correo si tiene email
-                $r=Mail::send('email.carnet_qr',
-                    ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
+                $clientes = new Clientes();
+                $clientes->id_qr=$qr->id;
+                $clientes->id_usuario=$usuario->id;
+                $clientes->nombres=$request->nombres;
+                $clientes->apellidos=$request->apellidos;
+                $clientes->rut = $request->rut.'-'.$request->verificador;
+                $clientes->status=$request->status;
+                $clientes->save();
 
-                    $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
-                    $m->from('a.leon@eiche.cl', 'Naturandes!');
-                    $m->to($destinatario)->subject($asunto);
-                    $m->attachData($pdf->output(), "carnet_qr.pdf");
-                });
+                if ($request->email!="") {
+                    //dd('email y pdf');
+                    $nombres= $request->nombres.' '.$request->apellidos;
+                    $email= $request->email;
+                    $rut = $request->rut.'-'.$request->verificador;
+                    $asunto="Naturandes! | Bienvenido";
+                    $destinatario=$request->email;
+                    $mensaje="Bienvenido a Naturandes";
+                    
+                    //enviando correo si tiene email
+                    $r=Mail::send('email.carnet_qr',
+                        ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
+
+                        $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
+                        $m->from('a.leon@eiche.cl', 'Naturandes!');
+                        $m->to($destinatario)->subject($asunto);
+                        $m->attachData($pdf->output(), "carnet_qr.pdf");
+                    });
+                }
+
+                toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
+                return redirect()->to('clientes');
             }
-
-            toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
-            return redirect()->to('clientes');
         }else{
             toastr()->warning('no puede acceder!!', 'ACCESO DENEGADO');
             return redirect()->back();

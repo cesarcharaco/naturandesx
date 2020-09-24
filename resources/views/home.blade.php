@@ -27,6 +27,50 @@
   <!-- Top Statistics -->
   @if(Auth::user()->tipo_usuario == 'Admin' )
     <div class="row">
+      <div class="col-md-6">
+        <div class="card card-outline card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Ventas de los últimos 7 días</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div style="width:100%;">
+                {!! $chartjs->render() !!}
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <div class="col-md-6">
+        <div class="card card-outline card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Ventas de los últimos 7 días</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div style="width:100%;">
+                {!! $chartjs1->render() !!}
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+    <div class="row">
       <div class="col-xl-8 col-sm-6">
         <div class="card mb-4 border" style="border-color: #8914fc !important;">
           <div class="card-body">
@@ -149,4 +193,8 @@
     </div>
   @endif
 </div>
+@endsection
+@section('scripts')
+<script src="{{ asset('js/Chart.min.js') }}"></script>
+<script src="{{ asset('js/line-chart.js') }}"></script>
 @endsection
