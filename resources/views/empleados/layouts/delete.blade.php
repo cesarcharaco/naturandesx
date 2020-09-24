@@ -16,7 +16,7 @@
 							<div class="input-group-prepend">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
-                    <div class="ti-lock"></div>
+                    <div class="fa fa-lock"></div>
                   </div>
                 </div>
               </div>
