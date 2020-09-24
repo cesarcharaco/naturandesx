@@ -130,7 +130,6 @@
                 <p class="text-white">¿Ya tienes cuenta? <a href="{{ route('login') }}">Iniciar sesión</a></p>
             </div>
           </div>
-        </div>
       </form>
     </div>
   </div>
