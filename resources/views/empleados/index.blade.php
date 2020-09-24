@@ -43,7 +43,7 @@
         <div class="row" style="position: relative !important;">
           <div class="col-md-12" style="position: relative !important;">
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-              <table id="dataTable1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
+              <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
                   <thead class="text-capitalize bg-primary">
                     <tr class="border-orange">
                       <th>Nombres</th>
