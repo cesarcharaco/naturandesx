@@ -14,7 +14,7 @@
               <strong>{{ $errors->first('usuario') ?: $errors->first('email') }}</strong>
             </span>
           @endif
-          <input id="password" value="Contraseña" type="password" class="border border-warning form-control mb-4 input @error('password') is-invalid @enderror" name="password" required placeholder="Contraseña">
+          <input id="password" type="password" class="border border-warning form-control mb-4 input @error('password') is-invalid @enderror" name="password" required placeholder="Contraseña">
           <div class="row">
             <div class="col-6">
               <div class="icheck-primary">
