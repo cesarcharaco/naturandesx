@@ -1,5 +1,32 @@
 @extends('layouts.app')
 @section('css')
+<style type="text/css">
+  .container{
+/*      width:95%;
+      max-width:900px;
+      padding:32px 64px;
+      margin:auto;*/
+    }
+
+    .botonesLaterales{
+      /*las imágenes usadas tienen width de 48px*/
+      width:48px;
+      position:fixed;
+      top:50px;
+      right:0;
+    }
+
+    /* Extra centrado vertical*/
+
+    .botonesLaterales{
+      /*border:1px solid #000;*/
+      top:50%;
+      height:205px;
+      /*para poner height 192 deberíamos haber indicado en el reset de estilos font-size:0;*/
+      margin-top:-100px;
+      /*position: relative;*/
+    }
+</style>
   <title>Ventas</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">
 @endsection
@@ -23,7 +50,7 @@
 @endsection
 @section('content')
   <div class="container-fluid">
-
+    
       <div class="row mt-5 mb-5">
           <!-- Live Crypto Price area sta Qrt -->
           <div class="col-lg-4">
@@ -98,6 +125,73 @@
                       </div>
                   </div>
               </div>
+
+              <div id="configuracion" class="configuracion card border" style="border-radius: 10px !important; display: none;">
+                <div class="card-body">
+                  <div class="well" style="width: 100%;">
+                      <label id="zoom-value" width="100">Zoom: 2</label>
+                      <input id="zoom" onchange="Page.changeZoom();" type="range" min="10" max="30" value="20">
+                      <label id="brightness-value" width="100">Brillo: 0</label>
+                      <input id="brightness" onchange="Page.changeBrightness();" type="range" min="0" max="128" value="0">
+                      <label id="contrast-value" width="100">Contraste: 0</label>
+                      <input id="contrast" onchange="Page.changeContrast();" type="range" min="-128" max="128" value="0">
+                      <label id="threshold-value" width="100">Límite: 0</label>
+                      <input id="threshold" onchange="Page.changeThreshold();" type="range" min="0" max="512" value="0">
+                      <label id="sharpness-value" width="100">Nitidez: off</label>
+                      <input id="sharpness" onchange="Page.changeSharpness();" type="checkbox">
+                      <label id="grayscale-value" width="100">Escala de Grises: off</label>
+                      <input id="grayscale" onchange="Page.changeGrayscale();" type="checkbox">
+                      <br>
+                      <label id="flipVertical-value" width="100">Girar Vertical: off</label>
+                      <input id="flipVertical" onchange="Page.changeVertical();" type="checkbox">
+                      <label id="flipHorizontal-value" width="100">Girar Horizontal: off</label>
+                      <input id="flipHorizontal" onchange="Page.changeHorizontal();" type="checkbox">
+                  </div>
+                </div>
+              </div>
+
+              <div id="selectCamara" class="selectCamara card border" style="border-radius: 10px !important;display: none;">
+                <div class="card-body">
+                  <div class="card mb-4">
+                      <div class="card-body">
+                           <select class="select2 border" id="camera-select" style="
+                              width: 100% !important;
+                              border-color: #8914fc !important;
+                              border-radius: 5px;
+                              height: 35px;">
+                              
+                          </select>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="botones" class="botones card border" style="display: none; border-radius: 10px !important;">
+                <div class="card-body">
+                  <div class="form-group">
+                     
+                      <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-upload"></span></button>
+                      <button title="Image shoot" class="btn btn-info btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-picture"></span></button>
+                      <button title="Play" class="btn btn-success btn-sm" id="play" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-play"></span></button>
+                      <button title="Pause" class="btn btn-warning btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
+                      <button title="Stop streams" class="btn btn-danger btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
+                  </div>
+                </div>
+              </div>
+
+              <div id="resultadoScanner" class="resultadoScanner card border" style="display: none;border-radius: 10px !important;">
+                <div class="card-body">
+                  <div class="thumbnail" id="result">
+                    <div class="well">
+                        <img width="320" height="240" id="scanned-img" src="">
+                    </div>
+                    <div class="caption">
+                        <h3>Escaneando resultados</h3>
+                        <p id="scanned-QR"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
           <!-- Live Crypto Price area end -->
           <!-- trading history area start -->
@@ -121,66 +215,30 @@
                             </select>
                         </div> --}}
                         <div id="scannerQR">
-                          <label for="">Ingrese o Scanne el Código QR</label>
+                          <center><label for="" >Ingrese o Scanne el Código QR</label></center>
                           <div class="container" id="QR-Code">
                             <div class="col-md-6">
-                              <div class="well" style="position: relative;display: inline-block;">
-                                  <canvas width="320" height="240" id="webcodecam-canvas"></canvas>
-                                  <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
-                                  <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
-                                  <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
-                                  <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
-                              </div>
-                              <div class="well" style="width: 100%;">
-                                  <label id="zoom-value" width="100">Zoom: 2</label>
-                                  <input id="zoom" onchange="Page.changeZoom();" type="range" min="10" max="30" value="20">
-                                  <label id="brightness-value" width="100">Brillo: 0</label>
-                                  <input id="brightness" onchange="Page.changeBrightness();" type="range" min="0" max="128" value="0">
-                                  <label id="contrast-value" width="100">Contraste: 0</label>
-                                  <input id="contrast" onchange="Page.changeContrast();" type="range" min="-128" max="128" value="0">
-                                  <label id="threshold-value" width="100">Límite: 0</label>
-                                  <input id="threshold" onchange="Page.changeThreshold();" type="range" min="0" max="512" value="0">
-                                  <label id="sharpness-value" width="100">Nitidez: off</label>
-                                  <input id="sharpness" onchange="Page.changeSharpness();" type="checkbox">
-                                  <label id="grayscale-value" width="100">Escala de Grises: off</label>
-                                  <input id="grayscale" onchange="Page.changeGrayscale();" type="checkbox">
-                                  <br>
-                                  <label id="flipVertical-value" width="100">Girar Vertical: off</label>
-                                  <input id="flipVertical" onchange="Page.changeVertical();" type="checkbox">
-                                  <label id="flipHorizontal-value" width="100">Girar Horizontal: off</label>
-                                  <input id="flipHorizontal" onchange="Page.changeHorizontal();" type="checkbox">
-                              </div>
-                              <div class="card mb-4">
-                                  <div class="card-body">
-                                       <select class="select2 border" id="camera-select" style="
-                                          width: 100% !important;
-                                          border-color: #8914fc !important;
-                                          border-radius: 5px;
-                                          height: 35px;">
-                                          
-                                      </select>
+                                  <div class="botonesLaterales">
+                                    <a href="#configuracion" id="boton1" onclick="mostrarO(1)" class="btn btn-warning btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-cog"></i></a>
+                                    <a href="#selectCamara" id="boton2" onclick="mostrarO(2)" class="btn btn-info btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-camera"></i></a>
+                                    <a href="#botones" id="boton3" onclick="mostrarO(3)" class="btn btn-default btn-sm mt-1 text-dark" style="border-radius: 30px !important;"><i class="fa fa-play"></i></a>
+                                    <a href="#resultadoScanner" id="boton4" onclick="mostrarO(4)" class="btn btn-primary btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-image"></i></a>
+                                    <a  id="boton5" onclick="mostrarO(5)" class="btn btn-success btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-arrow-left"></i></a>
                                   </div>
-                              </div>
-                              <div class="form-group">
-                                 
-                                  <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-upload"></span></button>
-                                  <button title="Image shoot" class="btn btn-info btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-picture"></span></button>
-                                  <button title="Play" class="btn btn-success btn-sm" id="play" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-play"></span></button>
-                                  <button title="Pause" class="btn btn-warning btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
-                                  <button title="Stop streams" class="btn btn-danger btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
-                               </div>
-
-                              <div class="thumbnail" id="result">
-                                  <div class="well">
-                                      <img width="320" height="240" id="scanned-img" src="">
-                                  </div>
-                                  <div class="caption">
-                                      <h3>Escaneando resultados</h3>
-                                      <p id="scanned-QR"></p>
-                                  </div>
-                              </div>
+                              <center>
+                                <div class="card" style="position: relative;display: inline-block;">
+                                    <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
+                                    <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
+                                </div>
+                              </center>
+                              
+                              
+                              
+                              
                             </div>
-                        
                           </div>
                         </div>
                         <div id="vistaCliente" style="display: none;">
@@ -276,10 +334,70 @@
 
 <script>
 
+  function mostrarO(opcion) {
+    if(opcion == 1){
+      $('#configuracion').fadeIn(300);
+      $('#boton1').removeClass('btn-warning').addClass('btn-success');
+      $('#boton1').removeAttr('onclick',false).attr('onclick','Cerrar(1);');
+    }else if(opcion == 2){
+      $('#selectCamara').fadeIn(300);
+      $('#boton2').removeClass('btn-info').addClass('btn-success');
+      $('#boton2').removeAttr('onclick',false).attr('onclick','Cerrar(2);');
+    }else if(opcion == 3){
+      $('#botones').fadeIn(300);
+      $('#boton3').removeClass('text-dark').addClass('text-white');
+      $('#boton3').removeClass('btn-default').addClass('btn-success');
+      $('#boton3').removeAttr('onclick',false).attr('onclick','Cerrar(3);');
+    }else if(opcion == 4){
+      $('#resultadoScanner').fadeIn(300);
+      $('#boton4').removeClass('btn-primary').addClass('btn-success');
+      $('#boton4').removeAttr('onclick',false).attr('onclick','Cerrar(4);');
+    }else{
+      $('#boton1').removeClass('btn-success').addClass('btn-warning');
+      $('#boton2').removeClass('btn-success').addClass('btn-info');
+      $('#boton3').removeClass('text-white').addClass('text-dark');
+      $('#boton3').removeClass('btn-success').addClass('btn-default');
+      $('#boton4').removeClass('btn-success').addClass('btn-primary');
+
+
+      $('#configuracion').fadeOut('slow');
+      $('#selectCamara').fadeOut('slow');
+      $('#botones').fadeOut('slow');
+      $('#resultadoScanner').fadeOut('slow');
+    }
+  }
+
+  function Cerrar(opcion) {
+    if(opcion == 1){
+      $('#configuracion').fadeOut('slow');
+      $('#boton1').removeClass('btn-success').addClass('btn-warning');
+      $('#boton1').removeAttr('onclick',false).attr('onclick','mostrarO(1);');
+    }else if(opcion == 2){
+      $('#selectCamara').fadeOut('slow');
+      $('#boton2').removeClass('btn-success').addClass('btn-info');
+      $('#boton2').removeAttr('onclick',false).attr('onclick','mostrarO(2);');
+    }else if(opcion == 3){
+      $('#botones').fadeOut('slow');
+      $('#boton3').removeClass('text-white').addClass('text-dark');
+      $('#boton3').removeClass('btn-success').addClass('btn-default');
+      $('#boton3').removeAttr('onclick',false).attr('onclick','mostrarO(3);');
+    }else{
+      $('#resultadoScanner').fadeOut('slow');
+      $('#boton4').removeClass('btn-success').addClass('btn-primary');
+      $('#boton4').removeAttr('onclick',false).attr('onclick','mostrarO(4);');
+    }
+  }
+
+
 function codigoEscaneado(codigo) {
   $('#scannerQR').fadeOut('slow',
     function() { 
       $(this).hide();
+      $('#configuracion').fadeOut('slow');
+      $('#selectCamara').fadeOut('slow');
+      $('#botones').fadeOut('slow');
+      $('#resultadoScanner').fadeOut('slow');
+
       $('#vistaCliente').fadeIn(300);
   });
   // alert(codigo);
@@ -293,6 +411,16 @@ function codigoEscaneado(codigo) {
       $('#id_cliente2').val(data[0].id);
     }else{
       alert('Sin resultados');
+      $('#scannerQR').fadeIn(300,
+        function() { 
+          $(this).hide();
+          Cerrar(1);
+          Cerrar(2);
+          Cerrar(3);
+          Cerrar(4);
+
+          $('#vistaCliente').fadeOut(300);
+      });
     }
   });
 }
