@@ -57,8 +57,8 @@
     
       <div class="row mt-5 mb-5">
           <!-- Live Crypto Price area sta Qrt -->
-          <div class="col-lg-4">
-              <div class="card border" style="border-radius: 10px !important;">
+          <div class="col-lg-12">
+              <div class="card border" style="border-radius: 10px !important; display: none;" id="tabla">
                   <div class="card-body">
                       <h4 class="header-title">Ventas Realizadas</h4>
                       <div class="" style="width: 100% !important;box-shadow: 0 0 3px black;">
@@ -130,6 +130,10 @@
                   </div>
               </div>
 
+          </div>
+          <!-- Live Crypto Price area end -->
+          <!-- trading history area start -->
+          <div class="col-lg-4">
               <div id="configuracion" class="configuracion card border" style="border-radius: 10px !important; display: none;">
                 <div class="card-body">
                   <div class="mb-5" style="width: 100%;">
@@ -243,8 +247,6 @@
                 </div>
               </div>
           </div>
-          <!-- Live Crypto Price area end -->
-          <!-- trading history area start -->
           <div class="col-lg-8 mt-sm-30 mt-xs-30">
             <form action="{{ route('ventas.store') }}" method="POST" name="ventas">
               @csrf
@@ -268,6 +270,9 @@
                           <center><label for="" >Ingrese o Scanne el Código QR</label></center>
                           <div class="container" id="QR-Code">
                             <div class="botonesLaterales">
+
+                              <a href="#tabla" id="boton6" onclick="mostrarO(6)" class="btn btn-danger btn-sm mt-1 text-white" style="border-radius: 30px !important;" style="background-color: purple !important;">
+                                <i class="fa fa-fw fa-align-center"></i></a>
                               <a href="#configuracion" id="boton1" onclick="mostrarO(1)" class="btn btn-warning btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-cog"></i></a>
                               <a href="#selectCamara" id="boton2" onclick="mostrarO(2)" class="btn btn-info btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-camera"></i></a>
                               <a href="#botones" id="boton3" onclick="mostrarO(3)" class="btn btn-default btn-sm mt-1 text-dark" style="border-radius: 30px !important;"><i class="fa fa-play"></i></a>
@@ -398,6 +403,10 @@
       $('#resultadoScanner').fadeIn(300);
       $('#boton4').removeClass('btn-primary').addClass('btn-success');
       $('#boton4').removeAttr('onclick',false).attr('onclick','Cerrar(4);');
+    }else if(opcion == 6){
+      $('#tabla').fadeIn(300);
+      $('#boton6').removeClass('btn-danger').addClass('btn-success');
+      $('#boton6').removeAttr('onclick',false).attr('onclick','Cerrar(6);');
     }else{
       $('#boton1').removeClass('btn-success').addClass('btn-warning');
       $('#boton2').removeClass('btn-success').addClass('btn-info');
@@ -410,6 +419,7 @@
       $('#selectCamara').fadeOut('slow');
       $('#botones').fadeOut('slow');
       $('#resultadoScanner').fadeOut('slow');
+      $('#tabla').fadeOut('slow');
     }
   }
 
@@ -427,6 +437,10 @@
       $('#boton3').removeClass('text-white').addClass('text-dark');
       $('#boton3').removeClass('btn-success').addClass('btn-default');
       $('#boton3').removeAttr('onclick',false).attr('onclick','mostrarO(3);');
+    }else if(opcion == 6){
+      $('#tabla').fadeOut('slow');
+      $('#boton6').removeClass('btn-success').addClass('btn-danger');
+      $('#boton6').removeAttr('onclick',false).attr('onclick','mostrarO(6);');
     }else{
       $('#resultadoScanner').fadeOut('slow');
       $('#boton4').removeClass('btn-success').addClass('btn-primary');
