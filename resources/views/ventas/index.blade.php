@@ -274,15 +274,17 @@
                               <a href="#resultadoScanner" id="boton4" onclick="mostrarO(4)" class="btn btn-primary btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-image"></i></a>
                               <a  id="boton5" onclick="mostrarO(5)" class="btn btn-success btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-arrow-left"></i></a>
                             </div>
-                            <center>
-                              <div class="card" style="position: relative;display: inline-block;">
-                                  <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
-                                  <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
-                                  <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
-                                  <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
-                                  <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
-                              </div>
-                            </center>
+                            <div class="col-md-6">
+                              <center>
+                                <div class="card" style="position: relative;display: inline-block;">
+                                    <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
+                                    <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
+                                </div>
+                              </center>
+                            </div>
                           </div>
                         </div>
                         <div id="vistaCliente" style="display: none;">
