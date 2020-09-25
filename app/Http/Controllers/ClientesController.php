@@ -46,7 +46,7 @@ class ClientesController extends Controller
      */
     public function store(ClientesRequest $request)
     {
-        if(\Auth::user()->tipo_usuario == 'Admin'){
+        if(\Auth::user()->tipo_usuario != 'Cliente'){
             $nombre_qr = $request->rut.'-'.$request->verificador;
             $clave = $request->rut.''.$request->verificador;
             //dd($clave);
