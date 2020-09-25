@@ -51,7 +51,9 @@
                     <th>Usuario</th>
                     <th>Email</th>
                     <th>status</th>
-                    <th></th>
+                    @if(Auth::user()->tipo_usuario == 'Admin' )
+                      <th></th>
+                    @endif
                   </tr>
                 </thead>
                 <tbody>
@@ -90,8 +92,6 @@
                                 <div class="far fa-trash-alt text-white"></div>
                             </a>
                         </td>
-                      @else
-                        <td></td>
                       @endif
                     </tr>
                   @endforeach
