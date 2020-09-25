@@ -73,57 +73,61 @@
                             
                           </thead>
                           <tbody>
+                            <?php $i=0; ?>
                             @foreach($ventas as $key)
-                              <tr class="mb-5">
-                                <td>
-                                  <!-- <div class="icon d">
-                                    <i class="ti-money"></i>
-                                  </div> -->
-                                      <i class="ti-check" style="background-color: green; color: white; border-radius: 30px;"></i>
-                                  {{ $key->cliente->nombres }}
-                                </td>
-                                <td>
-                                  {{ $key->cantidad }}
-                                </td>
-                                <td>
-                                  <span>${{$key->monto_total}} 
-                                  </span>
-                                </td>
-                                <td>
-                                  @if($key->created_at->month == 1)
-                                    @php $mes= 'Enero' @endphp
-                                  @elseif($key->created_at->month == 2)
-                                    @php $mes= 'Febrero' @endphp
-                                  @elseif($key->created_at->month == 3)
-                                    @php $mes= 'Marzo' @endphp
-                                  @elseif($key->created_at->month == 4)
-                                    @php $mes= 'Abril' @endphp
-                                  @elseif($key->created_at->month == 5)
-                                    @php $mes= 'Mayo' @endphp
-                                  @elseif($key->created_at->month == 6)
-                                    @php $mes= 'Junio' @endphp
-                                  @elseif($key->created_at->month == 7)
-                                    @php $mes= 'Julio' @endphp
-                                  @elseif($key->created_at->month == 8)
-                                    @php $mes= 'Agosto' @endphp
-                                  @elseif($key->created_at->month == 9)
-                                    @php $mes= 'Septiembre' @endphp
-                                  @elseif($key->created_at->month == 10)
-                                    @php $mes= 'Octubre' @endphp
-                                  @elseif($key->created_at->month == 11)
-                                    @php $mes= 'Noviembre' @endphp
-                                  @else
-                                    @php $mes= 'Diciembre' @endphp
-                                  @endif
-                                  <strong>{{$key->created_at->day}}</strong> de
-                                  <strong>{{$mes}}</strong> del
-                                  <strong>{{$key->created_at->year}}</strong>
-                                  <br>
-                                  {{--A las <strong>{{$key->created_at->hour}}:{{$key->created_at->minute}}:00</strong>--}}
+                              @if($i<10)
+                                <tr class="mb-5">
+                                  <td>
+                                    <!-- <div class="icon d">
+                                      <i class="ti-money"></i>
+                                    </div> -->
+                                        <i class="ti-check" style="background-color: green; color: white; border-radius: 30px;"></i>
+                                    {{ $key->cliente->nombres }}
+                                  </td>
+                                  <td>
+                                    {{ $key->cantidad }}
+                                  </td>
+                                  <td>
+                                    <span>${{$key->monto_total}} 
+                                    </span>
+                                  </td>
+                                  <td>
+                                    @if($key->created_at->month == 1)
+                                      @php $mes= 'Enero' @endphp
+                                    @elseif($key->created_at->month == 2)
+                                      @php $mes= 'Febrero' @endphp
+                                    @elseif($key->created_at->month == 3)
+                                      @php $mes= 'Marzo' @endphp
+                                    @elseif($key->created_at->month == 4)
+                                      @php $mes= 'Abril' @endphp
+                                    @elseif($key->created_at->month == 5)
+                                      @php $mes= 'Mayo' @endphp
+                                    @elseif($key->created_at->month == 6)
+                                      @php $mes= 'Junio' @endphp
+                                    @elseif($key->created_at->month == 7)
+                                      @php $mes= 'Julio' @endphp
+                                    @elseif($key->created_at->month == 8)
+                                      @php $mes= 'Agosto' @endphp
+                                    @elseif($key->created_at->month == 9)
+                                      @php $mes= 'Septiembre' @endphp
+                                    @elseif($key->created_at->month == 10)
+                                      @php $mes= 'Octubre' @endphp
+                                    @elseif($key->created_at->month == 11)
+                                      @php $mes= 'Noviembre' @endphp
+                                    @else
+                                      @php $mes= 'Diciembre' @endphp
+                                    @endif
+                                    <strong>{{$key->created_at->day}}</strong> de
+                                    <strong>{{$mes}}</strong> del
+                                    <strong>{{$key->created_at->year}}</strong>
+                                    <br>
+                                    {{--A las <strong>{{$key->created_at->hour}}:{{$key->created_at->minute}}:00</strong>--}}
 
-                                </td>
-                              </tr>
-                              @endforeach
+                                  </td>
+                                </tr>
+                                <?php $i++; ?>
+                              @endif
+                            @endforeach
                           </tbody>
                         </table>
                       </div>
