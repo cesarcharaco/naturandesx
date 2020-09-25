@@ -71,6 +71,8 @@
                         <td>
                           @if($key->status == 'Activo')
                             <span class="text-success"><strong>{!! $key->status !!}</strong></span>
+                          @elseif($key->status == 'Sin Aprobar')
+                            <span class="text-warning"><strong>{!! $key->status !!}</strong></span>
                           @else
                             <span class="text-danger"><strong>{!! $key->status !!}</strong></span>
                           @endif
