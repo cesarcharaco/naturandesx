@@ -20,7 +20,7 @@ class CreateClientesTable extends Migration
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('rut');
-            $table->enum('status',['Activo','Inactivo']);
+            $table->enum('status',['Activo','Inactivo','Sin Aprobar']);
 
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_qr')->references('id')->on('codigo_qr')->onDelete('cascade');

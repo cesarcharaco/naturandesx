@@ -65,7 +65,7 @@ class ClientesController extends Controller
                 $qr = new CodigoQr();
                 $qr->codigo=$url_img;
                 $qr->codigo_recupera=1234;
-                $qr->status="Activo";
+                $qr->status="Sin Aprobar";
                 $qr->save();
 
                 $usuario = new User();
@@ -86,7 +86,11 @@ class ClientesController extends Controller
                 $clientes->nombres=$request->nombres;
                 $clientes->apellidos=$request->apellidos;
                 $clientes->rut = $request->rut.'-'.$request->verificador;
+                if(\Auth::user()->tipo_usuario=="Admin"){
                 $clientes->status=$request->status;
+                }else{
+                $clientes->status="Sin Aprobar";
+                }
                 $clientes->save();
 
                 if ($request->email!="") {
