@@ -17,7 +17,7 @@ class CreateCodigoQrTable extends Migration
             $table->bigIncrements('id');
             $table->string('codigo');
             $table->string('codigo_recupera');
-            $table->enum('status',['Activo','Inactivo'])->default('Activo');
+            $table->enum('status',['Activo','Inactivo','Sin Aprobar'])->default('Activo');
             $table->timestamps();
         });
     }

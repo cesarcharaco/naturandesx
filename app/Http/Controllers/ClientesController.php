@@ -65,7 +65,11 @@ class ClientesController extends Controller
                 $qr = new CodigoQr();
                 $qr->codigo=$url_img;
                 $qr->codigo_recupera=1234;
-                $qr->status="Sin Aprobar";
+                if(\Auth::user()->tipo_usuario=="Admin"){
+                    $qr->status="Activo";
+                }else{
+                    $qr->status="Sin Aprobar";
+                }
                 $qr->save();
 
                 $usuario = new User();

@@ -24,6 +24,7 @@ class EmpleadosController extends Controller
 
             //$empleados = Empleados::select('users.*','empleados.*')->join('users', 'users.id', '=', 'empleados.id_usuario')->where('users.tipo_usuario','Empleado')->get();
             $empleados = Empleados::all();
+            
             return view('empleados.index', compact('empleados'));
         }else{
             toastr()->warning('no puede acceder!!', 'ACCESO DENEGADO');

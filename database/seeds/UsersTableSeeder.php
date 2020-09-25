@@ -36,5 +36,29 @@ class UsersTableSeeder extends Seeder
             'direccion' => NULL,
             'status' => 'Activo'
         ]);
+        //---------- repartidor
+        \DB::table('codigo_qr')->insert([
+            'codigo' => '',
+            'codigo_recupera' => 1234,
+            'status' => 'Activo'
+        ]);
+
+        \DB::table('users')->insert([
+            'usuario' => 'darwis',
+            'email' => 'darwis@naturandes.cl',
+            'password' => bcrypt('123456'),
+            'tipo_usuario' => 'Empleado'
+        ]);
+
+        \DB::table('empleados')->insert([
+            'id_usuario'=>2,
+            'id_qr'=>2,
+            'nombres' => 'Darwis',
+            'apellidos' => 'Rojas',
+            'rut' =>'987654321',
+            'telefono' => '04120000000',
+            'direccion' => NULL,
+            'status' => 'Activo'
+        ]);
     }
 }
