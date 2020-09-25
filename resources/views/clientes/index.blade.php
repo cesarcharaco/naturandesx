@@ -50,7 +50,7 @@
                     <th>RUT</th>
                     <th>Usuario</th>
                     <th>Email</th>
-                    <th>status</th>
+                    @if(Auth::user()->tipo_usuario == 'Admin')<th>status</th>@endif
                     <th></th>
                   </tr>
                 </thead>
@@ -67,13 +67,15 @@
                           {!! $key->usuario->email !!}
                         @endif
                       </td>
-                      <td>
-                        @if($key->status == 'Activo')
-                          <span class="text-success"><strong>{!! $key->status !!}</strong></span>
-                        @else
-                          <span class="text-danger"><strong>{!! $key->status !!}</strong></span>
-                        @endif
-                      </td>
+                      @if(Auth::user()->tipo_usuario == 'Admin')
+                        <td>
+                          @if($key->status == 'Activo')
+                            <span class="text-success"><strong>{!! $key->status !!}</strong></span>
+                          @else
+                            <span class="text-danger"><strong>{!! $key->status !!}</strong></span>
+                          @endif
+                        </td>
+                      @endif
                       @if(Auth::user()->tipo_usuario == 'Admin' )
                         <td>
                            <a data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" class="btn btn-success btn-sm boton-tabla" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">

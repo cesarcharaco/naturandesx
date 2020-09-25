@@ -58,8 +58,11 @@
       <div class="row mt-5 mb-5">
           <!-- Live Crypto Price area sta Qrt -->
           <div class="col-lg-12">
+              <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡EL CLIENTE NO ESTÁ AUTORIZADO PARA HACER VENTAS!</div><br>
               <div class="card border" style="border-radius: 10px !important; display: none;" id="tabla">
                   <div class="card-body">
+                    <center>
+                    </center>
                       <h4 class="header-title">Ventas Realizadas</h4>
                       <div class="" style="width: 100% !important;box-shadow: 0 0 3px black;">
                         <table id="" class="text-center table-striped table-hover" width="100%">
@@ -454,6 +457,7 @@
 
 
 function codigoEscaneado(codigo) {
+  $('#mensaje').css('display','none');
   $('#scannerQR').fadeOut('slow',
     function() { 
       $(this).hide();
@@ -469,22 +473,27 @@ function codigoEscaneado(codigo) {
   })
   .done(function(data) {
     if (data.length>0) {
-      $('#nombre_c').html(data[0].nombres+' '+data[0].apellidos);
-      $('#rut_c').html(data[0].rut);
-      $('#email_c').html(data[0].email);
-      $('#id_cliente2').val(data[0].id);
+      if(data[0].status == 'Activo'){
+
+        $('#nombre_c').html(data[0].nombres+' '+data[0].apellidos);
+        $('#rut_c').html(data[0].rut);
+        $('#email_c').html(data[0].email);
+        $('#id_cliente2').val(data[0].id);
+      }else{
+
+        $('#mensaje').css('display','block');
+        setTimeout(function() {
+          $('#mensaje').fadeOut('slow');
+        }, 3000);
+        $('#scannerQR').show();
+        $('#vistaCliente').hide(300);
+        mostrarO(3);
+      }
     }else{
       alert('Sin resultados');
-      $('#scannerQR').fadeIn(300,
-        function() { 
-          $(this).hide();
-          Cerrar(1);
-          Cerrar(2);
-          Cerrar(3);
-          Cerrar(4);
+      $('#scannerQR').show();
 
-          $('#vistaCliente').fadeOut(300);
-      });
+      $('#vistaCliente').hide(300);
     }
   });
 }
