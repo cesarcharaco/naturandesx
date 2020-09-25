@@ -58,13 +58,15 @@
                   <input type="email" class="form-control" placeholder="Ingrese email" name="email" id="email_edit">
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="status">Status</label>
-                  <select class="form-control" id="status_editar" name="status">
-                  </select>
+              @if(Auth::user()->tipo_usuario == 'Admin')
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status_editar" name="status">
+                    </select>
+                  </div>
                 </div>
-              </div>
+              @endif
             </div>
             {{--<div class="form-group">
               <label for="pregunta">Pregunta de seguridad</label>

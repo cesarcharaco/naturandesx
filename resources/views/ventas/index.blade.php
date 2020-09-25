@@ -58,7 +58,7 @@
       <div class="row mt-5 mb-5">
           <!-- Live Crypto Price area sta Qrt -->
           <div class="col-lg-12">
-              <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡EL CLIENTE NO ESTÁ AUTORIZADO PARA HACER VENTAS!</div><br>
+              <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡La cuenta del cliente seleccionado aún no ha sido aprobada!</div><br>
               <div class="card border" style="border-radius: 10px !important; display: none;" id="tabla">
                   <div class="card-body">
                     <center>

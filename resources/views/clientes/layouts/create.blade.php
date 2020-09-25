@@ -67,15 +67,17 @@
 		              @endif
 		            </div>
 	        	</div>
-	        	<div class="col-md-4">
-		            <div class="form-group">
-		              <label for="status">Status</label>
-		              <select class="form-control" id="exampleFormControlSelect12" name="status">
-		                <option value="Activo">Activo</option>
-		                <option value="Inactivo">Inactivo</option>
-		              </select>
-		            </div>
-	        	</div>
+	        	@if(Auth::user()->tipo_usuario == 'Admin')
+		        	<div class="col-md-4">
+			            <div class="form-group">
+			              <label for="status">Status</label>
+			              <select class="form-control" id="exampleFormControlSelect12" name="status">
+			                <option value="Activo">Activo</option>
+			                <option value="Inactivo">Inactivo</option>
+			              </select>
+			            </div>
+		        	</div>
+		        @endif
 	        </div>
 	              {{--<div class="form-group">
 	                <label for="pregunta">Pregunta de seguridad</label>
