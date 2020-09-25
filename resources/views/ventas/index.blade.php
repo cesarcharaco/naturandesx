@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('css')
 <style type="text/css">
+
+  .custom-control-input{
+    display: none !important;
+  }
   .container{
 /*      width:95%;
       max-width:900px;
@@ -128,24 +132,67 @@
 
               <div id="configuracion" class="configuracion card border" style="border-radius: 10px !important; display: none;">
                 <div class="card-body">
-                  <div class="well" style="width: 100%;">
-                      <label id="zoom-value" width="100">Zoom: 2</label>
-                      <input id="zoom" onchange="Page.changeZoom();" type="range" min="10" max="30" value="20">
-                      <label id="brightness-value" width="100">Brillo: 0</label>
-                      <input id="brightness" onchange="Page.changeBrightness();" type="range" min="0" max="128" value="0">
-                      <label id="contrast-value" width="100">Contraste: 0</label>
-                      <input id="contrast" onchange="Page.changeContrast();" type="range" min="-128" max="128" value="0">
-                      <label id="threshold-value" width="100">Límite: 0</label>
-                      <input id="threshold" onchange="Page.changeThreshold();" type="range" min="0" max="512" value="0">
-                      <label id="sharpness-value" width="100">Nitidez: off</label>
-                      <input id="sharpness" onchange="Page.changeSharpness();" type="checkbox">
-                      <label id="grayscale-value" width="100">Escala de Grises: off</label>
-                      <input id="grayscale" onchange="Page.changeGrayscale();" type="checkbox">
-                      <br>
-                      <label id="flipVertical-value" width="100">Girar Vertical: off</label>
-                      <input id="flipVertical" onchange="Page.changeVertical();" type="checkbox">
-                      <label id="flipHorizontal-value" width="100">Girar Horizontal: off</label>
-                      <input id="flipHorizontal" onchange="Page.changeHorizontal();" type="checkbox">
+                  <div class="mb-5" style="width: 100%;">
+                    <div class="form-group">
+                      <label id="zoom-value" width="100" class="text-danger">Zoom: 2</label>
+                      <input id="zoom" onchange="Page.changeZoom();" type="range" min="10" max="30" value="20" class="custom-range custom-range-danger">
+                    </div>
+                    <div class="form-group">
+                      <label id="brightness-value" width="100" class="text-success">Brillo: 0</label>
+                      <input id="brightness" onchange="Page.changeBrightness();" type="range" min="0" max="128" value="0" class="custom-range custom-range-success">
+                    </div>
+                    <div class="form-group">
+                      <label id="contrast-value" width="100" class="text-warning">Contraste: 0</label>
+                      <input id="contrast" onchange="Page.changeContrast();" type="range" min="-128" max="128" value="0" class="custom-range custom-range-warning">
+                    </div>
+                    <div class="form-group">
+                      <label id="threshold-value" width="100" class="text-primary">Límite: 0</label>
+                      <input id="threshold" onchange="Page.changeThreshold();" type="range" min="0" max="512" value="0" class="custom-range custom-range-primary">
+                    </div>
+                    <div class="mt-5 md-5"><br></div>
+                      <div class="form-group">
+                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                          <input type="checkbox" onchange="Page.changeSharpness();" class="custom-control-input" id="sharpness">
+                          <label class="custom-control-label" id="sharpness-value" for="sharpness">Nitidez</label>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                          <input type="checkbox" onchange="Page.changeGrayscale();" class="custom-control-input" id="grayscale">
+                          <label class="custom-control-label" id="grayscale-value" for="grayscale">Escala de Grises</label>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                          <input type="checkbox" onchange="Page.changeVertical();" class="custom-control-input" id="flipVertical">
+                          <label class="custom-control-label" id="flipVertical-value" for="flipVertical">Girar Vertical</label>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                          <input type="checkbox" onchange="Page.changeHorizontal();" class="custom-control-input" id="flipHorizontal">
+                          <label class="custom-control-label" id="flipHorizontal-value" for="flipHorizontal">Girar Horizontal</label>
+                        </div>
+                      </div>
+                        <!-- <div class="form-group">
+                          <label id="sharpness-value" width="100">Nitidez: off</label>
+                          <input id="sharpness" onchange="Page.changeSharpness();" type="checkbox" class="custom-control-input">
+                        </div> -->
+                        <!-- <div class="form-group">
+                          <label id="grayscale-value" width="100">Escala de Grises</label>
+                          <input id="grayscale" onchange="Page.changeGrayscale();" type="checkbox">
+                        </div>
+                        <div class="form-group">
+                        <label id="flipVertical-value" width="100">Girar Vertical</label>
+                          <input id="flipVertical" onchange="Page.changeVertical();" type="checkbox">
+                        </div>
+                        <div class="form-group">
+                          <label id="flipHorizontal-value" width="100">Girar Horizontal</label>
+                          <input id="flipHorizontal" onchange="Page.changeHorizontal();" type="checkbox">
+                        </div> -->
                   </div>
                 </div>
               </div>
@@ -168,6 +215,8 @@
 
               <div id="botones" class="botones card border" style="display: none; border-radius: 10px !important;">
                 <div class="card-body">
+                  <center>
+                    
                   <div class="form-group">
                      
                       <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-upload"></span></button>
@@ -176,6 +225,7 @@
                       <button title="Pause" class="btn btn-warning btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
                       <button title="Stop streams" class="btn btn-danger btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
                   </div>
+                  </center>
                 </div>
               </div>
 
@@ -217,28 +267,22 @@
                         <div id="scannerQR">
                           <center><label for="" >Ingrese o Scanne el Código QR</label></center>
                           <div class="container" id="QR-Code">
-                            <div class="col-md-6">
-                                  <div class="botonesLaterales">
-                                    <a href="#configuracion" id="boton1" onclick="mostrarO(1)" class="btn btn-warning btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-cog"></i></a>
-                                    <a href="#selectCamara" id="boton2" onclick="mostrarO(2)" class="btn btn-info btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-camera"></i></a>
-                                    <a href="#botones" id="boton3" onclick="mostrarO(3)" class="btn btn-default btn-sm mt-1 text-dark" style="border-radius: 30px !important;"><i class="fa fa-play"></i></a>
-                                    <a href="#resultadoScanner" id="boton4" onclick="mostrarO(4)" class="btn btn-primary btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-image"></i></a>
-                                    <a  id="boton5" onclick="mostrarO(5)" class="btn btn-success btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-arrow-left"></i></a>
-                                  </div>
-                              <center>
-                                <div class="card" style="position: relative;display: inline-block;">
-                                    <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
-                                    <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
-                                    <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
-                                    <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
-                                    <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
-                                </div>
-                              </center>
-                              
-                              
-                              
-                              
+                            <div class="botonesLaterales">
+                              <a href="#configuracion" id="boton1" onclick="mostrarO(1)" class="btn btn-warning btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-cog"></i></a>
+                              <a href="#selectCamara" id="boton2" onclick="mostrarO(2)" class="btn btn-info btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-camera"></i></a>
+                              <a href="#botones" id="boton3" onclick="mostrarO(3)" class="btn btn-default btn-sm mt-1 text-dark" style="border-radius: 30px !important;"><i class="fa fa-play"></i></a>
+                              <a href="#resultadoScanner" id="boton4" onclick="mostrarO(4)" class="btn btn-primary btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-image"></i></a>
+                              <a  id="boton5" onclick="mostrarO(5)" class="btn btn-success btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-arrow-left"></i></a>
                             </div>
+                            <center>
+                              <div class="card" style="position: relative;display: inline-block;">
+                                  <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
+                                  <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
+                                  <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
+                                  <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
+                                  <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
+                              </div>
+                            </center>
                           </div>
                         </div>
                         <div id="vistaCliente" style="display: none;">
@@ -590,11 +634,13 @@ function codigoEscaneado(codigo) {
         if (decoder.isInitialized()) {
             var value = sharpness.checked;
             if (value) {
-                sharpnessValue[txt] = sharpnessValue[txt].split(":")[0] + ": on";
+                sharpnessValue[txt] = sharpnessValue[txt].split(":")[0] + "";
+                $('#sharpness-value').addClass('text-success');
                 decoder.options.sharpness = [0, -1, 0, -1, 5, -1, 0, -1, 0];
             } else {
-                sharpnessValue[txt] = sharpnessValue[txt].split(":")[0] + ": off";
+                sharpnessValue[txt] = sharpnessValue[txt].split(":")[0] + "";
                 decoder.options.sharpness = [];
+                $('#sharpness-value').removeClass('text-success');
             }
         }
     };
@@ -602,11 +648,13 @@ function codigoEscaneado(codigo) {
         if (decoder.isInitialized()) {
             var value = flipVertical.checked;
             if (value) {
-                flipVerticalValue[txt] = flipVerticalValue[txt].split(":")[0] + ": on";
+                flipVerticalValue[txt] = flipVerticalValue[txt].split(":")[0] + "";
+                $('#flipVertical-value').addClass('text-success');
                 decoder.options.flipVertical = value;
             } else {
-                flipVerticalValue[txt] = flipVerticalValue[txt].split(":")[0] + ": off";
+                flipVerticalValue[txt] = flipVerticalValue[txt].split(":")[0] + "";
                 decoder.options.flipVertical = value;
+                $('#flipVertical-value').removeClass('text-success');
             }
         }
     };
@@ -614,11 +662,13 @@ function codigoEscaneado(codigo) {
         if (decoder.isInitialized()) {
             var value = flipHorizontal.checked;
             if (value) {
-                flipHorizontalValue[txt] = flipHorizontalValue[txt].split(":")[0] + ": on";
+                flipHorizontalValue[txt] = flipHorizontalValue[txt].split(":")[0] + "";
+                $('#flipHorizontal-value').addClass('text-success');
                 decoder.options.flipHorizontal = value;
             } else {
-                flipHorizontalValue[txt] = flipHorizontalValue[txt].split(":")[0] + ": off";
+                flipHorizontalValue[txt] = flipHorizontalValue[txt].split(":")[0] + "";
                 decoder.options.flipHorizontal = value;
+                $('#flipHorizontal-value').removeClass('text-success');
             }
         }
     };
@@ -626,11 +676,13 @@ function codigoEscaneado(codigo) {
         if (decoder.isInitialized()) {
             var value = grayscale.checked;
             if (value) {
-                grayscaleValue[txt] = grayscaleValue[txt].split(":")[0] + ": on";
+                grayscaleValue[txt] = grayscaleValue[txt].split(":")[0] + "";
+                $('#grayscale-value').addClass('text-success');
                 decoder.options.grayScale = true;
             } else {
-                grayscaleValue[txt] = grayscaleValue[txt].split(":")[0] + ": off";
+                grayscaleValue[txt] = grayscaleValue[txt].split(":")[0] + "";
                 decoder.options.grayScale = false;
+                $('#grayscale-value').removeClass('text-success').addClass('text-danger');
             }
         }
     };
