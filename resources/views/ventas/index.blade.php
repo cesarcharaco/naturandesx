@@ -231,11 +231,16 @@
                     
                   <div class="form-group">
                      
-                      <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-upload"></span></button>
-                      <button title="Image shoot" class="btn btn-default btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-picture"></span></button>
-                      <button title="Play" class="btn btn-default btn-sm" id="play" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-play"></span></button>
-                      <button title="Pause" class="btn btn-default btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
-                      <button title="Stop streams" class="btn btn-default btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
+                      <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"data-placement="bottom"><span class="glyphicon glyphicon-upload"></span></button>
+
+                      <button title="Image shoot" class="btn btn-default btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-picture"></span></button>
+
+                      <button title="Play" class="btn btn-default btn-sm" id="play" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-play"></span></button>
+
+                      <button title="Pause" class="btn btn-default btn-sm" id="pause" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-pause"></span></button>
+
+                      <button title="Stop streams" class="btn btn-default btn-sm" id="stop" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-stop"></span></button>
+
                   </div>
                   </center>
                 </div>

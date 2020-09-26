@@ -1,7 +1,8 @@
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" defer></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" defer></script><!-- Bootstrap 4 -->
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
 <!-- Select2 -->
 <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- Bootstrap4 Duallistbox -->
@@ -24,8 +25,11 @@
 
 
 <script type="text/javascript">
-
   $(function () {
+        $("[rel='tooltip']").tooltip();
+    });
+  $(function () {
+    $('#example').tooltip(options)
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
