@@ -58,7 +58,7 @@
       <div class="row mt-5 mb-5">
           <!-- Live Crypto Price area sta Qrt -->
           <div class="col-lg-12">
-              <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡La cuenta del cliente seleccionado aún no ha sido aprobada!</div><br>
+              <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡No se puede realizar la venta al cliente debido a que su estatus es <strong>INACTIVO</strong> o <strong>SIN APROBAR</strong>!</div><br>
               <div class="card border" style="border-radius: 10px !important; display: none;" id="tabla">
                   <div class="card-body">
                     <center>
@@ -231,10 +231,10 @@
                   <div class="form-group">
                      
                       <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-upload"></span></button>
-                      <button title="Image shoot" class="btn btn-info btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-picture"></span></button>
-                      <button title="Play" class="btn btn-success btn-sm" id="play" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-play"></span></button>
-                      <button title="Pause" class="btn btn-warning btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
-                      <button title="Stop streams" class="btn btn-danger btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
+                      <button title="Image shoot" class="btn btn-default btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-picture"></span></button>
+                      <button title="Play" class="btn btn-default btn-sm" id="play" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-play"></span></button>
+                      <button title="Pause" class="btn btn-default btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
+                      <button title="Stop streams" class="btn btn-default btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
                   </div>
                   </center>
                 </div>
@@ -484,10 +484,11 @@ function codigoEscaneado(codigo) {
         $('#mensaje').css('display','block');
         setTimeout(function() {
           $('#mensaje').fadeOut('slow');
+          location.reload();
         }, 3000);
         $('#scannerQR').show();
         $('#vistaCliente').hide(300);
-        mostrarO(3);
+        // mostrarO(3);
       }
     }else{
       alert('Sin resultados');
