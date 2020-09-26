@@ -8,7 +8,7 @@ use App\Promociones;
 use App\EmpleadosVentas;
 use Carbon\Carbon;
 use App\Empleados;
-use App\CLientes;
+use App\Clientes;
 date_default_timezone_set('America/Caracas');
 setlocale(LC_ALL, 'es_ES');
 class HomeController extends Controller

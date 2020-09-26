@@ -12,9 +12,9 @@ class PromocionesTableSeeder extends Seeder
     public function run()
     {
     	\DB::table('promociones')->insert([
-	        'promocion' => 'Bidones 3 x 1',
+	        'promocion' => 'Bidones 4 x 1',
 			'descripcion' => 'Compra 3 bidones y te regalamos 1',
-			'monto' => '300',
+			'monto' => '6000',
 			'status' => 'Activo'
     	]);
     }
