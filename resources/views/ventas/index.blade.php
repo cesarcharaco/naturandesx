@@ -40,11 +40,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Home</h1>
+        <h1>Ventas</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Ventas</a></li>
           <li class="breadcrumb-item active">Tablero</li>
         </ol>
       </div>
@@ -54,11 +54,12 @@
 @endsection
 @section('content')
   <div class="container-fluid">
-    
-      <div class="row mt-5 mb-5">
+    <div class="row mt-2 mb-2">
           <!-- Live Crypto Price area sta Qrt -->
           <div class="col-lg-12">
-              <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡No se puede realizar la venta al cliente debido a que su estatus es <strong>INACTIVO</strong> o <strong>SIN APROBAR</strong>!</div><br>
+              <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡No se puede realizar la venta al cliente debido a que su estatus es <strong>SIN APROBAR</strong>!</div>
+              <div id="mensaje2" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡No se puede realizar la venta al cliente debido a que su estatus es <strong>INACTIVO</strong>!</div>
+              <br>
               <div class="card border" style="border-radius: 10px !important; display: none;" id="tabla">
                   <div class="card-body">
                     <center>
@@ -242,15 +243,15 @@
 
               <div id="resultadoScanner" class="resultadoScanner card border" style="display: none;border-radius: 10px !important;">
                 <div class="card-body">
-                  <div class="thumbnail" id="result">
-                    <div class="well">
-                        <img width="320" height="240" id="scanned-img" src="">
+                    <div class="thumbnail" id="result">
+                      <div class="well">
+                          <img id="scanned-img" src="" style="width: 100%; height: 100%;">
+                      </div>
+                      <div class="caption">
+                          <h3>Escaneando resultados</h3>
+                          <p id="scanned-QR"></p>
+                      </div>
                     </div>
-                    <div class="caption">
-                        <h3>Escaneando resultados</h3>
-                        <p id="scanned-QR"></p>
-                    </div>
-                  </div>
                 </div>
               </div>
           </div>
@@ -275,7 +276,7 @@
                         </div> --}}
                         <div id="scannerQR">
                           <center><label for="" >Ingrese o Scanne el Código QR</label></center>
-                          <div class="container" id="QR-Code">
+                          <div id="QR-Code">
                             <div class="botonesLaterales">
 
                               <a href="#tabla" id="boton6" onclick="mostrarO(6)" class="btn btn-danger btn-sm mt-1 text-white" style="border-radius: 30px !important;" style="background-color: purple !important;">
@@ -286,17 +287,17 @@
                               <a href="#resultadoScanner" id="boton4" onclick="mostrarO(4)" class="btn btn-primary btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-image"></i></a>
                               <a  id="boton5" onclick="mostrarO(5)" class="btn btn-success btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-arrow-left"></i></a>
                             </div>
-                            <div class="col-md-6">
-                              <center>
-                                <div class="card" style="position: relative;display: inline-block;">
-                                    <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
-                                    <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
-                                    <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
-                                    <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
-                                    <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
-                                </div>
-                              </center>
-                            </div>
+                              <div class="col-md-12 text-center">
+                                <center>
+                                  <div align="center" class="card" style="position: relative;display: inline-block; justify-content: center !important; text-align: center !important;">
+                                      <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
+                                      <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
+                                      <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
+                                      <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
+                                      <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
+                                  </div>
+                                </center>
+                              </div>
                           </div>
                         </div>
                         <div id="vistaCliente" style="display: none;">
@@ -382,7 +383,8 @@
               </div>
             </form>
           <!-- trading history area end -->
-      </div>
+          </div>
+    </div>
   </div>
 @endsection
 @section('scripts')
@@ -479,7 +481,7 @@ function codigoEscaneado(codigo) {
         $('#rut_c').html(data[0].rut);
         $('#email_c').html(data[0].email);
         $('#id_cliente2').val(data[0].id);
-      }else{
+      }else if(data[0].status == 'Sin Aprobar'){
 
         $('#mensaje').css('display','block');
         setTimeout(function() {
@@ -488,7 +490,17 @@ function codigoEscaneado(codigo) {
         }, 3000);
         $('#scannerQR').show();
         $('#vistaCliente').hide(300);
-        // mostrarO(3);
+
+      }else{
+
+        $('#mensaje2').css('display','block');
+        setTimeout(function() {
+          $('#mensaje2').fadeOut('slow');
+          location.reload();
+        }, 3000);
+        $('#scannerQR').show();
+        $('#vistaCliente').hide(300);
+
       }
     }else{
       alert('Sin resultados');
