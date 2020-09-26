@@ -29,4 +29,9 @@ class Empleados extends Model
     {
         return $this->hasMany('App\Pagos','id_empleado','id');
     }
+
+    public function ventas()
+    {
+        return $this->belongsToMany('App\Ventas','empleados_has_ventas','id_empleado','id_venta')->withPivot('status');
+    }
 }

@@ -24,4 +24,9 @@ class Ventas extends Model
     {
         return $this->hasMany('App\EmpleadosVentas','id_venta','id');
     }
+
+     public function empleados()
+    {
+        return $this->belongsToMany('App\Empleados','empleados_has_ventas','id_venta','id_empleado')->withPivot('status');
+    }
 }

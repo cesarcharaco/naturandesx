@@ -7,6 +7,8 @@ use App\Ventas;
 use App\Promociones;
 use App\EmpleadosVentas;
 use Carbon\Carbon;
+use App\Empleados;
+use App\CLientes;
 date_default_timezone_set('America/Caracas');
 setlocale(LC_ALL, 'es_ES');
 class HomeController extends Controller
@@ -29,6 +31,11 @@ class HomeController extends Controller
     public function index()
     {
         $ventas = Ventas::all();
+        if(\Auth::user()->tipo_usuario=="Empleado"){
+            $empleado=Empleados::where('id_usuario',\Auth::user()->id)->first();
+        }elseif(\Auth::user()->tipo_usuario=="Cliente"){
+            $cliente=Clientes::where('id_usuario',\Auth::user()->id)->first();
+        }
         $promociones = Promociones::all();
         $empleados_ventas = EmpleadosVentas::all();
 
@@ -179,6 +186,6 @@ class HomeController extends Controller
         ])
         ->options([]);
 
-        return view('home', compact('ventas','promociones','empleados_ventas','chartjs','chartjs1'));
+        return view('home', compact('ventas','promociones','empleados_ventas','chartjs','chartjs1','empleado','cliente'));
     }
 }

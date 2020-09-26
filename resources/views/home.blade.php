@@ -165,7 +165,7 @@
         </div>
       </div>
     </div>
-  @else
+  @elseif(Auth::user()->tipo_usuario == 'Empleado')
     <div class="row">
       <div class="col-xl-12 col-sm-12">
         <div class="card card-outline card-primary">
@@ -180,10 +180,44 @@
               </thead>
               <tbody>
                 @foreach($ventas as $key)
+                @foreach($key->empleados as $key2)
+                @if($key2->pivot->id_empleado==$empleado->id)
                 <tr align="center">
                   <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
                   <th>{{$key->cantidad}}</th>
                 </tr>
+                @endif
+                @endforeach
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    @else
+    <div class="row">
+      <div class="col-xl-12 col-sm-12">
+        <div class="card card-outline card-primary">
+          <div class="card-body">
+            <h3>Compras del día <?php echo date('d/m/Y'); ?></h3>
+            <table class="table table-curved" >
+              <thead>
+                <tr align="center">
+                  <th colspan="2">Repartidor</th>
+                  <th>Cantidad de Promoción</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($ventas as $key)
+                @foreach($key->empleados as $key2)
+                @if($key->id_cliente  ==$cliente->id)
+                <tr align="center">
+                  <th colspan="2">{{$key2->nombres}} {{$key2->apellidos}}</th>
+                  <th>{{$key->cantidad}}</th>
+                </tr>
+                @endif
+                @endforeach
                 @endforeach
               </tbody>
             </table>

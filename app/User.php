@@ -51,4 +51,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Preguntas','usuarios_has_preguntas','id_usuario','id_pregunta')->pivot('respuesta');
     }
+
 }
