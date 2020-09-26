@@ -162,7 +162,7 @@
 													<td>{{$key->venta->cliente->nombres}} {{$key->venta->cliente->apellidos}}</td>
 													<td>{{$key->venta->promociones->promocion}}</td>
 													<td>{{$key->venta->cantidad}}</td>
-													<td>{{$key->venta->monto_total}}</td>
+													<td>{{$key->venta->monto_total}}.00$</td>
 													<td>{{$key->status}}</td>
 													<td>{{$key->created_at}}</td>
 												</tr>
@@ -292,7 +292,7 @@
 													<td>{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</td>
 													<td>{{$key->promociones->promocion}}</td>
 													<td>{{$key->cantidad}}</td>
-													<td>{{$key->monto_total}}</td>
+													<td>{{$key->monto_total}}.00$</td>
 													<td>{{$key->created_at}}</td>
 												</tr>
 												@endforeach

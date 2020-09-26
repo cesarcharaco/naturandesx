@@ -71,7 +71,7 @@
                             <tr class="bg-success text-white">
                               <th><center>Cliente</center></th>
                               <th><center>Cant.</center></th>
-                              <th>Total($)</th>
+                              <th><center>Total($)</center></th>
                               <th><center>Fecha</center></th>
                             </tr>
                             
@@ -92,7 +92,7 @@
                                     {{ $key->cantidad }}
                                   </td>
                                   <td>
-                                    <span>${{$key->monto_total}} 
+                                    <span>{{$key->monto_total}}.00 $
                                     </span>
                                   </td>
                                   <td>
@@ -334,7 +334,7 @@
                                     height: 40px;">
                                     <option value="0" selected>Seleccione</option>
                                     @foreach($promociones as $key)
-                                      <option value="{{$key->id}}" id="selectOptionPromo{{$key->id}}">{{$key->promocion}} - {{$key->monto}}$</option>
+                                      <option value="{{$key->id}}" id="selectOptionPromo{{$key->id}}">{{$key->promocion}} - {{$key->monto}}.00$</option>
                                     @endforeach()
                                   </select>
                               </div>
@@ -366,7 +366,7 @@
                               <div class="card shadow" style="width: 100% !important; height: 200px;">
                                   <div class="card-body">
                                     <center>
-                                      <span style="font-size: 70px; color: grey;" id="TotalPagar">0</span><span style="font-size: 40px; color: grey;">$</span>
+                                      <span style="font-size: 70px; color: grey;" id="TotalPagar">0</span><span style="font-size: 40px; color: grey;">.00$</span>
                                     </center>
                                   </div>
                               </div>
@@ -817,7 +817,7 @@ $("document").ready(function() {
                 '<tr id="filaPromo'+id+'">'+
                   '<td>'+ data[i].promocion +'</td>'+
                   '<td>'+ cantidad +'</td>'+
-                  '<td>'+ data[i].monto +'$</td>'+
+                  '<td>'+ data[i].monto +'.00 $</td>'+
                   '<td><buttom class="btn btn-danger btn-sm" style="border-radius: 30px;" onclick="EliminarFila('+id+','+data[i].monto+')">X</buttom></td>'+
                 '</tr>'
               );
