@@ -100,7 +100,7 @@ class RegisterController extends Controller
                 $qr = new CodigoQr();
                 $qr->codigo=$url_img;
                 $qr->codigo_recupera=1234;
-                $qr->status="Activo";
+                $qr->status="Sin Aprobar";
                 $qr->save();
 
                 $clave = $request->password;
@@ -134,7 +134,7 @@ class RegisterController extends Controller
                 $clientes->nombres=$request->nombres;
                 $clientes->apellidos=$request->apellidos;
                 $clientes->rut = $request->rut.'-'.$request->verificador;
-                $clientes->status="Activo";
+                $clientes->status="Sin Aprobar";
                 $clientes->save();
 
                 if ($request->email!="") {
