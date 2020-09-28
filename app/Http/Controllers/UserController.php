@@ -369,7 +369,7 @@ class UserController extends Controller
             $r=Mail::send('email.carnet_qr',
             ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
                 $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
-                $m->from('a.leon@eiche.cl', 'Naturandes!');
+                $m->from('promociones@naturandeschile.com', 'Naturandes!');
                 $m->to($destinatario)->subject($asunto);
                 $m->attachData($pdf->output(), "carnet_qr.pdf");
             });
@@ -394,7 +394,7 @@ class UserController extends Controller
                 $r=Mail::send('email.carnet_qr',
                 ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
                     $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
-                    $m->from('a.leon@eiche.cl', 'Naturandes!');
+                    $m->from('promociones@naturandeschile.com', 'Naturandes!');
                     $m->to($destinatario)->subject($asunto);
                     $m->attachData($pdf->output(), "carnet_qr.pdf");
                 });
