@@ -231,7 +231,7 @@
                     
                   <div class="form-group">
                      
-                      <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"data-placement="bottom"><span class="glyphicon glyphicon-upload"></span></button>
+                      <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"data-placement="bottom" style="display: none;"><span class="glyphicon glyphicon-upload"></span></button>
 
                       <button title="Image shoot" class="btn btn-default btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-picture"></span></button>
 
