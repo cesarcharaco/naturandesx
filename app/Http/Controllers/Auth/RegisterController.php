@@ -136,6 +136,7 @@ class RegisterController extends Controller
                 $clientes->rut = $request->rut.'-'.$request->verificador;
                 $clientes->status="Sin Aprobar";
                 $clientes->save();
+                //--- clientes externos---
 
                 if ($request->email!="") {
                     //dd('email y pdf');
