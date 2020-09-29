@@ -102,16 +102,22 @@
       Lu-VI: 8:30-18:00
       Sa: 8:30-14:00
       Do: cerrado
-      <p align="right">Fecha: <?php echo date('d/m/Y h:m A'); ?></p>
+      <?php
+        // $fecha= date('d/m/Y h:m A');
+        $fecha= date('d-m-Y h:m A'); 
+        $fecha2 = strtotime('-1 hour',strtotime($fecha));
+        $fecha2 = date('d/m/Y h:m A',$fecha2); 
+      ?>
+      <p align="right">Fecha: <?php echo $fecha2; ?></p>
     </p>
   </header>
   
   <div class="content">
     <h1>Carnet único de cliente de Naturandes</h1>
+    <p>Registrado por: <strong>Administrador</strong></p>
     <hr>
     <div class="contenido">
-        <p id="primero">Hola, Bienvenido Sr(a). {{$nombres}}. Gracias por formar parte de nuestra familia de Naturandes, para hacer sus compras mucho
-         mejo y en el menor tiempo posibles hemos mejorado nuestra atención, por eso le traemos nuestro nuevo carnet con código QR de Naturandes.</p>
+        <p id="primero">Hola, Bienvenido Sr(a). {{$nombres}}. Gracias por formar parte de nuestra familia de Naturandes, para hacer sus compras mucho mejor y en el menor tiempo posibles hemos mejorado nuestra atención, por eso le traemos nuestro nuevo carnet con código QR de Naturandes.</p>
         <div class="carnet">          
           <div class="card border shadow" style="
           <?php $favicon1 = '/img/blue-white.jpg'; ?>

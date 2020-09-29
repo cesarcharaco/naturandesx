@@ -10,6 +10,18 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item">
+        <a href="#" class="nav-link" style="border-radius: 30px !important;" data-slide="false" role="button">
+            <span class="text-success"> Verificado </span>  <i class="fas fa-check-circle text-success"></i>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link" style="border-radius: 30px !important;" data-slide="false" role="button">
+            <span class="text-danger"> No Verificado </span>  <i class="fas fa-minus-circle text-danger"></i>
+        </a>
+      </li>
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">

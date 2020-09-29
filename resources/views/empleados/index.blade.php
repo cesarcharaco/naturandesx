@@ -37,6 +37,7 @@
             @include('empleados.layouts.create')
             @include('empleados.layouts.show')
             @include('empleados.layouts.edit')
+            @include('empleados.layouts.cambiar_clave')
             @include('empleados.layouts.delete')
           </div>
         </div>
@@ -83,6 +84,11 @@
                                 <a data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-warning btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="editarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->telefono}}','{{$key->status}}','{{$key->direccion}}')">
                                     <i class="fa fa-fw fa-edit text-white"></i>
                                   </a>
+
+                                <a data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5" class="btn btn-default btn-sm boton-tabla border border-warning" style="border-radius: 5px;" style="border-radius: 5px;" onclick="cambiarClaveRepartidor('{{$key->id}}')">
+                                  <div class="fa fa-key"></div>
+                                </a>
+
                                   <a data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4" class="btn btn-danger btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" onclick="eliminarEmpleado('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
                                       <i class="fa fa-fw fa-trash text-white"></i>
                               </td>
@@ -145,6 +151,12 @@
 
 
 
+    }
+
+    function cambiarClaveRepartidor(id) {
+      $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').fadeOut('fast');
+      $('#id_repartidor_pass').val(id);
     }
 
     function eliminarEmpleado(id,id_usuario,id_qr){

@@ -13,13 +13,13 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="nombres_edit">Nombres</label>
-                  <input type="text" class="form-control" placeholder="Ingrese nombres" id="nombres_edit" required="required" name="nombres">
+                  <input type="text" class="form-control" placeholder="Ingrese nombres" id="nombres_edit" required="required" name="nombres" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="apellidos_edit">Apellidos</label>
-                  <input type="text" class="form-control" placeholder="Ingrese apellidos" id="apellidos_edit" required="required" name="apellidos">
+                  <input type="text" class="form-control" placeholder="Ingrese apellidos" id="apellidos_edit" required="required" name="apellidos" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 </div>
               </div>
               <div class="col-md-4">
@@ -28,12 +28,12 @@
                   <div class="row">
                     <div class="col-md-8">
                       <div class="form-group">
-                        <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut_edit" class="form-control" required>
+                        <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut_edit" class="form-control" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="number" name="verificador" min="1" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+                        <input type="number" name="verificador" min="0" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
                       </div>
                     </div>
                   </div>
@@ -44,7 +44,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="usuario">Usuario <b style="color: red;">*</b></label>
-                  <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit" >
+                  <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit"  style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
                   @if ($errors->has('usuario'))
                       <small class="form-text text-danger">
                           {{ $errors->first('usuario') }}
@@ -86,7 +86,7 @@
             <div class="form-group">
               <label for="respuesta">Respuesta</label>
               <div class="input-group mb-2 mr-sm-2">
-                <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta">
+                <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
                 <div class="input-group-prepend" onclick="VerR(1)">
                   <div class="input-group-text" style="color: green;">
                     <div class="ti-eye"></div>
@@ -94,8 +94,8 @@
                 </div>
               </div>
             </div>--}}
-              <input type="hidden" id="id_edit" name="id">
-              <input type="hidden" id="id_usuario_edit" name="id_usuario">
+              <input type="hidden" id="id_edit" name="id" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
+              <input type="hidden" id="id_usuario_edit" name="id_usuario" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
               <button type="submit" style="float: right;" class="btn btn-warning text-white">Actualizar</button>
           </form>
         </center>

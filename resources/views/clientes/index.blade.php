@@ -37,6 +37,7 @@
             @include('clientes.layouts.create')
             @include('clientes.layouts.show')
             @include('clientes.layouts.edit')
+            @include('clientes.layouts.cambiar_clave')
             @include('clientes.layouts.delete')
           </div>
         </div>
@@ -81,13 +82,18 @@
                         </td>
                       @if(Auth::user()->tipo_usuario == 'Admin' )
                         <td>
-                           <a data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" class="btn btn-success btn-sm boton-tabla" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
+                           <a data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm boton-tabla shadow botonesEditEli" style="border-radius: 5px;" style="border-radius: 5px;" onclick="verCliente('{{$key->id}}','{{$key->qr->codigo}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}')">
                               <div class="far fa-eye text-white"></div>
                             </a>
 
                             <a data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-warning btn-sm boton-tabla" style="border-radius: 5px;" onclick="editarCliente('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->status}}')">
                               <div class="far fa-edit text-white"></div>
                             </a>
+
+                            <a data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5" class="btn btn-default btn-sm boton-tabla border border-warning" style="border-radius: 5px;" style="border-radius: 5px;" onclick="cambiarClaveCliente('{{$key->id}}')">
+                              <div class="fa fa-key"></div>
+                            </a>
+
                             <a data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4" class="btn btn-danger btn-sm boton-tabla" style="border-radius: 5px;" onclick="eliminarCliente('{{$key->id}}','{{$key->usuario->id}}','{{$key->qr->id}}')">
                                 <div class="far fa-trash-alt text-white"></div>
                             </a>
@@ -154,6 +160,12 @@
         $("#status_editar").append('<option value="Activo">Activo</option>');
         $("#status_editar").append('<option selected value="Inactivo">Inactivo</option>');
       }
+    }
+
+    function cambiarClaveCliente(id) {
+      $('#example1_wrapper').fadeOut('fast');
+      $('#btnRegistrar').fadeOut('fast');
+      $('#id_cliente_pass').val(id);
     }
 
     function eliminarCliente(id,id_usuario,id_qr){

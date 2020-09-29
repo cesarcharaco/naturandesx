@@ -1,6 +1,6 @@
 <div class="collapse multi-collapse" id="collapseExample3" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
     <div class="card-header">
-      <a href="#" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-success btn-sm boton-tabla text-white" style="border-radius: 5px; float: right;" onclick="cerrar(3)">
+      <a href="#" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-warning btn-sm boton-tabla text-white" style="border-radius: 5px; float: right;" onclick="cerrar(3)">
         <strong>Cerrar</strong>
       </a>
     </div>
@@ -12,7 +12,7 @@
             <div class="col-md-4">
             	<div class="form-group">
             		<label>Nombres</label>
-            		<input type="text" name="nombres" class="form-control" required value="{{ old('nombres') }}" id="nombres_edit">
+            		<input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" name="nombres" class="form-control" required value="{{ old('nombres') }}" id="nombres_edit">
               @error('nombres')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -23,7 +23,7 @@
             <div class="col-md-4">
             	<div class="form-group">
             		<label>Apellidos</label>
-            		<input type="text" name="apellidos" class="form-control" required value="{{ old('apellidos') }}" id="apellidos_edit">
+            		<input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" name="apellidos" class="form-control" required value="{{ old('apellidos') }}" id="apellidos_edit">
               @error('apellidos')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
                 <div class="row">
                   <div class="col-md-8">
                     <div class="form-group">
-                      <input type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_edit" class="form-control" required placeholder="Rut del repartidor">
+                      <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_edit" class="form-control" required placeholder="Rut del repartidor">
                       @if($errors->has('rut'))
                         <small class="form-text text-danger">
                           {{ $errors->first('rut') }}
@@ -47,7 +47,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <input type="number" name="verificador" min="1" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+                      <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="number" name="verificador" min="0" id="verificador_edit" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
                     </div>
                   </div>
                 </div>
@@ -58,7 +58,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="usuario">Usuario <b style="color: red;">*</b></label>
-                <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit">
+                <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit">
                 @if ($errors->has('usuario'))
                     <small class="form-text text-danger">
                         {{ $errors->first('usuario') }}
@@ -73,7 +73,7 @@
       							<div class="input-group-prepend">
       								<div class="input-group-text">@</div>
       							</div>
-      							<input type="email" placeholder="Correo" name="email" class="form-control" id="email_edit" value="{{ old('email') }}">
+      							<input type="email" placeholder="CORREO" name="email" class="form-control" id="email_edit" value="{{ old('email') }}">
       						</div>
                 @error('email')
                   <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                         </div>
                       </div>
                     </div>
-      					     <input type="text" name="telefono" class="form-control" autocomplete="off" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" maxlength="11" value="{{ old('telefono') }}" id="telefono_edit" >
+      					     <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" name="telefono" class="form-control" autocomplete="off" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" maxlength="11" value="{{ old('telefono') }}" id="telefono_edit" >
                       @if ($errors->has('telefono'))
                         <small class="form-text text-danger">
                             {{ $errors->first('telefono') }}
@@ -107,7 +107,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="direccion">Dirección</label>
-              	  <textarea style="max-height: 40px !important;" name="direccion" class="form-control" value="{{ old('direccion') }}" id="direccion_edit"></textarea>
+              	  <textarea style="max-height: 40px !important; text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="direccion" class="form-control" value="{{ old('direccion') }}" id="direccion_edit"></textarea>
                 @error('direccion')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -124,9 +124,9 @@
               </div>
             </div>
           </div>
-        	<input type="hidden" name="id" id="id_edit">
-          <input type="hidden" name="id_usuario" id="id_usuario">
-          <button type="submit" style="float: right;" class="btn btn-warning">Actualizar</button>
+        	<input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="hidden" name="id" id="id_edit">
+          <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="hidden" name="id_usuario" id="id_usuario">
+          <button type="submit" style="float: right;" class="btn btn-warning text-white">Actualizar</button>
       </form>
     </div>
 </div>

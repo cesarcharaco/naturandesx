@@ -1,7 +1,7 @@
 <div class="collapse" id="collapseExample2" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important; border-top: 3px solid grey;" >
   <div class="card-header">
     <div class="card-header">
-      <a href="#" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-primary btn-sm boton-tabla text-white" style="border-radius: 5px; float: right;" onclick="cerrar(3)">
+      <a href="#" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm boton-tabla text-white" style="border-radius: 5px; float: right;" onclick="cerrar(3)">
         <strong>Cerrar</strong>
       </a>
     </div>

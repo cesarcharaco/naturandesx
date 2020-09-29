@@ -11,7 +11,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                     <label for="nombres">Nombres <b style="color: red;">*</b></label>
-                    <input type="text" class="form-control input" placeholder="Ingrese nombres" id="nombres" required="required" name="nombres" value="{{ old('nombres') }}">
+                    <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" class="form-control input" placeholder="Ingrese nombres" id="nombres" required="required" name="nombres" value="{{ old('nombres') }}">
                     @if ($errors->has('nombres'))
                         <small class="form-text text-danger">
                             {{ $errors->first('usuario') }}
@@ -22,13 +22,13 @@
               <div class="col-md-3">
                 <div class="form-group">
                     <label for="apellidos">Apellidos <b style="color: red;">*</b></label>
-                    <input type="text" class="form-control input" placeholder="Ingrese apellidos" id="apellidos" required="required" name="apellidos" value="{{ old('apellidos') }}">
+                    <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" class="form-control input" placeholder="Ingrese apellidos" id="apellidos" required="required" name="apellidos" value="{{ old('apellidos') }}">
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                     <label for="usuario">Usuario <b style="color: red;">*</b></label>
-                    <input type="text" class="form-control input" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}" maxlength="15">
+                    <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" class="form-control input" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}" maxlength="15">
                     @if ($errors->has('usuario'))
                         <small class="form-text text-danger">
                             {{ $errors->first('usuario') }}
@@ -63,7 +63,7 @@
                     <label for="rut">RUT <b style="color: red;">*</b></label>
                         <br>
                     <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control input" required style="width: 80% !important; float: left;">
-                    <input type="number" name="verificador" min="1" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control input" required style="width: 20% !important; float: right;">
+                    <input type="number" name="verificador" min="0" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control input" required style="width: 20% !important; float: right;">
 
                 </div>
               </div>

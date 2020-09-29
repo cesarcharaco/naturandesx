@@ -12,7 +12,7 @@
 	        	<div class="col-md-4">
 		            <div class="form-group">
 		              <label for="nombres">Nombres <b style="color: red;">*</b></label>
-		              <input type="text" class="form-control" placeholder="Ingrese nombres" id="nombres" required="required" name="nombres" value="{{ old('nombres') }}">
+		              <input type="text" class="form-control" placeholder="Ingrese nombres" id="nombres" required="required" name="nombres" value="{{ old('nombres') }}" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
 		              @if ($errors->has('nombres'))
 		                  <small class="form-text text-danger">
 		                      {{ $errors->first('usuario') }}
@@ -23,7 +23,7 @@
 	        	<div class="col-md-4">
 		            <div class="form-group">
 		              <label for="apellidos">Apellidos <b style="color: red;">*</b></label>
-		              <input type="text" class="form-control" placeholder="Ingrese apellidos" id="apellidos" required="required" name="apellidos" value="{{ old('apellidos') }}">
+		              <input type="text" class="form-control" placeholder="Ingrese apellidos" id="apellidos" required="required" name="apellidos" value="{{ old('apellidos') }}" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
 		            </div>
 	        	</div>
 	        	<div class="col-md-4">
@@ -32,12 +32,12 @@
 		              <div class="row">
 		                <div class="col-md-8">
 		                  <div class="form-group">
-		                    <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control" required>
+		                    <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control" required style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
 		                  </div>
 		                </div>
 		                <div class="col-md-4">
 		                  <div class="form-group">
-		                    <input type="number" name="verificador" min="1" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+		                    <input type="number" name="verificador" min="0" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control" required style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
 		                  </div>
 		                </div>
 		              </div>
@@ -48,7 +48,7 @@
 	        	<div class="col-md-4">
 		            <div class="form-group">
 		              <label for="usuario">Usuario <b style="color: red;">*</b></label>
-		              <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}">
+		              <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
 		              @if ($errors->has('usuario'))
 		                  <small class="form-text text-danger">
 		                      {{ $errors->first('usuario') }}
@@ -59,7 +59,7 @@
 	        	<div class="col-md-4">
 		            <div class="form-group">
 		              <label for="email">Email</label>
-		              <input type="email" class="form-control" placeholder="Ingrese email" name="email" id="email" value="{{ old('email') }}">
+		              <input type="email" class="form-control" placeholder="INGRESE EMAIL" name="email" id="email" value="{{ old('email') }}">
 		              @if ($errors->has('email'))
 		                  <small class="form-text text-danger">
 		                      {{ $errors->first('email') }}
@@ -97,7 +97,7 @@
 	              <div class="form-group">
 	                <label for="respuesta">Respuesta</label>
 	                <div class="input-group mb-2 mr-sm-2">
-	                  <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta">
+	                  <input type="password" name="respuesta" class="form-control" required id="Inputrespuesta" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
 	                  <div class="input-group-prepend" onclick="VerR(1)">
 	                    <div class="input-group-text" style="color: green;">
 	                      <div class="ti-eye"></div>

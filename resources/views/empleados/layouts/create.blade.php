@@ -12,7 +12,7 @@
         		<div class="col-md-4">
 		        	<div class="form-group">
 		        		<label>Nombres</label>
-		        		<input type="text" name="nombres" class="form-control" required value="{{ old('nombres') }}" placeholder="Nombres del repartidor">
+		        		<input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" name="nombres" class="form-control" required value="{{ old('nombres') }}" placeholder="Nombres del repartidor">
 				          @if($errors->has('nombres'))
 				            <small class="form-text text-danger">
 				              {{ $errors->first('nombres') }}
@@ -23,7 +23,7 @@
         		<div class="col-md-4">
 		        	<div class="form-group">
 		        		<label>Apellidos</label>
-		        		<input type="text" name="apellidos" class="form-control" required value="{{ old('apellidos') }}" placeholder="Apellidos del repartidor">
+		        		<input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" name="apellidos" class="form-control" required value="{{ old('apellidos') }}" placeholder="Apellidos del repartidor">
 				        @if($errors->has('apellidos'))
 				            <small class="form-text text-danger">
 				              {{ $errors->first('apellidos') }}
@@ -37,7 +37,7 @@
 			            	<div class="row">
 			            <div class="col-md-8">
 			              <div class="form-group">
-			                <input type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_e" class="form-control" required placeholder="Rut del repartidor">
+			                <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" name="rut" placeholder="Rut del Repartidor" minlength="7" maxlength="8" id="rut_e" class="form-control" required placeholder="Rut del repartidor">
 				                		@if($errors->has('rut'))
 			                  <small class="form-text text-danger">
 			                    {{ $errors->first('rut') }}
@@ -47,7 +47,7 @@
 			            </div>
 			            <div class="col-md-4">
 			              <div class="form-group">
-			                <input type="number" name="verificador" min="1" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
+			                <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="number" name="verificador" min="0" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control" required>
 			              </div>
 			            </div>
 			          	</div>
@@ -58,7 +58,7 @@
         		<div class="col-md-4">
         			<div class="form-group">
 			          <label for="usuario">Usuario <b style="color: red;">*</b></label>
-			          <input type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}">
+			          <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}">
 			          @if ($errors->has('usuario'))
 			              <small class="form-text text-danger">
 			                  {{ $errors->first('usuario') }}
@@ -73,7 +73,7 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text">@</div>
 							</div>
-							<input type="email" placeholder="Correo" name="email" class="form-control" id="email" value="{{ old('email') }}" required="required">
+							<input type="email" placeholder="CORREO" name="email" class="form-control" id="email" value="{{ old('email') }}" required="required">
 						</div>
 				        @if($errors->has('email'))
 				            <small class="form-text text-danger">
@@ -93,7 +93,7 @@
 			                </div>
 			              </div>
 			            </div>
-			            <input type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" autocomplete="off" maxlength="11" value="{{ old('telefono') }}" required="required">
+			            <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" name="telefono" class="form-control" data-mask="(999) 999-9999" placeholder="Teléfono del Repartidor" aria-label="" autocomplete="off" maxlength="11" value="{{ old('telefono') }}" required="required">
 			            @if($errors->has('telefono'))
 			              <small class="form-text text-danger">
 			                {{ $errors->first('email') }}
@@ -110,7 +110,7 @@
         	</div>
 	        <div class="form-group">
 	          <label for="direccion">Dirección</label>
-	        	  <textarea name="direccion" class="form-control" value="{{ old('direccion') }}" placeholder="Dirección del repartidor"></textarea>
+	        	  <textarea name="direccion" class="form-control" value="{{ old('direccion') }}" placeholder="Dirección del repartidor" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"></textarea>
 	          @if($errors->has('direccion'))
 	            <small class="form-text text-danger">
 	              {{ $errors->first('direccion') }}
