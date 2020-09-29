@@ -46,7 +46,15 @@ class ClientesController extends Controller
      */
     public function store(ClientesRequest $request)
     {
-        dd('asasas');
+        $length = 8;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        //return $randomString;
+        //dd('asasas');
         if(\Auth::user()->tipo_usuario != 'Cliente'){
             $nombre_qr = $request->rut.'-'.$request->verificador;
             $clave = $request->rut.''.$request->verificador;
@@ -65,7 +73,7 @@ class ClientesController extends Controller
                 $url_img = "img/qr-code/".$nombre_qr.".png";
                 $qr = new CodigoQr();
                 $qr->codigo=$url_img;
-                $qr->codigo_recupera=1234;
+                $qr->codigo_recupera=$randomString;
                 if(\Auth::user()->tipo_usuario=="Admin"){
                     $qr->status="Activo";
                 }else{
@@ -106,6 +114,7 @@ class ClientesController extends Controller
                     $asunto="Naturandes! | Bienvenido";
                     $destinatario=$request->email;
                     $mensaje="Bienvenido a Naturandes";
+                    $mensaje1="Cliente registrado";
                     
                     //enviando correo si tiene email
                     $r=Mail::send('email.carnet_qr',
@@ -114,6 +123,16 @@ class ClientesController extends Controller
                         $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
                         $m->from('promociones@naturandeschile.com', 'Naturandes!');
                         $m->to($destinatario)->subject($asunto);
+                        $m->attachData($pdf->output(), "carnet_qr.pdf");
+                    });
+
+                    //enviando correo si tiene email
+                    $send_admin=Mail::send('email.nuevo_cliente',
+                        ['nombres'=>$nombres, 'mensaje1' => $mensaje1], function ($m) use ($nombres,$email,$rut,$url_img,$mensaje1) {
+
+                        $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
+                        $m->from('promociones@naturandeschile.com', 'Naturandes!');
+                        $m->to('promociones@naturandeschile.com')->subject('Nuevo cliente registrado');
                         $m->attachData($pdf->output(), "carnet_qr.pdf");
                     });
                 }

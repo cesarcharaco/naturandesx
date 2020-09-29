@@ -79,6 +79,15 @@ class RegisterController extends Controller
 
     public function store(ClienteRegisterRequest $request)
     {
+        $length = 8;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        //return $randomString;
+
         //dd($request->all());
         if($request->pregunta1==0 || $request->respuesta1=="" || $request->pregunta2==0 || $request->respuesta2==""){
             toastr()->error('Error!!', 'Debe Seleccionar las preguntas y colocar sus respectivas respuestas');
@@ -86,8 +95,12 @@ class RegisterController extends Controller
         }else{
             $nombre_qr = $request->rut.'-'.$request->verificador;
             $buscar_rut = Clientes::where('rut',$nombre_qr)->get();
+            $buscar_email = User::where('email',$request->email)->get();
             if (count($buscar_rut)>0) {
                 toastr()->error('Error!!', ' RUT ya se encuentra registrado');
+                return redirect()->to('registerClienteExterno');
+            } else if(count($buscar_email)>0) {
+                toastr()->error('Error!!', 'Email ya se encuentra registrado');
                 return redirect()->to('registerClienteExterno');
             } else {
                 $qr_code = QRCode::text($nombre_qr)
@@ -99,7 +112,7 @@ class RegisterController extends Controller
                 $url_img = "img/qr-code/".$nombre_qr.".png";
                 $qr = new CodigoQr();
                 $qr->codigo=$url_img;
-                $qr->codigo_recupera=1234;
+                $qr->codigo_recupera=$randomString;
                 $qr->status="Sin Aprobar";
                 $qr->save();
 
@@ -146,14 +159,24 @@ class RegisterController extends Controller
                     $asunto="Naturandes! | Bienvenido";
                     $destinatario=$request->email;
                     $mensaje="Bienvenido a Naturandes";
+                    $mensaje1="Cliente registrado";
                     
                     //enviando correo si tiene email
                     $r=Mail::send('email.carnet_qr',
                         ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$rut,$url_img,$asunto,$destinatario,$mensaje) {
 
                         $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
-                        $m->from('a.leon@eiche.cl', 'Naturandes!');
+                        $m->from('promociones@naturandeschile.com', 'Naturandes!');
                         $m->to($destinatario)->subject($asunto);
+                        $m->attachData($pdf->output(), "carnet_qr.pdf");
+                    });
+
+                    $send_admin=Mail::send('email.nuevo_cliente',
+                        ['nombres'=>$nombres, 'mensaje1' => $mensaje1], function ($m) use ($nombres,$email,$rut,$url_img,$mensaje1) {
+
+                        $pdf = PDF::loadView(('pdf/carnet_qr'),array('nombres'=>$nombres,'email'=>$email,'rut'=>$rut,'url_img'=>$url_img));
+                        $m->from('promociones@naturandeschile.com', 'Naturandes!');
+                        $m->to('promociones@naturandeschile.com')->subject('Nuevo cliente registrado');
                         $m->attachData($pdf->output(), "carnet_qr.pdf");
                     });
                 }
