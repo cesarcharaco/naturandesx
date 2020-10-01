@@ -2,6 +2,13 @@
 @section('css')
 <style type="text/css">
 
+
+
+  /*DATATABLES*/
+  #example1_length, #example1_filter{
+    display: none;
+  }
+
   .custom-control-input{
     display: none !important;
   }
@@ -55,340 +62,398 @@
 @section('content')
   <div class="container-fluid">
     <div class="row mt-2 mb-2">
-          <!-- Live Crypto Price area sta Qrt -->
-          <div class="col-lg-12">
-              <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡No se puede realizar la venta al cliente debido a que su estatus es <strong>SIN APROBAR</strong>!</div>
-              <div id="mensaje2" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡No se puede realizar la venta al cliente debido a que su estatus es <strong>INACTIVO</strong>!</div>
-              <br>
-              <div class="card border" style="border-radius: 10px !important; display: none;" id="tabla">
-                  <div class="card-body">
-                    <center>
-                    </center>
-                      <h4 class="header-title">Ventas Realizadas</h4>
-                      <div class="" style="width: 100% !important;box-shadow: 0 0 3px black;">
-                        <table id="" class="text-center table-striped table-hover" width="100%">
-                          <thead class="text-capitalize">
-                            <tr class="bg-success text-white">
-                              <th><center>Cliente</center></th>
-                              <th><center>Cant.</center></th>
-                              <th><center>Total($)</center></th>
-                              <th><center>Fecha</center></th>
-                            </tr>
-                            
-                          </thead>
-                          <tbody>
-                            <?php $i=0; ?>
-                            @foreach($ventas as $key)
-                              @if($i<10)
-                                <tr class="mb-5">
-                                  <td>
-                                    <!-- <div class="icon d">
-                                      <i class="ti-money"></i>
-                                    </div> -->
-                                        <i class="ti-check" style="background-color: green; color: white; border-radius: 30px;"></i>
-                                    {{ $key->cliente->nombres }}
-                                  </td>
-                                  <td>
-                                    {{ $key->cantidad }}
-                                  </td>
-                                  <td>
-                                    <span>{{$key->monto_total}}.00 $
-                                    </span>
-                                  </td>
-                                  <td>
-                                    @if($key->created_at->month == 1)
-                                      @php $mes= 'Enero' @endphp
-                                    @elseif($key->created_at->month == 2)
-                                      @php $mes= 'Febrero' @endphp
-                                    @elseif($key->created_at->month == 3)
-                                      @php $mes= 'Marzo' @endphp
-                                    @elseif($key->created_at->month == 4)
-                                      @php $mes= 'Abril' @endphp
-                                    @elseif($key->created_at->month == 5)
-                                      @php $mes= 'Mayo' @endphp
-                                    @elseif($key->created_at->month == 6)
-                                      @php $mes= 'Junio' @endphp
-                                    @elseif($key->created_at->month == 7)
-                                      @php $mes= 'Julio' @endphp
-                                    @elseif($key->created_at->month == 8)
-                                      @php $mes= 'Agosto' @endphp
-                                    @elseif($key->created_at->month == 9)
-                                      @php $mes= 'Septiembre' @endphp
-                                    @elseif($key->created_at->month == 10)
-                                      @php $mes= 'Octubre' @endphp
-                                    @elseif($key->created_at->month == 11)
-                                      @php $mes= 'Noviembre' @endphp
-                                    @else
-                                      @php $mes= 'Diciembre' @endphp
-                                    @endif
-                                    <strong>{{$key->created_at->day}}</strong> de
-                                    <strong>{{$mes}}</strong> del
-                                    <strong>{{$key->created_at->year}}</strong>
-                                    <br>
-                                    {{--A las <strong>{{$key->created_at->hour}}:{{$key->created_at->minute}}:00</strong>--}}
-
-                                  </td>
-                                </tr>
-                                <?php $i++; ?>
-                              @endif
-                            @endforeach
-                          </tbody>
-                        </table>
-                      </div>
-                  </div>
-              </div>
-
-          </div>
-          <!-- Live Crypto Price area end -->
-          <!-- trading history area start -->
-          <div class="col-lg-4">
-              <div id="configuracion" class="configuracion card border" style="border-radius: 10px !important; display: none;">
-                <div class="card-body">
-                  <div class="mb-5" style="width: 100%;">
-                    <div class="form-group">
-                      <label id="zoom-value" width="100" class="text-danger">Zoom: 2</label>
-                      <input id="zoom" onchange="Page.changeZoom();" type="range" min="10" max="30" value="20" class="custom-range custom-range-danger">
-                    </div>
-                    <div class="form-group">
-                      <label id="brightness-value" width="100" class="text-success">Brillo: 0</label>
-                      <input id="brightness" onchange="Page.changeBrightness();" type="range" min="0" max="128" value="0" class="custom-range custom-range-success">
-                    </div>
-                    <div class="form-group">
-                      <label id="contrast-value" width="100" class="text-warning">Contraste: 0</label>
-                      <input id="contrast" onchange="Page.changeContrast();" type="range" min="-128" max="128" value="0" class="custom-range custom-range-warning">
-                    </div>
-                    <div class="form-group">
-                      <label id="threshold-value" width="100" class="text-primary">Límite: 0</label>
-                      <input id="threshold" onchange="Page.changeThreshold();" type="range" min="0" max="512" value="0" class="custom-range custom-range-primary">
-                    </div>
-                    <div class="mt-5 md-5"><br></div>
-                      <div class="form-group">
-                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                          <input type="checkbox" onchange="Page.changeSharpness();" class="custom-control-input" id="sharpness">
-                          <label class="custom-control-label" id="sharpness-value" for="sharpness">Nitidez</label>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                          <input type="checkbox" onchange="Page.changeGrayscale();" class="custom-control-input" id="grayscale">
-                          <label class="custom-control-label" id="grayscale-value" for="grayscale">Escala de Grises</label>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                          <input type="checkbox" onchange="Page.changeVertical();" class="custom-control-input" id="flipVertical">
-                          <label class="custom-control-label" id="flipVertical-value" for="flipVertical">Girar Vertical</label>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                          <input type="checkbox" onchange="Page.changeHorizontal();" class="custom-control-input" id="flipHorizontal">
-                          <label class="custom-control-label" id="flipHorizontal-value" for="flipHorizontal">Girar Horizontal</label>
-                        </div>
-                      </div>
-                        <!-- <div class="form-group">
-                          <label id="sharpness-value" width="100">Nitidez: off</label>
-                          <input id="sharpness" onchange="Page.changeSharpness();" type="checkbox" class="custom-control-input">
-                        </div> -->
-                        <!-- <div class="form-group">
-                          <label id="grayscale-value" width="100">Escala de Grises</label>
-                          <input id="grayscale" onchange="Page.changeGrayscale();" type="checkbox">
-                        </div>
-                        <div class="form-group">
-                        <label id="flipVertical-value" width="100">Girar Vertical</label>
-                          <input id="flipVertical" onchange="Page.changeVertical();" type="checkbox">
-                        </div>
-                        <div class="form-group">
-                          <label id="flipHorizontal-value" width="100">Girar Horizontal</label>
-                          <input id="flipHorizontal" onchange="Page.changeHorizontal();" type="checkbox">
-                        </div> -->
-                  </div>
-                </div>
-              </div>
-
-              <div id="selectCamara" class="selectCamara card border" style="border-radius: 10px !important;display: none;">
-                <div class="card-body">
-                  <div class="card mb-4">
-                      <div class="card-body">
-                           <select class="select2 border" id="camera-select" style="
-                              width: 100% !important;
-                              border-color: #8914fc !important;
-                              border-radius: 5px;
-                              height: 35px;">
-                              
-                          </select>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <div id="botones" class="botones card border" style="display: none; border-radius: 10px !important;">
+      <div class="col-md-12">
+        <button id="botonHistorial" onclick="vistaHistory(1)" class="btn btn-primary shadow" style="float: right; border-radius: 30px;"><strong>Historial</strong></button>
+      </div>
+    </div>
+    <div id="vista1">
+      <div class="row">
+        <!-- Live Crypto Price area sta Qrt -->
+        <div class="col-lg-12">
+            <div id="mensaje" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡No se puede realizar la venta al cliente debido a que su estatus es <strong>SIN APROBAR</strong>!</div>
+            <div id="mensaje2" class="btn btn-danger text-white mt-3 mb-3" style="display: none;">¡No se puede realizar la venta al cliente debido a que su estatus es <strong>INACTIVO</strong>!</div>
+            <br>
+            <div class="card border" style="border-radius: 10px !important; display: none;" id="tabla">
                 <div class="card-body">
                   <center>
-                    
-                  <div class="form-group">
-                     
-                      <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"data-placement="bottom" style="display: none;"><span class="glyphicon glyphicon-upload"></span></button>
-
-                      <button title="Image shoot" class="btn btn-default btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-picture"></span></button>
-
-                      <button title="Play" class="btn btn-default btn-sm" id="play" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-play"></span></button>
-
-                      <button title="Pause" class="btn btn-default btn-sm" id="pause" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-pause"></span></button>
-
-                      <button title="Stop streams" class="btn btn-default btn-sm" id="stop" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-stop"></span></button>
-
-                  </div>
                   </center>
+                    <h4 class="header-title">Ventas Realizadas</h4>
+                    <div class="" style="width: 100% !important;box-shadow: 0 0 3px black;">
+                      <table id="" class="text-center table-striped table-hover" width="100%">
+                        <thead class="text-capitalize">
+                          <tr class="bg-success text-white">
+                            <th><center>Cliente</center></th>
+                            <th><center>Cant.</center></th>
+                            <th><center>Total($)</center></th>
+                            <th><center>Fecha</center></th>
+                          </tr>
+                          
+                        </thead>
+                        <tbody>
+                          <?php $i=0; ?>
+                          @foreach($ventas as $key)
+                            @if($i<10)
+                              <tr class="mb-5">
+                                <td>
+                                  <!-- <div class="icon d">
+                                    <i class="ti-money"></i>
+                                  </div> -->
+                                      <i class="ti-check" style="background-color: green; color: white; border-radius: 30px;"></i>
+                                  {{ $key->cliente->nombres }}
+                                </td>
+                                <td>
+                                  {{ $key->cantidad }}
+                                </td>
+                                <td>
+                                  <span>{{$key->monto_total}}.00 $
+                                  </span>
+                                </td>
+                                <td>
+                                  @if($key->created_at->month == 1)
+                                    @php $mes= 'Enero' @endphp
+                                  @elseif($key->created_at->month == 2)
+                                    @php $mes= 'Febrero' @endphp
+                                  @elseif($key->created_at->month == 3)
+                                    @php $mes= 'Marzo' @endphp
+                                  @elseif($key->created_at->month == 4)
+                                    @php $mes= 'Abril' @endphp
+                                  @elseif($key->created_at->month == 5)
+                                    @php $mes= 'Mayo' @endphp
+                                  @elseif($key->created_at->month == 6)
+                                    @php $mes= 'Junio' @endphp
+                                  @elseif($key->created_at->month == 7)
+                                    @php $mes= 'Julio' @endphp
+                                  @elseif($key->created_at->month == 8)
+                                    @php $mes= 'Agosto' @endphp
+                                  @elseif($key->created_at->month == 9)
+                                    @php $mes= 'Septiembre' @endphp
+                                  @elseif($key->created_at->month == 10)
+                                    @php $mes= 'Octubre' @endphp
+                                  @elseif($key->created_at->month == 11)
+                                    @php $mes= 'Noviembre' @endphp
+                                  @else
+                                    @php $mes= 'Diciembre' @endphp
+                                  @endif
+                                  <strong>{{$key->created_at->day}}</strong> de
+                                  <strong>{{$mes}}</strong> del
+                                  <strong>{{$key->created_at->year}}</strong>
+                                  <br>
+                                  {{--A las <strong>{{$key->created_at->hour}}:{{$key->created_at->minute}}:00</strong>--}}
+
+                                </td>
+                              </tr>
+                              <?php $i++; ?>
+                            @endif
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Live Crypto Price area end -->
+        <!-- trading history area start -->
+        <div class="col-lg-4">
+            <div id="configuracion" class="configuracion card border" style="border-radius: 10px !important; display: none;">
+              <div class="card-body">
+                <div class="mb-5" style="width: 100%;">
+                  <div class="form-group">
+                    <label id="zoom-value" width="100" class="text-danger">Zoom: 2</label>
+                    <input id="zoom" onchange="Page.changeZoom();" type="range" min="10" max="30" value="20" class="custom-range custom-range-danger">
+                  </div>
+                  <div class="form-group">
+                    <label id="brightness-value" width="100" class="text-success">Brillo: 0</label>
+                    <input id="brightness" onchange="Page.changeBrightness();" type="range" min="0" max="128" value="0" class="custom-range custom-range-success">
+                  </div>
+                  <div class="form-group">
+                    <label id="contrast-value" width="100" class="text-warning">Contraste: 0</label>
+                    <input id="contrast" onchange="Page.changeContrast();" type="range" min="-128" max="128" value="0" class="custom-range custom-range-warning">
+                  </div>
+                  <div class="form-group">
+                    <label id="threshold-value" width="100" class="text-primary">Límite: 0</label>
+                    <input id="threshold" onchange="Page.changeThreshold();" type="range" min="0" max="512" value="0" class="custom-range custom-range-primary">
+                  </div>
+                  <div class="mt-5 md-5"><br></div>
+                    <div class="form-group">
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                        <input type="checkbox" onchange="Page.changeSharpness();" class="custom-control-input" id="sharpness">
+                        <label class="custom-control-label" id="sharpness-value" for="sharpness">Nitidez</label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                        <input type="checkbox" onchange="Page.changeGrayscale();" class="custom-control-input" id="grayscale">
+                        <label class="custom-control-label" id="grayscale-value" for="grayscale">Escala de Grises</label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                        <input type="checkbox" onchange="Page.changeVertical();" class="custom-control-input" id="flipVertical">
+                        <label class="custom-control-label" id="flipVertical-value" for="flipVertical">Girar Vertical</label>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                        <input type="checkbox" onchange="Page.changeHorizontal();" class="custom-control-input" id="flipHorizontal">
+                        <label class="custom-control-label" id="flipHorizontal-value" for="flipHorizontal">Girar Horizontal</label>
+                      </div>
+                    </div>
+                      <!-- <div class="form-group">
+                        <label id="sharpness-value" width="100">Nitidez: off</label>
+                        <input id="sharpness" onchange="Page.changeSharpness();" type="checkbox" class="custom-control-input">
+                      </div> -->
+                      <!-- <div class="form-group">
+                        <label id="grayscale-value" width="100">Escala de Grises</label>
+                        <input id="grayscale" onchange="Page.changeGrayscale();" type="checkbox">
+                      </div>
+                      <div class="form-group">
+                      <label id="flipVertical-value" width="100">Girar Vertical</label>
+                        <input id="flipVertical" onchange="Page.changeVertical();" type="checkbox">
+                      </div>
+                      <div class="form-group">
+                        <label id="flipHorizontal-value" width="100">Girar Horizontal</label>
+                        <input id="flipHorizontal" onchange="Page.changeHorizontal();" type="checkbox">
+                      </div> -->
                 </div>
               </div>
+            </div>
 
-              <div id="resultadoScanner" class="resultadoScanner card border" style="display: none;border-radius: 10px !important;">
-                <div class="card-body">
-                    <div class="thumbnail" id="result">
-                      <div class="well">
-                          <img id="scanned-img" src="" style="width: 100%; height: 100%;">
-                      </div>
-                      <div class="caption">
-                          <h3>Escaneando resultados</h3>
-                          <p id="scanned-QR"></p>
-                      </div>
+            <div id="selectCamara" class="selectCamara card border" style="border-radius: 10px !important;display: none;">
+              <div class="card-body">
+                <div class="card mb-4">
+                    <div class="card-body">
+                         <select class="select2 border" id="camera-select" style="
+                            width: 100% !important;
+                            border-color: #8914fc !important;
+                            border-radius: 5px;
+                            height: 35px;">
+                            
+                        </select>
                     </div>
                 </div>
               </div>
-          </div>
-          <div class="col-lg-8 mt-sm-30 mt-xs-30">
-            <form action="{{ route('ventas.store') }}" method="POST" name="ventas">
-              @csrf
-              <div class="card shadow">
-                  <div class="card-body">
-                    <div class="border border-success mb-3 shadow rounded">
-                      <div class="card-body">
-                        
-                        {{-- <label>Seleccione cliente</label>
-                        <div class="input-group mb-3 shadow ">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Clientes</span>
-                            </div>
-                            <select name="id_cliente" class="form-control select2" required>
-                              @foreach($clientes as $key)
-                                <option value="{{$key->id}}">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
-                              @endforeach()
-                            </select>
-                        </div> --}}
-                        <div id="scannerQR">
-                          <center><label for="" >Ingrese o Scanne el Código QR</label></center>
-                          <div id="QR-Code">
-                            <div class="botonesLaterales">
+            </div>
 
-                              <a href="#tabla" id="boton6" onclick="mostrarO(6)" class="btn btn-danger btn-sm mt-1 text-white" style="border-radius: 30px !important;" style="background-color: purple !important;">
-                                <i class="fa fa-fw fa-align-center"></i></a>
-                              <a href="#configuracion" id="boton1" onclick="mostrarO(1)" class="btn btn-warning btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-cog"></i></a>
-                              <a href="#selectCamara" id="boton2" onclick="mostrarO(2)" class="btn btn-info btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-camera"></i></a>
-                              <a href="#botones" id="boton3" onclick="mostrarO(3)" class="btn btn-default btn-sm mt-1 text-dark" style="border-radius: 30px !important;"><i class="fa fa-play"></i></a>
-                              <a href="#resultadoScanner" id="boton4" onclick="mostrarO(4)" class="btn btn-primary btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-image"></i></a>
-                              <a  id="boton5" onclick="mostrarO(5)" class="btn btn-success btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-arrow-left"></i></a>
-                            </div>
-                              <div class="col-md-12 text-center">
-                                <center>
-                                  <div align="center" class="card" style="position: relative;display: inline-block; justify-content: center !important; text-align: center !important;">
-                                      <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
-                                      <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
-                                      <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
-                                      <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
-                                      <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
-                                  </div>
-                                </center>
-                              </div>
-                          </div>
-                        </div>
-                        <div id="vistaCliente" style="display: none;">
-                          <div class="card rounded" style="box-shadow:10px black;">
-                            <div class="card-body">
-                              <div class="form-group">
-                                <span id="nombre_c" style="font-size: 30px; color: grey;"></span>
-                              </div>
-                              <div class="form-group">
-                                <span id="rut_c" style="font-size: 30px; color: grey;"></span>
-                              </div>
-                              <div class="form-group">
-                                <span id="email_c" style="font-size: 30px; color: grey;"></span>
-                              </div>
-                            </div>
-                          </div>
-                          <input type="hidden" name="id_cliente" id="id_cliente2">
-                          <div class="card mb-3 shadow rounded">
-                            <div class="card-body">
-                              <label>Seleccione Promoción</label>
-                              <div class="input-group mb-3 shadow ">
-                                  <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon3">Promociones</span>
-                                  </div>
-                                  <select class="form-control select2 border" id="selectPromo" name="id_promocion" style="
-                                    width: 100% !important;
-                                    border-color: #8914fc !important;
-                                    border-radius: 5px;
-                                    height: 40px;">
-                                    <option value="0" selected>Seleccione</option>
-                                    @foreach($promociones as $key)
-                                      <option value="{{$key->id}}" id="selectOptionPromo{{$key->id}}">{{$key->promocion}} - {{$key->monto}}.00$</option>
-                                    @endforeach()
-                                  </select>
-                              </div>
+            <div id="botones" class="botones card border" style="display: none; border-radius: 10px !important;">
+              <div class="card-body">
+                <center>
+                  
+                <div class="form-group">
+                   
+                    <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"data-placement="bottom" style="display: block;"><span class="glyphicon glyphicon-upload"></span></button>
 
-                              <div class="form-group">
-                                <input type="number" class="form-control border border-dark" onkeyup="selectPromocion(this.value)" min="0" maxlength="7" name="cantidad" id="cantidadPromo" placeholder="Cantidad de Promociones" style="
-                                    width: 100% !important;
-                                    border-color: #8914fc !important;
-                                    border-radius: 5px;
-                                    height: 35px;">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row justify-content-center">
-                          <div class="col-md-6">
-                              <div class="card">
-                                  <div class="card-body">
-                                      <!-- <h4 class="header-title">Thead Primary</h4> -->
-                                      <div class="single-table">
-                                              <table class="table text-center">
-                                                  <tbody id="promocionSeleccionada">
-                                                  </tbody>
-                                              </table>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                            <div class="col-md-6">
-                              <div class="card shadow" style="width: 100% !important; height: 200px;">
-                                  <div class="card-body">
-                                    <center>
-                                      <span style="font-size: 70px; color: grey;" id="TotalPagar">0</span><span style="font-size: 40px; color: grey;">.00$</span>
-                                    </center>
-                                  </div>
-                              </div>
-                            </div>
-                          </div>
-                          <center>
-                            <div id="promocionSeleccionada2">
-                              
-                            </div>
-                            <input type="hidden" name="cantidad1" id="cantidad1">
-                            <input type="hidden" name="id_promocion1" id="id_promocion1">
-                            <input type="hidden" name="monto_total" id="monto_total">
-                            <button type="submit" class="btn btn-success" id="botonAceptar" disabled>Aceptar</button>
-                          </center>
-                        </div>
-                      </div>
+                    <button title="Image shoot" class="btn btn-default btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-picture"></span></button>
+
+                    <button title="Play" class="btn btn-default btn-sm" id="play" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-play"></span></button>
+
+                    <button title="Pause" class="btn btn-default btn-sm" id="pause" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-pause"></span></button>
+
+                    <button title="Stop streams" class="btn btn-default btn-sm" id="stop" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-stop"></span></button>
+
+                </div>
+                </center>
+              </div>
+            </div>
+
+            <div id="resultadoScanner" class="resultadoScanner card border" style="display: none;border-radius: 10px !important;">
+              <div class="card-body">
+                  <div class="thumbnail" id="result">
+                    <div class="well">
+                        <img id="scanned-img" src="" style="width: 100%; height: 100%;">
+                    </div>
+                    <div class="caption">
+                        <h3>Escaneando resultados</h3>
+                        <p id="scanned-QR"></p>
                     </div>
                   </div>
               </div>
-            </form>
-          <!-- trading history area end -->
+            </div>
+        </div>
+        <div class="col-lg-8 mt-sm-30 mt-xs-30">
+          <form action="{{ route('ventas.store') }}" method="POST" name="ventas">
+            @csrf
+            <div class="card shadow">
+                <div class="card-body">
+                  <div class="border border-success mb-3 shadow rounded">
+                    <div class="card-body">
+                      
+                      {{-- <label>Seleccione cliente</label>
+                      <div class="input-group mb-3 shadow ">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon3">Clientes</span>
+                          </div>
+                          <select name="id_cliente" class="form-control select2" required>
+                            @foreach($clientes as $key)
+                              <option value="{{$key->id}}">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
+                            @endforeach()
+                          </select>
+                      </div> --}}
+                      <div id="scannerQR">
+                        <center><label for="" >Ingrese o Scanne el Código QR</label></center>
+                        <div id="QR-Code">
+                          <div class="botonesLaterales">
+
+                            <a href="#tabla" id="boton6" onclick="mostrarO(6)" class="btn btn-danger btn-sm mt-1 text-white" style="border-radius: 30px !important;" style="background-color: purple !important;">
+                              <i class="fa fa-fw fa-align-center"></i></a>
+                            <a href="#configuracion" id="boton1" onclick="mostrarO(1)" class="btn btn-warning btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-cog"></i></a>
+                            <a href="#selectCamara" id="boton2" onclick="mostrarO(2)" class="btn btn-info btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-camera"></i></a>
+                            <a href="#botones" id="boton3" onclick="mostrarO(3)" class="btn btn-default btn-sm mt-1 text-dark" style="border-radius: 30px !important;"><i class="fa fa-play"></i></a>
+                            <a href="#resultadoScanner" id="boton4" onclick="mostrarO(4)" class="btn btn-primary btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-image"></i></a>
+                            <a  id="boton5" onclick="mostrarO(5)" class="btn btn-success btn-sm mt-1 text-white" style="border-radius: 30px !important;"><i class="fa fa-arrow-left"></i></a>
+                          </div>
+                            <div class="col-md-12 text-center">
+                              <center>
+                                <div align="center" class="card" style="position: relative;display: inline-block; justify-content: center !important; text-align: center !important;">
+                                    <canvas style="width: 100%; height: 100%;" id="webcodecam-canvas"></canvas>
+                                    <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
+                                    <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
+                                </div>
+                              </center>
+                            </div>
+                        </div>
+                      </div>
+                      <div id="vistaCliente" style="display: none;">
+                        <div class="card rounded" style="box-shadow:10px black;">
+                          <div class="card-body">
+                            <div class="form-group">
+                              <span id="nombre_c" style="font-size: 30px; color: grey;"></span>
+                            </div>
+                            <div class="form-group">
+                              <span id="rut_c" style="font-size: 30px; color: grey;"></span>
+                            </div>
+                            <div class="form-group">
+                              <span id="email_c" style="font-size: 30px; color: grey;"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <input type="hidden" name="id_cliente" id="id_cliente2">
+                        <div class="card mb-3 shadow rounded">
+                          <div class="card-body">
+                            <label>Seleccione Promoción</label>
+                            <div class="input-group mb-3 shadow ">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Promociones</span>
+                                </div>
+                                <select class="form-control select2 border" id="selectPromo" name="id_promocion" style="
+                                  width: 100% !important;
+                                  border-color: #8914fc !important;
+                                  border-radius: 5px;
+                                  height: 40px;">
+                                  <option value="0" selected>Seleccione</option>
+                                  @foreach($promociones as $key)
+                                    <option value="{{$key->id}}" id="selectOptionPromo{{$key->id}}">{{$key->promocion}} - {{$key->monto}}.00$</option>
+                                  @endforeach()
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                              <input type="number" class="form-control border border-dark" onkeyup="selectPromocion(this.value)" min="0" maxlength="7" name="cantidad" id="cantidadPromo" placeholder="Cantidad de Promociones" style="
+                                  width: 100% !important;
+                                  border-color: #8914fc !important;
+                                  border-radius: 5px;
+                                  height: 35px;">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- <h4 class="header-title">Thead Primary</h4> -->
+                                    <div class="single-table">
+                                            <table class="table text-center">
+                                                <tbody id="promocionSeleccionada">
+                                                </tbody>
+                                            </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="col-md-6">
+                            <div class="card shadow" style="width: 100% !important; height: 200px;">
+                                <div class="card-body">
+                                  <center>
+                                    <span style="font-size: 70px; color: grey;" id="TotalPagar">0</span><span style="font-size: 40px; color: grey;">.00$</span>
+                                  </center>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <center>
+                          <div id="promocionSeleccionada2">
+                            
+                          </div>
+                          <input type="hidden" name="cantidad1" id="cantidad1">
+                          <input type="hidden" name="id_promocion1" id="id_promocion1">
+                          <input type="hidden" name="monto_total" id="monto_total">
+                          <button type="submit" class="btn btn-success" id="botonAceptar" disabled>Aceptar</button>
+                        </center>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </form>
+        <!-- trading history area end -->
+        </div>
+      </div>
+    </div>
+    <div id="vista2" style="display: none;">
+      <div class="card border border-warning" style="border-radius: 10px;">
+        <div class="card-body">
+          <center>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Desde</label>
+                  <input id="inputDesde" type="date" class="form-control" name="desde" style="border-radius: 30px;" onchange="busqueda();">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Hasta</label>
+                  <input id="inputHasta" type="date" class="form-control" name="hasta" style="border-radius: 30px;" onchange="busqueda();">
+                </div>
+              </div>
+            </div>
+          </center>
+          <div id="cargando" style="display: none;">
+            <center>
+              <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+            </center>
           </div>
+          <div class="row mb-2 mt-2">
+            <div class="col-md-12">
+              <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important; display: none;">
+                <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
+                  <thead class="text-capitalize bg-primary">
+                    <tr class="border-orange">
+                      <th>Fecha</th>
+                      <th>Cliente</th>
+                      <th>Repartidor</th>
+                      <th>Orden de Pedido</th>
+                      <th>Usuario</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="busquedaHistory" style="display: none;">
+                   
+                  </tbody>
+                </table>
+              </div>
+              <center>
+                <h2 id="sin_resultados" style="display: none;"><strong>Sin Resultados</strong></h2>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 @endsection
@@ -398,6 +463,74 @@
 <script type="text/javascript" src="{{ URL::asset('/webcodecamjs/js/webcodecamjs.js ') }}"></script>
 
 <script>
+
+  function vistaHistory(opcion){
+    if (opcion == 1) {
+      $('#vista1').fadeOut('slow',
+      function() { 
+        $('#botonHistorial').removeAttr('onclick',false).attr('onclick','vistaHistory(2)');
+        $('#botonHistorial').removeClass('btn-primary').addClass('btn-success');
+        $('#botonHistorial').html('<strong>Volver</strong>');
+        $(this).hide();
+        $('#vista2').fadeIn(300);
+      });
+    }else{
+      $('#vista2').fadeOut('slow',
+      function() { 
+        $('#botonHistorial').removeAttr('onclick',false).attr('onclick','vistaHistory(1)');
+        $('#botonHistorial').removeClass('btn-success').addClass('btn-primary');
+        $('#botonHistorial').html('<strong>Historial</strong>');
+        $(this).hide();
+        $('#vista1').fadeIn(300);
+      });
+    }
+  }
+
+
+  function busqueda() {
+    var desde = $('#inputDesde').val();
+    var hasta = $('#inputHasta').val();
+
+    if (desde && hasta) {
+      $('#inputDesde').attr('disabled',true);
+      $('#inputHasta').attr('disabled',true);
+      $('#cargando').fadeIn(300);
+
+      $.get("historial/"+desde+"/"+hasta+"/"+1+"/buscar",function (data) {
+      })
+      .done(function(data) {
+        $('#cargando').fadeIn(300);
+        if (data.length>0) {
+          $('#example1_wrapper').fadeIn(300);
+          for (var i = 0; i < data.length; i++) {
+            alert('asdads');
+            $('#busquedaHistory').append(
+              '<tr>'+
+                '<td>'+data[i].id+'</td>'+
+                '<td>'+data[i].id+'</td>'+
+                '<td>'+data[i].id+'</td>'+
+                '<td>'+data[i].id+'</td>'+
+                '<td>'+data[i].id+'</td>'+
+                '<td>'+data[i].id+'</td>'+
+                '<td>'+data[i].id+'</td>'+
+              +'</tr>'
+            );
+          }
+          $('#busquedaHistory').show();
+          $('#cargando').fadeOut('slow');
+        }else{
+          $('#cargando').hide();
+          $('#sin_resultados').fadeIn(300);
+          setTimeout(function() {
+            $('#sin_resultados').fadeOut('slow');
+          }, 500);
+        }
+        $('#inputDesde').removeAttr('disabled',false).val(0);
+        $('#inputHasta').removeAttr('disabled',false).val(0);
+      });
+    }
+
+  }
 
   function mostrarO(opcion) {
     if(opcion == 1){

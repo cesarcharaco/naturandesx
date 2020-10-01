@@ -123,6 +123,18 @@ class VentasController extends Controller
         //
     }
 
+
+    public function historial($desde, $hasta, $opcion)
+    {
+        if ($opcion == 1) {
+            return $ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')
+            ->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+            ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+            ->whereBetween('empleados_has_ventas.created_at', [$desde, $hasta])
+            ->get();
+        }
+    }
+
     public function buscar_reporte()
     {
         //$repartidores=Empleados::join('users','users.id','=','empleados.id_usuario')->where([['empleados.status','Activo'],['users.tipo_usuario','Empleado']])->get();

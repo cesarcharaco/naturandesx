@@ -40,7 +40,6 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 		return view('scanner_qr/index');
 	})->name('mitestqr');
 
-
 	Route::resource('ventas','VentasController');
 	Route::get('ventas/{rut}/clientes','VentasController@ventas')->name('ventas_qr');
 	Route::get('clientes/{QR}/buscar','ClientesController@buscarQR');
@@ -52,4 +51,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 
 	Route::get('reportes','VentasController@buscar_reporte')->name('reportes');
 	Route::post('reportes/mostrar','VentasController@mostrar_reporte')->name('mostrar_reporte');
+	
+
+	Route::get('historial/{desde}/{hasta}/{opcion}/buscar','VentasController@historial');
 });
