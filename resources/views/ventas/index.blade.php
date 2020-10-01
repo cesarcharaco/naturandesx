@@ -578,6 +578,8 @@
         }else{
           $('#cargando').hide();
           $('#sin_resultados').fadeIn(300);
+          $('#inputDesde').removeAttr('disabled',false).val(0);
+          $('#inputHasta').removeAttr('disabled',false).val(0);
           setTimeout(function() {
             $('#sin_resultados').fadeOut('slow');
           }, 500);

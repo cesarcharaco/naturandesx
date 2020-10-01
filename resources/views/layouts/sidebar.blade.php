@@ -67,7 +67,7 @@
 
           @if(Auth::user()->tipo_usuario == 'Cliente' )
             <li class="nav-item">
-              <a href="{{ route('ventas.index') }}" class="nav-link">
+              <a href="{{ route('historial') }}" class="nav-link">
                 <i class="nav-icon far fa-circle text-warning"></i>
                 <p>Historial</p>
               </a>

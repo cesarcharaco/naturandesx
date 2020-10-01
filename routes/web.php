@@ -54,7 +54,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('reportes','VentasController@buscar_reporte')->name('reportes');
 	Route::post('reportes/mostrar','VentasController@mostrar_reporte')->name('mostrar_reporte');
 	
-
+	Route::get('historial','VentasController@history')->name('historial');
 	Route::get('historial/{desde}/{hasta}/{opcion}/buscar','VentasController@historial');
 	Route::get('repartidor/{id_venta}/buscar','VentasController@historial2');
 });
