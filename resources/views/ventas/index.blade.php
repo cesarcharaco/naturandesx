@@ -5,9 +5,9 @@
 
 
   /*DATATABLES*/
-  #example1_length, #example1_filter{
+  /*#example1_length, #example1_filter{
     display: none;
-  }
+  }*/
 
   .custom-control-input{
     display: none !important;
@@ -38,6 +38,16 @@
       /*position: relative;*/
     }
 </style>
+@if(Auth::user()->tipo_usuario == 'Cliente')
+  <style type="text/css">
+    #botonHistorial, #vista1{
+      display: none;
+    }
+    #vista2{
+      display: block !important;
+    }
+  </style>
+@endif
   <title>Ventas</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">
 @endsection
@@ -429,23 +439,31 @@
           </div>
           <div class="row mb-2 mt-2">
             <div class="col-md-12">
-              <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important; display: none;">
-                <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
-                  <thead class="text-capitalize bg-primary">
-                    <tr class="border-orange">
-                      <th>Fecha</th>
-                      <th>Cliente</th>
-                      <th>Repartidor</th>
-                      <th>Orden de Pedido</th>
-                      <th>Usuario</th>
-                      <th>Estado</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody id="busquedaHistory" style="display: none;">
-                   
-                  </tbody>
-                </table>
+              <div id="tableHistory">
+                <!-- <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+                  <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
+                    <thead class="text-capitalize bg-primary">
+                      <tr class="border-orange">
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Repartidor</th>
+                        <th>Orden de Pedido</th>
+                        <th>Usuario</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="busquedaHistory">
+                      <td>asd</td>
+                      <td>asd</td>
+                      <td>asd</td>
+                      <td>asd</td>
+                      <td>asd</td>
+                      <td>asd</td>
+                      <td>asd</td>
+                    </tbody>
+                  </table>
+                </div> -->
               </div>
               <center>
                 <h2 id="sin_resultados" style="display: none;"><strong>Sin Resultados</strong></h2>
@@ -462,6 +480,141 @@
 <script type="text/javascript" src=" {{ URL::asset('/webcodecamjs/js/qrcodelib.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/webcodecamjs/js/webcodecamjs.js ') }}"></script>
 
+
+
+@if(Auth::user()->tipo_usuario == 'Repartidor')
+  <script type="text/javascript">
+
+    // function busqueda() {
+    //   var desde = $('#inputDesde').val();
+    //   var hasta = $('#inputHasta').val();
+
+    //   if (desde && hasta) {
+    //     $('#busquedaHistory').empty();
+    //     $('#inputDesde').attr('disabled',true);
+    //     $('#inputHasta').attr('disabled',true);
+    //     $('#cargando').fadeIn(300);
+
+    //     $.get("historial/"+desde+"/"+hasta+"/"+2+"/buscar",function (data) {
+    //     })
+    //     .done(function(data) {
+    //       $('#cargando').fadeIn(300);
+    //       if (data.length>0) {
+    //         $('#example1_wrapper').fadeIn(300);
+    //         for (var i = 0; i < data.length; i++) {
+    //           alert('asdads');
+    //           $('#busquedaHistory').append(
+    //             '<tr>'+
+    //               '<td>'+data[i].created_at+'</td>'+
+    //               '<td>'+data[i].nombres+' '+data[i].apellidos+'</td>'+
+    //               '<td>Repartidor</td>'+
+    //               '<td>Orden de pedido</td>'+
+    //               '<td>'+data[i].usuario+'</td>'+
+    //               '<td>Estado</td>'+
+    //               '<td>Acciones</td>'+
+    //             +'</tr>'
+    //           );
+    //         }
+    //         $('#busquedaHistory').show();
+    //         $('#cargando').fadeOut('slow');
+    //       }else{
+    //         $('#cargando').hide();
+    //         $('#sin_resultados').fadeIn(300);
+    //         setTimeout(function() {
+    //           $('#sin_resultados').fadeOut('slow');
+    //         }, 500);
+    //       }
+    //       $('#inputDesde').removeAttr('disabled',false).val(0);
+    //       $('#inputHasta').removeAttr('disabled',false).val(0);
+    //     });
+    //   }
+
+    // }
+  </script>
+@else
+  <script type="text/javascript">
+    function busqueda() {
+    var desde = $('#inputDesde').val();
+    var hasta = $('#inputHasta').val();
+
+    if (desde && hasta) {
+      $('#tableHistory').empty();
+      $('#inputDesde').attr('disabled',true);
+      $('#inputHasta').attr('disabled',true);
+      $('#cargando').fadeIn(300);
+
+
+      $('#tableHistory').append(
+        '<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">'+
+          '<table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">'+
+            '<thead class="text-capitalize bg-primary">'+
+              '<tr class="border-orange">'+
+                '<th>Fecha</th>'+
+                '<th>Cliente</th>'+
+                '<th>Repartidor</th>'+
+                '<th>Orden de Pedido</th>'+
+                '<th>Usuario</th>'+
+                '<th>Estado</th>'+
+                // '<th>Acciones</th>'+
+              '</tr>'+
+            '</thead>'+
+            '<tbody id="busquedaHistory">'+
+             
+            '</tbody>'+
+          '</table>'+
+        '</div>'
+      );
+
+      $.get("historial/"+desde+"/"+hasta+"/"+1+"/buscar",function (data) {
+      })
+      .done(function(data) {
+        if (data.length>0) {
+          n1 = data.length-1;
+          for (var i = 0; i < data.length; i++) {
+            busqueda2(data[i].id_venta,data[i].fecha,data[i].nombres,data[i].apellidos,data[i].promocion,data[i].cantidad,data[i].monto_total,n1,i);
+            
+          }
+          // $('#example1_wrapper').fadeIn(300);
+        }else{
+          $('#cargando').hide();
+          $('#sin_resultados').fadeIn(300);
+          setTimeout(function() {
+            $('#sin_resultados').fadeOut('slow');
+          }, 500);
+        }
+      });
+    }
+
+  }
+
+  function busqueda2(id_venta, fecha,nombres, apellidos, promocion, cantidad, monto_total, n1, n2) {
+    $.get("repartidor/"+id_venta+"/buscar",function (data) {
+    })
+    .done(function(data) {
+      $('#busquedaHistory').append(
+        '<tr id="tr+'+id_venta+'">'+
+          '<td>'+fecha+'</td>'+
+          '<td>'+nombres+' '+apellidos+'</td>'+
+          '<td>'+data[0].nombres+' '+data[0].apellidos+'</td>'+
+          '<td>'+promocion+' - '+cantidad+' / '+monto_total+'</td>'+
+          '<td>'+data[0].usuario+'</td>'+
+          '<td>'+data[0].status+'</td>'+
+          // '<td>Acciones</td>'+
+        +'</tr>'
+      );
+      if (n1 == n2) {
+        $("#example1").DataTable({
+          "responsive": true,
+          "autoWidth": false,
+        });
+        $('#inputDesde').removeAttr('disabled',false).val(0);
+        $('#inputHasta').removeAttr('disabled',false).val(0);
+        $('#cargando').fadeOut('slow');
+      }
+    });
+  }
+  </script>
+@endif
 <script>
 
   function vistaHistory(opcion){
@@ -487,50 +640,7 @@
   }
 
 
-  function busqueda() {
-    var desde = $('#inputDesde').val();
-    var hasta = $('#inputHasta').val();
-
-    if (desde && hasta) {
-      $('#inputDesde').attr('disabled',true);
-      $('#inputHasta').attr('disabled',true);
-      $('#cargando').fadeIn(300);
-
-      $.get("historial/"+desde+"/"+hasta+"/"+1+"/buscar",function (data) {
-      })
-      .done(function(data) {
-        $('#cargando').fadeIn(300);
-        if (data.length>0) {
-          $('#example1_wrapper').fadeIn(300);
-          for (var i = 0; i < data.length; i++) {
-            alert('asdads');
-            $('#busquedaHistory').append(
-              '<tr>'+
-                '<td>'+data[i].id+'</td>'+
-                '<td>'+data[i].id+'</td>'+
-                '<td>'+data[i].id+'</td>'+
-                '<td>'+data[i].id+'</td>'+
-                '<td>'+data[i].id+'</td>'+
-                '<td>'+data[i].id+'</td>'+
-                '<td>'+data[i].id+'</td>'+
-              +'</tr>'
-            );
-          }
-          $('#busquedaHistory').show();
-          $('#cargando').fadeOut('slow');
-        }else{
-          $('#cargando').hide();
-          $('#sin_resultados').fadeIn(300);
-          setTimeout(function() {
-            $('#sin_resultados').fadeOut('slow');
-          }, 500);
-        }
-        $('#inputDesde').removeAttr('disabled',false).val(0);
-        $('#inputHasta').removeAttr('disabled',false).val(0);
-      });
-    }
-
-  }
+  
 
   function mostrarO(opcion) {
     if(opcion == 1){

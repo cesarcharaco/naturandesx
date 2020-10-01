@@ -126,13 +126,49 @@ class VentasController extends Controller
 
     public function historial($desde, $hasta, $opcion)
     {
+        $empleado=Empleados::where('id_usuario',\Auth::User()->id)->first();
+
         if ($opcion == 1) {
-            return $ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')
-            ->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
-            ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-            ->whereBetween('empleados_has_ventas.created_at', [$desde, $hasta])
+            
+            $cliente=Clientes::where('id_usuario',\Auth::User()->id)->first();
+            // return $ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')
+            // ->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+            // ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+            // ->whereBetween('empleados_has_ventas.created_at', [$desde, $hasta])
+            // ->whereIn('empleados.id', $empleado)
+            // ->get();
+
+            return \DB::table('ventas')
+            ->join('clientes','clientes.id','=','ventas.id_cliente')
+            ->join('users','users.id','=','clientes.id_usuario')
+            ->join('promociones','promociones.id','=','ventas.id_promocion')
+            // ->whereBetween('ventas.created_at', [$desde, $hasta])
+            ->where('clientes.id',$cliente->id)
+            ->select('clientes.*','ventas.*','ventas.created_at as fecha','ventas.id as id_venta','users.*','promociones.*')
             ->get();
+
+        }else if($opcion == 2){
+            // return $ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')
+            // ->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+            // ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+            // ->whereBetween('empleados_has_ventas.created_at', [$desde, $hasta])
+            // ->whereIn('empleados.id', $empleado)->get();
+            // ->get();
+        }else{
+
         }
+
+    }
+
+    public function historial2($id){
+
+        return \DB::table('empleados_has_ventas')
+        ->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+        ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+        ->join('users','users.id','=','empleados.id_usuario')
+        ->where('ventas.id',$id)
+        ->select('users.*','empleados.*','empleados_has_ventas.status as status')
+        ->get();
     }
 
     public function buscar_reporte()

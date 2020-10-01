@@ -56,4 +56,5 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	
 
 	Route::get('historial/{desde}/{hasta}/{opcion}/buscar','VentasController@historial');
+	Route::get('repartidor/{id_venta}/buscar','VentasController@historial2');
 });
