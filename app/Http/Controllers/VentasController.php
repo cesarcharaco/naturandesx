@@ -8,6 +8,8 @@ use App\Promociones;
 use App\Ventas;
 use App\EmpleadosVentas;
 use App\Empleados;
+date_default_timezone_set('America/Santiago');
+setlocale(LC_ALL, 'es_ES');
 class VentasController extends Controller
 {
     /**
@@ -127,17 +129,15 @@ class VentasController extends Controller
     public function historial($desde, $hasta, $opcion)
     {
 
-        if ($opcion == 1) {
-            
+        if ($opcion == 1) {            
             $cliente=Clientes::where('id_usuario',\Auth::User()->id)->first();
-
             return \DB::table('ventas')
+            ->select('clientes.*','ventas.*','ventas.created_at as fecha','ventas.id as id_venta','users.*','promociones.*')
             ->join('clientes','clientes.id','=','ventas.id_cliente')
             ->join('users','users.id','=','clientes.id_usuario')
             ->join('promociones','promociones.id','=','ventas.id_promocion')
-            // ->whereBetween('ventas.created_at', [$desde, $hasta])
+            ->whereBetween('ventas.created_at', array($desde." 00:00:00", $hasta." 23:59:59"))
             ->where('clientes.id',$cliente->id)
-            ->select('clientes.*','ventas.*','ventas.created_at as fecha','ventas.id as id_venta','users.*','promociones.*')
             ->get();
 
         }else if($opcion == 2){

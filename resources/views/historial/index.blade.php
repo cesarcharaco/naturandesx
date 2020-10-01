@@ -93,7 +93,7 @@
     function busqueda() {
     var desde = $('#inputDesde').val();
     var hasta = $('#inputHasta').val();
-
+    console.log(desde+"-----"+hasta);
     if (desde && hasta) {
       $('#tableHistory').empty();
       $('#inputDesde').attr('disabled',true);
