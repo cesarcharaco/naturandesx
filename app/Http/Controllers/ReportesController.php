@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Clientes;
+use App\Promociones;
+use App\Ventas;
+use App\EmpleadosVentas;
+use App\Empleados;
+date_default_timezone_set('America/Santiago');
+setlocale(LC_ALL, 'es_ES');
 
 class ReportesController extends Controller
 {
@@ -188,7 +195,7 @@ class ReportesController extends Controller
 
                     $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-                    ->whereBetween('empleados_has_ventas.created_at', [$request->desde, $request->hasta])
+                    ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados_has_ventas.status','No Cancelado')
                     ->whereIn('empleados.id', $request->id_repartidor)->get();
 
@@ -276,7 +283,7 @@ class ReportesController extends Controller
                    
                     $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-                    ->whereBetween('empleados_has_ventas.created_at', [$request->desde, $request->hasta])
+                    ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados_has_ventas.status','Cancelado')
                     ->whereIn('empleados.id', $request->id_repartidor)->get();
 
@@ -366,18 +373,18 @@ class ReportesController extends Controller
                     $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->get();
                     $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                         ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-                        ->whereBetween('empleados_has_ventas.created_at', [$request->desde, $request->hasta])
+                        ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                         ->whereIn('empleados.id', $request->id_repartidor)->get();
 
                     $cancelado = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                         ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-                        ->whereBetween('empleados_has_ventas.created_at', [$request->desde, $request->hasta])
+                        ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                         ->where('empleados_has_ventas.status','Cancelado')
                         ->whereIn('empleados.id', $request->id_repartidor)->count();
 
                     $no_cancelado = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                         ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-                        ->whereBetween('empleados_has_ventas.created_at', [$request->desde, $request->hasta])
+                        ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                         ->where('empleados_has_ventas.status','No Cancelado')
                         ->whereIn('empleados.id', $request->id_repartidor)->count();
 
@@ -467,12 +474,12 @@ class ReportesController extends Controller
                 $ventas = ventas::select('ventas.*','clientes.*')
                 ->join('clientes', 'clientes.id', '=', 'ventas.id_cliente')
                 ->join('promociones', 'promociones.id', '=', 'ventas.id_promocion')
-                ->whereBetween('ventas.created_at', [$request->desde, $request->hasta])
+                ->whereBetween('ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                 ->whereIn('clientes.id', $request->id_clientes)->get();
                 
                 $can_cli = Ventas::whereIn('id_cliente', $request->id_clientes)->groupby('id_cliente')->count();
                 $can_pro = Ventas::select(\DB::raw('SUM(cantidad) as cantidad'))
-                ->whereBetween('ventas.created_at', [$request->desde, $request->hasta])
+                ->whereBetween('ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                 ->whereIn('id_cliente', $request->id_clientes)->get();
                 foreach ($can_pro as $key) {
                     $can_pro = $key->cantidad;
