@@ -20,13 +20,13 @@
 
       <li class="nav-item">
         <a href="#" class="nav-link" style="border-radius: 30px !important;" data-slide="false" role="button">
-            <span class="text-danger"> Inactivo </span>  <i class="fas fa-minus-circle text-danger"></i>
+            <span class="text-warning"> Inactivo </span>  <i class="fas fa-minus-circle text-warning"></i>
         </a>
       </li>
       @elseif(status() == 'Sin Aprobar')
       <li class="nav-item">
         <a href="#" class="nav-link" style="border-radius: 30px !important;" data-slide="false" role="button">
-            <span class="text-warning"> Sin Aprobar </span>  <i class="fas fa-exclamation-circle text-warning"></i>
+            <span class="text-danger"> Sin Aprobar </span>  <i class="fas fa-exclamation-circle text-danger"></i>
         </a>
       </li>
       @endif

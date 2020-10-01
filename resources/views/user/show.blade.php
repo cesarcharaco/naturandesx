@@ -162,7 +162,7 @@
                   </div>
                   <input type="hidden" value="1" id="datos_seg" name="datos_seg">
                   <input type="hidden" value="{{$users->id}}" id="id_usuario" name="id_usuario">
-                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4" id="boton_enviar">Actualizar perfil</button>
+                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4" id="boton_enviar" disabled="disabled">Actualizar perfil</button>
                 </form>
               </div>
               <!-- /.tab-pane -->
@@ -358,7 +358,7 @@
                   </div>
                   <input type="hidden" value="1" id="datos_seg" name="datos_seg">
                   <input type="hidden" value="{{$users->id}}" id="id_usuario" name="id_usuario">
-                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4" id="boton_enviar">Actualizar perfil</button>
+                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4" id="boton_enviar" disabled="disabled">Actualizar perfil</button>
                 </form>
               </div>
               <!-- /.tab-pane -->
