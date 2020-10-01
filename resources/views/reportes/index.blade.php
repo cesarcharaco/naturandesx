@@ -91,6 +91,12 @@
 				    	<button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Generar</button>
 				    </center>
 				</form>
+		    	{{--
+		    	<form action="{{ route('enviar_reportes') }}" method="POST" target="_blank">
+		    		@csrf
+		    		<button type="submit" class="btn btn-danger mt-4 pr-4 pl-4">Enviar datos al email</button>
+		    	</form>
+		    	--}}
 				<hr>
 		        <div class="row">
 					<div class="col-lg-12 mt-4">

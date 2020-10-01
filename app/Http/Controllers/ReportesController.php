@@ -8,6 +8,7 @@ use App\Promociones;
 use App\Ventas;
 use App\EmpleadosVentas;
 use App\Empleados;
+use PDF;
 date_default_timezone_set('America/Santiago');
 setlocale(LC_ALL, 'es_ES');
 
@@ -87,6 +88,14 @@ class ReportesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function enviar_reportes(Request $request)
+    {
+        $rep_ventas=EmpleadosVentas::all();
+        $pdf = PDF::loadView('pdf/reportes', array('rep_ventas'=>$rep_ventas));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('reportes.pdf');
     }
 
     public function buscar_reporte()
@@ -277,6 +286,7 @@ class ReportesController extends Controller
                     ])
                     ->options([]);
                     $active = 0;
+
                     return view('reportes.index',compact('rep_ventas','count_rep_ventas','graf_barra_rep','graf_torta_rep','repartidores','clientes','graf_barra_cli','graf_torta_cli','active','ventas'));
 
                 }elseif(is_null($request->no_cancelado) and $request->cancelado==1){
