@@ -73,7 +73,7 @@
   <div class="container-fluid">
     <div class="row mt-2 mb-2">
       <div class="col-md-12">
-        <button id="botonHistorial" onclick="vistaHistory(1)" class="btn btn-primary shadow" style="float: right; border-radius: 30px;"><strong>Historial</strong></button>
+        <button id="botonHistorial" onclick="vistaHistory(1)" class="btn btn-primary shadow" style="float: right; border-radius: 30px; display: none;"><strong>Historial</strong></button>
       </div>
     </div>
     <div id="vista1">
@@ -253,7 +253,7 @@
                   
                 <div class="form-group">
                    
-                    <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"data-placement="bottom" style="display: block;"><span class="glyphicon glyphicon-upload"></span></button>
+                    <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"data-placement="bottom" style="display: none;"><span class="glyphicon glyphicon-upload"></span></button>
 
                     <button title="Image shoot" class="btn btn-default btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-picture"></span></button>
 
