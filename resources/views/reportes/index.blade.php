@@ -78,11 +78,11 @@
 			            	<label for="">status</label>
 					        <div class="custom-control custom-checkbox">
 					            <input name="cancelado" type="checkbox" class="custom-control-input" id="customCheck1" value="1">
-					            <label class="custom-control-label" for="customCheck1">Cancelado</label>
+					            <label class="custom-control-label" for="customCheck1">Pagado</label>
 					        </div>
 					        <div class="custom-control custom-checkbox">
 					            <input name="no_cancelado" type="checkbox" class="custom-control-input" id="customCheck2" value="1">
-					            <label class="custom-control-label" for="customCheck2">No Cancelado</label>
+					            <label class="custom-control-label" for="customCheck2">No Pagado</label>
 					        </div>		            	
 			            </div>
 		        	</div>

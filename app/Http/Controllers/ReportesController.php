@@ -116,12 +116,12 @@ class ReportesController extends Controller
         ->labels(['Gráficas por status de ventas'])
         ->datasets([
             [
-                "label" => "Cancelado",
+                "label" => "Pagado",
                 'backgroundColor' => ['rgba(54, 162, 235, 0.3)'],
                 'data' => [$cancelado]
             ],
             [
-                "label" => "No cancelado",
+                "label" => "No Pagado",
                 'backgroundColor' => ['rgba(255, 99, 132, 0.2)'],
                 'data' => [$no_cancelado]
             ]
@@ -132,7 +132,7 @@ class ReportesController extends Controller
         ->name('graf_torta_rep')
         ->type('pie')
         ->size(['width' => 400, 'height' => 120])
-        ->labels(['Cancelado', 'No Cancelado'])
+        ->labels(['Pagado', 'No Pagado'])
         ->datasets([
             [
                 'backgroundColor' => ['#36A2EB','#FF6384'],
@@ -219,7 +219,7 @@ class ReportesController extends Controller
                     ->labels(['Gráficas por status de ventas'])
                     ->datasets([
                         [
-                            "label" => "No cancelado",
+                            "label" => "No Pagado",
                             'backgroundColor' => ['rgba(255, 99, 132, 0.2)'],
                             'data' => [$no_cancelado]
                         ]
@@ -230,7 +230,7 @@ class ReportesController extends Controller
                     ->name('pieChartTest')
                     ->type('pie')
                     ->size(['width' => 400, 'height' => 120])
-                    ->labels(['No Cancelado'])
+                    ->labels(['No Pagado'])
                     ->datasets([
                         [
                             'backgroundColor' => ['#FF6384'],
@@ -308,7 +308,7 @@ class ReportesController extends Controller
                     ->labels(['Gráficas por status de ventas'])
                     ->datasets([
                         [
-                            "label" => "Cancelado",
+                            "label" => "Pagado",
                             'backgroundColor' => ['rgba(54, 162, 235, 0.3)'],
                             'data' => [$cancelado]
                         ]
@@ -319,7 +319,7 @@ class ReportesController extends Controller
                     ->name('pieChartTest')
                     ->type('pie')
                     ->size(['width' => 400, 'height' => 120])
-                    ->labels(['Cancelado'])
+                    ->labels(['Pagado'])
                     ->datasets([
                         [
                             'backgroundColor' => ['#36A2EB'],
@@ -405,12 +405,12 @@ class ReportesController extends Controller
                     ->labels(['Gráficas por status de ventas'])
                     ->datasets([
                         [
-                            "label" => "Cancelado",
+                            "label" => "Pagado",
                             'backgroundColor' => ['rgba(54, 162, 235, 0.3)'],
                             'data' => [$cancelado]
                         ],
                         [
-                            "label" => "No cancelado",
+                            "label" => "No Pagado",
                             'backgroundColor' => ['rgba(255, 99, 132, 0.2)'],
                             'data' => [$no_cancelado]
                         ]
@@ -421,7 +421,7 @@ class ReportesController extends Controller
                     ->name('pieChartTest')
                     ->type('pie')
                     ->size(['width' => 400, 'height' => 120])
-                    ->labels(['Cancelado', 'No Cancelado'])
+                    ->labels(['Pagado', 'No Pagado'])
                     ->datasets([
                         [
                             'backgroundColor' => ['#36A2EB','#FF6384'],
@@ -544,7 +544,7 @@ class ReportesController extends Controller
                 ->labels(['Gráficas por status de ventas'])
                 ->datasets([
                     [
-                        "label" => "Cancelado",
+                        "label" => "Pagado",
                         'backgroundColor' => ['rgba(54, 162, 235, 0.3)'],
                         'data' => [$cancelado]
                     ],
@@ -560,7 +560,7 @@ class ReportesController extends Controller
                 ->name('graf_torta_rep')
                 ->type('pie')
                 ->size(['width' => 400, 'height' => 120])
-                ->labels(['Cancelado', 'No Cancelado'])
+                ->labels(['Pagado', 'No Pagado'])
                 ->datasets([
                     [
                         'backgroundColor' => ['#36A2EB','#FF6384'],
