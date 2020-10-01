@@ -109,7 +109,7 @@
                   @csrf
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
+                        <input class="form-check-input checkbox" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
                         <label class="form-check-label" for="cambiar_password">
                             Seleccione si desea cambiar su contraseña
                         </label>
@@ -127,7 +127,7 @@
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
+                        <input class="form-check-input checkbox" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
                         <label class="form-check-label" for="cambiar_preguntas">
                             Seleccione si desea cambiar sus preguntas de seguridad
                         </label>
@@ -161,7 +161,8 @@
                     </div>
                   </div>
                   <input type="hidden" value="1" id="datos_seg" name="datos_seg">
-                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Actualizar perfil</button>
+                  <input type="hidden" value="{{$users->id}}" id="id_usuario" name="id_usuario">
+                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4" id="boton_enviar">Actualizar perfil</button>
                 </form>
               </div>
               <!-- /.tab-pane -->
@@ -304,7 +305,7 @@
                   @csrf
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
+                        <input class="form-check-input checkbox" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
                         <label class="form-check-label" for="cambiar_password">
                             Seleccione si desea cambiar su contraseña
                         </label>
@@ -322,7 +323,7 @@
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
+                        <input class="form-check-input checkbox" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
                         <label class="form-check-label" for="cambiar_preguntas">
                             Seleccione si desea cambiar sus preguntas de seguridad
                         </label>
@@ -356,7 +357,8 @@
                     </div>
                   </div>
                   <input type="hidden" value="1" id="datos_seg" name="datos_seg">
-                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Actualizar perfil</button>
+                  <input type="hidden" value="{{$users->id}}" id="id_usuario" name="id_usuario">
+                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4" id="boton_enviar">Actualizar perfil</button>
                 </form>
               </div>
               <!-- /.tab-pane -->
@@ -507,7 +509,7 @@
                   @csrf
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
+                        <input class="form-check-input checkbox" type="checkbox" value="1" id="cambiar_password" name="cambiar_password">
                         <label class="form-check-label" for="cambiar_password">
                             Seleccione si desea cambiar su contraseña
                         </label>
@@ -525,7 +527,7 @@
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
+                        <input class="form-check-input checkbox" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
                         <label class="form-check-label" for="cambiar_preguntas">
                             Seleccione si desea cambiar sus preguntas de seguridad
                         </label>
@@ -534,7 +536,7 @@
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="pregunta1">1era Pregunta de seguridad <b style="color: red;">*</b></label>
-                        <select class="form-control" name="pregunta1" required id="pregunta1" disabled="">
+                        <select class="form-control" name="pregunta1" id="pregunta1" disabled="disabled">
                           <option value="0">Seleccione una pregunta</option>
                           @foreach($preguntas as $key)
                             <option value="{{$key->id}}">{{$key->pregunta}}</option>
@@ -543,13 +545,13 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="respuesta1">Respuesta <b style="color: red;">*</b></label>
-                        <input type="password" class="form-control" name="respuesta1" id="respuesta1" placeholder="Ingrese respuesta..." required="" disabled="disabled">
+                        <input type="password" class="form-control" name="respuesta1" id="respuesta1" placeholder="Ingrese respuesta..." disabled="disabled">
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="pregunta2">2da Pregunta de seguridad <b style="color: red;">*</b></label>
-                        <select class="form-control" name="pregunta2" required id="pregunta2" disabled="">
+                        <select class="form-control" name="pregunta2" id="pregunta2" disabled="disabled">
                           @foreach($preguntas as $key)
                             <option value="{{$key->id}}">{{$key->pregunta}}</option>
                           @endforeach()
@@ -557,12 +559,12 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="respuesta2">Respuesta <b style="color: red;">*</b></label>
-                        <input type="password" class="form-control" name="respuesta2" id="respuesta2" placeholder="Ingrese respuesta..." required="" disabled="disabled">
+                        <input type="password" class="form-control" name="respuesta2" id="respuesta2" placeholder="Ingrese respuesta..." disabled="disabled">
                     </div>
                   </div>
                   <input type="hidden" value="1" id="datos_seg" name="datos_seg">
                   <input type="hidden" value="{{$users->id}}" id="id_usuario" name="id_usuario">
-                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Actualizar perfil</button>
+                  <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4" disabled="disabled" id="boton_enviar" name="boton_enviar">Actualizar perfil</button>
                 </form>
               </div>
               <!-- /.tab-pane -->
@@ -665,6 +667,13 @@ $('#cambiar_preguntas').on('change',function () {
       respuesta2.value="";
       respuesta2.value="";
     }
+  });
+</script>
+<script type="text/javascript"> 
+  $(function() {
+    $(".checkbox").click(function() {
+      $('#boton_enviar').prop('disabled',$('input.checkbox:checked').length == 0);
+    });
   });
 </script>
 <script type="text/javascript">

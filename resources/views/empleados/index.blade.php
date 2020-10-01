@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('css')
   <title>Repartidores</title>
+  <link rel="stylesheet" href="{{ asset('plugins/parsleyjs/parsley.css') }}">
 @endsection
 
 @section('content-header')
@@ -85,7 +86,7 @@
                                     <i class="fa fa-fw fa-edit text-white"></i>
                                   </a>
 
-                                <a data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5" class="btn btn-default btn-sm boton-tabla border border-warning" style="border-radius: 5px;" style="border-radius: 5px;" onclick="cambiarClaveRepartidor('{{$key->id}}')">
+                                <a data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5" class="btn btn-default btn-sm boton-tabla border border-warning" style="border-radius: 5px;" style="border-radius: 5px;" onclick="cambiarClaveRepartidor('{{$key->id}}','{{$key->usuario->id}}')">
                                   <div class="fa fa-key"></div>
                                 </a>
 
@@ -153,10 +154,11 @@
 
     }
 
-    function cambiarClaveRepartidor(id) {
+    function cambiarClaveRepartidor(id,id_usuario) {
       $('#example1_wrapper').fadeOut('fast');
       $('#btnRegistrar').fadeOut('fast');
       $('#id_repartidor_pass').val(id);
+      $('#id_usuario_cc').val(id_usuario);
     }
 
     function eliminarEmpleado(id,id_usuario,id_qr){
@@ -175,4 +177,6 @@
     }
   </script>
 @section('scripts')
+<script src="{{ asset('plugins/parsleyjs/parsley.min.js') }}"></script>
+<script src="{{ asset('plugins/parsleyjs/i18n/es.js') }}"></script>
 @endsection

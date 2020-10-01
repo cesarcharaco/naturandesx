@@ -26,6 +26,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::resource('clientes','ClientesController');
 	Route::post('clientes/editar','ClientesController@editar')->name('clientes.editar');
 	Route::post('clientes/eliminar','ClientesController@eliminar')->name('clientes.eliminar');
+	Route::post('clientes/cambiar_clave','ClientesController@cambiar_clave')->name('clientes.cambiar_clave');
 	Route::resource('user','UserController',['except' => ['show']]);
 	Route::get('user/{id}/perfil', 'UserController@show')->name('perfil');
 	Route::get('generar_qr/{id}/qr', 'UserController@generar_qr')->name('generar_qr');
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::resource('empleados','EmpleadosController');
 	Route::post('empleados/editar','EmpleadosController@editar')->name('empleados.editar');
 	Route::post('empleados/eliminar','EmpleadosController@eliminar')->name('empleados.eliminar');
+	Route::post('empleados/cambiar_clave','EmpleadosController@cambiar_clave')->name('empleados.cambiar_clave');
 	Route::get('mitestqr',function(){
 		return view('scanner_qr/index');
 	})->name('mitestqr');

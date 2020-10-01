@@ -10,18 +10,26 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      @if(status() == 'Activo')
+      <li class="nav-item">
+        <a href="#" class="nav-link" style="border-radius: 30px !important;" data-slide="false" role="button">
+            <span class="text-success"> Activo </span>  <i class="fas fa-check-circle text-success"></i>
+        </a>
+      </li>
+      @elseif(status() == 'Inactivo')
 
       <li class="nav-item">
         <a href="#" class="nav-link" style="border-radius: 30px !important;" data-slide="false" role="button">
-            <span class="text-success"> Verificado </span>  <i class="fas fa-check-circle text-success"></i>
+            <span class="text-danger"> Inactivo </span>  <i class="fas fa-minus-circle text-danger"></i>
         </a>
       </li>
-
+      @elseif(status() == 'Sin Aprobar')
       <li class="nav-item">
         <a href="#" class="nav-link" style="border-radius: 30px !important;" data-slide="false" role="button">
-            <span class="text-danger"> No Verificado </span>  <i class="fas fa-minus-circle text-danger"></i>
+            <span class="text-warning"> Sin Aprobar </span>  <i class="fas fa-exclamation-circle text-warning"></i>
         </a>
       </li>
+      @endif
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">

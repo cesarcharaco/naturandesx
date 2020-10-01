@@ -102,10 +102,13 @@ class UserController extends Controller
             } else if ($request->datos_seg==1) {
                 if ($request->cambiar_password==1) {
                     $clave = $request->password;
-                    $usuario = new User();
+                    $usuario = User::find($request->id_usuario);
                     $nueva_clave=\Hash::make($clave);
                     $usuario->password=$nueva_clave;
                     $usuario->save();
+
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
                 } else if ($request->cambiar_preguntas==1){
                     DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
                     \DB::table('usuarios_has_preguntas')->insert([
@@ -124,7 +127,7 @@ class UserController extends Controller
                 } else if ($request->cambiar_password==1 && $request->cambiar_preguntas==1){
                     //dd($id_preguntas);
                     $clave = $request->password;
-                    $usuario = new User();
+                    $usuario = User::find($request->id_usuario);
                     $nueva_clave=\Hash::make($clave);
                     $usuario->password=$nueva_clave;
                     $usuario->save();
@@ -181,10 +184,13 @@ class UserController extends Controller
             } else if ($request->datos_seg==1){
                 if ($request->cambiar_password==1) {
                     $clave = $request->password;
-                    $usuario = new User();
+                    $usuario = User::find($request->id_usuario);
                     $nueva_clave=\Hash::make($clave);
                     $usuario->password=$nueva_clave;
                     $usuario->save();
+
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
                 } else if ($request->cambiar_preguntas==1){
                     DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
                     \DB::table('usuarios_has_preguntas')->insert([
@@ -203,7 +209,7 @@ class UserController extends Controller
                 } else if ($request->cambiar_password==1 && $request->cambiar_preguntas==1){
                     //dd($id_preguntas);
                     $clave = $request->password;
-                    $usuario = new User();
+                    $usuario = User::find($request->id_usuario);
                     $nueva_clave=\Hash::make($clave);
                     $usuario->password=$nueva_clave;
                     $usuario->save();
@@ -259,10 +265,13 @@ class UserController extends Controller
                 //dd($request->all());
                 if ($request->cambiar_password==1) {
                     $clave = $request->password;
-                    $usuario = new User();
+                    $usuario = User::find($request->id_usuario);
                     $nueva_clave=\Hash::make($clave);
                     $usuario->password=$nueva_clave;
                     $usuario->save();
+
+                    toastr()->success('Éxito!!', ' Perfil datos de seguridad actualizado satisfactoriamente');
+                    return redirect()->back();
                 } else if ($request->cambiar_preguntas==1){
                     //dd($id_preguntas);
                     DB::table('usuarios_has_preguntas')->where('id_usuario',$request->id_usuario)->delete();
@@ -282,7 +291,7 @@ class UserController extends Controller
                 } else if ($request->cambiar_password==1 && $request->cambiar_preguntas==1){
                     //dd($id_preguntas);
                     $clave = $request->password;
-                    $usuario = new User();
+                    $usuario = User::find($request->id_usuario);
                     $nueva_clave=\Hash::make($clave);
                     $usuario->password=$nueva_clave;
                     $usuario->save();

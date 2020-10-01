@@ -5,54 +5,58 @@
       </a>
     </div>
     <div class="card card-body" style="border-top: 3px solid yellow;">
-        <form action="" name="cambiar_clave_repartidor" method="POST">
+        <form action="{{ route('empleados.cambiar_clave') }}" name="cambiar_clave_repartidor" method="POST" data-parsley-validate>
           @csrf
           <h3>Cambiar clave del repartidor</h3> 
           <p class="text-dark">Modificar la contraseña del repartidor para accesar al sistema<p>
           <div class="card-body border border-default shadow" style="border-radius: 20px;">
-	        <div class="form-group">                      
-	            <label for="contraseña">Ingrese nueva contraseña del repartidor</label>
-	            <div class="input-group">
-	              <div class="input-group-prepend">
-	                <div class="input-group-prepend">
-	                  <div class="input-group-text">
-	                    <div class="fa fa-lock"></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <input type="password" name="password_new" class="form-control" placeholder="Nueva Contraseña" aria-label="" autocomplete="off" required="required">
-	              @error('password_new')
-	                <span class="invalid-feedback" role="alert">
-	                  <strong>{{ $message }}</strong>
-	                </span>
-	              @enderror
-	            </div>
-	        </div>
-
-	        <div class="form-group">                      
-	            <label for="contraseña">Confirmar nueva contraseña</label>
-	            <div class="input-group">
-	              <div class="input-group-prepend">
-	                <div class="input-group-prepend">
-	                  <div class="input-group-text">
-	                    <div class="fa fa-lock"></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <input type="password" name="password_confir" class="form-control" placeholder="Confirmar Contraseña" aria-label="" autocomplete="off" required="required">
-	              @error('password_confir')
-	                <span class="invalid-feedback" role="alert">
-	                  <strong>{{ $message }}</strong>
-	                </span>
-	              @enderror
-	            </div>
-	        </div>
-          	
+          	<div class="form-row">
+          		<div class="col-md-6">
+			        <div class="form-group">                      
+			            <label for="password_new">Ingrese nueva contraseña del repartidor</label>
+			            <div class="input-group">
+			              <div class="input-group-prepend">
+			                <div class="input-group-prepend">
+			                  <div class="input-group-text">
+			                    <div class="fa fa-lock"></div>
+			                  </div>
+			                </div>
+			              </div>
+			              <input type="password" name="password_new" id="password_new" class="form-control" placeholder="Nueva Contraseña" aria-label="" autocomplete="off" required="required" data-parsley-minlength="8">
+			              @error('password_new')
+			                <span class="invalid-feedback" role="alert">
+			                  <strong>{{ $message }}</strong>
+			                </span>
+			              @enderror
+			            </div>
+			        </div>
+          		</div>
+          		<div class="col-md-6">
+			        <div class="form-group">                      
+			            <label for="password_confir">Confirmar nueva contraseña</label>
+			            <div class="input-group">
+			              <div class="input-group-prepend">
+			                <div class="input-group-prepend">
+			                  <div class="input-group-text">
+			                    <div class="fa fa-lock"></div>
+			                  </div>
+			                </div>
+			              </div>
+			              <input type="password" name="password_confir" id="password_confir" class="form-control" placeholder="Confirmar Contraseña" aria-label="" autocomplete="off" required="required" data-parsley-minlength="8" data-parsley-equalto="#password_new">
+			              @error('password_confir')
+			                <span class="invalid-feedback" role="alert">
+			                  <strong>{{ $message }}</strong>
+			                </span>
+			              @enderror
+			            </div>
+			        </div>
+          		</div>
+          	</div>
           </div>
 
           <div class="card-body border border-danger shadow mt-3 mb-3" style="border-radius: 20px;">
 	          <div class="form-group ">                      
-	            <label for="contraseña">Ingrese contraseña de Administrador</label>
+	            <label for="password">Ingrese contraseña de Administrador</label>
 	            <div class="input-group">
 	              <div class="input-group-prepend">
 	                <div class="input-group-prepend">
@@ -61,7 +65,7 @@
 	                  </div>
 	                </div>
 	              </div>
-	              <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña actual" aria-label="" autocomplete="off" required="required">
+	              <input type="password" name="password" id="password" class="form-control" placeholder="Ingrese su contraseña actual" aria-label="" autocomplete="off" required="required">
 	              @error('password')
 	                <span class="invalid-feedback" role="alert">
 	                  <strong>{{ $message }}</strong>
@@ -72,6 +76,7 @@
           </div>
           <div class="float-right">
             <input type="hidden" name="id" id="id_repartidor_pass">
+            <input type="hidden" name="id_usuario_cc" id="id_usuario_cc">
             <button type="submit" class="btn btn-warning float-right text-white">Modificar</button>
           </div>
         </form>

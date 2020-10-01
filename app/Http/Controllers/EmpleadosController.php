@@ -200,6 +200,31 @@ class EmpleadosController extends Controller
         }
     }
 
+    public function cambiar_clave(Request $request)
+    {
+        if(\Auth::user()->tipo_usuario == 'Admin'){
+            //dd($request->all());
+            $password = $request['password'];
+            $consulta = User::where('id',\Auth::User()->id)->first();
+            $hashedPassword = $consulta->password;
+
+            if (\Hash::check($password, $hashedPassword)) {
+                //dd($request->all());
+                $usuario = User::find($request->id_usuario_cc);
+                $usuario->password=\Hash::make($request->password_new);
+                $usuario->save();
+                toastr()->success('Éxito!!', 'Contraseña de Cliente cambiada satisfactoriamente');
+                return redirect()->to('empleados');
+            }else{
+                toastr()->error('Error!!', ' Contraseña del administrador incorrecta');
+                return redirect()->to('empleados');
+            }
+        }else{
+            toastr()->warning('no puede acceder!!', 'ACCESO DENEGADO');
+            return redirect()->back();
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
