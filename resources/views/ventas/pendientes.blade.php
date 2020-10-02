@@ -45,45 +45,47 @@
                 </thead>
                 <tbody>
                   @foreach($repartidores as $key)
-                  @php
-                    $cuenta=count($key->ventas);
-                    $cuenta2=1;
-                    $monto=0;
-                  @endphp
-                  <tr class="bg-info" class="text-white" id="empleado{{$key->id}}">
-                    <td><button id="boton{{$key->id}}" class="btn btn-success border" onclick="MostrarInfo(1,'{{$key->id}}')" style="border-radius: 30px;"><strong>+</strong></button></td>
-                    <td>{{$key->nombres}}</td>
-                    <td>{{$key->apellidos}}</td>
-                    <td>{{$key->rut}}</td>
-                  </tr>
-                    @foreach($key->ventas as $key2)
-                      <tr style="background-color: white; display: none;" class="fila{{$key->id}}">
-                        <td>{{$key2->cliente->nombres}} {{$key2->cliente->apellidos}}<br>{{$key2->cliente->rut}}</td>
-                        <td>{{$key2->created_at}}</td>
-                        <td>{{$key2->promociones->promocion}}<br>
-                          Cant. <strong>{{$key2->cantidad}}</strong><br>
-                          Monto Total: <strong>{{$key2->monto_total}}.00$</strong>
-                        </td>
-                          @foreach($key->empleados_has_ventas as $key3)
-                            @if($key2->id == $key3->id_venta)
-                              @if($key3->status == 'No Cancelado')
-                                <td><strong style="color: red;">{{$key3->status}}</strong></td>
-                                @php $monto = $monto+$key2->monto_total @endphp
-                              @else
-                                <td><strong style="color: green;">{{$key3->status}}</strong></td>
-                              @endif
-                            @endif
-                          @endforeach
+                    @if($key->usuario->tipo_usuario != 'Admin')
+                      @php
+                        $cuenta=count($key->ventas);
+                        $cuenta2=1;
+                        $monto=0;
+                      @endphp
+                      <tr class="bg-info" class="text-white" id="empleado{{$key->id}}">
+                        <td><button id="boton{{$key->id}}" class="btn btn-success border" onclick="MostrarInfo(1,'{{$key->id}}')" style="border-radius: 30px;"><strong>+</strong></button></td>
+                        <td>{{$key->nombres}}</td>
+                        <td>{{$key->apellidos}}</td>
+                        <td>{{$key->rut}}</td>
                       </tr>
-                      @if($cuenta == $cuenta2)
+                      @foreach($key->ventas as $key2)
                         <tr style="background-color: white; display: none;" class="fila{{$key->id}}">
-                          <td colspan="3" align="right"><h3>Total a pagar:</h3></td>
-                          <td><h3>{{$monto}}.00$</h3></td>
+                          <td>{{$key2->cliente->nombres}} {{$key2->cliente->apellidos}}<br>{{$key2->cliente->rut}}</td>
+                          <td>{{$key2->created_at}}</td>
+                          <td><strong>{{$key2->promociones->promocion}}</strong><br>
+                            Cant: <strong>{{$key2->cantidad}}</strong><br>
+                            Monto Total: <strong>{{$key2->monto_total}}.00$</strong>
+                          </td>
+                            @foreach($key->empleados_has_ventas as $key3)
+                              @if($key2->id == $key3->id_venta)
+                                @if($key3->status == 'No Cancelado')
+                                  <td><strong style="color: red;">{{$key3->status}}</strong></td>
+                                  @php $monto = $monto+$key2->monto_total @endphp
+                                @else
+                                  <td><strong style="color: green;">{{$key3->status}}</strong></td>
+                                @endif
+                              @endif
+                            @endforeach
                         </tr>
-                        @php $id=0 @endphp
-                      @endif
-                      @php $cuenta2++ @endphp
-                    @endforeach
+                        @if($cuenta == $cuenta2)
+                          <tr style="background-color: white; display: none;" class="fila{{$key->id}}">
+                            <td colspan="3" align="right"><h3>Total a pagar:</h3></td>
+                            <td><h3>{{$monto}}.00$</h3></td>
+                          </tr>
+                          @php $id=0 @endphp
+                        @endif
+                        @php $cuenta2++ @endphp
+                      @endforeach
+                    @endif
                   @endforeach
                 </tbody>
               </table>
