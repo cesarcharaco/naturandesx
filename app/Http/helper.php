@@ -25,3 +25,17 @@ function status()
 		return $status;
 	}
 }
+
+function total_ventas_no_pagadas($id_repartidor)
+{
+	$cont=0;
+	$repartidor=Empleado::find($id_repartidor);
+
+	foreach ($repartidor->ventas as $key) {
+		if($key->pivot->status=="No Cancelado"){
+			$cont++;
+		}
+	}
+
+	return $cont;
+}
