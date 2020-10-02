@@ -37,7 +37,7 @@ class HomeController extends Controller
             $cliente=Clientes::where('id_usuario',\Auth::user()->id)->first();
         }
         $promociones = Promociones::all();
-        $empleados_ventas = EmpleadosVentas::all();
+        $empleados_ventas = EmpleadosVentas::orderBy('id','ASC')->get();
 
         $f1 = Carbon::now()->format('d-m-Y');
         $f2 = Carbon::now()->subDays(1)->format('d-m-Y');

@@ -28,7 +28,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                     <label for="usuario">Usuario <b style="color: red;">*</b></label>
-                    <input style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" class="form-control input" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}" maxlength="15">
+                    <input onkeypress="return check(event)" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" type="text" class="form-control input" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}" maxlength="15">
                     @if ($errors->has('usuario'))
                         <small class="form-text text-danger">
                             {{ $errors->first('usuario') }}

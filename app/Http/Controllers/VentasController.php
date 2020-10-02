@@ -21,7 +21,7 @@ class VentasController extends Controller
     {
         $promociones=Promociones::all();
         $clientes=Clientes::all();
-        $ventas=Ventas::all();
+        $ventas=Ventas::orderBy('id','ASC')->get();
         
         return view('ventas.index', compact('clientes','promociones','ventas'));
     }
