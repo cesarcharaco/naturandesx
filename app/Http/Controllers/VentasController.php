@@ -163,4 +163,12 @@ class VentasController extends Controller
         ->get();
     }
 
+    public function ventas_pedientes()
+    {
+        $repartidores=Empleados::all();
+        $num=1;
+        //dd($repartidores);
+        return view('ventas.pendientes',compact('repartidores','num'));
+    }
+
 }

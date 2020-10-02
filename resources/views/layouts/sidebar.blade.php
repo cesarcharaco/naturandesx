@@ -61,6 +61,12 @@
                 <p>Reportes</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('pendientes') }}" class="nav-link">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p>Ventas Pendientes</p>
+              </a>
+            </li>
           @endif
 
           @if(Auth::user()->tipo_usuario == 'Cliente' )

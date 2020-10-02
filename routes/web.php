@@ -41,7 +41,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('mitestqr',function(){
 		return view('scanner_qr/index');
 	})->name('mitestqr');
-
+	Route::get('ventas/pendientes','VentasController@ventas_pedientes')->name('pendientes');
 	Route::resource('ventas','VentasController');
 	Route::get('ventas/{rut}/clientes','VentasController@ventas')->name('ventas_qr');
 	Route::get('clientes/{QR}/buscar','ClientesController@buscarQR');
@@ -58,4 +58,6 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('historial','VentasController@history')->name('historial');
 	Route::get('historial/{desde}/{hasta}/{opcion}/buscar','VentasController@historial');
 	Route::get('repartidor/{id_venta}/buscar','VentasController@historial2');
+
+	
 });
