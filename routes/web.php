@@ -42,6 +42,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 		return view('scanner_qr/index');
 	})->name('mitestqr');
 	Route::get('ventas/pendientes','VentasController@ventas_pedientes')->name('pendientes');
+	Route::post('ventas/pagar_pendientes','VentasController@pagar_venta')->name('pagar_pendientes');
 	Route::resource('ventas','VentasController');
 	Route::get('ventas/{rut}/clientes','VentasController@ventas')->name('ventas_qr');
 	Route::get('clientes/{QR}/buscar','ClientesController@buscarQR');

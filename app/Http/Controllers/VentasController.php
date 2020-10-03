@@ -171,4 +171,19 @@ class VentasController extends Controller
         return view('ventas.pendientes',compact('repartidores','num'));
     }
 
+    public function pagar_venta(Request $request)
+    {
+        $repartidor=App\Empleados::find($request->id_repartidor);
+
+        foreach ($repartidor->ventas as $key) {
+            if($key->pivot->status=="No Cancelado"){
+                $key->pivot->status="Cancelado";
+                $key->pivot->save();
+            }
+        }
+
+        toastr()->success('Éxito!!', 'Bidones pagados a repartidor');
+        return redirect()->to('pendientes');
+    }
+
 }
