@@ -60,23 +60,19 @@
               <div class="col-md-3">
                   <label for="">status</label>
                   <div class="row justify-content-center">
-                    <div class="col-lg-6">
                       <div class="custom-control custom-checkbox">
                           <input name="cancelado" type="checkbox" class="custom-control-input" id="customCheck1" value="1">
                           <label class="custom-control-label" for="customCheck1">Pagado</label>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
                       <div class="custom-control custom-checkbox">
                         <input name="no_cancelado" type="checkbox" class="custom-control-input" id="customCheck2" value="1">
                         <label class="custom-control-label" for="customCheck2">No Pagado</label>
                       </div>                  
-                    </div>
                   </div>
               </div>
             </div>
             <div class="mt-4 mb-4">
-              <button class="btn btn-success">Generar</button>
+              <button class="btn btn-success">Buscar</button>
             </div>
           </center>
           <div class="shadow border border-default" style="border-radius: 20px;">
