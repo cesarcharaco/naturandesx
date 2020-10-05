@@ -64,7 +64,7 @@
             <li class="nav-item">
               <a href="{{ route('pendientes') }}" class="nav-link">
                 <i class="nav-icon far fa-circle text-info"></i>
-                <p>Ventas Pendientes</p>
+                <p>Ventas por Pagar</p>
               </a>
             </li>
           @endif
