@@ -78,32 +78,45 @@
               </div>
             </center>
           </form>
-          <div class="shadow border border-default" style="border-radius: 20px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="position: relative !important;">
-                  <div id="cargando" class="mt-2 mb-2" style="display: none;">
-                    <center>
-                      <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                    </center>
-                  </div>
-                  <div id="tablePendientes">
-                    <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed" style="width: 100% !important;">
-                      <thead class="text-capitalize bg-primary">
-                          <tr>
-                            <th>Nombre</th>
-                            <th>RUT</th>
-                            <th>Total</th>
-                          </tr>
-                      </thead>
-                      <tbody id="bodyPendiente">
-                      </tbody>
-                    </table>
+          @if($mostrar_tabla == 1)
+            <div class="shadow border border-default" style="border-radius: 20px;">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12" style="position: relative !important;">
+                    <div id="cargando" class="mt-2 mb-2" style="display: none;">
+                      <center>
+                        <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                      </center>
+                    </div>
+                    <div id="tablePendientes">
+                      <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+                        <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
+                          <thead class="text-capitalize bg-primary">
+                            <tr>
+                              <th>Cliente</th>
+                              <th>Promoción</th>
+                              <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bodyPendiente">
+                          @foreach($rep_ventas as $key)
+                            <tr style="background-color: white; display: none !important;" class="fila{{$key->id}}">
+                              <td>{{$key->nombres}} {{$key->apellidos}}<br>{{$key->rut}}</td>
+                              <td>{{$key->created_at}}</td>
+                              <td><strong>Promoción</strong><br>
+                                Cant: <strong>{{$key->cantidad}}</strong><br>
+                                <strong>{{$key->monto_total}}.00$</strong>
+                              </td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          @endif
         </div>
       </div>
     </div>
