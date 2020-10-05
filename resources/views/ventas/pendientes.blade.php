@@ -35,7 +35,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label>Repartidor <b style="color: red;">*</b></label>
-                  <select class="form-control select2 choices form-select multiple-remove shadow" name="id_repartidor[]" required="required" style="border-radius: 30px;">
+                  <select class="form-control select2 choices form-select multiple-remove shadow" name="id_repartidor" required="required" style="border-radius: 30px;">
                     <option value="">Seleccione Repartidor</option>
                     @foreach($repartidores as $key)
                       @if($key->usuario->tipo_usuario=="Empleado")
@@ -58,7 +58,6 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="card-body border shadow" style="border-radius: 30px;">
                   <label for="">status</label>
                   <div class="row justify-content-center">
                     <div class="col-lg-6">
@@ -74,7 +73,6 @@
                       </div>                  
                     </div>
                   </div>
-                </div>
               </div>
             </div>
             <div class="mt-4 mb-4">
