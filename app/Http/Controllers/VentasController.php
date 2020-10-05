@@ -186,4 +186,119 @@ class VentasController extends Controller
         return redirect()->to('pendientes');
     }
 
+    public function buscar_ventas_pendientes(Request $request)
+    {
+        if ($request->desde > $request->hasta) {
+            toastr()->error('Error!!', ' Fecha desde no puede ser mayor a fecha hasta');
+            return redirect()->back();
+        } else {
+            if ($request->form_empleados==1) {
+                //dd(is_null($request->no_cancelado));
+                $repartidores=$request->id_repartidor;
+                //dd($repartidores);
+
+                if(is_null($request->cancelado) and $request->no_cancelado==1){
+                    $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                    ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                    ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                    ->where('empleados_has_ventas.status','No Cancelado')
+                    ->whereIn('empleados.id', $request->id_repartidor)->get();
+
+                    //dd($rep_ventas);
+                    $no_cancelado = count($rep_ventas);
+
+                    $ventas = Ventas::all();
+                    $repartidores = Empleados::where('status','Activo')->get();
+                    $clientes=Clientes::where('status','Activo')->get();
+                    //DATOS GENERAL EN REPORTES CLIENTES
+                    $can_cli = Ventas::groupby('id_cliente')->count();
+                    $can_pro = Ventas::select(\DB::raw('SUM(cantidad) as cantidad'))->get();
+                    foreach ($can_pro as $key) {
+                        $can_pro = $key->cantidad;
+                    }
+
+                    return view();
+
+
+                }elseif(is_null($request->no_cancelado) and $request->cancelado==1){
+                   
+                    $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                    ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                    ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                    ->where('empleados_has_ventas.status','Cancelado')
+                    ->whereIn('empleados.id', $request->id_repartidor)->get();
+
+                    //dd($rep_ventas);
+                    $cancelado = count($rep_ventas);
+                    $ventas = Ventas::all();
+                    $repartidores = Empleados::where('status','Activo')->get();
+                    $clientes=Clientes::where('status','Activo')->get();
+
+                    //DATOS GENERAL EN REPORTES CLIENTES
+                    $can_cli = Ventas::groupby('id_cliente')->count();
+                    $can_pro = Ventas::select(\DB::raw('SUM(cantidad) as cantidad'))->get();
+                    foreach ($can_pro as $key) {
+                        $can_pro = $key->cantidad;
+                    }
+                    return view();
+                }else{
+                    $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->get();
+                    $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                        ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                        ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                        ->whereIn('empleados.id', $request->id_repartidor)->get();
+
+                    $cancelado = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                        ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                        ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                        ->where('empleados_has_ventas.status','Cancelado')
+                        ->whereIn('empleados.id', $request->id_repartidor)->count();
+
+                    $no_cancelado = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                        ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                        ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                        ->where('empleados_has_ventas.status','No Cancelado')
+                        ->whereIn('empleados.id', $request->id_repartidor)->count();
+
+                    $ventas = Ventas::all();
+                    $repartidores = Empleados::where('status','Activo')->get();
+                    $clientes=Clientes::where('status','Activo')->get();
+
+                    //DATOS GENERAL EN REPORTES CLIENTES
+                    $can_cli = Ventas::groupby('id_cliente')->count();
+                    $can_pro = Ventas::select(\DB::raw('SUM(cantidad) as cantidad'))->get();
+                    foreach ($can_pro as $key) {
+                        $can_pro = $key->cantidad;
+                    }
+
+                    return view();
+                }
+            } else if ($request->form_clientes==1){
+                $ventas = ventas::select('ventas.*','clientes.*')
+                ->join('clientes', 'clientes.id', '=', 'ventas.id_cliente')
+                ->join('promociones', 'promociones.id', '=', 'ventas.id_promocion')
+                ->whereBetween('ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                ->whereIn('clientes.id', $request->id_clientes)->get();
+                
+                $can_cli = Ventas::whereIn('id_cliente', $request->id_clientes)->groupby('id_cliente')->count();
+                $can_pro = Ventas::select(\DB::raw('SUM(cantidad) as cantidad'))
+                ->whereBetween('ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                ->whereIn('id_cliente', $request->id_clientes)->get();
+                foreach ($can_pro as $key) {
+                    $can_pro = $key->cantidad;
+                }
+
+                $repartidores = Empleados::where('status','Activo')->get();
+                $clientes=Clientes::where('status','Activo')->get();
+
+                $rep_ventas=EmpleadosVentas::all();
+
+                $cancelado = EmpleadosVentas::where('status','Cancelado')->count();
+                $no_cancelado = EmpleadosVentas::where('status','No Cancelado')->count();
+
+                return view();
+            }
+        }
+    }
+
 }
