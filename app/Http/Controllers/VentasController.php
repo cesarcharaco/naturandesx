@@ -221,7 +221,7 @@ class VentasController extends Controller
                     $can_pro = $key->cantidad;
                 }
 
-                return view('ventas.pendientes',compact('mostrar_tabla'));
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado'));
 
 
             }elseif(is_null($request->no_cancelado) and $request->cancelado==1){
@@ -244,7 +244,7 @@ class VentasController extends Controller
                 foreach ($can_pro as $key) {
                     $can_pro = $key->cantidad;
                 }
-                return view('ventas.pendientes',compact('mostrar_tabla'));
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado'));
             }else{
                 $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->get();
                 $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
@@ -275,7 +275,7 @@ class VentasController extends Controller
                     $can_pro = $key->cantidad;
                 }
 
-                return view('ventas.pendientes',compact('mostrar_tabla'));
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado'));
             }
         
         }
