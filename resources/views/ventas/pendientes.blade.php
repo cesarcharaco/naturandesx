@@ -50,13 +50,13 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label>Desde</label>
-                    <input id="inputDesde" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="desde" style="border-radius: 30px;">
+                    <input id="inputDesde" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="desde" style="border-radius: 30px;" required="required">
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
                     <label>Hasta</label>
-                    <input id="inputHasta" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="hasta" style="border-radius: 30px;">
+                    <input id="inputHasta" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="hasta" style="border-radius: 30px;" required="required">
                   </div>
                 </div>
                 <div class="col-md-3">
