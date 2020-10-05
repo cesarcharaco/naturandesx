@@ -30,51 +30,54 @@
     <div class="col-md-12">             
       <div class="card bg-white shadow" style="border-radius: 30px !important;">
         <div class="card-body">
-          <center>
-            <div class="row mb-4">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Repartidor <b style="color: red;">*</b></label>
-                  <select class="form-control select2 choices form-select multiple-remove shadow" name="id_repartidor" required="required" style="border-radius: 30px;">
-                    <option value="">Seleccione Repartidor</option>
-                    @foreach($repartidores as $key)
-                      @if($key->usuario->tipo_usuario=="Empleado")
-                        <option value="{{$key->id}}" style="color: black !important;">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
-                      @endif
-                    @endforeach()
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Desde</label>
-                  <input id="inputDesde" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="desde" style="border-radius: 30px;">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Hasta</label>
-                  <input id="inputHasta" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="hasta" style="border-radius: 30px;">
-                </div>
-              </div>
-              <div class="col-md-3">
-                  <label for="">status</label>
-                  <div class="row justify-content-center">
-                      <div class="custom-control custom-checkbox">
-                          <input name="cancelado" type="checkbox" class="custom-control-input" id="customCheck1" value="1">
-                          <label class="custom-control-label" for="customCheck1">Pagado</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input name="no_cancelado" type="checkbox" class="custom-control-input" id="customCheck2" value="1">
-                        <label class="custom-control-label" for="customCheck2">No Pagado</label>
-                      </div>                  
+          <form action="{{ route('pendientes.buscar') }}" name="ventas_pendientes" method="POST">
+            @csrf
+            <center>
+              <div class="row mb-4">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Repartidor <b style="color: red;">*</b></label>
+                    <select class="form-control select2 choices form-select multiple-remove shadow" name="id_repartidor" required="required" style="border-radius: 30px;">
+                      <option value="">Seleccione Repartidor</option>
+                      @foreach($repartidores as $key)
+                        @if($key->usuario->tipo_usuario=="Empleado")
+                          <option value="{{$key->id}}" style="color: black !important;">{{$key->nombres}} {{$key->apellidos}}.- {{$key->rut}}</option>
+                        @endif
+                      @endforeach()
+                    </select>
                   </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Desde</label>
+                    <input id="inputDesde" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="desde" style="border-radius: 30px;">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Hasta</label>
+                    <input id="inputHasta" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="hasta" style="border-radius: 30px;">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="">status</label>
+                    <div class="row justify-content-center">
+                        <div class="custom-control custom-checkbox">
+                            <input name="cancelado" type="checkbox" class="custom-control-input" id="customCheck1" value="1">
+                            <label class="custom-control-label" for="customCheck1">Pagado</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input name="no_cancelado" type="checkbox" class="custom-control-input" id="customCheck2" value="1">
+                          <label class="custom-control-label" for="customCheck2">No Pagado</label>
+                        </div>                  
+                    </div>
+                </div>
               </div>
-            </div>
-            <div class="mt-4 mb-4">
-              <button class="btn btn-success">Buscar</button>
-            </div>
-          </center>
+              <div class="mt-4 mb-4">
+                <button class="btn btn-success">Buscar</button>
+              </div>
+            </center>
+          </form>
           <div class="shadow border border-default" style="border-radius: 20px;">
             <div class="card-body">
               <div class="row">
