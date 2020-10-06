@@ -82,8 +82,15 @@
             @include('ventas.layouts.pagar')
             <div class="shadow border border-default mb-4" style="border-radius: 20px;">
               <div class="card-body">
-                <h3>Repartidor: <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong></h3>
-                <h3>Total de Bidones a Pagar: </h3>
+                <h5>Repartidor: <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong></h5>
+                @if($no_cancelado>=0)
+                <h5>Total de Bidones a Pagar: <span style="color: red;">{{ $no_cancelado }}</span></h5>
+                <div class="col-md-12" style="position: relative !important;">
+                      @if(!is_null($rep_ventas))
+                        <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
+                      @endif
+                    </div>
+                @endif
               </div>
             </div>
             <div class="shadow border border-default" style="border-radius: 20px;">
@@ -95,11 +102,7 @@
                         <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                       </center>
                     </div>
-                    <div class="col-md-12" style="position: relative !important;">
-                      @if(!is_null($rep_ventas))
-                        <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
-                      @endif
-                    </div>
+                    
                     <div id="tablePendientes" class="mt-5">
                       <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
                         <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">

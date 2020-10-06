@@ -176,13 +176,22 @@ class VentasController extends Controller
     public function pagar_venta(Request $request)
     {
         $repartidor=App\Empleados::find($request->id_repartidor);
-
-        foreach ($repartidor->ventas as $key) {
+        $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                ->where('empleados_has_ventas.status','No Cancelado')
+                ->where('empleados.id', $request->id_repartidor)->get();
+        foreach ($rep_ventas as $key) {
+            $venta=EmpleadosVentas::find($key->id);
+            $venta->status="Cancelado";
+            $venta->save();
+        }
+        /*foreach ($repartidor->ventas as $key) {
             if($key->pivot->status=="No Cancelado"){
                 $key->pivot->status="Cancelado";
                 $key->pivot->save();
             }
-        }
+        }*/
 
         toastr()->success('Éxito!!', 'Bidones pagados a repartidor');
         return redirect()->to('pendientes');
@@ -191,7 +200,11 @@ class VentasController extends Controller
     public function buscar_ventas_pendientes(Request $request)
     {
         //dd($request->all());
+        $no_cancelado=-1;
         $mostrar_tabla=1;
+        $id_repartidor=$request->id_repartidor;
+        $desde=$request->desde;
+        $hasta=$request->hasta;
         if ($request->desde > $request->hasta) {
             toastr()->error('Error!!', ' Fecha desde no puede ser mayor a fecha hasta');
             return redirect()->back();
@@ -222,7 +235,7 @@ class VentasController extends Controller
                     $can_pro = $key->cantidad;
                 }
 
-                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes'));
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta'));
 
 
             }elseif(is_null($request->no_cancelado) and $request->cancelado==1){
@@ -245,7 +258,7 @@ class VentasController extends Controller
                 foreach ($can_pro as $key) {
                     $can_pro = $key->cantidad;
                 }
-                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes'));
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta'));
             }else{
                 $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->get();
                 $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*','empleados_has_ventas.status')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
@@ -276,7 +289,7 @@ class VentasController extends Controller
                     $can_pro = $key->cantidad;
                 }
 
-                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes'));
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta'));
             }
         
         }
