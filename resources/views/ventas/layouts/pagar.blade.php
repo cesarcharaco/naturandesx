@@ -1,57 +1,34 @@
-<div class="modal fade" id="pagar" role="dialog" style="border-radius: 20px;">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div id="cargando2" class="mt-2 mb-2" style="display: none;">
-                  <center>
-                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                  </center>
-                </div>
-                <form action="">
-                    <div id="mostrarPagar"  style="display: none;">
-                        <table class="table table-striped border border-orange" style="width: 100%; border-radius: 20px !important;">
-                            <thead class="bg-primary">
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Fecha</th>
-                                    <th>Cantidad</th>
-                                    <th>Total a pagar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php 
-                                    $num=0;
-                                    $monto=0;
-                                @endphp
-                                @foreach($rep_ventas as $key)
-                                    @if($key->status != 'Cancelado')
-                                      <tr id="filaP{{$num}}" style="display: none;" align="center">
-                                        <td>{{$key->nombres}} {{$key->apellidos}}<br>{{$key->rut}}</td>
-                                        <td>{{$key->created_at}}</td>
-                                        <td><strong>Promoción</strong><br>
-                                            Cant: <strong>{{$key->cantidad}}</strong>
-                                        </td>
-                                        <td>
-                                            <strong>{{$key->monto_total}}.00$</strong>
-                                        </td>
-                                      </tr>
-                                        @php
-                                            $num++;
-                                            $monto=$monto+$key->monto_total;
-                                        @endphp
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="mt-2" align="right">
-                            Total a Pagar: <h2>{{$monto}}.00$</h2>
-                        </div>
-                        <center>
-                            <button class="btn btn-warning text-white"><strong>Pagar</strong></button>
-                        </center>
+<div class="modal fade" id="pagar" role="dialog" >
+    <div class="modal-dialog modal-default">
+        <div class="modal-content border border-warning" style="border-radius: 20px !important;">
+            <div class="modal-header shadow">
+                <h4>Pagar ventas</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('pagar_pendientes') }}" name="pagar_pendientes" method="POST">
+                @csrf
+                <div class="modal-body ">
+                    <div id="cargando2" class="mt-2 mb-2" style="display: none;">
+                      <center>
+                        <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                      </center>
                     </div>
-                </form>
-            </div>                            
+                    <div id="mostrarPagar"  style="display: none;">
+                        <h5>¿Está realmente seguro de querer pagar un total de <strong>{{$no_cancelado}}</strong> bidones al repartidor <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong>?</h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div style="float: left !important; justify-content: left !important;">
+                        <button type="button" class="btn btn-default shadow" data-dismiss="modal" style="float: left !important;"><strong>Cancelar</strong></button>
+                    </div>
+                    <input type="hidden" name="id_repartidor" id="id_repartidorPagar" value="{{$id_repartidor}}">
+                    <input type="hidden" name="desde" id="desdePagar" value="{{$desde}}">
+                    <input type="hidden" name="hasta" id="hastaPagar" value="{{$hasta}}">
+                    <button type="submit" class="btn btn-warning text-white shadow" style="float: right;"><strong>Pagar</strong></button>
+                </div>                            
+            </form>
         </div>
     </div>
 </div>

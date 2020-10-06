@@ -159,6 +159,9 @@
 
     function pagar(count) {
       // $('#pagar').modal('show');
+      $('#id_repartidorPagar').val();
+      $('#desdePagar').val();
+      $('#hastaPagar').val();
       tiempo = 500;
       $('#mostrarPagar').hide();
       $('#cargando2').show();
