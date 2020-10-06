@@ -80,6 +80,12 @@
           </form>
           @if($mostrar_tabla == 1)
             @include('ventas.layouts.pagar')
+            <div class="shadow border border-default mb-4" style="border-radius: 20px;">
+              <div class="card-body">
+                <h3>Repartidor: <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong></h3>
+                <h3>Total de Bidones a Pagar: </h3>
+              </div>
+            </div>
             <div class="shadow border border-default" style="border-radius: 20px;">
               <div class="card-body">
                 <div class="row">
@@ -100,32 +106,37 @@
                           <thead class="text-capitalize bg-primary">
                             <tr>
                               <th>Cliente</th>
-                              <th>Promoción</th>
-                              <th>Total</th>
+                              <th>Cantidad</th>
+                              <th>Monto</th>
+                              <th>Fecha</th>
                             </tr>
                         </thead>
                         <tbody id="bodyPendiente">
                           @foreach($rep_ventas as $key)
-                            @if($key->status == 'Cancelado')
-                              <tr style="" class="fila{{$key->id}}">
-                                <td><img src="{{ asset('img/checked.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key->nombres}} {{$key->apellidos}}<br>{{$key->rut}}</td>
-                                <td>{{$key->created_at}}</td>
-                                <td><strong>Promoción</strong><br>
-                                    Cant: <strong>{{$key->cantidad}}</strong><br>
-                                    <strong>{{$key->monto_total}}.00$</strong>
-                                </td>
-                              </tr>
-                            @else
-                              <tr style="background-color: #E6B0AA;" class="fila{{$key->id}} text-white">
-                                <td><img src="{{ asset('img/error.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key->nombres}} {{$key->apellidos}}<br>{{$key->rut}}</td>
-                                <td>{{$key->created_at}}</td>
-                                <td><strong>Promoción</strong><br>
-                                    Cant: <strong>{{$key->cantidad}}</strong><br>
-                                    <strong>{{$key->monto_total}}.00$</strong>
-                                </td>
-                              </tr>
-                            @endif
-                          @endforeach
+                            @foreach($clientes as $key2)
+                              @if($key2->id == $key->id_cliente)
+                                @if($key->status == 'Cancelado')
+                                  <tr style="" class="fila{{$key->id}}">
+                                    <td><img src="{{ asset('img/checked.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key2->nombres}} {{$key2->apellidos}}<br>{{$key2->rut}}</td>
+                                    <td>
+                                      <strong>{{$key->cantidad}}</strong>
+                                    </td>
+                                    <td><strong>{{$key->monto_total}}.00$</strong></td>
+                                    <td>{{$key->created_at}}</td>
+                                  </tr>
+                                @else
+                                  <tr style="background-color: #E6B0AA;" class="fila{{$key->id}}">
+                                    <td><img src="{{ asset('img/error.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key2->nombres}} {{$key2->apellidos}}<br>{{$key2->rut}}</td>
+                                    <td>
+                                      <strong>{{$key->cantidad}}</strong>
+                                    </td>
+                                    <td><strong>{{$key->monto_total}}.00$</strong></td>
+                                    <td>{{$key->created_at}}</td>
+                                  </tr>
+                                @endif
+                              @endif
+                            @endforeach()
+                          @endforeach()
                         </tbody>
                       </table>
                     </div>
