@@ -203,7 +203,7 @@ class VentasController extends Controller
 
             if(is_null($request->cancelado) and $request->no_cancelado==1){
             
-                $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*','empleados_has_ventas.status')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                 ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                 ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                 ->where('empleados_has_ventas.status','No Cancelado')
@@ -227,7 +227,7 @@ class VentasController extends Controller
 
             }elseif(is_null($request->no_cancelado) and $request->cancelado==1){
                
-                $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*','empleados_has_ventas.status')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                 ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                 ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                 ->where('empleados_has_ventas.status','Cancelado')
@@ -248,7 +248,7 @@ class VentasController extends Controller
                 return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores'));
             }else{
                 $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->get();
-                $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*','empleados_has_ventas.status')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                     ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados.id', $request->id_repartidor)->get();

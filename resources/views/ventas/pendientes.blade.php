@@ -26,6 +26,7 @@
 
 @section('content')
 <div class="container-fluid">
+  @include('ventas.layouts.pagar')
   <div class="row mt-2 mb-2">
     <div class="col-md-12">             
       <div class="card bg-white shadow" style="border-radius: 30px !important;">
@@ -49,13 +50,13 @@
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label>Desde</label>
+                    <label>Desde <b style="color: red;">*</b></label>
                     <input id="inputDesde" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="desde" style="border-radius: 30px;" required="required">
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label>Hasta</label>
+                    <label>Hasta <b style="color: red;">*</b></label>
                     <input id="inputHasta" max="<?php echo date('Y-m-d');?>" type="date" class="form-control shadow" name="hasta" style="border-radius: 30px;" required="required">
                   </div>
                 </div>
@@ -88,7 +89,12 @@
                         <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                       </center>
                     </div>
-                    <div id="tablePendientes">
+                    <div class="col-md-12" style="position: relative !important;">
+                      @if(!is_null($rep_ventas))
+                        <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
+                      @endif
+                    </div>
+                    <div id="tablePendientes" class="mt-5">
                       <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
                         <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
                           <thead class="text-capitalize bg-primary">
@@ -100,14 +106,25 @@
                         </thead>
                         <tbody id="bodyPendiente">
                           @foreach($rep_ventas as $key)
-                            <tr style="background-color: white; display: none !important;" class="fila{{$key->id}}">
-                              <td>{{$key->nombres}} {{$key->apellidos}}<br>{{$key->rut}}</td>
-                              <td>{{$key->created_at}}</td>
-                              <td><strong>Promoción</strong><br>
-                                Cant: <strong>{{$key->cantidad}}</strong><br>
-                                <strong>{{$key->monto_total}}.00$</strong>
-                              </td>
-                            </tr>
+                            @if($key->status == 'Cancelado')
+                              <tr style="" class="fila{{$key->id}}">
+                                <td><img src="{{ asset('img/checked.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key->nombres}} {{$key->apellidos}}<br>{{$key->rut}}</td>
+                                <td>{{$key->created_at}}</td>
+                                <td><strong>Promoción</strong><br>
+                                    Cant: <strong>{{$key->cantidad}}</strong><br>
+                                    <strong>{{$key->monto_total}}.00$</strong>
+                                </td>
+                              </tr>
+                            @else
+                              <tr style="background-color: #E6B0AA;" class="fila{{$key->id}} text-white">
+                                <td><img src="{{ asset('img/error.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key->nombres}} {{$key->apellidos}}<br>{{$key->rut}}</td>
+                                <td>{{$key->created_at}}</td>
+                                <td><strong>Promoción</strong><br>
+                                    Cant: <strong>{{$key->cantidad}}</strong><br>
+                                    <strong>{{$key->monto_total}}.00$</strong>
+                                </td>
+                              </tr>
+                            @endif
                           @endforeach
                         </tbody>
                       </table>
@@ -125,6 +142,26 @@
 @endsection
 
   <script type="text/javascript">
+
+    function pagar(count) {
+      // $('#pagar').modal('show');
+      tiempo = 500;
+      $('#mostrarPagar').hide();
+      $('#cargando2').show();
+      setTimeout(function() {
+        $('#mostrarPagar').fadeIn(300);
+        $('#cargando2').hide();
+        for (var i = 0; i < count; i++) {
+          if ($('#filaP'+i) != null) {
+            // setTimeout(function() {
+              $('#filaP'+i).fadeIn(300);
+              // alert(tiempo);
+              tiempo=+tiempo + 500;
+            // }, tiempo);
+          }
+        }
+      }, 1500);
+    }
 
     function busqueda() {
       var desde = $('#inputDesde').val();
