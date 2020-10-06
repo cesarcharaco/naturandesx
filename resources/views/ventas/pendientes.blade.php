@@ -26,7 +26,6 @@
 
 @section('content')
 <div class="container-fluid">
-  @include('ventas.layouts.pagar')
   <div class="row mt-2 mb-2">
     <div class="col-md-12">             
       <div class="card bg-white shadow" style="border-radius: 30px !important;">
@@ -80,6 +79,7 @@
             </center>
           </form>
           @if($mostrar_tabla == 1)
+            @include('ventas.layouts.pagar')
             <div class="shadow border border-default" style="border-radius: 20px;">
               <div class="card-body">
                 <div class="row">
