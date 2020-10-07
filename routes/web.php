@@ -20,6 +20,7 @@ Route::get('registerClienteExterno','ClienteExternoController@register')->name('
 Route::get('buscar_preguntas/{id_pregunta}/seguridad','ClienteExternoController@buscar_preguntas');
 Auth::routes();
 Route::post('registerCliente', 'Auth\RegisterController@store')->name('registerCliente');
+ROute::post('password.reset','Auth\ResetPasswordController@resetPassword')->name('password.reset');
 
 Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('/home', 'HomeController@index')->name('home');
