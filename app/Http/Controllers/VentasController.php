@@ -194,7 +194,7 @@ class VentasController extends Controller
         }*/
 
         toastr()->success('Éxito!!', 'Bidones pagados a repartidor');
-        return redirect()->to('pendientes');
+        return redirect()->to(route('pendientes'));
     }
 
     public function buscar_ventas_pendientes(Request $request)

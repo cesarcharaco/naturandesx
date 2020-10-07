@@ -86,7 +86,7 @@
                 @if($no_cancelado>=0)
                 <h5>Total de Bidones a Pagar: <span style="color: red;">{{ $no_cancelado }}</span></h5>
                 <div class="col-md-12" style="position: relative !important;">
-                      @if(!is_null($rep_ventas))
+                      @if(!is_null($rep_ventas) && $no_cancelado>0)
                         <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
                       @endif
                     </div>
