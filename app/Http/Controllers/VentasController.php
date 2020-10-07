@@ -175,7 +175,7 @@ class VentasController extends Controller
 
     public function pagar_venta(Request $request)
     {
-        $repartidor=App\Empleados::find($request->id_repartidor);
+        // $repartidor=App\Empleados::find($request->id_repartidor);
         $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                 ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                 ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
