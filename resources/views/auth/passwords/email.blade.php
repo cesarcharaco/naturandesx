@@ -14,11 +14,12 @@
             <div class="form-group row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="email" class="col-md-12 col-form-label email">{{ __('E-Mail Address') }}</label>
-                        <input id="email" type="email" class="form-control email @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Correo">
+                        <label for="email" class="col-md-12 col-form-label email">RUT</label>
+                        <input id="email" type="text" class="form-control email @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" maxlength="12" required autocomplete="rut" autofocus placeholder="Rut">
+                        <p>Ejm: 1234567-<strong>8</strong></p>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <strong>No se ha encontrado un usuario con ese RUT.</strong>
                             </span>
                         @enderror
                     </div>
