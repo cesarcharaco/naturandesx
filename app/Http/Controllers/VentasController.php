@@ -223,7 +223,8 @@ class VentasController extends Controller
                 ->where('empleados.id', $request->id_repartidor)->get();
 
                 //dd($rep_ventas);
-                $no_cancelado = count($rep_ventas);
+                //$no_cancelado = count($rep_ventas);
+
 
                 $ventas = Ventas::all();
                 $repartidores = Empleados::where('status','Activo')->get();
@@ -247,6 +248,13 @@ class VentasController extends Controller
                 ->where('empleados.id', $request->id_repartidor)->get();
 
                 //dd($rep_ventas);
+                if (count($rep_ventas)>0) {
+                    $no_cancelado=0;
+                    foreach ($rep_ventas as $key) {
+                        $no_cancelado+=$key->cantidad;
+                    }
+                }
+                
                 $cancelado = count($rep_ventas);
                 $ventas = Ventas::all();
                 $repartidores = Empleados::where('status','Activo')->get();
@@ -272,12 +280,17 @@ class VentasController extends Controller
                     ->where('empleados_has_ventas.status','Cancelado')
                     ->where('empleados.id', $request->id_repartidor)->count();
 
-                $no_cancelado = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                $no_cancelado_search = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                     ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados_has_ventas.status','No Cancelado')
-                    ->where('empleados.id', $request->id_repartidor)->count();
-
+                    ->where('empleados.id', $request->id_repartidor)->get();
+                    if(count($no_cancelado_search)>0){
+                        $no_cancelado=0;
+                        foreach ($no_cancelado_search as $key) {
+                            $no_cancelado+=$key->cantidad;
+                        }
+                    }
                 $ventas = Ventas::all();
                 $repartidores = Empleados::where('status','Activo')->get();
                 $clientes=Clientes::where('status','Activo')->get();
