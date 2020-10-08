@@ -20,7 +20,7 @@ Route::get('registerClienteExterno','ClienteExternoController@register')->name('
 Route::get('buscar_preguntas/{id_pregunta}/seguridad','ClienteExternoController@buscar_preguntas');
 Auth::routes();
 Route::post('registerCliente', 'Auth\RegisterController@store')->name('registerCliente');
-ROute::post('password.reset','Auth\ResetPasswordController@resetPassword')->name('password.reset');
+Route::post('password.reset','Auth\ResetPasswordController@resetPassword')->name('password.reset');
 
 Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('/home', 'HomeController@index')->name('home');
@@ -64,5 +64,10 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('historial/{desde}/{hasta}/{opcion}/buscar','VentasController@historial');
 	Route::get('repartidor/{id_venta}/buscar','VentasController@historial2');
 
+
+	Route::get('recuperacion','RecuperacionController@index')->name('recuperacion');
+	Route::post('recuperacion/seleccion','RecuperacionController@seleccion')->name('seleccion');
+	Route::post('recuperacion/validar','RecuperacionController@validar')->name('validar');
+	Route::post('recuperacion/nueva_clave','RecuperacionController@nueva_clave')->name('nueva_clave');
 	
 });
