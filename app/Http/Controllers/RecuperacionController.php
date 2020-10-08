@@ -35,19 +35,22 @@ class RecuperacionController extends Controller
     			$buscar->status="Vencido";
     			$buscar->save();
     		} else {
+    			
     			$enviado=new CodigoRecuperacion();
 	    		$enviado->email=$destinatario;
 	    		$enviado->codigo=$codigo;
+	    		$enviado->save();
     		}
+    		
     		//enviando correo
     			$r=Mail::send('auth.recuperacion.codigo_recuperacion',
-                        ['codigo'=>$codigo], function () use ($codigo,$asunto,$destinatario) {
+                        ['codigo'=>$codigo], function ($m) use ($codigo,$asunto,$destinatario) {
                         $m->from('promociones@naturandeschile.com', 'Naturandes!');
                         $m->to($destinatario)->subject($asunto);
                         
                     });
 
-    		toastr()->succes('Éxito!!', 'El código de recuperación ha sido enviado a su correo');
+    		toastr()->success('Éxito!!', 'El código de recuperación ha sido enviado a su correo');
     		 	return view('auth.recuperacion.validacion', compact('destinatario','opcion'));
     		}else{
     			toastr()->warning('Alerta!!', 'El correo ingresado no se encuentra registrado');
@@ -62,22 +65,13 @@ class RecuperacionController extends Controller
     private function generar_codigo()
     {
 
-		$key = '';
-    	$pattern = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    	$max = strlen($pattern)-1;
-    	for($i=0;$i < 8;$i++) $key .= $pattern{mt_rand(0,$max)};
-    	return $key;
-	
-
-		//Me funcionó esto
-			$key = '';
-		    $pattern = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		    $max = strlen($pattern)-1;
-		    
-		    for($i=0;$i < 8;$i++){
-		    	$key .= $pattern=mt_rand(0,$max);
-		    }
-		    return $key;	
-	    }
-    	//
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < 8; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;	
+	 }
+    
 }
