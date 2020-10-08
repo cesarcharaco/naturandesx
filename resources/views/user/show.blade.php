@@ -252,7 +252,7 @@
             </div>
             <h3 class="profile-username text-center" style="text-transform: uppercase;">{{$users->empleado->nombres}} {{$users->empleado->apellidos}}</h3>
             <p class="text-muted text-center">{{$users->tipo_usuario}}</p>
-            <ul class="list-group list-group-unbordered mb-3">
+            <!-- <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
                 <?php $favicon = $users->empleado->qr->codigo; ?>
                 <img class="card-img-top img-fluid" src="{{ asset($favicon) }}" alt="image-QR">
@@ -261,7 +261,7 @@
             <div class="text-center">
               <a href="#" class="btn btn-primary"><b>Descargar QR en PDF</b></a>
               <a href="#" class="btn btn-primary"><b>Enviar al email QR</b></a>              
-            </div>
+            </div> -->
           </div>
           <!-- /.card-body -->
         </div>
@@ -471,8 +471,8 @@
               <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/naturandes.jpg') }}" alt="User profile picture" style="width: 70%;">
             </div>
             <h3 class="profile-username text-center" style="text-transform: uppercase;">{{$users->empleado->nombres}} {{$users->empleado->apellidos}}</h3>
-            <p class="text-muted text-center">{{$users->tipo_usuario}}</p>
-            <ul class="list-group list-group-unbordered mb-3">
+            <p class="text-muted text-center">{{$users->tipo_usuario}}</p>            
+            <!-- <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
                 <?php $favicon = $users->empleado->qr->codigo; ?>
                 @if($favicon!="")
@@ -489,7 +489,7 @@
                 <a href="{{ route('descargar_qr_pdf', $users->empleado->id) }}" class="btn btn-primary" target="_blank"><b>Descargar QR en PDF</b></a>
                 <a href="{{ route('enviar_qr', $users->empleado->id) }}" class="btn btn-primary"><b>Enviar al email QR</b></a>
               @endif
-            </div>
+            </div> -->
           </div>
           <!-- /.card-body -->
         </div>
