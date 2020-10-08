@@ -35,7 +35,7 @@
 
       @if (Route::has('password.request'))
         <p class="mt-3">
-          <a style="float: left !important;" href="{{ route('password.request') }}">
+          <a style="float: left !important;" href="{{ route('recuperacion') }}">
               {{ __('Forgot Your Password?') }}
           </a>
         </p>

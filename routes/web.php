@@ -22,6 +22,11 @@ Auth::routes();
 Route::post('registerCliente', 'Auth\RegisterController@store')->name('registerCliente');
 Route::post('password.reset','Auth\ResetPasswordController@resetPassword')->name('password.reset');
 
+Route::get('recuperacion','RecuperacionController@index')->name('recuperacion');
+Route::post('recuperacion/seleccion','RecuperacionController@seleccion')->name('seleccion');
+Route::post('recuperacion/validar','RecuperacionController@validar')->name('validar');
+Route::post('recuperacion/nueva_clave','RecuperacionController@nueva_clave')->name('nueva_clave');
+
 Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::resource('clientes','ClientesController');
@@ -65,9 +70,5 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 	Route::get('repartidor/{id_venta}/buscar','VentasController@historial2');
 
 
-	Route::get('recuperacion','RecuperacionController@index')->name('recuperacion');
-	Route::post('recuperacion/seleccion','RecuperacionController@seleccion')->name('seleccion');
-	Route::post('recuperacion/validar','RecuperacionController@validar')->name('validar');
-	Route::post('recuperacion/nueva_clave','RecuperacionController@nueva_clave')->name('nueva_clave');
 	
 });
