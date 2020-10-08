@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function preguntas()
     {
-        return $this->belongsToMany('App\Preguntas','usuarios_has_preguntas','id_usuario','id_pregunta')->pivot('respuesta');
+        return $this->belongsToMany('App\Preguntas','usuarios_has_preguntas','id_usuario','id_pregunta')->withPivot('respuesta');
     }
 
 }

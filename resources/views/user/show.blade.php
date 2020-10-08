@@ -128,19 +128,20 @@
                   <hr>
 
                   <div class="form-group">                    
-                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridad</label>
+                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridada</label>
                     <div class="form-row">
                     @if(count($users->preguntas)>0)
                     @php $i=1; @endphp
                       @foreach($users->preguntas as $key)
                       <div class="col-md-3">
                         <label for="pregunta1">Pregunta {{ $i }}:</label>
-                        <b>{{ $key->pregunta }}</b>
+                       {{ $key->pregunta }}
                       </div>
                       <div class="col-md-3">
                         <label for="respuesta1">Respuesta: </label>
-                        <b>{{ $key->pivot->respuesta }}</b>
+                       {{ $key->pivot->respuesta }}
                       </div>
+                      @php $i++; @endphp
                       @endforeach
                       @else
                       <div class="col-md-12">
@@ -347,24 +348,26 @@
                   </div>
                   <hr>
                   <div class="form-group">                    
-                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridad{{ $users }}</label>
+                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridad</label>
                     <div class="form-row">
+                    @if(count($users->preguntas)>0)
+                    @php $i=1; @endphp
+                      @foreach($users->preguntas as $key)
                       <div class="col-md-3">
-                        <label for="pregunta1">Pregunta 1</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                        <label for="pregunta1">Pregunta {{ $i }}:</label>
+                       {{ $key->pregunta }}
                       </div>
                       <div class="col-md-3">
-                        <label for="respuesta1">Respuesta 1</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                        <label for="respuesta1">Respuesta: </label>
+                       {{ $key->pivot->respuesta }}
                       </div>
-                      <div class="col-md-3">
-                        <label for="pregunta2">Pregunta 2</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                      @php $i++; @endphp
+                      @endforeach
+                      @else
+                      <div class="col-md-12">
+                        <label for="respuesta2">No tiene preguntas de seguridad registradas</label>
                       </div>
-                      <div class="col-md-3">
-                        <label for="respuesta2">Respuesta 2</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
-                      </div>
+                      @endif
                     </div>
                   </div>
                   <div class="form-group">
@@ -575,22 +578,24 @@
                   <div class="form-group">                    
                     <label for="preguntas_seguridad">Preguntas y respuestas de seguridad</label>
                     <div class="form-row">
+                    @if(count($users->preguntas)>0)
+                    @php $i=1; @endphp
+                      @foreach($users->preguntas as $key)
                       <div class="col-md-3">
-                        <label for="pregunta1">Pregunta 1</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                        <label for="pregunta1">Pregunta {{ $i }}:</label>
+                        {{ $key->pregunta }}
                       </div>
                       <div class="col-md-3">
-                        <label for="respuesta1">Respuesta 1</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                        <label for="respuesta1">Respuesta: </label>
+                       {{ $key->pivot->respuesta }}
                       </div>
-                      <div class="col-md-3">
-                        <label for="pregunta2">Pregunta 2</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                      @php $i++; @endphp
+                      @endforeach
+                      @else
+                      <div class="col-md-12">
+                        <label for="respuesta2">No tiene preguntas de seguridad registradas</label>
                       </div>
-                      <div class="col-md-3">
-                        <label for="respuesta2">Respuesta 2</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
-                      </div>
+                      @endif
                     </div>
                   </div>
                   <div class="form-group">

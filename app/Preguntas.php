@@ -12,6 +12,6 @@ class Preguntas extends Model
 
     public function usuarios()
     {
-    	return $this->belongsToMany('App\User','usuarios_has_preguntas','id_pregunta','id_usuario')->pivot('respuesta');
+    	return $this->belongsToMany('App\User','usuarios_has_preguntas','id_pregunta','id_usuario')->withPivot('respuesta');
     }
 }
