@@ -57,8 +57,8 @@ class UserController extends Controller
     {
         $preguntas =  \DB::table('preguntas_seguridad')->get();
         $users=User::find($id);
-        
-        return view('user.show', compact('users','preguntas'));
+        $preguntas_user =  \DB::table('usuarios_has_preguntas')->where('id_usuario',$id)->get();
+        return view('user.show', compact('users','preguntas','preguntas_user'));
     }
     public function buscar_preguntas($id_pregunta)
     {

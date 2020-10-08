@@ -525,6 +525,28 @@
                         <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." disabled="disabled" data-parsley-equalto="#password" data-parsley-minlength="8">
                     </div>
                   </div>
+                  <hr>
+                  <div class="form-group">                    
+                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridad</label>
+                    <div class="form-row">
+                      <div class="col-md-3">
+                        <label for="pregunta1">Pregunta 1</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="respuesta1">Respuesta 1</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="pregunta2">Pregunta 2</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="respuesta2">Respuesta 2</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <div class="form-check">
                         <input class="form-check-input checkbox" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
@@ -537,7 +559,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="pregunta1">1era Pregunta de seguridad <b style="color: red;">*</b></label>
                         <select class="form-control" name="pregunta1" id="pregunta1" disabled="disabled">
-                          <option value="0">Seleccione una pregunta</option>
+                          <option value="">Seleccione una pregunta</option>
                           @foreach($preguntas as $key)
                             <option value="{{$key->id}}">{{$key->pregunta}}</option>
                           @endforeach()
@@ -552,9 +574,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="pregunta2">2da Pregunta de seguridad <b style="color: red;">*</b></label>
                         <select class="form-control" name="pregunta2" id="pregunta2" disabled="disabled">
-                          @foreach($preguntas as $key)
-                            <option value="{{$key->id}}">{{$key->pregunta}}</option>
-                          @endforeach()
+                          <option value="">Seleccione una pregunta</option>
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -680,7 +700,7 @@ $('#cambiar_preguntas').on('change',function () {
   $('#pregunta1').on('change',function(event){
     var id_pregunta=event.target.value;
     console.log(id_pregunta);
-    $.get('buscar_preguntas_p/'+id_pregunta+'/seguridad_p',function(data){
+    $.get('/buscar_preguntas_p/'+id_pregunta+'/seguridad_p',function(data){
       console.log('hola_buscar');
       if (data.length>0) {
         $('#pregunta2').empty();
@@ -693,6 +713,7 @@ $('#cambiar_preguntas').on('change',function () {
 
   });
 </script>
+
 <script src="{{ asset('plugins/parsleyjs/parsley.min.js') }}"></script>
 <script src="{{ asset('plugins/parsleyjs/i18n/es.js') }}"></script>
 @endsection
