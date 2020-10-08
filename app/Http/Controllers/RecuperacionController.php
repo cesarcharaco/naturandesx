@@ -62,11 +62,22 @@ class RecuperacionController extends Controller
     private function generar_codigo()
     {
 
-	 $key = '';
-     $pattern = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-     $max = strlen($pattern)-1;
-     for($i=0;$i < 8;$i++) $key .= $pattern{mt_rand(0,$max)};
-     return $key;
-		
-    }
+		$key = '';
+    	$pattern = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    	$max = strlen($pattern)-1;
+    	for($i=0;$i < 8;$i++) $key .= $pattern{mt_rand(0,$max)};
+    	return $key;
+	
+
+		//Me funcionó esto
+			$key = '';
+		    $pattern = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		    $max = strlen($pattern)-1;
+		    
+		    for($i=0;$i < 8;$i++){
+		    	$key .= $pattern=mt_rand(0,$max);
+		    }
+		    return $key;	
+	    }
+    	//
 }
