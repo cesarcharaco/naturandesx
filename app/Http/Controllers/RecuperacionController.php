@@ -84,12 +84,14 @@ class RecuperacionController extends Controller
 
     public function validar(Request $request)
     {
-        if ($request->opcion==1) {
+        $id_usuario=$request->id_usuario;
+        $opcion=$request->opcion;
+        if ($opcion==1) {
             $buscar=CodigoRecuperacion::where('id_usuario',$request->id_usuario)->where('codigo',$request->codigo)->where('status','Enviado')->first();
             if (!is_null($buscar)) {
                 $buscar->status="Usado";
                 toastr()->success('Éxito!!', 'Código correcto');
-                return view('auth.recuperacion.validacion', compact('opcion','id_usuario'));       
+                return view('auth.recuperacion.nueva_clave', compact('opcion','id_usuario'));       
             } else {
                 toastr()->warning('Alerta!!', 'Código Vencido o Incorrecto');
                 return redirect()->back();
@@ -97,7 +99,25 @@ class RecuperacionController extends Controller
             
 
         } else {
-            # code...
+            $usuario=User::find($request->id_usuario);
+            $hallado=0;
+            foreach ($usuario->preguntas as $key) {
+                if($key->pivot->respuesta==$respuesta1){
+                    $hallado++;
+                }
+                if($key->pivot->respuesta==$respuesta2){
+                    $hallado++;
+                }
+            }
+
+            if ($hallado==2) {
+                toastr()->success('Éxito!!', 'Código correcto');
+                return view('auth.recuperacion.nueva_clave', compact('opcion','id_usuario'));       
+            } else {
+                toastr()->warning('Alerta!!', 'Las respuestas no coinciden');
+                return redirect()->back();
+            }
+            
         }
         
     }
