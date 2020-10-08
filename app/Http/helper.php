@@ -39,3 +39,5 @@ function total_ventas_no_pagadas($id_repartidor)
 
 	return $cont;
 }
+
+
