@@ -58,6 +58,7 @@ class RecuperacionController extends Controller
     		}
     	} else {
     		# en caso de recuperación por preguntas de seguridad
+            return view('auth.recuperacion.validacion', compact('opcion'));
     	}
     	
     }

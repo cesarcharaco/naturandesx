@@ -126,25 +126,27 @@
                     </div>
                   </div>
                   <hr>
+
                   <div class="form-group">                    
                     <label for="preguntas_seguridad">Preguntas y respuestas de seguridad</label>
                     <div class="form-row">
+                    @if(count($users->preguntas)>0)
+                    @php $i=1; @endphp
+                      @foreach($users->preguntas as $key)
                       <div class="col-md-3">
-                        <label for="pregunta1">Pregunta 1</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                        <label for="pregunta1">Pregunta {{ $i }}:</label>
+                        <b>{{ $key->pregunta }}</b>
                       </div>
                       <div class="col-md-3">
-                        <label for="respuesta1">Respuesta 1</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                        <label for="respuesta1">Respuesta: </label>
+                        <b>{{ $key->pivot->respuesta }}</b>
                       </div>
-                      <div class="col-md-3">
-                        <label for="pregunta2">Pregunta 2</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
+                      @endforeach
+                      @else
+                      <div class="col-md-12">
+                        <label for="respuesta2">No tiene preguntas de seguridad registradas</label>
                       </div>
-                      <div class="col-md-3">
-                        <label for="respuesta2">Respuesta 2</label>
-                        <input type="text" class="form-control" value="" disabled="disabled">
-                      </div>
+                      @endif
                     </div>
                   </div>
                   <div class="form-group">
@@ -345,7 +347,7 @@
                   </div>
                   <hr>
                   <div class="form-group">                    
-                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridad</label>
+                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridad{{ $users }}</label>
                     <div class="form-row">
                       <div class="col-md-3">
                         <label for="pregunta1">Pregunta 1</label>
