@@ -26,6 +26,7 @@ class RecuperacionController extends Controller
     			//si el correo existe
     		$destinatario=$usuario->email;
     		$codigo=$this->generar_codigo();
+    		//dd($codigo);
     		$asunto="Código de Recuperación de Clave";
     		//buscando si tiene un código en estatus ENVIADO....
     		//para colocarlo como vencido y enviar otro
@@ -53,19 +54,19 @@ class RecuperacionController extends Controller
     			return redirect()->back();
     		}
     	} else {
-    		# code...
+    		# en caso de recuperación por preguntas de seguridad
     	}
     	
     }
 
     private function generar_codigo()
     {
-    	
-	    $key = '';
-	    $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
-	    $max = strlen($pattern)-1;
-	    for($i=0;$i < 8;$i++) $key .= $pattern{mt_rand(0,$max)};
-	    return $key;
+
+	 $key = '';
+     $pattern = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+     $max = strlen($pattern)-1;
+     for($i=0;$i < 8;$i++) $key .= $pattern{mt_rand(0,$max)};
+     return $key;
 		
     }
 }
