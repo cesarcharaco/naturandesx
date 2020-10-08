@@ -13,7 +13,8 @@
 
         <form method="POST" action="{{ route('validar') }}">
             @csrf
-
+            <input type="text" value="{{opcion}}" name="opcion">
+			<input type="text" value="{{id_usuario}}" name="id_usuario">
 	    	@if($opcion == 1)
 	            <div class="form-group row">
 	                <div class="col-md-12">
