@@ -57,6 +57,11 @@
                 </div>
             </center>
         </form>
+        <div class="form-footer text-center mt-5">
+            <p class="text-white">Volver
+                <a href="{{ route('login') }}">Iniciar sesión</a>
+            </p>
+        </div>
     </div>
 </div>
 @endsection
