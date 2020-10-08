@@ -22,6 +22,7 @@ class RecuperacionController extends Controller
     		//buscando correo en user
 
     		$usuario=User::where('email',$request->email)->first();
+            $id_usuario=$usuario->id;
     		if(!is_null($usuario)){
     			//si el correo existe
     		$destinatario=$usuario->email;
@@ -51,7 +52,7 @@ class RecuperacionController extends Controller
                     });
 
     		toastr()->success('Éxito!!', 'El código de recuperación ha sido enviado a su correo');
-    		 	return view('auth.recuperacion.validacion', compact('destinatario','opcion'));
+    		 	return view('auth.recuperacion.validacion', compact('id_usuario','opcion'));
     		}else{
     			toastr()->warning('Alerta!!', 'El correo ingresado no se encuentra registrado');
     			return redirect()->back();
