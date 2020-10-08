@@ -125,6 +125,28 @@
                         <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." disabled="disabled">
                     </div>
                   </div>
+                  <hr>
+                  <div class="form-group">                    
+                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridad</label>
+                    <div class="form-row">
+                      <div class="col-md-3">
+                        <label for="pregunta1">Pregunta 1</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="respuesta1">Respuesta 1</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="pregunta2">Pregunta 2</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="respuesta2">Respuesta 2</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <div class="form-check">
                         <input class="form-check-input checkbox" type="checkbox" value="1" id="cambiar_preguntas" name="cambiar_preguntas">
@@ -319,6 +341,28 @@
                     <div class="col-md-6 mb-3">
                         <label for="confirmar_password">Repita contraseña</label>
                         <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." disabled="disabled" data-parsley-equalto="#password" data-parsley-minlength="8">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="form-group">                    
+                    <label for="preguntas_seguridad">Preguntas y respuestas de seguridad</label>
+                    <div class="form-row">
+                      <div class="col-md-3">
+                        <label for="pregunta1">Pregunta 1</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="respuesta1">Respuesta 1</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="pregunta2">Pregunta 2</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="respuesta2">Respuesta 2</label>
+                        <input type="text" class="form-control" value="" disabled="disabled">
+                      </div>
                     </div>
                   </div>
                   <div class="form-group">
