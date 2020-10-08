@@ -8,6 +8,7 @@ use App\Empleados;
 use App\Clientes;
 use App\User;
 use App\CodigoRecuperacion;
+use App\Http\Requests\RecuperacionRequest;
 class RecuperacionController extends Controller
 {
     public function index()
@@ -59,11 +60,58 @@ class RecuperacionController extends Controller
     		}
     	} else {
     		# en caso de recuperación por preguntas de seguridad
-            return view('auth.recuperacion.validacion', compact('opcion'));
+            $rut=$request->rut.'-'.$request->verificador;
+            $usuario=User::where('rut',$rut)->first();
+            $id_usuario=$usuario->id;
+            if (!is_null($usuario)) {
+            $preguntas=array();
+            $i=0;
+            foreach ($usuario->preguntas as $key) {
+                $preguntas[$i]=$key->pregunta;
+                $i++;
+            }
+
+            return view('auth.recuperacion.validacion', compact('opcion','preguntas','id_usuario'));
+            } else {
+                # code...
+                toastr()->warning('Alerta!!', 'El RUT ingresado no se encuentra registrado');
+                return redirect()->back();   
+            }
+            
     	}
     	
     }
 
+    public function validar(Request $request)
+    {
+        if ($request->opcion==1) {
+            $buscar=CodigoRecuperacion::where('id_usuario',$request->id_usuario)->where('codigo',$request->codigo)->where('status','Enviado')->first();
+            if (!is_null($buscar)) {
+                $buscar->status="Usado";
+                toastr()->success('Éxito!!', 'Código correcto');
+                return view('auth.recuperacion.validacion', compact('opcion','id_usuario'));       
+            } else {
+                toastr()->warning('Alerta!!', 'Código Vencido o Incorrecto');
+                return redirect()->back();
+            }
+            
+
+        } else {
+            # code...
+        }
+        
+    }
+
+    public function nueva_clave(RecuperacionRequest $request)
+    {
+        $nueva_clave=\Hash::make($request->password);
+        $usuario=User::find($request->id_usuario);
+        $usuario->password=$nueva_clave;
+        $usuario->save();
+
+        toastr()->warning('Éxito!!', 'Contraseña cambiada');
+        return redirect()->to('/');
+    }
     private function generar_codigo()
     {
 
