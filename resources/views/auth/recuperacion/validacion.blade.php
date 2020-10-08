@@ -9,7 +9,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        <form method="POST" action="{{ route('seleccion') }}">
+        <form method="POST" action="{{ route('validar') }}">
             @csrf
             <div class="form-group row">
                 <div class="col-md-12">
