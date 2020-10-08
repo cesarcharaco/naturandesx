@@ -118,11 +118,11 @@
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." required="" disabled="disabled">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." disabled="disabled">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="confirmar_password">Repita contraseña</label>
-                        <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." required="" disabled="disabled">
+                        <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." disabled="disabled">
                     </div>
                   </div>
                   <div class="form-group">
@@ -314,11 +314,11 @@
                   <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." required="" disabled="disabled" data-parsley-minlength="8">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña..." disabled="disabled" data-parsley-minlength="8">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="confirmar_password">Repita contraseña</label>
-                        <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." required="" disabled="disabled" data-parsley-equalto="#password" data-parsley-minlength="8">
+                        <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." disabled="disabled" data-parsley-equalto="#password" data-parsley-minlength="8">
                     </div>
                   </div>
                   <div class="form-group">

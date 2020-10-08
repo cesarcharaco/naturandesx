@@ -159,7 +159,7 @@
                         <b>¡Información de interes!</b><br>
                         Su  registro ha sido exitoso.
                         <br><br>
-                        Si tiene alguna duda escribanos a la siguiente dirección de correo: <b>soporte@naturandes.cl</b>
+                        Si tiene alguna duda escribanos a la siguiente dirección de correo: <b>promociones@naturandeschile.com</b>
                       <br>
                       <br>
 
