@@ -24,13 +24,13 @@
                 </div>
             </div>
             <div id="vistaRut" style="display: none;">
+                <center>
+                    <label for="rut">RUT</label>
+                </center>
                 <div class="form-group row">
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="rut" class="col-md-12 col-form-label">RUT</label>
-                            <input id="rut" type="text" class="form-control @error('rut') is-invalid @enderror" name="rut" value="{{ old('rut') }}" maxlength="12" autocomplete="rut" autofocus placeholder="Ingrese RUT">
-                            <p>Ejm: 1234567-<strong>8</strong></p>
-                        </div>
+                        <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control input" required style="width: 80% !important; float: left;">
+                        <input type="number" name="verificador" min="0" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control input" style="width: 20% !important; float: right;">
                     </div>
                 </div>
                 <center>
@@ -76,6 +76,7 @@
                 }
             );
             $('#rut').removeAttr('required');
+            $('#verificador').removeAttr('required');
             $('#email').attr('required',true);
         }else{
             $('#vistaEmail').fadeOut('slow',
@@ -86,6 +87,7 @@
             );
             $('#email').removeAttr('required');
             $('#rut').attr('required',true);
+            $('#verificador').attr('required',true);
         }
     }
 </script>
