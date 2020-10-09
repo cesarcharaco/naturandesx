@@ -4,6 +4,7 @@
     @include('layouts.css')
     @include('layouts.css2')
     @toastr_css
+    @yield('css')
     <style type="text/css">
 	  body{
 	    background-image: url("{{ asset('img/banner-covid-19.jpg') }}") !important;
@@ -34,6 +35,7 @@
     @yield('content')
     @include('layouts.scripts')
 </body>
+@yield('scripts')
 @jquery
 @toastr_js
 @toastr_render
