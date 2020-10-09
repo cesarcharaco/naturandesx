@@ -67,7 +67,7 @@ class RecuperacionController extends Controller
     		 	return view('auth.recuperacion.validacion', compact('id_usuario','opcion','email'));
     		}else{
     			toastr()->warning('Alerta!!', 'El correo ingresado no se encuentra registrado');
-    			return redirect()->back();
+    			return redirect()->to('/');
     		}
     	} else {
     		# en caso de recuperación por preguntas de seguridad
@@ -97,12 +97,12 @@ class RecuperacionController extends Controller
                 $preguntas[$i]=$key->pregunta;
                 $i++;
             }
-
+            toastr()->success('Éxito!!', 'Respuestas correctas');
             return view('auth.recuperacion.validacion', compact('opcion','preguntas','id_usuario'));
             } else {
                 # code...
                 toastr()->warning('Alerta!!', 'El RUT ingresado no se encuentra registrado');
-                return redirect()->back();   
+                return redirect()->to('/');   
             }
             
     	}
@@ -111,6 +111,7 @@ class RecuperacionController extends Controller
 
     public function validar(Request $request)
     {
+
         $id_usuario=$request->id_usuario;
         $opcion=$request->opcion;
         $email=$request->email;
@@ -122,7 +123,7 @@ class RecuperacionController extends Controller
                 return view('auth.recuperacion.nueva_clave', compact('opcion','id_usuario'));       
             } else {
                 toastr()->warning('Alerta!!', 'Código Vencido o Incorrecto');
-                return redirect()->back();
+                return redirect()->to('/');
             }
             
 
@@ -143,7 +144,7 @@ class RecuperacionController extends Controller
                 return view('auth.recuperacion.nueva_clave', compact('opcion','id_usuario'));       
             } else {
                 toastr()->warning('Alerta!!', 'Las respuestas no coinciden');
-                return redirect()->back();
+                return redirect()->to('/');
             }
             
         }
