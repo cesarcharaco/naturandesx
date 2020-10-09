@@ -130,10 +130,10 @@ class RecuperacionController extends Controller
             $usuario=User::find($request->id_usuario);
             $hallado=0;
             foreach ($usuario->preguntas as $key) {
-                if($key->pivot->respuesta==$respuesta1){
+                if($key->pivot->respuesta==$request->respuesta1){
                     $hallado++;
                 }
-                if($key->pivot->respuesta==$respuesta2){
+                if($key->pivot->respuesta==$request->respuesta2){
                     $hallado++;
                 }
             }
