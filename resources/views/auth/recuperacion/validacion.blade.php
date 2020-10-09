@@ -15,7 +15,6 @@
             @csrf
             <input type="hidden" value="{{$opcion}}" name="opcion">
 			<input type="hidden" value="{{$id_usuario}}" name="id_usuario">
-            <input type="hidden" value="{{$email}}" name="email">
 	    	@if($opcion == 1)
 	            <div class="form-group row">
 	                <div class="col-md-12">
@@ -35,25 +34,26 @@
 	                        <button class="btn btn-warning" disabled style=" border-radius: 20%;">
 	                            <img src="{{ asset('img/list.png') }}" style="width: 100%; height: 100%;">
 	                        </button>
-	                        <label class="text-white">Pregunta de seguridad</label>
+	                        <label class="text-white">Preguntas de seguridad</label>
 	                    </div>
 	                </div>
 	    		</div>
 	    		<div id="pregunta2">
                     <div class="border border-warning shadow" style="border-radius: 20px;">
                         <div class="card-body">
-                            <div class="form-group">
-                                <label>Pregunta</label>
-                                <h3 class="text-white">PREGUNTA</h3>
-                            </div>
-                            <div class="form-group">
-                                <label>Repuesta</label>
-                                <input type="password" name="respuesta" class="form-control">
-                            </div>
+                        	@foreach($preguntas as $key)
+	                            <div class="form-group">
+	                                <h3 class="text-white">{{$key}}</h3>
+	                            </div>
+	                            <div class="form-group">
+	                                <label>Repuesta</label>
+	                                <input type="password" name="respuesta[]" class="form-control" required>
+	                            </div>
+	                        @endforeach
                             <center>
                                 <div class="form-group row mb-0">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-success" name="opcion" value="1">
+                                        <button type="submit" class="btn btn-success">
                                             Reestablecer
                                         </button>
                                     </div>
