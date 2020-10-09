@@ -49,6 +49,7 @@
 	                                <label>Repuesta</label>
 	                                <input type="password" name="respuesta[]" class="form-control" required>
 	                            </div>
+	                            
 	                        @endforeach
                             <center>
                                 <div class="form-group row mb-0">
