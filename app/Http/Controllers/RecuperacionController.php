@@ -72,7 +72,23 @@ class RecuperacionController extends Controller
     	} else {
     		# en caso de recuperación por preguntas de seguridad
             $rut=$request->rut.'-'.$request->verificador;
-            $usuario=User::where('rut',$rut)->first();
+            
+            $buscar_c=Clientes::where('rut',$rut)->count();
+            $buscar_e=Empleados::where('rut',$rut)->count();
+            if ($buscar_c==0 && $buscar_e==0) {
+                toastr()->warning('Alerta!!', 'El RUT no se encuentra registrado');
+                return redirect()->back();
+            } else {
+                if ($buscar_c>0) {
+                    $buscar=Clientes::where('rut',$rut)->first();
+                    $usuario=User::find($buscar->id_usuario);
+                } elseif($buscar_e>0) {
+                    $buscar=Empleados::where('rut',$rut)->first();
+                    $usuario=User::find($buscar->id_usuario);
+                }
+                
+            }
+            
             $id_usuario=$usuario->id;
             if (!is_null($usuario)) {
             $preguntas=array();
