@@ -12,7 +12,17 @@
 	    background: rgba(0, 0, 0, 0.6) !important;
 	    color: black;
 	    font: 18px Arial, sans-serif;
-	  }
+	}
+
+	.card-white{
+	    /*background-color: black !important;*/
+	    border-radius: 0px !important;
+	    padding: 20px;
+	    background: rgba(0, 0, 0, 0.6) !important;
+	    color: white;
+	    font: 18px Arial, sans-serif;
+	}
+
 	  .input,p, a,.nav-icon{
 	    color:#ffa600 !important;
 	    border-radius: 10px !important;
