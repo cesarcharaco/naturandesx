@@ -41,15 +41,15 @@
 	    		<div id="pregunta2">
                     <div class="border border-warning shadow" style="border-radius: 20px;">
                         <div class="card-body">
+                        	@php $num=0; @endphp
                         	@foreach($preguntas as $key)
 	                            <div class="form-group">
 	                                <h3 class="text-white">{{$key}}</h3>
 	                            </div>
 	                            <div class="form-group">
 	                                <label>Repuesta</label>
-	                                <input type="password" name="respuesta[]" class="form-control" required>
+	                                <input type="password" name="respuesta{{$num=$num+1}}" class="form-control" required>
 	                            </div>
-	                            
 	                        @endforeach
                             <center>
                                 <div class="form-group row mb-0">
