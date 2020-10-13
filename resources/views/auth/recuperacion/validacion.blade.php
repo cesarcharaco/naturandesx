@@ -25,7 +25,7 @@
 	                </div>
 	            </div>
 	            <center>
-	            	<button type="submit" class="btn btn-success">Aceptar</button>
+	            	<button type="submit" class="btn btn-success">Verificar</button>
 	            </center>
 	    	@else
 	    		<div class="row justify-content-center">
@@ -39,29 +39,34 @@
 	                </div>
 	    		</div>
 	    		<div id="pregunta2">
-                    <div class="border border-warning shadow" style="border-radius: 20px;">
-                        <div class="card-body">
-                        	@php $num=0; @endphp
-                        	@foreach($preguntas as $key)
-	                            <div class="form-group">
-	                                <h3 class="text-white">{{$key}}</h3>
-	                            </div>
-	                            <div class="form-group">
-	                                <label>Repuesta</label>
-	                                <input type="password" name="respuesta{{$num=$num+1}}" class="form-control" required>
-	                            </div>
-	                        @endforeach
-                            <center>
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-success">
-                                            Reestablecer
-                                        </button>
-                                    </div>
-                                </div>
-                            </center>
+                	@php $num=0; @endphp
+                	@foreach($preguntas as $key)
+	                    <div class="border border-warning shadow mt-3 card-black" style="border-radius: 10px !important;">
+	                    	<span class="bg-success text-white" style="float: right; margin-right:  -30px !important; margin-top: -30px !important; border-radius: 30px; height: 40px; width: 40px;">
+	                    		<center>
+	                    			<h2>{{$num=$num+1}}</h2>
+	                    		</center>
+	                    	</span>
+	                        <div class="card-body">
+		                            <div class="form-group">
+		                                <h3 class="text-white">{{$key}}</h3>
+		                            </div>
+		                            <div class="form-group">
+		                                <label>Repuesta</label>
+		                                <input type="password" name="respuesta{{$num}}" class="form-control" required>
+		                            </div>
+	                        </div>
+	                    </div>
+	                @endforeach
+                    <center>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success">
+                                    Verificar
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </center>
                 </div>
 	    	@endif
         </form>
