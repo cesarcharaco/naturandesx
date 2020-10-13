@@ -23,7 +23,7 @@ class RecuperacionController extends Controller
     	if($opcion==1 && version_compare(PHP_VERSION, '7.2.0', '>=')) {
             error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
     		//buscando correo en user
-
+            //dd('1');
     		$usuario=User::where('email',$request->email)->first();
             $count_usuario =User::where('email',$request->email)->count();
             //dd($count_usuario);
@@ -70,6 +70,7 @@ class RecuperacionController extends Controller
     			return redirect()->to('/');
     		}
     	} else {
+
     		# en caso de recuperación por preguntas de seguridad
             $rut=$request->rut.'-'.$request->verificador;
             
@@ -114,9 +115,9 @@ class RecuperacionController extends Controller
 
         $id_usuario=$request->id_usuario;
         $opcion=$request->opcion;
-        $email=$request->email;
+        $usuario=User::find($request->id_usuario);
         if ($opcion==1) {
-            $buscar=CodigoRecuperacion::where('email',$request->email)->where('codigo',$request->codigo)->where('status','Enviado')->first();
+            $buscar=CodigoRecuperacion::where('email',$usuario->email)->where('codigo',$request->codigo)->where('status','Enviado')->first();
             if (!is_null($buscar)) {
                 $buscar->status="Usado";
                 toastr()->success('Éxito!!', 'Código correcto');
