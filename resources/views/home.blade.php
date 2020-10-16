@@ -173,15 +173,15 @@
               <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
                 <thead class="text-capitalize bg-primary">
                   <tr class="border-orange">
-                    <th colspan="2">Cliente</th>
+                    <th>Cliente</th>
                     <th>Cantidad de Promoción</th>
                   </tr>
                 </thead>
                 <tbody>
                 @foreach($ventas as $key)
-                <tr align="center">
-                  <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
-                  <th>{{$key->cantidad}}</th>
+                <tr>
+                  <td>{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</td>
+                  <td>{{$key->cantidad}}</td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -192,59 +192,6 @@
       </div>
     </div>
 
-    <div class="card shadow">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-12" style="position: relative !important;">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-              <table id="example2" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
-                <thead class="text-capitalize bg-primary">
-                  <tr class="border-orange">
-                    <th colspan="2">Cliente</th>
-                    <th>Cantidad de Promoción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                @foreach($ventas as $key)
-                <tr align="center">
-                  <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
-                  <th>{{$key->cantidad}}</th>
-                </tr>
-                @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card shadow">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-12" style="position: relative !important;">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-              <table id="dataTable3" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
-                <thead class="text-capitalize bg-primary">
-                  <tr class="border-orange">
-                    <th colspan="2">Cliente</th>
-                    <th>Cantidad de Promoción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                @foreach($ventas as $key)
-                <tr align="center">
-                  <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
-                  <th>{{$key->cantidad}}</th>
-                </tr>
-                @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
   @else
     <div class="row">
