@@ -26,20 +26,20 @@
   <div class="container-fluid">
     <div class="card card-primary card-outline">
       <div class="card-body">
-        <div class="row mb-3">
-          <div class="col-md-12">
-            <a class="btn btn-primary btn-sm text-uppercase float-right text-white" id="btnRegistrar" data-toggle="collapse" href="#RegistrarCliente" role="button" aria-expanded="false" aria-controls="RegistrarCliente" onclick="RegistrarCliente()">
-              <strong>Registrar</strong>
-            </a>
-          </div>
-        </div>
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-md-12">
             @include('clientes.layouts.create')
             @include('clientes.layouts.show')
             @include('clientes.layouts.edit')
             @include('clientes.layouts.cambiar_clave')
             @include('clientes.layouts.delete')
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <a class="btn btn-primary btn-sm text-uppercase float-right text-white" id="btnRegistrar" data-toggle="collapse" href="#RegistrarCliente" role="button" aria-expanded="false" aria-controls="RegistrarCliente" onclick="RegistrarCliente()">
+              <strong>Registrar</strong>
+            </a>
           </div>
         </div>
         <div class="row">

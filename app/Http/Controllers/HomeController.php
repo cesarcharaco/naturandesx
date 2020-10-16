@@ -33,8 +33,9 @@ class HomeController extends Controller
         $ventas = Ventas::all();
         $ventas_admin=Ventas::select(\DB::raw('cantidad'),\DB::raw('monto_total'))->whereDate('created_at', [Carbon::now()->format('Y-m-d')])->get();
 
-        if(\Auth::user()->tipo_usuario=="Empleado"){
+        if(\Auth::user()->tipo_usuario=="Empleado" || \Auth::user()->tipo_usuario=="Repartidor"){
             $empleado=Empleados::where('id_usuario',\Auth::user()->id)->first();
+            $cliente=0;
         }elseif(\Auth::user()->tipo_usuario=="Cliente"){
             $cliente=Clientes::where('id_usuario',\Auth::user()->id)->first();
         }

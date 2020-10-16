@@ -1,6 +1,6 @@
 <div class="collapse multi-collapse" id="RegistrarCliente" style="position: absolute; margin-left: -8px; width: 100% !important; background-color: white !important;">
 	<div class="card-header">
-      <a data-toggle="collapse" data-target="#RegistrarCliente" aria-expanded="false" aria-controls="RegistrarCliente" class="btn btn-primary btn-sm text-uppercase float-right text-white" style="border-radius: 5px; float: right;" onclick="cerrar(4)">
+      <a data-toggle="collapse" data-target="#RegistrarCliente" aria-expanded="false" aria-controls="RegistrarCliente" class="btn btn-primary btn-sm text-uppercase float-right text-white" style="border-radius: 5px; " onclick="cerrar(4)">
         <strong>Cerrar</strong>
       </a>
     </div>
