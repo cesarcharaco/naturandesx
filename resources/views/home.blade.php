@@ -70,46 +70,50 @@
         <!-- /.card -->
       </div>
     </div>
-    <div class="row">
+    <div class="row"style="height: 100% !important;">
       <div class="col-xl-8 col-sm-6">
         <div class="card card-outline card-primary">
           <div class="card-body">
-            <table class="table table-curved">
-              <thead>
-                <tr align="center">
-                  <th colspan="2">Repartidor</th>
-                  <th>Promociones vendida</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($empleados_ventas as $key)
-                <tr align="center">
-                  <th colspan="2">{{$key->empleado->nombres}}</th>
-                  <th>{{$key->venta->cantidad}}</th>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+              <table id="example2" class="table table-curved">
+                <thead>
+                  <tr align="center">
+                    <th colspan="2">Repartidor</th>
+                    <th>Promociones vendida</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($empleados_ventas as $key)
+                  <tr align="center">
+                    <th colspan="2">{{$key->empleado->nombres}}</th>
+                    <th>{{$key->venta->cantidad}}</th>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-xl-4 col-sm-6">
+      <div class="col-xl-4 col-sm-6" >
         <div class="card card-outline card-primary">
           <div class="card-body">
-            <table class="table table-curved">
-              <thead>
-                <tr align="center">
-                  <th>Promociones activas</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($promociones as $key)
-                <tr align="center">
-                  <th>{{$key->promocion}} - {{$key->monto}} $</th>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+              <table class="table table-curved">
+                <thead>
+                  <tr align="center">
+                    <th>Promociones activas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($promociones as $key)
+                  <tr align="center">
+                    <th>{{$key->promocion}} - {{$key->monto}} $</th>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -118,23 +122,25 @@
       <div class="col-xl-12 col-sm-12">
         <div class="card card-outline card-primary">
           <div class="card-body">
-            <h3>Ventas del día <?php echo date('d/m/Y'); ?></h3>
-            <table class="table table-curved" >
-              <thead>
-                <tr align="center">
-                  <th colspan="2">Cliente</th>
-                  <th>Cantidad de Promoción</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($ventas_admin as $key)
-                <tr align="center">
-                  <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
-                  <th>{{$key->cantidad}}</th>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+              <h3>Ventas del día <?php echo date('d/m/Y'); ?></h3>
+              <table id="example1" class="table table-curved" >
+                <thead>
+                  <tr align="center">
+                    <th colspan="2">Cliente</th>
+                    <th>Cantidad de Promoción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($ventas_admin as $key)
+                  <tr align="center">
+                    <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
+                    <th>{{$key->cantidad}}</th>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -143,23 +149,27 @@
     
     <div class="row">
       <div class="col-md-12" style="position: relative !important;">
-        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-          <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
-            <thead class="text-capitalize bg-primary">
-              <tr class="border-orange">
-                <th colspan="2">Cliente</th>
-                <th>Cantidad de Promoción</th>
-              </tr>
-            </thead>
-            <tbody>
-            @foreach($ventas as $key)
-            <tr align="center">
-              <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
-              <th>{{$key->cantidad}}</th>
-            </tr>
-            @endforeach
-            </tbody>
-          </table>
+        <div class="card card-outline card-primary">
+          <div class="card-body">
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+              <table id="example2" class="table table-curved">
+                <thead class="text-capitalize bg-primary">
+                  <tr class="border-orange">
+                    <th>Cliente</th>
+                    <th>Cantidad de Promoción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($ventas as $key)
+                    <tr align="center">
+                      <th>{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
+                      <th>{{$key->cantidad}}</th>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -197,8 +207,6 @@
         </div>
       </div>
     </div>
-
-
   @else
     <div class="row">
       <div class="col-xl-12 col-sm-12">
