@@ -175,6 +175,7 @@
                   <tr class="border-orange">
                     <th>Cliente</th>
                     <th>Cantidad de Promoción</th>
+                    <th>Fecha</th>
                     <th>Pagado por la Empresa</th>
                   </tr>
                 </thead>
@@ -183,6 +184,7 @@
                 <tr>
                   <td>{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</td>
                   <td>{{$key->cantidad}}</td>
+                  <td>{{ $key->created_at }}</td>
                   @foreach($key->empleados as $key2)
                   <td>{{ $key2->pivot->status }}</td>
                   @endforeach
