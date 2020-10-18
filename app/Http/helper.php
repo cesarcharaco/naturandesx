@@ -40,4 +40,8 @@ function total_ventas_no_pagadas($id_repartidor)
 	return $cont;
 }
 
-
+function datos_empleado($id_repartidor)
+{
+	$repartidor=App\Empleados::find($id_repartidor);
+	return $repartidor->apellidos." ".$repartidor->nombres;
+}

@@ -41,8 +41,9 @@ class HomeController extends Controller
             $cliente=Clientes::where('id_usuario',\Auth::user()->id)->first();
         }
         $promociones = Promociones::all();
-        $empleados_ventas = EmpleadosVentas::orderBy('id','ASC')->get();
-
+        $empleados_ventas = EmpleadosVentas::join('ventas','ventas.id','=','empleados_has_ventas.id_venta')->orderBy('empleados_has_ventas.id','ASC')->whereDate('empleados_has_ventas.created_at', [Carbon::now()->format('Y-m-d')])->select(\DB::raw('SUM(ventas.cantidad) as cantidad,empleados_has_ventas.id_empleado',\DB::raw('empleados_has_ventas.id_empleado')))->groupby('empleados_has_ventas.id_empleado')->get();
+        //dd($empleados_ventas);
+        
         $f1 = Carbon::now()->format('d-m-Y');
         $f2 = Carbon::now()->subDays(1)->format('d-m-Y');
         $f3 = Carbon::now()->subDays(2)->format('d-m-Y');

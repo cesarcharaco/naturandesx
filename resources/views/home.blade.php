@@ -79,15 +79,17 @@
                 <thead>
                   <tr align="center">
                     <th>Repartidor</th>
-                    <th>Promociones vendida</th>
+                    <th>Promociones vendida Hoy</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($empleados_ventas as $key)
+                  
                   <tr align="center">
-                    <td>{{$key->empleado->nombres}}</td>
-                    <td>{{$key->venta->cantidad}}</td>
+                    <td>{{ datos_empleado($key->id_empleado) }}</td>
+                    <td>{{$key->cantidad}}</td>
                   </tr>
+                  
                   @endforeach
                 </tbody>
               </table>
@@ -221,7 +223,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($ventas_admin as $key)
+                {{-- @foreach($ventas_admin as $key)
                 @foreach($key->empleados as $key2)
                 @if($key->id_cliente  ==$cliente->id)
                 <tr align="center">
@@ -230,7 +232,7 @@
                 </tr>
                 @endif
                 @endforeach
-                @endforeach
+                @endforeach --}}
               </tbody>
             </table>
           </div>
