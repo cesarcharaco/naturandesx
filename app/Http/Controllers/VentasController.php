@@ -8,6 +8,7 @@ use App\Promociones;
 use App\Ventas;
 use App\EmpleadosVentas;
 use App\Empleados;
+use Carbon\Carbon;
 date_default_timezone_set('America/Santiago');
 setlocale(LC_ALL, 'es_ES');
 class VentasController extends Controller
@@ -21,7 +22,9 @@ class VentasController extends Controller
     {
         $promociones=Promociones::all();
         $clientes=Clientes::all();
-        $ventas=Ventas::orderBy('id','ASC')->get();
+        $hoy = Carbon::now()->format('Y-m-d');
+        //dd($hoy);
+        $ventas=Ventas::whereDate('created_at',$hoy)->orderBy('id','ASC')->get();
         
         return view('ventas.index', compact('clientes','promociones','ventas'));
     }

@@ -1,14 +1,10 @@
 @extends('layouts.app')
 @section('css')
 <style type="text/css">
-
-
-
   /*DATATABLES*/
   /*#example1_length, #example1_filter{
     display: none;
   }*/
-
   .custom-control-input{
     display: none !important;
   }
@@ -18,7 +14,6 @@
       padding:32px 64px;
       margin:auto;*/
     }
-
     .botonesLaterales{
       /*las imágenes usadas tienen width de 48px*/
       width:48px;
@@ -26,9 +21,7 @@
       top:50px;
       right:0;
     }
-
     /* Extra centrado vertical*/
-
     .botonesLaterales{
       /*border:1px solid #000;*/
       top:50%;
@@ -87,17 +80,16 @@
                 <div class="card-body">
                   <center>
                   </center>
-                    <h4 class="header-title">Ventas Realizadas</h4>
-                    <div class="" style="width: 100% !important;box-shadow: 0 0 3px black;">
-                      <table id="" class="text-center table-striped table-hover" width="100%">
+                    <h4 class="header-title">Ventas Realizadas del día</h4>
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;box-shadow: 0 0 3px black;">
+                      <table id="example4" class="text-center table-striped table-hover" width="100%">
                         <thead class="text-capitalize">
                           <tr class="bg-success text-white">
                             <th><center>Cliente</center></th>
                             <th><center>Cant.</center></th>
                             <th><center>Total($)</center></th>
                             <th><center>Fecha</center></th>
-                          </tr>
-                          
+                          </tr>                          
                         </thead>
                         <tbody>
                           <?php $i=0; ?>

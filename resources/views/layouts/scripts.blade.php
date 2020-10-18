@@ -38,6 +38,10 @@
       "responsive": true,
       "autoWidth": false,
     });
+    $("#example4").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
     $('#dataTable3').DataTable(
       // {
       //   "paging": true,
