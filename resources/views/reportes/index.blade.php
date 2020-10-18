@@ -83,7 +83,7 @@
 					        <div class="custom-control custom-checkbox">
 					            <input name="no_cancelado" type="checkbox" class="custom-control-input" id="customCheck2" value="1">
 					            <label class="custom-control-label" for="customCheck2">No Pagado</label>
-					        </div>
+					        </div>		            	
 			            </div>
 		        	</div>
 				    <center>
@@ -152,7 +152,6 @@
 					                	<table id="repartidores_dt" class="table table-bordered table-striped dataTable dtr-inline">
 											<thead>
 												<tr>
-													<th>ID</th>
 													<th>Repartidor</th>
 													<th>Cliente</th>
 													<th>Promoción</th>
@@ -165,12 +164,6 @@
 											<tbody>
 												@foreach($rep_ventas as $key)
 												<tr>
-													<td>
-														<div class="custom-control custom-checkbox">
-												            <input name="id[]" type="checkbox" class="custom-control-input" id="{{$key->id}}" value="{{$key->id}}">
-												            <label class="custom-control-label" for="{{$key->id}}"></label>
-												        </div>
-													</td>
 													<td>{{$key->empleado->nombres}} {{$key->empleado->apellidos}}</td>
 													<td>{{$key->venta->cliente->nombres}} {{$key->venta->cliente->apellidos}}</td>
 													<td>{{$key->venta->promociones->promocion}}</td>
@@ -183,7 +176,6 @@
 											</tbody>
 											<tfoot>
 												<tr>
-													<th>ID</th>
 													<th>Repartidor</th>
 													<th>Cliente</th>
 													<th>Promoción</th>
@@ -293,7 +285,6 @@
 					                	<table id="clientes_dt" class="table table-bordered table-striped">
 											<thead>
 												<tr>
-													<th>ID</th>
 													<th>Cliente</th>
 													<th>Promoción</th>
 													<th>Cantidad</th>
@@ -304,12 +295,6 @@
 											<tbody>
 												@foreach($ventas as $key)
 												<tr>
-													<td>
-														<div class="custom-control custom-checkbox">
-												            <input name="id_venta[]" type="checkbox" class="custom-control-input" id="{{$key->created_at}}" value="{{$key->id}}">
-												            <label class="custom-control-label" for="{{$key->created_at}}"></label>
-												        </div>
-													</td>
 													<td>{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</td>
 													<td>{{$key->promociones->promocion}}</td>
 													<td>{{$key->cantidad}}</td>

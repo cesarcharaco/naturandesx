@@ -108,6 +108,7 @@
                         <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
                           <thead class="text-capitalize bg-primary">
                             <tr>
+                              <th>ID</th>
                               <th>Cliente</th>
                               <th>Cantidad</th>
                               <th>Monto</th>
@@ -120,6 +121,12 @@
                               @if($key2->id == $key->id_cliente)
                                 @if($key->status == 'Cancelado')
                                   <tr style="" class="fila{{$key->id}}">
+                                    <td>
+                                      <div class="custom-control custom-checkbox">
+                                        <input name="id_venta[]" type="checkbox" class="custom-control-input" id="{{$key->id}}" value="{{$key->id}}">
+                                        <label class="custom-control-label" for="{{$key->id}}"></label>
+                                      </div>
+                                    </td>
                                     <td><img src="{{ asset('img/checked.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key2->nombres}} {{$key2->apellidos}}<br>{{$key2->rut}}</td>
                                     <td>
                                       <strong>{{$key->cantidad}}</strong>
@@ -129,6 +136,12 @@
                                   </tr>
                                 @else
                                   <tr style="background-color: #E6B0AA;" class="fila{{$key->id}}">
+                                    <td>
+                                      <div class="custom-control custom-checkbox">
+                                          <input name="id_venta[]" type="checkbox" class="custom-control-input" id="{{$key->id}}" value="{{$key->id}}">
+                                          <label class="custom-control-label" for="{{$key->id}}"></label>
+                                      </div>
+                                    </td>
                                     <td><img src="{{ asset('img/error.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key2->nombres}} {{$key2->apellidos}}<br>{{$key2->rut}}</td>
                                     <td>
                                       <strong>{{$key->cantidad}}</strong>
