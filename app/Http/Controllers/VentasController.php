@@ -178,6 +178,7 @@ class VentasController extends Controller
 
     public function pagar_venta(Request $request)
     {
+        dd($request->all());
         if ($request->opcion==1) {
             // $repartidor=App\Empleados::find($request->id_repartidor);
             $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
