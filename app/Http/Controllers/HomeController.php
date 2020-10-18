@@ -31,9 +31,10 @@ class HomeController extends Controller
     public function index()
     {
         $ventas = Ventas::all();
-        $ventas_admin=Ventas::select(\DB::raw('cantidad'),\DB::raw('monto_total'))->whereDate('created_at', [Carbon::now()->format('Y-m-d')])->get();
+        $ventas_admin=Ventas::join('clientes','clientes.id','=','ventas.id_cliente')->select(\DB::raw('ventas.cantidad'),\DB::raw('ventas.monto_total'),'clientes.nombres','clientes.apellidos')->whereDate('ventas.created_at', [Carbon::now()->format('Y-m-d')])->get();
         $empleado=0;
         $cliente=0;
+        //dd($ventas_admin);
         if(\Auth::user()->tipo_usuario=="Empleado" || \Auth::user()->tipo_usuario=="Repartidor"){
             $empleado=Empleados::where('id_usuario',\Auth::user()->id)->first();
         }elseif(\Auth::user()->tipo_usuario=="Cliente"){

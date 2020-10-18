@@ -127,15 +127,15 @@
               <table id="example1" class="table table-curved" >
                 <thead>
                   <tr align="center">
-                    <th colspan="2">Cliente</th>
-                    <th>Cantidad de Promoción</th>
+                    <td>Cliente</td>
+                    <td>Cantidad de Promoción</td>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($ventas_admin as $key)
                   <tr align="center">
-                    <th colspan="2">{{$key->cliente->nombres}} {{$key->cliente->apellidos}}</th>
-                    <th>{{$key->cantidad}}</th>
+                    <td>{{$key->nombres}} {{$key->apellidos}}</td>
+                    <td>{{$key->cantidad}}</td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -216,7 +216,7 @@
             <table class="table table-curved" >
               <thead>
                 <tr align="center">
-                  <th colspan="2">Repartidor</th>
+                  <th colspan="2">Repartidoraaa</th>
                   <th>Cantidad de Promoción</th>
                 </tr>
               </thead>
