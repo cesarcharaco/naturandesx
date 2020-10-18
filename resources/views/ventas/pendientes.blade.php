@@ -87,7 +87,7 @@
                 <h5>Total de Bidones a Pagar: <span style="color: red;">{{ $no_cancelado }}</span></h5>
                 <div class="col-md-12" style="position: relative !important;">
                       @if(!is_null($rep_ventas) && $no_cancelado>0)
-                        <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
+                        <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#cambiar_status" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
                       @endif
                     </div>
                 @endif
@@ -104,58 +104,88 @@
                     </div>
                     
                     <div id="tablePendientes" class="mt-5">
-                      <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-                        <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
-                          <thead class="text-capitalize bg-primary">
-                            <tr>
-                              <th>ID</th>
-                              <th>Cliente</th>
-                              <th>Cantidad</th>
-                              <th>Monto</th>
-                              <th>Fecha</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bodyPendiente">
-                          @foreach($rep_ventas as $key)
-                            @foreach($clientes as $key2)
-                              @if($key2->id == $key->id_cliente)
-                                @if($key->status == 'Cancelado')
-                                  <tr style="" class="fila{{$key->id}}">
-                                    <td>
-                                      <div class="custom-control custom-checkbox">
-                                        <input name="id_venta[]" type="checkbox" class="custom-control-input" id="{{$key->id}}" value="{{$key->id}}">
-                                        <label class="custom-control-label" for="{{$key->id}}"></label>
-                                      </div>
-                                    </td>
-                                    <td><img src="{{ asset('img/checked.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key2->nombres}} {{$key2->apellidos}}<br>{{$key2->rut}}</td>
-                                    <td>
-                                      <strong>{{$key->cantidad}}</strong>
-                                    </td>
-                                    <td><strong>{{$key->monto_total}}.00$</strong></td>
-                                    <td>{{$key->created_at}}</td>
-                                  </tr>
-                                @else
-                                  <tr style="background-color: #E6B0AA;" class="fila{{$key->id}}">
-                                    <td>
-                                      <div class="custom-control custom-checkbox">
+                      <form action="{{ route('pagar_pendientes') }}" name="cambiar_status" method="POST">
+                        @csrf
+                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+                          <table id="example1" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-orange" style="width: 100% !important;">
+                            <thead class="text-capitalize bg-primary">
+                              <tr>
+                                <th></th>
+                                <th>Cliente</th>
+                                <th>Cantidad</th>
+                                <th>Monto</th>
+                                <th>Fecha</th>
+                              </tr>
+                          </thead>
+                          <tbody id="bodyPendiente">
+                            @foreach($rep_ventas as $key)
+                              @foreach($clientes as $key2)
+                                @if($key2->id == $key->id_cliente)
+                                  @if($key->status == 'Cancelado')
+                                    <tr style="" class="fila{{$key->id}}">
+                                      <td>
+                                        <div class="custom-control custom-checkbox">
                                           <input name="id_venta[]" type="checkbox" class="custom-control-input" id="{{$key->id}}" value="{{$key->id}}">
                                           <label class="custom-control-label" for="{{$key->id}}"></label>
-                                      </div>
-                                    </td>
-                                    <td><img src="{{ asset('img/error.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key2->nombres}} {{$key2->apellidos}}<br>{{$key2->rut}}</td>
-                                    <td>
-                                      <strong>{{$key->cantidad}}</strong>
-                                    </td>
-                                    <td><strong>{{$key->monto_total}}.00$</strong></td>
-                                    <td>{{$key->created_at}}</td>
-                                  </tr>
+                                        </div>
+                                      </td>
+                                      <td><img src="{{ asset('img/checked.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key2->nombres}} {{$key2->apellidos}}<br>{{$key2->rut}}</td>
+                                      <td>
+                                        <strong>{{$key->cantidad}}</strong>
+                                      </td>
+                                      <td><strong>{{$key->monto_total}}.00$</strong></td>
+                                      <td>{{$key->created_at}}</td>
+                                    </tr>
+                                  @else
+                                    <tr style="background-color: #E6B0AA;" class="fila{{$key->id}}">
+                                      <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input name="id_venta[]" type="checkbox" class="custom-control-input" id="{{$key->id}}" value="{{$key->id}}">
+                                            <label class="custom-control-label" for="{{$key->id}}"></label>
+                                        </div>
+                                      </td>
+                                      <td><img src="{{ asset('img/error.png') }}" style="width: 30px; height: 30px; border-radius: 30px;">{{$key2->nombres}} {{$key2->apellidos}}<br>{{$key2->rut}}</td>
+                                      <td>
+                                        <strong>{{$key->cantidad}}</strong>
+                                      </td>
+                                      <td><strong>{{$key->monto_total}}.00$</strong></td>
+                                      <td>{{$key->created_at}}</td>
+                                    </tr>
+                                  @endif
                                 @endif
-                              @endif
+                              @endforeach()
                             @endforeach()
-                          @endforeach()
-                        </tbody>
-                      </table>
-                    </div>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!--INICIO DE MODAL -->
+                      <div class="modal fade" id="cambiar_status" role="dialog" >
+                        <div class="modal-dialog modal-default">
+                          <div class="modal-content border border-warning" style="border-radius: 20px !important;">
+                            <div class="modal-header shadow">
+                                <h4>Cambiar status de ventas</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body ">
+                                <div id="mostrarPagar">
+                                    <h5>¿Está realmente seguro de querer pagar las cantidad de ventas seleccionadas al repartidor <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong>?</h5>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div style="float: left !important; justify-content: left !important;">
+                                    <button type="button" class="btn btn-default shadow" data-dismiss="modal" style="float: left !important;"><strong>Cancelar</strong></button>
+                                </div>
+                                <input type="hidden" name="id_repartidor" id="id_repartidorPagar" value="{{$id_repartidor}}">
+                                <input type="hidden" name="opcion" value="1">
+                                <button type="submit" class="btn btn-warning text-white shadow" style="float: right;"><strong>Pagar</strong></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--FIN DE MODAL -->
+                    </form>
                   </div>
                 </div>
               </div>
