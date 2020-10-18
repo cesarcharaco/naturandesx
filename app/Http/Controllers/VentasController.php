@@ -197,6 +197,30 @@ class VentasController extends Controller
         return redirect()->to(route('pendientes'));
     }
 
+    public function no_pagar_venta(Request $request)
+    {
+        // $repartidor=App\Empleados::find($request->id_repartidor);
+        $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
+                ->where('empleados_has_ventas.status','Cancelado')
+                ->where('empleados.id', $request->id_repartidor)->get();
+        foreach ($rep_ventas as $key) {
+            $venta=EmpleadosVentas::find($key->id);
+            $venta->status="No Cancelado";
+            $venta->save();
+        }
+        /*foreach ($repartidor->ventas as $key) {
+            if($key->pivot->status=="No Cancelado"){
+                $key->pivot->status="Cancelado";
+                $key->pivot->save();
+            }
+        }*/
+
+        toastr()->success('Éxito!!', 'Bidones pagados a repartidor');
+        return redirect()->to(route('pendientes'));
+    }
+
     public function buscar_ventas_pendientes(Request $request)
     {
         //dd($request->all());

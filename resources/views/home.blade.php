@@ -78,15 +78,15 @@
               <table id="example2" class="table table-curved">
                 <thead>
                   <tr align="center">
-                    <th colspan="2">Repartidor</th>
+                    <th>Repartidor</th>
                     <th>Promociones vendida</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($empleados_ventas as $key)
                   <tr align="center">
-                    <th colspan="2">{{$key->empleado->nombres}}</th>
-                    <th>{{$key->venta->cantidad}}</th>
+                    <td>{{$key->empleado->nombres}}</td>
+                    <td>{{$key->venta->cantidad}}</td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -152,7 +152,7 @@
         <div class="card card-outline card-primary">
           <div class="card-body">
             <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
-              <table id="example2" class="table table-curved">
+              <table id="example3" class="table table-curved">
                 <thead class="text-capitalize bg-primary">
                   <tr class="border-orange">
                     <th>Cliente</th>
