@@ -218,12 +218,12 @@
             <table class="table table-curved" >
               <thead>
                 <tr align="center">
-                  <th colspan="2">Repartidoraaa</th>
+                  <th colspan="2">Repartidor</th>
                   <th>Cantidad de Promoción</th>
                 </tr>
               </thead>
               <tbody>
-                {{-- @foreach($ventas_admin as $key)
+                @foreach($ventas_cli as $key)
                 @foreach($key->empleados as $key2)
                 @if($key->id_cliente  ==$cliente->id)
                 <tr align="center">
@@ -232,7 +232,7 @@
                 </tr>
                 @endif
                 @endforeach
-                @endforeach --}}
+                @endforeach
               </tbody>
             </table>
           </div>

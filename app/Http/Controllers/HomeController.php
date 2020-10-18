@@ -32,6 +32,8 @@ class HomeController extends Controller
     {
         $ventas = Ventas::all();
         $ventas_admin=Ventas::join('clientes','clientes.id','=','ventas.id_cliente')->select(\DB::raw('ventas.cantidad'),\DB::raw('ventas.monto_total'),'clientes.nombres','clientes.apellidos')->whereDate('ventas.created_at', [Carbon::now()->format('Y-m-d')])->get();
+        $ventas_cli=Ventas::orderBy('id_cliente','ASC')->whereDate('ventas.created_at', [Carbon::now()->format('Y-m-d')])->get();
+        //dd($ventas_cli);
         $empleado=0;
         $cliente=0;
         //dd($ventas_admin);
@@ -191,6 +193,6 @@ class HomeController extends Controller
         ])
         ->options([]);
 
-        return view('home', compact('ventas','promociones','empleados_ventas','chartjs','chartjs1','empleado','cliente','ventas_admin'));
+        return view('home', compact('ventas','promociones','empleados_ventas','chartjs','chartjs1','empleado','cliente','ventas_admin','ventas_cli'));
     }
 }
