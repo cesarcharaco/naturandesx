@@ -258,7 +258,15 @@ class VentasController extends Controller
                 ->where('empleados_has_ventas.status','No Cancelado')
                 ->where('empleados.id', $request->id_repartidor)->get();
 
-                //dd($rep_ventas);
+                if (count($rep_ventas)>0) {
+                    $no_cancelado=0;
+                    foreach ($rep_ventas as $key) {
+                        $no_cancelado+=$key->cantidad;
+                    }
+                } else {
+                    $no_cancelado=0;
+                }
+                //dd($no_cancelado);
                 //$no_cancelado = count($rep_ventas);
 
 
@@ -268,11 +276,12 @@ class VentasController extends Controller
                 //DATOS GENERAL EN REPORTES CLIENTES
                 $can_cli = Ventas::groupby('id_cliente')->count();
                 $can_pro = Ventas::select(\DB::raw('SUM(cantidad) as cantidad'))->get();
+                //dd(count($can_pro));
                 foreach ($can_pro as $key) {
                     $can_pro = $key->cantidad;
                 }
-                $cancelado=2;
-                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta'));
+                $pagar = 0;
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta','pagar'));
 
 
             }elseif(is_null($request->no_cancelado) and $request->cancelado==1){
@@ -285,13 +294,16 @@ class VentasController extends Controller
 
                 //dd($rep_ventas);
                 if (count($rep_ventas)>0) {
-                    $no_cancelado=0;
+                    $cancelado=0;
                     foreach ($rep_ventas as $key) {
-                        $no_cancelado+=$key->cantidad;
+                        $cancelado+=$key->cantidad;
                     }
+                } else {
+                    $cancelado=0;
                 }
+                //dd($cancelado);
                 
-                $cancelado = count($rep_ventas);
+                //$cancelado = count($rep_ventas);
                 $ventas = Ventas::all();
                 $repartidores = Empleados::where('status','Activo')->get();
                 $clientes=Clientes::where('status','Activo')->get();
@@ -302,7 +314,8 @@ class VentasController extends Controller
                 foreach ($can_pro as $key) {
                     $can_pro = $key->cantidad;
                 }
-                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta'));
+                $pagar = 1;
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta','pagar'));
             }else{
                 $ventas=EmpleadosVentas::whereBetween(\DB::raw('DATE(created_at)'), array($request->desde, $request->hasta))->get();
                 $rep_ventas = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*','empleados_has_ventas.status')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
@@ -310,12 +323,17 @@ class VentasController extends Controller
                     ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados.id', $request->id_repartidor)->get();
 
-                $cancelado = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
+                $cancelado_search = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                     ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados_has_ventas.status','Cancelado')
-                    ->where('empleados.id', $request->id_repartidor)->count();
-
+                    ->where('empleados.id', $request->id_repartidor)->get();
+                    if(count($cancelado_search)>0){
+                        $cancelado=0;
+                        foreach ($cancelado_search as $key) {
+                            $cancelado+=$key->cantidad;
+                        }
+                    }
                 $no_cancelado_search = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                     ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
@@ -337,8 +355,8 @@ class VentasController extends Controller
                 foreach ($can_pro as $key) {
                     $can_pro = $key->cantidad;
                 }
-
-                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta'));
+                $pagar = 2;
+                return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','cancelado','no_cancelado','id_repartidor','desde','hasta','pagar'));
             }
         
         }
