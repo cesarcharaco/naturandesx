@@ -115,7 +115,8 @@
                   <div class="col-md-12" style="position: relative !important;">
                     @if($no_cancelado>0)
                       <button class="btn btn-success text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar_bi" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
-                    @elseif($cancelado>0)
+                    @endif
+                    @if($cancelado>0)
                       <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#no_pagar_bi" onclick="pagar('{{count($rep_ventas)}}')"><strong>No Pagado</strong></button>
                     @endif
                   </div>
@@ -207,7 +208,7 @@
                                     <button type="button" class="btn btn-default shadow" data-dismiss="modal" style="float: left !important;"><strong>Cancelar</strong></button>
                                 </div>
                                 <input type="hidden" name="id_repartidor" id="id_repartidorPagar" value="{{$id_repartidor}}">
-                                <input type="hidden" name="opcion" value="1">
+                                <input type="hidden" name="opcion1" value="1">
                                 <button type="submit" class="btn btn-success text-white shadow" style="float: right;"><strong>Aceptar</strong></button>
                             </div>
                           </div>
@@ -234,7 +235,7 @@
                                     <button type="button" class="btn btn-default shadow" data-dismiss="modal" style="float: left !important;"><strong>Cancelar</strong></button>
                                 </div>
                                 <input type="hidden" name="id_repartidor" id="id_repartidorPagar" value="{{$id_repartidor}}">
-                                <input type="hidden" name="opcion" value="2">
+                                <input type="hidden" name="opcion2" value="2">
                                 <button type="submit" class="btn btn-success text-white shadow" style="float: right;"><strong>Aceptar</strong></button>
                             </div>
                           </div>

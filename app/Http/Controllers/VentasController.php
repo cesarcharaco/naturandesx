@@ -183,7 +183,7 @@ class VentasController extends Controller
             toastr()->warning('Alerta!!', 'No ha seleccionado ninguna venta');
             return redirect()->to(route('pendientes'));
         } else {
-            if ($request->opcion==1) {
+            if ($request->opcion1==1) {
                 //dd($request->id_venta);
             // $repartidor=App\Empleados::find($request->id_repartidor);
             $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
@@ -206,7 +206,7 @@ class VentasController extends Controller
 
             toastr()->success('Éxito!!', 'Bidones pagados a repartidor');
             return redirect()->to(route('pendientes'));
-        } else if($request->opcion==2) {
+        } else if($request->opcion2==2) {
             // $repartidor=App\Empleados::find($request->id_repartidor);
             $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
@@ -336,6 +336,7 @@ class VentasController extends Controller
                     } else {
                         $cancelado = 0;
                     }
+                    //dd($cancelado);
                 $no_cancelado_search = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                     ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
