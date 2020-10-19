@@ -271,7 +271,7 @@ class VentasController extends Controller
                 foreach ($can_pro as $key) {
                     $can_pro = $key->cantidad;
                 }
-
+                $cancelado=2;
                 return view('ventas.pendientes',compact('mostrar_tabla','rep_ventas','cancelado','repartidores','clientes','no_cancelado','id_repartidor','desde','hasta'));
 
 

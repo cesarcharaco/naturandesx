@@ -83,18 +83,18 @@
             <div class="shadow border border-default mb-4" style="border-radius: 20px;">
               <div class="card-body">
                 <h5>Repartidor: <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong></h5>
-                @if($no_cancelado>=0)
                 <h5>Total de Bidones a Pagar: <span style="color: red;">{{ $no_cancelado }}</span></h5>
                 <h5>Leyenda: 
                   <img src="{{ asset('img/checked.png') }}" style="width: 30px; height: 30px; border-radius: 30px;"> Pagado |
                   <img src="{{ asset('img/error.png') }}" style="width: 30px; height: 30px; border-radius: 30px;"> No Pagado
                 </h5>
                 <div class="col-md-12" style="position: relative !important;">
-                      @if(!is_null($rep_ventas) && $no_cancelado>0)
-                        <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#cambiar_status" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
-                      @endif
-                    </div>
-                @endif
+                  @if($cancelado>0)
+                    <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#cambiar_status"><strong>Pagar</strong></button>
+                  @elseif($no_cancelado>0)
+                    <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#cambiar_status"><strong>No Pagado</strong></button>
+                  @endif
+                </div>
               </div>
             </div>
             <div class="shadow border border-default" style="border-radius: 20px;">
@@ -162,6 +162,7 @@
                           </tbody>
                         </table>
                       </div>
+                      @if($cancelado>0)
                       <!--INICIO DE MODAL -->
                       <div class="modal fade" id="cambiar_status" role="dialog" >
                         <div class="modal-dialog modal-default">
@@ -189,6 +190,35 @@
                         </div>
                       </div>
                       <!--FIN DE MODAL -->
+                      @elseif($no_cancelado>0)
+                      <!--INICIO DE MODAL -->
+                      <div class="modal fade" id="cambiar_status" role="dialog" >
+                        <div class="modal-dialog modal-default">
+                          <div class="modal-content border border-warning" style="border-radius: 20px !important;">
+                            <div class="modal-header shadow">
+                                <h4>Cambiar status de ventas</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body ">
+                                <div id="mostrarPagar">
+                                    <h5>¿Está realmente seguro de cambiar status a No Pagado las ventas seleccionadas al repartidor <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong>?</h5>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div style="float: left !important; justify-content: left !important;">
+                                    <button type="button" class="btn btn-default shadow" data-dismiss="modal" style="float: left !important;"><strong>Cancelar</strong></button>
+                                </div>
+                                <input type="hidden" name="id_repartidor" id="id_repartidorPagar" value="{{$id_repartidor}}">
+                                <input type="hidden" name="opcion" value="2">
+                                <button type="submit" class="btn btn-warning text-white shadow" style="float: right;"><strong>no Pagado</strong></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--FIN DE MODAL -->
+                      @endif
                     </form>
                   </div>
                 </div>
