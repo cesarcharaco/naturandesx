@@ -215,26 +215,28 @@
         <div class="card card-outline card-primary">
           <div class="card-body">
             <h3>Compras del día <?php echo date('d/m/Y'); ?></h3>
-            <table class="table table-curved" >
-              <thead>
-                <tr align="center">
-                  <th colspan="2">Repartidor</th>
-                  <th>Cantidad de Promoción</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($ventas_cli as $key)
-                @foreach($key->empleados as $key2)
-                @if($key->id_cliente  ==$cliente->id)
-                <tr align="center">
-                  <th colspan="2">{{$key2->nombres}} {{$key2->apellidos}}</th>
-                  <th>{{$key->cantidad}}</th>
-                </tr>
-                @endif
-                @endforeach
-                @endforeach
-              </tbody>
-            </table>
+            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
+              <table id="example10" class="table table-bordered table-hover table-striped dataTable dtr-inline collapsed border border-blue">
+                <thead>
+                  <tr align="center">
+                    <th>Repartidor</th>
+                    <th>Cantidad de Promoción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($ventas_cli as $key)
+                  @foreach($key->empleados as $key2)
+                  @if($key->id_cliente  ==$cliente->id)
+                  <tr align="center">
+                    <th>{{$key2->nombres}} {{$key2->apellidos}}</th>
+                    <th>{{$key->cantidad}}</th>
+                  </tr>
+                  @endif
+                  @endforeach
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

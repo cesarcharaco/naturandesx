@@ -81,7 +81,7 @@
                   <center>
                   </center>
                     <h4 class="header-title">Ventas Realizadas del día</h4>
-                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;box-shadow: 0 0 3px black;">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width: 100% !important;">
                       <table id="example4" class="text-center table-striped table-hover" width="100%">
                         <thead class="text-capitalize">
                           <tr class="bg-success text-white">
