@@ -176,21 +176,21 @@ class VentasController extends Controller
         return view('ventas.pendientes',compact('repartidores','num','mostrar_tabla'));
     }
 
-    public function pagar_venta(Request $request)
-    {
-        //dd($request->all());
-        if (is_null($request->id_venta)) {
-            toastr()->warning('Alerta!!', 'No ha seleccionado ninguna venta');
-            return redirect()->to(route('pendientes'));
-        } else {
-            if ($request->opcion1==1) {
-                //dd($request->id_venta);
+public function pagar_venta(Request $request)
+{
+    //dd($request->all());
+    if (is_null($request->id_venta)) {
+        toastr()->warning('Alerta!!', 'No ha seleccionado ninguna venta');
+        return redirect()->to(route('pendientes'));
+    } else {
+        if ($request->opcion==1) {
+            //dd($request->id_venta);
             // $repartidor=App\Empleados::find($request->id_repartidor);
             $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
-                    ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-                    ->where('empleados_has_ventas.status','No Cancelado')
-                    ->where('empleados.id', $request->id_repartidor)
-                    ->whereIn('empleados_has_ventas.id_venta', $request->id_venta)->get();
+                ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                ->where('empleados_has_ventas.status','No Cancelado')
+                ->where('empleados.id', $request->id_repartidor)
+                ->whereIn('ventas.id', $request->id_venta)->get();
             //dd($rep_ventas);
             foreach ($rep_ventas as $key) {
                 $venta=EmpleadosVentas::find($key->id);
@@ -206,13 +206,14 @@ class VentasController extends Controller
 
             toastr()->success('Éxito!!', 'Bidones pagados a repartidor');
             return redirect()->to(route('pendientes'));
-        } else if($request->opcion2==2) {
+        } else if($request->opcion==2) {
             // $repartidor=App\Empleados::find($request->id_repartidor);
             $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
-                    ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-                    ->where('empleados_has_ventas.status','Cancelado')
-                    ->where('empleados.id', $request->id_repartidor)
-                    ->whereIn('ventas.id', $request->id_venta)->get();
+                ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
+                ->where('empleados_has_ventas.status','Cancelado')
+                ->where('empleados.id', $request->id_repartidor)
+                ->whereIn('ventas.id', $request->id_venta)->get();
+            //dd($rep_ventas);
             foreach ($rep_ventas as $key) {
                 $venta=EmpleadosVentas::find($key->id);
                 $venta->status="No Cancelado";

@@ -91,7 +91,7 @@
                 </h5>
                 <div class="col-md-12" style="position: relative !important;">
                   @if(!is_null($rep_ventas) && $no_cancelado>0)
-                    <button class="btn btn-success text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar_bi" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
+                    <button class="btn btn-success text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar1" onclick="pagar1('1','mensaje')"><strong>Pagar</strong></button>
                   @endif
                 </div>
                 @elseif($cancelado>=0 && $pagar==1)
@@ -102,7 +102,7 @@
                   </h5>
                   <div class="col-md-12" style="position: relative !important;">
                     @if(!is_null($rep_ventas) && $cancelado>0)
-                      <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#no_pagar_bi" onclick="pagar('{{count($rep_ventas)}}')"><strong>No Pagado</strong></button>
+                      <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar1" onclick="pagar1('2','mensaje')"><strong>No Pagado</strong></button>
                     @endif
                   </div>
                 @else
@@ -114,10 +114,10 @@
                   </h5>
                   <div class="col-md-12" style="position: relative !important;">
                     @if($no_cancelado>0)
-                      <button class="btn btn-success text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar_bi" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
+                      <button class="btn btn-success text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar1" onclick="pagar1('1','mensaje')"><strong>Pagar</strong></button>
                     @endif
                     @if($cancelado>0)
-                      <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#no_pagar_bi" onclick="pagar('{{count($rep_ventas)}}')"><strong>No Pagado</strong></button>
+                      <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#pagar1" onclick="pagar1('2','mensaje')"><strong>No Pagado</strong></button>
                     @endif
                   </div>
                 @endif
@@ -189,7 +189,7 @@
                         </table>
                       </div>
                       <!--INICIO DE MODAL -->
-                      <div class="modal fade" id="pagar_bi" role="dialog" >
+                      <div class="modal fade" id="pagar1" role="dialog" >
                         <div class="modal-dialog modal-default">
                           <div class="modal-content border border-warning" style="border-radius: 20px !important;">
                             <div class="modal-header shadow">
@@ -198,34 +198,12 @@
                                     <span>&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body ">
+                            <div class="modal-body" id="mensaje" style="display: none;">
                                 <div id="mostrarPagar">
                                     <h5>¿Está realmente seguro de querer pagar las cantidad de ventas seleccionadas al repartidor <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong>?</h5>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <div style="float: left !important; justify-content: left !important;">
-                                    <button type="button" class="btn btn-default shadow" data-dismiss="modal" style="float: left !important;"><strong>Cancelar</strong></button>
-                                </div>
-                                <input type="hidden" name="id_repartidor" id="id_repartidorPagar" value="{{$id_repartidor}}">
-                                <input type="hidden" name="opcion1" value="1">
-                                <button type="submit" class="btn btn-success text-white shadow" style="float: right;"><strong>Aceptar</strong></button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!--FIN DE MODAL -->
-                      <!--INICIO DE MODAL -->
-                      <div class="modal fade" id="no_pagar_bi" role="dialog" >
-                        <div class="modal-dialog modal-default">
-                          <div class="modal-content border border-warning" style="border-radius: 20px !important;">
-                            <div class="modal-header shadow">
-                                <h4>Cambiar status de ventas</h4>
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body ">
+                            <div class="modal-body" id="mensaje1" style="display: none;">
                                 <div id="mostrarPagar">
                                     <h5>¿Está realmente seguro de cambiar a No Pagada las cantidad de ventas seleccionadas al repartidor <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong>?</h5>
                                 </div>
@@ -235,7 +213,7 @@
                                     <button type="button" class="btn btn-default shadow" data-dismiss="modal" style="float: left !important;"><strong>Cancelar</strong></button>
                                 </div>
                                 <input type="hidden" name="id_repartidor" id="id_repartidorPagar" value="{{$id_repartidor}}">
-                                <input type="hidden" name="opcion2" value="2">
+                                <input type="hidden" name="opcion" id="opcion">
                                 <button type="submit" class="btn btn-success text-white shadow" style="float: right;"><strong>Aceptar</strong></button>
                             </div>
                           </div>
@@ -256,7 +234,21 @@
 @endsection
 
   <script type="text/javascript">
-
+    function pagar1(opcion,mensaje) {
+      $('#opcion').val(opcion);
+      if (opcion==1) {
+        $("#mensaje").css('display','block');
+        //$("#mensaje").removeAttr('style');
+      } else {
+        $("#mensaje").css('display','none');
+      }
+      if(opcion==2) {
+        $("#mensaje1").css('display','block');
+        //$("#mensaje1").removeAttr('style');
+      } else {
+        $("#mensaje1").css('display','none');
+      }
+    }
     function pagar(count) {
       // $('#pagar').modal('show');
       $('#id_repartidorPagar').val();
