@@ -333,6 +333,8 @@ class VentasController extends Controller
                         foreach ($cancelado_search as $key) {
                             $cancelado+=$key->cantidad;
                         }
+                    } else {
+                        $cancelado = 0;
                     }
                 $no_cancelado_search = EmpleadosVentas::select('ventas.*','empleados.*','empleados_has_ventas.*')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
@@ -344,7 +346,10 @@ class VentasController extends Controller
                         foreach ($no_cancelado_search as $key) {
                             $no_cancelado+=$key->cantidad;
                         }
+                    } else {
+                        $no_cancelado=0;
                     }
+                    //dd($no_cancelado_search);
                 $ventas = Ventas::all();
                 $repartidores = Empleados::where('status','Activo')->get();
                 $clientes=Clientes::where('status','Activo')->get();
