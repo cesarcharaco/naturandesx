@@ -77,6 +77,33 @@ class VentasController extends Controller
             $registro->id_venta=$ventas->id;
             $registro->save();
         }
+        $empleado=Empleados::where('id_usuario',\Auth::User()->id)->first();
+        $consultar_ventas = EmpleadosVentas::join('ventas','ventas.id','=','empleados_has_ventas.id_venta')
+        ->whereIn('ventas.id',$ventas->id)->get();
+
+        $nombres= $empleado->nombres.' '.$empleado->apellidos;
+        $email= $empleado->usuario->email;
+        $asunto="Naturandes! | Ventas Realizadas";
+        $destinatario=$empleado->usuario->email;
+        $mensaje="Ha realizado una nueva ventas | Naturandes";
+
+        $send_repartidor=Mail::send('email.ventas_repartidor',
+            ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$mensaje,$consultar_ventas) {
+
+            $pdf = PDF::loadView(('pdf/ventas_repartidor'),array('nombres'=>$nombres,'email'=>$email,'consultar_ventas'=>$consultar_ventas));
+            $m->from('promociones@naturandeschile.com', 'Naturandes!');
+            $m->to($destinatario)->subject($asunto);
+            $m->attachData($pdf->output(), "ventas_repartidor.pdf");
+        });
+
+        $send_admin=Mail::send('email.ventas_admin',
+            ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$mensaje,$consultar_ventas) {
+
+            $pdf = PDF::loadView(('pdf/ventas_repartidor'),array('nombres'=>$nombres,'email'=>$email,'consultar_ventas'=>$consultar_ventas));
+            $m->from('promociones@naturandeschile.com', 'Naturandes!');
+            $m->to('promociones@naturandeschile.com')->subject('Han realizado ventas nuevas');
+            $m->attachData($pdf->output(), "ventas_repartidor.pdf");
+        });
 
 
         toastr()->success('Éxito!!', ' Venta registrada satisfactoriamente');

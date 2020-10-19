@@ -182,7 +182,7 @@ class RegisterController extends Controller
                 }
 
                 toastr()->success('Éxito!!', ' Cliente registrado satisfactoriamente');
-                return redirect()->to('registerClienteExterno');
+                return redirect()->to('RegisterClienteExitoso');
             }
         }
     }

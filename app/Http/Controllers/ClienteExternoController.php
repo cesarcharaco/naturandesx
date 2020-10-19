@@ -12,6 +12,10 @@ class ClienteExternoController extends Controller
     	$preguntas=Preguntas::all();
     	return view('auth.register',compact('preguntas'));
     }
+    public function mensajes()
+    {
+    	return view('auth.mensajes');
+    }
 
 
     public function buscar_preguntas($id_pregunta)

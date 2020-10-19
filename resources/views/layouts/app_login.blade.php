@@ -12,7 +12,7 @@
 	    background-repeat: no-repeat !important;
 	    background-size: 100% !important;
 	    background-attachment: fixed !important;
-	    background-color: 
+	    background-color: ;
 	  }
 	  h2{
 	    color: white !important;

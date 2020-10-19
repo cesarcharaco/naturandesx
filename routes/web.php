@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('auth/login');
 });
 Route::get('registerClienteExterno','ClienteExternoController@register')->name('registerc');
+Route::get('RegisterClienteExitoso','ClienteExternoController@mensajes')->name('mensajes');
 Route::get('buscar_preguntas/{id_pregunta}/seguridad','ClienteExternoController@buscar_preguntas');
 Auth::routes();
 Route::post('registerCliente', 'Auth\RegisterController@store')->name('registerCliente');
