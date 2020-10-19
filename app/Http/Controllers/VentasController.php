@@ -188,7 +188,6 @@ class VentasController extends Controller
             // $repartidor=App\Empleados::find($request->id_repartidor);
             $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
-                    ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados_has_ventas.status','No Cancelado')
                     ->where('empleados.id', $request->id_repartidor)
                     ->whereIn('empleados_has_ventas.id_venta', $request->id_venta)->get();

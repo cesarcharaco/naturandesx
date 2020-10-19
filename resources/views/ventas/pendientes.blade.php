@@ -85,6 +85,10 @@
                 <h5>Repartidor: <strong>{{$key->nombres}} {{$key->apellidos}} - {{$key->rut}}</strong></h5>
                 @if($no_cancelado>=0)
                 <h5>Total de Bidones a Pagar: <span style="color: red;">{{ $no_cancelado }}</span></h5>
+                <h5>Leyenda: 
+                  <img src="{{ asset('img/checked.png') }}" style="width: 30px; height: 30px; border-radius: 30px;"> Pagado |
+                  <img src="{{ asset('img/error.png') }}" style="width: 30px; height: 30px; border-radius: 30px;"> No Pagado
+                </h5>
                 <div class="col-md-12" style="position: relative !important;">
                       @if(!is_null($rep_ventas) && $no_cancelado>0)
                         <button class="btn btn-warning text-white" style="border-radius: 10px; float: right;" data-toggle="modal" data-target="#cambiar_status" onclick="pagar('{{count($rep_ventas)}}')"><strong>Pagar</strong></button>
