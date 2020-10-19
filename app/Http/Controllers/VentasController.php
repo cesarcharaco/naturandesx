@@ -178,14 +178,21 @@ class VentasController extends Controller
 
     public function pagar_venta(Request $request)
     {
-        dd($request->all());
-        if ($request->opcion==1) {
+        //dd($request->all());
+        if (is_null($request->id_venta)) {
+            toastr()->warning('Alerta!!', 'No ha seleccionado ninguna venta');
+            return redirect()->to(route('pendientes'));
+        } else {
+            if ($request->opcion==1) {
+                //dd($request->id_venta);
             // $repartidor=App\Empleados::find($request->id_repartidor);
             $rep_ventas = EmpleadosVentas::select('ventas.id')->join('ventas', 'ventas.id', '=', 'empleados_has_ventas.id_venta')
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                     ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados_has_ventas.status','No Cancelado')
-                    ->where('empleados.id', $request->id_repartidor)->get();
+                    ->where('empleados.id', $request->id_repartidor)
+                    ->whereIn('empleados_has_ventas.id_venta', $request->id_venta)->get();
+            dd($rep_ventas);
             foreach ($rep_ventas as $key) {
                 $venta=EmpleadosVentas::find($key->id);
                 $venta->status="Cancelado";
@@ -206,7 +213,8 @@ class VentasController extends Controller
                     ->join('empleados', 'empleados.id', '=', 'empleados_has_ventas.id_empleado')
                     ->whereBetween('empleados_has_ventas.created_at', array($request->desde." 00:00:00", $request->hasta." 23:59:59"))
                     ->where('empleados_has_ventas.status','Cancelado')
-                    ->where('empleados.id', $request->id_repartidor)->get();
+                    ->where('empleados.id', $request->id_repartidor)
+                    ->whereIn('ventas.id', $request->id_venta)->get();
             foreach ($rep_ventas as $key) {
                 $venta=EmpleadosVentas::find($key->id);
                 $venta->status="No Cancelado";
@@ -219,12 +227,11 @@ class VentasController extends Controller
                 }
             }*/
 
-            toastr()->success('Éxito!!', 'Bidones No Pagados a repartidor');
+            toastr()->success('Éxito!!', 'Bidones cambiados a No Pagados');
             return redirect()->to(route('pendientes'));
-        }
-        
-        
+        }   
     }
+}
 
     
 
