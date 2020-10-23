@@ -1,13 +1,17 @@
 @extends('layouts.app_login')
 
 @section('content')
-  <div class="login-box card-black" id="login2">
-    <div class="card-body">
-      <h2 align="center" class="mb-4">REGISTRO DE CLIENTES</h2>
+<div class="login-area login-bg">
+  <div class="container">
+    <div class="login-box-register ptb--100">
       <form action="{{ route('registerCliente') }}" method="POST">
           @csrf
-          <div class="mt-4">
-            <div class="row">
+          <div class="login-form-head">
+              <h4>Registro de cliente</h4>
+              <p>Todos los campos (<b style="color:red;">*</b>) son requeridos</p>
+          </div>
+          <div class="login-form-body">
+            <div class="form-row">
               <div class="col-md-3">
                 <div class="form-group">
                     <label for="nombres">Nombres <b style="color: red;">*</b></label>
@@ -38,7 +42,7 @@
               </div>
               <div class="col-md-3">
                 <label for="email">Email <b style="color: red;">*</b></label>
-                <input type="email" class="form-control input" placeholder="Ingrese email" name="email" id="email" value="{{ old('email') }}">
+                <input type="email" class="form-control input" placeholder="Ingrese email" name="email" id="email" value="{{ old('email') }}" style="text-transform:uppercase;">
                 @if ($errors->has('email'))
                     <small class="form-text text-danger">
                         {{ $errors->first('email') }}
@@ -46,11 +50,11 @@
                 @endif
               </div>
             </div>
-            <div class="row">
+            <div class="form-row">
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="telefono">Teléfono <b style="color: red;">*</b></label>
-                  <input type="text" class="form-control input" placeholder="Ingrese teléfono" name="telefono" required id="telefono" maxlength="11" required value="{{ old('telefono') }}">
+                  <input type="text" class="form-control input" placeholder="Ingrese teléfono" name="telefono" required id="telefono" maxlength="11" required value="{{ old('telefono') }}" style="text-transform:uppercase;">
                   @if ($errors->has('usuario'))
                       <small class="form-text text-danger">
                           {{ $errors->first('usuario') }}
@@ -62,7 +66,7 @@
                 <div class="">                          
                     <label for="rut">RUT <b style="color: red;">*</b></label>
                         <br>
-                    <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control input" required style="width: 80% !important; float: left;">
+                    <input type="text" name="rut" placeholder="Rut del residente" minlength="7" maxlength="8" id="rut" class="form-control input" required style="width: 80% !important; float: left; text-transform:uppercase;">
                     <input type="number" name="verificador" min="0" id="verificador" minlength="1" maxlength="1" max="9" value="0" class="form-control input" required style="width: 20% !important; float: right;">
 
                 </div>
@@ -85,7 +89,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="form-row">
               <div class="col-md-6">
                 <div class="form-group">
                     <label for="pregunta">1era Pregunta de seguridad<b style="color: red;">*</b></label>
@@ -101,12 +105,12 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="respuesta">Respuesta<b style="color: red;">*</b></label>
-                  <input type="password" name="respuesta1" class="form-control input" required id="Inputrespuesta">
+                  <input type="password" name="respuesta1" class="form-control input" required id="Inputrespuesta" placeholder="INGRESE RESPUESTA">
                 </div>
               </div>
             </div>
             <div id="segunda_pregunta" style="display: none;" >
-              <div class="row">
+              <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="pregunta">2da Pregunta de seguridad<b style="color: red;">*</b></label>
@@ -118,21 +122,23 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="respuesta">Respuesta<b style="color: red;">*</b></label>
-                    <input type="password" name="respuesta2" class="form-control input" required id="Inputrespuesta">
+                    <input type="password" name="respuesta2" class="form-control input" required id="Inputrespuesta" placeholder="INGRESE RESPUESTA">
                   </div>
                 </div>
               </div>
             </div>
             <div class="submit-btn-area">
-                <button id="form_submit" type="submit" class="btn btn-block text-white" style="background-color: #ffa600;border-radius: 10px;"><strong>Registrarse </strong></button>
+                <button id="form_submit" type="submit">Registrarse <i class="ti-arrow-right"></i></button>
             </div>
             <div class="form-footer text-center mt-5">
-                <p class="text-white">¿Ya tienes cuenta? <a href="{{ route('login') }}">Iniciar sesión</a></p>
+                <p class="text-muted">Don't have an account? <a href="login.html">Sign in</a></p>
             </div>
           </div>
       </form>
     </div>
   </div>
+</div>
+
 @endsection
 @section('scripts')
 <script type="text/javascript">
