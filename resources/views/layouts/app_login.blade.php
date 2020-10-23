@@ -15,9 +15,13 @@
 	    background-image: url("{{ asset('img/banner.jpg') }}") !important;
 	    background-position: center center !important;
 	    background-repeat: no-repeat !important;
-	    background-size: 100% !important;
-	    background-attachment: fixed !important;
-	    background-color: ;
+	    background-attachment:  !important;
+	    background-size: 100% 100%;
+	    max-width: 400%;
+	    padding: 30px;
+	  }
+	  img {
+	  	object-fit: cover;
 	  }
 	  h2{
 	    color: white !important;
@@ -107,10 +111,9 @@ a:focus, a:hover {
 	      <div class="col-md-6">
 	        <div class="d-flex justify-content-md-end justify-content-between">
 	          <ul class="social-custom list-inline">
-	            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-	            <li class="list-inline-item"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-	            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-	            <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+	            <li class="list-inline-item"><a href="#" style="font-size: 22px; color: white;"><i class="fa fa-facebook"></i></a></li>
+	            <li class="list-inline-item"><a href="#" style="font-size: 22px; color: white;"><i class="fa fa-instagram"></i></a></li>
+	            <li class="list-inline-item"><a href="#" style="font-size: 22px; color: white;"><i class="fa fa-youtube"></i></a></li>
 	          </ul>
 	        </div>
 	      </div>
@@ -118,8 +121,10 @@ a:focus, a:hover {
 	  </div>
 	</div>
     <!-- preloader area end -->
-    <div id="banner">    	
-    	@yield('content')
+    <div id="banner">
+    	<div class="row">
+    		@yield('content')
+    	</div>
     </div>
     @include('layouts.scripts')
 </body>

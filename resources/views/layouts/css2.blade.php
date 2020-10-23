@@ -24,7 +24,7 @@
 	}
 
 	  .input,p, a,.nav-icon{
-	    color:#ffa600 !important;
+	    /*color:#ffa600 !important;*/
 	    border-radius: 10px !important;
 	    /*text-align: center;*/
 	  }

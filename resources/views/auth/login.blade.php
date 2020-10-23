@@ -1,7 +1,7 @@
 @extends('layouts.app_login')
 
 @section('content')
-    <div class="login-box card-black">
+    <div class="login-box card-black mx-auto">
       <div class="card-body">
       <h2 align="center" class="mb-4">INICIAR SESIÓN</h2>
       <form action="{{ route('login') }}" method="post">
