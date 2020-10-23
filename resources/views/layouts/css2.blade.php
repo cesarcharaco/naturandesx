@@ -23,26 +23,26 @@
 	    font: 18px Arial, sans-serif;
 	}
 
-	  .input,p, a,.nav-icon{
-	    /*color:#ffa600 !important;*/
-	    border-radius: 10px !important;
-	    /*text-align: center;*/
-	  }
+	.input,p, a,.nav-icon{
+		/*color:#ffa600 !important;*/
+		border-radius: 10px !important;
+		/*text-align: center;*/
+	}
 
-	  .main-sidebar, .sidebar{
-	  	background-color: #0d3357 !important;
-	  	border-color: orange !important;
-	  }
-	  .user-panel,.brand-link{
-	  	border-bottom: 1px solid #ffa600 !important;
-	  }
-	  .border-orange{
-	  	border-color: orange !important;
-	  }
-	  .h1{
-	  	color: white !important;
-	  }
-	  .main-footer{
-	  	border-color: white !important;
-	  }
+	.main-sidebar, .sidebar{
+		background-color: #0d3357 !important;
+		border-color: orange !important;
+	}
+	.user-panel,.brand-link{
+		border-bottom: 1px solid #ffa600 !important;
+	}
+	.border-orange{
+		border-color: orange !important;
+	}
+	.h1{
+		color: white !important;
+	}
+	.main-footer{
+		border-color: white !important;
+	}
 </style>

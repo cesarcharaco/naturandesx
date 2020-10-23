@@ -73,7 +73,7 @@
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                    <label for="password">Contraseña</label>
+                    <label for="password">Contraseña <b style="color: red;">*</b></label>
                     <input id="password" type="password" class="form-control input @error('password') is-invalid @enderror" name="password" required placeholder="*******************" autocomplete="new-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -84,7 +84,7 @@
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                    <label for="password-confirm" class="col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
+                    <label for="password-confirm">{{ __('Confirmar contraseña') }} <b style="color: red;">*</b></label>
                     <input id="password-confirm" type="password" class="form-control input" name="password_confirmation" required autocomplete="new-password" placeholder="*******************" autocomplete="new-password">
                 </div>
               </div>
@@ -92,7 +92,7 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-group">
-                    <label for="pregunta">1era Pregunta de seguridad<b style="color: red;">*</b></label>
+                    <label for="pregunta">1era Pregunta de seguridad <b style="color: red;">*</b></label>
                     <select class="form-control input" name="pregunta1" required id="pregunta1">
                       <option value="0">Seleccione una pregunta</option>
                       
@@ -104,7 +104,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="respuesta">Respuesta<b style="color: red;">*</b></label>
+                  <label for="respuesta">Respuesta <b style="color: red;">*</b></label>
                   <input type="password" name="respuesta1" class="form-control input" required id="Inputrespuesta" placeholder="INGRESE RESPUESTA">
                 </div>
               </div>
@@ -113,7 +113,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="pregunta">2da Pregunta de seguridad<b style="color: red;">*</b></label>
+                    <label for="pregunta">2da Pregunta de seguridad <b style="color: red;">*</b></label>
                     <select class="form-control input" name="pregunta2" id="pregunta2" required>
                       
                     </select>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="respuesta">Respuesta<b style="color: red;">*</b></label>
+                    <label for="respuesta">Respuesta <b style="color: red;">*</b></label>
                     <input type="password" name="respuesta2" class="form-control input" required id="Inputrespuesta" placeholder="INGRESE RESPUESTA">
                   </div>
                 </div>
@@ -131,7 +131,7 @@
                 <button id="form_submit" type="submit">Registrarse <i class="ti-arrow-right"></i></button>
             </div>
             <div class="form-footer text-center mt-5">
-                <p class="text-muted">Don't have an account? <a href="login.html">Sign in</a></p>
+                <p class="text-muted">¿Ya tiene cuenta? <a href="{{ url('/') }}">Iniciar sesión</a></p>
             </div>
           </div>
       </form>

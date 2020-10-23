@@ -47,7 +47,6 @@
                 <div class="text-center col-md-4">
                     <p style="color: white !important;">Quienes somos <br> Productos</p>
                 </div>
-
                 <!-- Social Links -->
                 <div class="text-center col-md-4">
                     <p style="color: white !important;">Atención al cliente <br> Casa matriz</p>
