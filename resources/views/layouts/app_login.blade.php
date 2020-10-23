@@ -18,6 +18,7 @@
 	    background-attachment:  !important;
 	    background-size: 100% 100%;
 	    max-width: 400%;
+	    height: 400px !important;
 	    padding: 30px;
 	  }
 	  img {
@@ -98,7 +99,16 @@ a:focus, a:hover {
     font-weight: 700;
     margin-right: 10px;
 }
-
+.footer2-container {
+	background:#010573;
+	color: white !important;
+	width:100%;
+	background-position:center top;
+	background-size:100% auto;
+	padding:20px 0;
+	margin:0;
+	border-bottom: 10px solid #fef200 ;
+}
 	</style>
 </head>
 <body class="hold-transition login-page">
@@ -126,6 +136,24 @@ a:focus, a:hover {
     		@yield('content')
     	</div>
     </div>
+    <footer class="page-section-no-padding  footer2-container">
+        <div class="container">
+            <div class="row">
+                <!-- Copyright -->
+                <div class="text-center col-md-4">
+                    <p>Quienes somos <br> Productos</p>
+                </div>
+
+                <!-- Social Links -->
+                <div class="text-center col-md-4">
+                    <p>Atención al cliente <br> Casa matriz</p>
+                </div>
+                <div class="text-center col-md-4">
+                	<p>Termino y condiciones <br> Horarios de atención</p>
+                </div>
+            </div>
+        </div>
+    </footer>
     @include('layouts.scripts')
 </body>
 @yield('scripts')
