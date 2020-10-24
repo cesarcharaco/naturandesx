@@ -1,18 +1,15 @@
 @extends('layouts.app_login')
 
 @section('content')
-<div class="login-box card-black">
-    <div class="card-body">
-
-        {{--<h2 align="center" class="">{{ __('Reset Password') }}</h2>--}}
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('validar') }}">
-            @csrf
+<div class="login-area login-bg">
+  <div class="container">
+    <div class="login-box ptb--100">
+      <form method="POST" action="{{ route('validar') }}">
+        @csrf
+        <div class="login-form-head">
+            <h4>Recuperación de contraseña con email</h4>
+        </div>
+        <div class="login-form-body">
             <input type="hidden" value="{{$opcion}}" name="opcion">
 			<input type="hidden" value="{{$id_usuario}}" name="id_usuario">
 	    	@if($opcion == 1)
@@ -24,9 +21,9 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <center>
-	            	<button type="submit" class="btn btn-success">Verificar</button>
-	            </center>
+	            <div class="submit-btn-area">
+                    <button id="form_submit" type="submit">Verificar <i class="ti-arrow-right"></i></button>
+                </div>
 	    	@else
 	    		<div class="row justify-content-center">
 		    		<div class="col-md-6" id="pregunta">
@@ -58,24 +55,18 @@
 	                        </div>
 	                    </div>
 	                @endforeach
-                    <center>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-success">
-                                    Verificar
-                                </button>
-                            </div>
-                        </div>
-                    </center>
+                    <div class="submit-btn-area">
+                    	<button id="form_submit" type="submit">Verificar <i class="ti-arrow-right"></i></button>
+                	</div>
                 </div>
 	    	@endif
-        </form>
-        <div class="form-footer text-center mt-5">
-            <p class="text-white">Volver
-                <a href="{{ route('login') }}">Iniciar sesión</a>
-            </p>
+            <div class="form-footer text-center mt-5">
+                <p class="text-muted">Volver <a href="{{ url('/') }}" class="text-center" style="color: #010573;">Iniciar sesión</a></p>
+            </div>
         </div>
+      </form>
     </div>
+  </div>
 </div>
 @endsection
 
