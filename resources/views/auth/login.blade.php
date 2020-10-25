@@ -1,9 +1,9 @@
 @extends('layouts.app_login')
 
 @section('content')
-<div class="login-area login-bg">
+<div class="login-area login-bg mx-auto">
   <div class="container">
-    <div class="login-box ptb--100">
+    <div class="login-box">
       <form action="{{ route('login') }}" method="post">
         @csrf
         <div class="login-form-head">
@@ -37,7 +37,7 @@
               </div>
           </div>
           <div class="submit-btn-area">
-              <button id="form_submit" type="submit">Iniciar Sesión <i class="ti-arrow-right"></i></button>
+              <button id="form_submit" type="submit" class="btn btn-success btn-block" style="background: #010573; color: white;">Iniciar Sesión <i class="ti-arrow-right"></i></button>
           </div>
           <div class="form-footer text-center mt-5">
               <p class="text-muted"><a href="{{ route('registerc') }}" class="text-center" style="color: #010573;">Registro de nuevo clientes</a></p>
