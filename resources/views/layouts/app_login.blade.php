@@ -1,70 +1,69 @@
 <!doctype html>
 <html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-	<link rel="stylesheet" href="{{ asset('login/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('login/css/font-awesome.min.css') }}">
 	@include('layouts.css')
     @include('layouts.css2')
     @toastr_css
     @yield('css')
     <style type="text/css">
-    	.login-box {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin-top: 50px;
-}
+	    .login-box, .login-box-register {
+		    display: -webkit-box;
+		    display: -ms-flexbox;
+		    display: flex;
+		    margin-top: 50px;
+		    margin-bottom: 20px;
+		}
 
-.login-box form {
-    margin: auto;
-    width: 450px;
-    max-width: 100%;
-    background: #fff;
-    border-radius: 3px;
-}
+		.login-box form {
+		    margin: auto;
+		    width: 450px;
+		    max-width: 100%;
+		    background: #fff;
+		    border-radius: 3px;
+		}
 
-.login-box-register form {
-    margin: auto;
-    width: 100%;
-    max-width: 100%;
-    background: #fff;
-    border-radius: 3px;
-}
+		.login-box-register form {
+		    margin: auto;
+		    width: 100%;
+		    max-width: 100%;
+		    background: #fff;
+		    border-radius: 3px;
+		}
 
-.login-form-head {
-    text-align: center;
-    background: #010573;
-    padding: 50px;
-}
+		.login-form-head {
+		    text-align: center;
+		    background: #010573;
+		    padding: 50px;
+		}
 
-.login-form-head h4 {
-    letter-spacing: 0;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 7px;
-    color: #fff;
-}
+		.login-form-head h4 {
+		    letter-spacing: 0;
+		    text-transform: uppercase;
+		    font-weight: 600;
+		    margin-bottom: 7px;
+		    color: #fff;
+		}
 
-.login-form-head p {
-    color: #fff;
-    font-size: 14px;
-    line-height: 22px;
-}
+		.login-form-head p {
+		    color: #fff;
+		    font-size: 14px;
+		    line-height: 22px;
+		}
 
-.login-form-body {
-    padding: 50px;
-    opacity: 0.7;
-}
-.top-bar ul.social-custom a {
-    text-decoration: none !important;
-    font-size: 0.7rem;
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
-    color: #999;
-    text-align: center;
-    margin: 0;
-}
+		.login-form-body {
+		    padding: 50px;
+		    opacity: 0.7;
+		}
+		.top-bar ul.social-custom a {
+		    text-decoration: none !important;
+		    font-size: 0.7rem;
+		    width: 26px;
+		    height: 26px;
+		    line-height: 26px;
+		    color: #999;
+		    text-align: center;
+		    margin: 0;
+		}
     </style>
 </head>
 <body>
@@ -89,7 +88,7 @@
   <!-- /.navbar -->
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="background: url('{{ asset('login/images/banner.jpg') }}') center/cover no-repeat !important; position: relative;">
+  <div class="content-wrapper" style="background: url('{{ asset('login/images/banner.jpg') }}') center/cover no-repeat !important; position: relative; background-attachment:  100% !important;">
   	<div class="content">
       	<div class="container">
 	        <div class="row">
@@ -106,14 +105,14 @@
     <div class="row">
         <!-- Copyright -->
         <div class="text-center col-md-4">
-            <p style="color: white !important;">Quienes somos <br> Productos</p>
+            <p style="color: white !important;"><a href="https://naturandes.cl/index.php/compania" target="_blank" style="color: white;">Quienes somos</a> <br> <a href="https://naturandes.cl/index.php/productos" style="color: white;" target="_blank">Productos</a></p>
         </div>
         <!-- Social Links -->
         <div class="text-center col-md-4">
-            <p style="color: white !important;">Atención al cliente <br> Casa matriz</p>
+            <p style="color: white !important;"><a href="https://naturandes.cl/index.php/contacto" target="_blank" style="color: white;">Atención al cliente</a> <br> Casa matriz</p>
         </div>
         <div class="text-center col-md-4">
-        	<p style="color: white !important;">Termino y condiciones <br> Horarios de atención</p>
+        	<p style="color: white !important;"><a href="https://naturandes.cl/index.php/compania" target="_blank" style="color: white;">Termino y condiciones</a> <br> Horarios de atención</p>
         </div>
     </div>
   </footer>

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('plugins/parsleyjs/parsley.css') }}">
 @endsection
 @section('content')
-<div class="login-area login-bg">
+<div class="login-area login-bg mx-auto">
   <div class="container">
     <div class="login-box ptb--100">
       <form method="POST" action="{{ route('nueva_clave') }}" data-parsley-validate>
@@ -27,7 +27,7 @@
                 <input type="password" class="form-control" name="confirmar_password" id="confirmar_password" placeholder="Repita contraseña..." data-parsley-equalto="#password" data-parsley-minlength="8">
             </div>
             <div class="submit-btn-area">
-                <button id="form_submit" type="submit">Aceptar <i class="ti-arrow-right"></i></button>
+                <button id="form_submit" type="submit" class="btn btn-success btn-block" style="background: #010573; color: white;">Aceptar <i class="ti-arrow-right"></i></button>
             </div>
             <div class="form-footer text-center mt-5">
                 <p class="text-muted">Volver <a href="{{ url('/') }}" class="text-center" style="color: #010573;">Iniciar sesión</a></p>

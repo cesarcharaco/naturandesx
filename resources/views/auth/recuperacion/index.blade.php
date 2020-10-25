@@ -1,9 +1,9 @@
 @extends('layouts.app_login')
 
 @section('content')
-<div class="login-area login-bg">
+<div class="login-area login-bg mx-auto">
   <div class="container">
-    <div class="login-box ptb--100">
+    <div class="login-box">
       <form method="POST" action="{{ route('seleccion') }}">
         @csrf
         <div class="login-form-head">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="submit-btn-area">
-                    <button id="form_submit" type="submit">Aceptar <i class="ti-arrow-right"></i></button>
+                    <button id="form_submit" type="submit" class="btn btn-success btn-block" style="background: #010573; color: white;">Aceptar <i class="ti-arrow-right"></i></button>
                 </div>
             </div>
             <div id="vistaEmail" style="display: none;">
@@ -42,7 +42,7 @@
                     <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus placeholder="Ingrese correo de recuperación">
                 </div>
                 <div class="submit-btn-area">
-                    <button id="form_submit" type="submit">Aceptar <i class="ti-arrow-right"></i></button>
+                    <button id="form_submit" type="submit" class="btn btn-success btn-block" style="background: #010573; color: white;">Aceptar <i class="ti-arrow-right"></i></button>
                 </div>
             </div>
             <div class="form-footer text-center mt-5">

@@ -1,7 +1,7 @@
 @extends('layouts.app_login')
 
 @section('content')
-<div class="login-area login-bg">
+<div class="login-area login-bg mx-auto">
   <div class="container">
     <div class="login-box ptb--100">
       <form method="POST" action="{{ route('validar') }}">
@@ -22,7 +22,7 @@
 	                </div>
 	            </div>
 	            <div class="submit-btn-area">
-                    <button id="form_submit" type="submit">Verificar <i class="ti-arrow-right"></i></button>
+                    <button id="form_submit" type="submit" class="btn btn-success btn-block" style="background: #010573; color: white;">Verificar <i class="ti-arrow-right"></i></button>
                 </div>
 	    	@else
 	    		<div class="row justify-content-center">
@@ -56,7 +56,7 @@
 	                    </div>
 	                @endforeach
                     <div class="submit-btn-area">
-                    	<button id="form_submit" type="submit">Verificar <i class="ti-arrow-right"></i></button>
+                    	<button id="form_submit" type="submit" class="btn btn-success btn-block" style="background: #010573; color: white;">Verificar <i class="ti-arrow-right"></i></button>
                 	</div>
                 </div>
 	    	@endif
