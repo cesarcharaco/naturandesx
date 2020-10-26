@@ -99,6 +99,7 @@ class ClientesController extends Controller
                 $clientes->nombres=$request->nombres;
                 $clientes->apellidos=$request->apellidos;
                 $clientes->rut = $request->rut.'-'.$request->verificador;
+                $clientes->telefono=$request->telefono;
                 if(\Auth::user()->tipo_usuario=="Admin"){
                 $clientes->status=$request->status;
                 }else{
@@ -193,6 +194,7 @@ class ClientesController extends Controller
             $clientes->nombres=$request->nombres;
             $clientes->apellidos=$request->apellidos;
             $clientes->rut = $request->rut.'-'.$request->verificador;
+            $clientes->telefono=$request->telefono;
             $clientes->status=$request->status;
             $clientes->save();
 

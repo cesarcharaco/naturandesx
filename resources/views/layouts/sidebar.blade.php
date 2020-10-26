@@ -60,7 +60,7 @@
             </a>
           </li>
           @endif
-          @if(Auth::user()->tipo_usuario == 'Admin' )
+          @if(Auth::user()->tipo_usuario == 'Admin' ||  Auth::user()->tipo_usuario == 'Pagador')
             <li class="nav-item">
               <a href="{{ route('reportes') }}" class="nav-link">
                 <i class="nav-icon far fa-circle text-info"></i>

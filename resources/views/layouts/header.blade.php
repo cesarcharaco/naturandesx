@@ -50,6 +50,7 @@
             </div>
             <!-- Message End -->
           </a>
+          @if(\Auth::User()->tipo_usuario!="Verificador")
           <div class="dropdown-divider"></div>
           <a href="{{ route('perfil', \Auth::User()->id) }}" class="dropdown-item mb-2 mt-2">
             <!-- Message Start -->
@@ -66,6 +67,7 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer mb-2 mt-2">Mi cuenta</a>
         </div>
+        @endif
       </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item">
