@@ -7,7 +7,7 @@
 <div class="col-md-4 mx-auto">
     <div class="login-area">
       <div class="container">
-        <div class="login-box ptb--100">
+        <div class="login-box-register ptb--100">
           <form method="POST" action="{{ route('nueva_clave') }}" data-parsley-validate>
             @csrf
             <div class="login-form-head">

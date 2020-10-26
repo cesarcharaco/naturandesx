@@ -4,7 +4,7 @@
 <div class="col-md-4 mx-auto">
   <div class="login-area">
     <div class="container">
-      <div class="login-box">
+      <div class="login-box-register ptb--100">
         <form action="{{ route('login') }}" method="post">
           @csrf
           <div class="login-form-head">

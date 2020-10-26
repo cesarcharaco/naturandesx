@@ -88,7 +88,7 @@
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background: #010573;">
     <div class="container">
       <a href="{{ url('/') }}" class="navbar-brand">
-        <img src="{{ asset('img/favicon.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="height: 70px !important;">
+        <img src="{{ asset('img/favicon.png') }}" alt="Naturandes Logo" class="brand-image elevation-3" style="height: 70px !important;">
       </a>
       <!-- Right navbar links -->
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto social-custom list-inline">
