@@ -13,7 +13,7 @@
 			background-position: center center !important;
     	}
     	@media only screen and (max-width: 767px) {
-    		#fondo{
+    		#fondo {
     			background: url('{{ asset('img/banner-responsive.jpg') }}') center/cover no-repeat !important;
     			position: relative; background-attachment:  fixed !important;
 				background-size: cover !important;
@@ -106,9 +106,7 @@
   	<div class="content">
       	<div class="container">
 	        <div class="row">
-	        	<div class="col-md-4 mx-auto">	        		
-	  				@yield('content')
-	        	</div>
+	        	@yield('content')
 	  		</div>
   		</div>
   	</div>
