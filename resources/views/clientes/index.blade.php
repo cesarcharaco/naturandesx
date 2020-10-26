@@ -52,6 +52,7 @@
                     <th>RUT</th>
                     <th>Usuario</th>
                     <th>Email</th>
+                    <th>Teléfono</th>
                     <th>status</th>
                     @if(Auth::user()->tipo_usuario == 'Admin' )
                       <th></th>
@@ -71,6 +72,7 @@
                           {!! $key->usuario->email !!}
                         @endif
                       </td>
+                      <td>{!! $key->telefono !!}</td>
                       
                         <td>
                           @if($key->status == 'Activo')
@@ -87,7 +89,7 @@
                               <div class="far fa-eye text-white"></div>
                             </a>
 
-                            <a data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-warning btn-sm boton-tabla" style="border-radius: 5px;" onclick="editarCliente('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->rut}}','{{$key->status}}')">
+                            <a data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-warning btn-sm boton-tabla" style="border-radius: 5px;" onclick="editarCliente('{{$key->id}}','{{$key->usuario->id}}','{{$key->nombres}}','{{$key->apellidos}}','{{$key->usuario->usuario}}','{{$key->usuario->email}}','{{$key->telefono}}','{{$key->rut}}','{{$key->status}}')">
                               <div class="far fa-edit text-white"></div>
                             </a>
 
@@ -141,7 +143,7 @@
       $("#img_qr").append('<a href="{!! URL::asset("'+codigo_qr+'") !!}" download="'+codigo_qr+'"><img src="{!! URL::asset("'+ codigo_qr +'") !!}" style="width: 200px; height: 200px; border-radius: 30px !important;" download="s" onclick="Refrescar()"></a>');
     }
 
-    function editarCliente(id, id_usuario,nombres, apellidos,usuario ,email, rut,status) {
+    function editarCliente(id, id_usuario,nombres, apellidos,usuario ,email, telefono, rut,status) {
       $('#example1_wrapper').fadeOut('fast');
       $('#btnRegistrar').fadeOut('fast');
       $('#id_edit').val(id);
@@ -150,6 +152,7 @@
       $('#apellidos_edit').val(apellidos);
       $('#usuario_edit').val(usuario);
       $('#email_edit').val(email);
+      $('#telefono_edit').val(telefono);
       $('#rut_edit').val(rut.substr(0,(rut.length-2)));
       $('#verificador_edit').val(rut.substr(-1,(rut.length)));
       if(status=="Activo") {

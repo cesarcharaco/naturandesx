@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label for="usuario">Usuario <b style="color: red;">*</b></label>
                   <input type="text" onkeypress="return check(event)" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario_edit"  style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();">
@@ -52,14 +52,20 @@
                   @endif
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label for="email_edit">Email</label>
                   <input type="email" class="form-control" placeholder="Ingrese email" name="email" id="email_edit">
                 </div>
               </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="telefono">Teléfono <b style="color: red;">*</b></label>
+                  <input type="telefono" class="form-control" placeholder="INGRESE TELÉFONO" name="telefono" id="telefono_edit">
+                </div>
+            </div>
               @if(Auth::user()->tipo_usuario == 'Admin')
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" id="status_editar" name="status">

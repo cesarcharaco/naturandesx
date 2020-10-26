@@ -45,7 +45,7 @@
 	        	</div>
 	        </div>
 	        <div class="row">
-	        	<div class="col-md-4">
+	        	<div class="col-md-3">
 		            <div class="form-group">
 		              <label for="usuario">Usuario <b style="color: red;">*</b></label>
 		              <input type="text" onkeypress="return check(event)" class="form-control" placeholder="Ingrese usuario" name="usuario" required id="usuario" value="{{ old('usuario') }}" style="text-transform:uppercase;"  onkeyup="javascript:this.value=this.value.toUpperCase();">
@@ -56,7 +56,7 @@
 		              @endif
 		            </div>
 	        	</div>
-	        	<div class="col-md-4">
+	        	<div class="col-md-3">
 		            <div class="form-group">
 		              <label for="email">Email</label>
 		              <input type="email" class="form-control" placeholder="INGRESE EMAIL" name="email" id="email" value="{{ old('email') }}">
@@ -67,8 +67,19 @@
 		              @endif
 		            </div>
 	        	</div>
+	        	<div class="col-md-3">
+		            <div class="form-group">
+		              <label for="telefono">Teléfono <b style="color: red;">*</b></label>
+		              <input type="telefono" class="form-control" placeholder="INGRESE TELÉFONO" name="telefono" id="telefono" value="{{ old('telefono') }}">
+		              @if ($errors->has('telefono'))
+		                  <small class="form-text text-danger">
+		                      {{ $errors->first('telefono') }}
+		                   </small>
+		              @endif
+		            </div>
+	        	</div>
 	        	@if(Auth::user()->tipo_usuario == 'Admin')
-		        	<div class="col-md-4">
+		        	<div class="col-md-3">
 			            <div class="form-group">
 			              <label for="status">Status</label>
 			              <select class="form-control" id="exampleFormControlSelect12" name="status">
