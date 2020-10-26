@@ -6,6 +6,21 @@
     @toastr_css
     @yield('css')
     <style type="text/css">
+    	#fondo {
+    		background: url('{{ asset('img/banner.jpg') }}') center/cover no-repeat !important;
+			position: relative; background-attachment:  100% !important;
+			background-size: cover !important;
+			background-position: center center !important;
+    	}
+    	@media only screen and (max-width: 767px) {
+    		#fondo{
+    			background: url('{{ asset('img/banner-responsive.jpg') }}') center/cover no-repeat !important;
+    			position: relative; background-attachment:  fixed !important;
+				background-size: cover !important;
+				background-position: center center !important;
+				width: 100%;
+    		}
+    	}
 	    .login-box, .login-box-register {
 		    display: -webkit-box;
 		    display: -ms-flexbox;
@@ -52,7 +67,6 @@
 
 		.login-form-body {
 		    padding: 50px;
-		    opacity: 0.7;
 		}
 		.top-bar ul.social-custom a {
 		    text-decoration: none !important;
@@ -73,7 +87,7 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background: #010573;">
     <div class="container">
-      <a href="../../index3.html" class="navbar-brand">
+      <a href="{{ url('/') }}" class="navbar-brand">
         <img src="{{ asset('img/favicon.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="height: 70px !important;">
       </a>
       <!-- Right navbar links -->
@@ -88,11 +102,13 @@
   <!-- /.navbar -->
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="background: url('{{ asset('login/images/banner.jpg') }}') center/cover no-repeat !important; position: relative; background-attachment:  100% !important;">
+  <div class="content-wrapper" id="fondo">
   	<div class="content">
       	<div class="container">
 	        <div class="row">
-	  			@yield('content')
+	        	<div class="col-md-4 mx-auto">	        		
+	  				@yield('content')
+	        	</div>
 	  		</div>
   		</div>
   	</div>
