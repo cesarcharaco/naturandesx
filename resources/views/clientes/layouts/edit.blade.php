@@ -61,7 +61,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="telefono">Teléfono <b style="color: red;">*</b></label>
-                  <input type="telefono" class="form-control" placeholder="INGRESE TELÉFONO" name="telefono" id="telefono_edit">
+                  <input type="telefono" class="form-control" placeholder="INGRESE TELÉFONO" name="telefono" id="telefono_edit" required="required">
                 </div>
             </div>
               @if(Auth::user()->tipo_usuario == 'Admin')

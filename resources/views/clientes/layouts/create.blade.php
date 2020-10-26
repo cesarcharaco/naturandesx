@@ -70,7 +70,7 @@
 	        	<div class="col-md-3">
 		            <div class="form-group">
 		              <label for="telefono">Teléfono <b style="color: red;">*</b></label>
-		              <input type="telefono" class="form-control" placeholder="INGRESE TELÉFONO" name="telefono" id="telefono" value="{{ old('telefono') }}">
+		              <input type="telefono" class="form-control" placeholder="INGRESE TELÉFONO" name="telefono" id="telefono" value="{{ old('telefono') }}" required="required">
 		              @if ($errors->has('telefono'))
 		                  <small class="form-text text-danger">
 		                      {{ $errors->first('telefono') }}
