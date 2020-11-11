@@ -93,8 +93,8 @@
 
   <header>
     <p align="center">
-      <?php $image_path = '/img/naturandes.jpg'; ?>
-      <img src="{{ public_path() . $image_path }}" class="logo">
+      
+      <img src="{{ asset('img/naturandes.jpg') }}" class="logo">
       <b style="font-size: 20px; margin-top: 20px;">
         Naturandes - Es Tritan<br>
        </b>
@@ -135,7 +135,7 @@
             <td>{{$key->venta->cliente->nombres}} {{$key->venta->cliente->apellidos}}</td>
             <td>{{$key->venta->promociones->promocion}}</td>
             <td>{{$key->venta->cantidad}}</td>
-            <td>{{$key->venta->monto_total}}.00$</td>
+            <td>{{$key->venta->monto_total}}.00&#36;</td>
             <td>{{$key->status}}</td>
             <td>{{$key->created_at}}</td>
           </tr>

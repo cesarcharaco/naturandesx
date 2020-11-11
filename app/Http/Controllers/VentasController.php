@@ -84,6 +84,7 @@ class VentasController extends Controller
         $empleado=Empleados::where('id_usuario',\Auth::User()->id)->first();
         $consultar_ventas = EmpleadosVentas::join('ventas','ventas.id','=','empleados_has_ventas.id_venta')
         ->whereIn('ventas.id',$mis_ventas)->get();
+        
 
         $nombres= $empleado->nombres.' '.$empleado->apellidos;
         $email= $empleado->usuario->email;
@@ -91,16 +92,17 @@ class VentasController extends Controller
         $destinatario=\Auth::User()->email;
         //dd($destinatario);
         $mensaje="Ha realizado una nueva ventas | Naturandes";
-
+        
         $send_repartidor=Mail::send('email.ventas_repartidor',
             ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$mensaje,$consultar_ventas,$destinatario,$asunto) {
 
             $pdf = PDF::loadView(('pdf/ventas_repartidor'),array('nombres'=>$nombres,'email'=>$email,'consultar_ventas'=>$consultar_ventas));
+            
             $m->from('promociones@naturandeschile.com', 'Naturandes!');
             $m->to($destinatario)->subject($asunto);
             $m->attachData($pdf->output(), "ventas_repartidor.pdf");
         });
-
+        dd('-----------------');
         $send_admin=Mail::send('email.ventas_admin',
             ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$mensaje,$consultar_ventas) {
 
