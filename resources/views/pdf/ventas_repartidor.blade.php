@@ -93,8 +93,8 @@
 
   <header>
     <p align="center">
-      
-      <img src="{{ asset('img/naturandes.jpg') }}" class="logo">
+      <?php $image_path = '/img/naturandes.jpg'; ?>
+      <img src="{{ public_path() . $image_path }}" class="logo">
       <b style="font-size: 20px; margin-top: 20px;">
         Naturandes - Es Tritan<br>
        </b>
