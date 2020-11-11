@@ -102,7 +102,7 @@ class VentasController extends Controller
             $m->to($destinatario)->subject($asunto);
             $m->attachData($pdf->output(), "ventas_repartidor.pdf");
         });
-        dd('-----------------');
+        
         $send_admin=Mail::send('email.ventas_admin',
             ['nombres'=>$nombres, 'mensaje' => $mensaje], function ($m) use ($nombres,$email,$mensaje,$consultar_ventas) {
 
