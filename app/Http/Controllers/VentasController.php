@@ -9,6 +9,8 @@ use App\Ventas;
 use App\EmpleadosVentas;
 use App\Empleados;
 use Carbon\Carbon;
+use Mail;
+use PDF;
 date_default_timezone_set('America/Santiago');
 setlocale(LC_ALL, 'es_ES');
 class VentasController extends Controller
@@ -60,6 +62,7 @@ class VentasController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        $mis_ventas=array();
         //dd(count($request->id_promocion));
         for ($i=0; $i < count($request->id_promocion); $i++) { 
             
@@ -69,6 +72,7 @@ class VentasController extends Controller
             $ventas->cantidad=$request->cantidad[$i];
             $ventas->monto_total=$request->monto_total;
             $ventas->save();
+            $mis_ventas[$i]=$ventas->id;
             // dd($ventas->id);
             $empleado=Empleados::where('id_usuario',\Auth::User()->id)->first();
             
@@ -79,8 +83,8 @@ class VentasController extends Controller
         }
         $empleado=Empleados::where('id_usuario',\Auth::User()->id)->first();
         $consultar_ventas = EmpleadosVentas::join('ventas','ventas.id','=','empleados_has_ventas.id_venta')
-        ->whereIn('ventas.id',$ventas->id)->get();
-
+        ->whereIn('ventas.id',$mis_ventas)->get();
+        
         $nombres= $empleado->nombres.' '.$empleado->apellidos;
         $email= $empleado->usuario->email;
         $asunto="Naturandes! | Ventas Realizadas";
