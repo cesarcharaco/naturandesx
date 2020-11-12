@@ -1,21 +1,15 @@
 <html>
 <head>
   @yield('css')
-  <style>
+  <style type="text/css">
     body{
       font-family: sans-serif;
     }
-    @page {
-      margin: 160px 50px;
+    .header { 
+      
     }
-    header { 
-      position: fixed;
-      left: 0px;
-      top: -160px;
-      right: 0px;
-      height: 100px;
-      background-color: ;
-      text-align: center;
+    .footer {
+      
     }
     header h1{
       margin: 10px 0;
@@ -23,13 +17,8 @@
     header h2{
       margin: 0 0 10px 0;
     }
-    footer {
-      position: fixed;
-      left: 0px;
-      bottom: -50px;
-      right: 0px;
-      height: 40px;
-      border-bottom: 2px solid #ddd;
+    .page {
+      margin: 160px 50px;
     }
     footer .page:after {
       content: counter(page);
@@ -91,7 +80,13 @@
   </style>
 <body>
 
-  <header>
+  <div class="header" style="
+      /*position: fixed;*/
+      left: 0px;
+      top: -160px;
+      right: 0px;
+      height: 100px;
+      text-align: center;">
     <p align="center">
       <?php $image_path = '/img/naturandes.jpg'; ?>
       <img src="{{ public_path() . $image_path }}" class="logo">
@@ -110,7 +105,7 @@
       ?>
       <p align="right">Fecha: <?php echo $fecha2; ?></p>
     </p>
-  </header>
+  </div>
   
   <div class="content">
     <h4 align="center">Reporte de ventas de repartidores</h4>
@@ -145,7 +140,13 @@
     </div>
   </div>
 
-  <footer>
+  <div class="footer" style="
+      /*position: fixed;*/
+      left: 0px;
+      bottom: -50px;
+      right: 0px;
+      height: 40px;
+      border-bottom: 2px solid #ddd;">
     <table>
       <tr>
         <td>
@@ -163,7 +164,7 @@
         </td>
       </tr>
     </table>
-  </footer>
+  </div>
 
 
 </body>

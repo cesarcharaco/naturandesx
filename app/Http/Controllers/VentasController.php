@@ -90,7 +90,6 @@ class VentasController extends Controller
         $email= $empleado->usuario->email;
         $asunto="Naturandes! | Ventas Realizadas";
         $destinatario=\Auth::User()->email;
-        //dd($destinatario);
         $mensaje="Ha realizado una nueva ventas | Naturandes";
         
         $send_repartidor=Mail::send('email.ventas_repartidor',
@@ -101,6 +100,7 @@ class VentasController extends Controller
             $m->from('promociones@naturandeschile.com', 'Naturandes!');
             $m->to($destinatario)->subject($asunto);
             $m->attachData($pdf->output(), "ventas_repartidor.pdf");
+        // dd($pdf);
         });
         
         $send_admin=Mail::send('email.ventas_admin',
