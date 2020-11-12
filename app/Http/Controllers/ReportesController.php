@@ -287,7 +287,7 @@ class ReportesController extends Controller
                     ->options([]);
                     $active = 0;
 
-                    return view('reportes.index',compact('rep_ventas','count_rep_ventas','graf_barra_rep','graf_torta_rep','repartidores','clientes','graf_barra_cli','graf_torta_cli','active','ventas'));
+                    return view('reportes.index',compact('rep_ventas','graf_barra_rep','graf_torta_rep','repartidores','clientes','graf_barra_cli','graf_torta_cli','active','ventas'));
 
                 }elseif(is_null($request->no_cancelado) and $request->cancelado==1){
                    
